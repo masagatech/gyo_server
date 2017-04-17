@@ -213,5 +213,3 @@ pip-log.txt
 
 #Mr Developer
 .mr.developer.cfg
-globals.js
-bin/www.js
