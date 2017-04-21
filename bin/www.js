@@ -8,29 +8,46 @@
 
 
 
-var express = require("express");
+var app = require('express')();
+var server = require('http').createServer(app);
+var io = require('socket.io')(server);
+
+var mondb = require("../db/mongodbservice.js"); //mongo db import
+mondb.start();
+
+var socketserver = require("./socketserver.js"); //socket server for instant message
+socketserver.io = io;
+socketserver.start();
+
+
+
 var bodyParser = require("body-parser");
-var app = express();
-
-
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
+
+
 //##############################################################################################
-app.all('/*', function(req, res, next) {
+app.all('goyoapi/*', function(req, res, next) {
     // CORS headers
+    console.log("resquest");
     res.header("Access-Control-Allow-Origin", "*"); // restrict it to the required domain
 
     res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
     // Set custom headers for CORS
     res.header('Access-Control-Allow-Headers', 'Content-type,Accept,App-Id,Password');
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     if (req.method == 'OPTIONS') {
         res.status(200).end();
     } else {
         next();
     }
 });
+
+app.get('/chat', function(req, res) {
+    res.sendFile(__dirname.replace("\\bin", "") + '\\httpdocs\\index.html');
+    // res.send('<h1>Hello world</h1>');
+});
+
 //##############################################################################################	
 
 var routes = require("../routes/routes.js")(app);
@@ -47,6 +64,6 @@ app.use(function(req, res, next) {
 ///start API server
 
 
-var server = app.listen(8081, function() {
-    console.log("Listening on port %s...", server.address().port);
+var expserver = server.listen(81, "0.0.0.0", function() {
+    console.log("Listening on port %s...", expserver.address().port);
 });
