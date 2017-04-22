@@ -2,7 +2,6 @@ var db = require("../../db/dbservice.js");
 var rs = require("../util/resp.js");
 var globals = require("../../globals.js");
 
-
 var studentinfo = module.exports = {};
 
 studentinfo.saveStudentInfo = function saveStudentInfo(req, res, done) {

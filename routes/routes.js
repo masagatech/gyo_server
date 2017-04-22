@@ -5,6 +5,7 @@ var fs = require('fs');
 var dashboard = require("../appmodule/schoolapi/dashboard.js");
 var driverinfo = require("../appmodule/schoolapi/driverinfo.js");
 var student = require("../appmodule/schoolapi/student.js");
+var batch = require("../appmodule/schoolapi/batch.js");
 var pickdrop = require("../appmodule/schoolapi/pickdrop.js");
 var common = require("../appmodule/schoolapi/common.js");
 
@@ -52,6 +53,14 @@ var appRouter = function(app) {
     app.post(globals.globvar.rootAPI + "/getdriverinfodetail", driverinfo.getDriverDetail);
 
     //##################################### Driver ################################################
+
+    //##################################### Batch ###############################################
+
+    app.post(globals.globvar.rootAPI + "/saveBatchInfo", batch.saveBatchInfo);
+    // app.post(globals.globvar.rootAPI + "/getBatchGrid", batch.getBatchGrid);
+    app.post(globals.globvar.rootAPI + "/getBatchDetail", batch.getBatchDetail);
+
+    //##################################### Batch ###############################################
 
     //##################################### Student ###############################################
 
