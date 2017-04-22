@@ -2,11 +2,11 @@ var rs = require("../appmodule/util/resp.js");
 var globals = require("../globals.js");
 var fs = require('fs');
 
-var dashboard = require("../appmodule/dashboard.js");
-var driverinfo = require("../appmodule/driverinfo.js");
-var student = require("../appmodule/student.js");
-var pickdrop = require("../appmodule/pickdrop.js");
-var common = require("../appmodule/common.js");
+var dashboard = require("../appmodule/schoolapi/dashboard.js");
+var driverinfo = require("../appmodule/schoolapi/driverinfo.js");
+var student = require("../appmodule/schoolapi/student.js");
+var pickdrop = require("../appmodule/schoolapi/pickdrop.js");
+var common = require("../appmodule/schoolapi/common.js");
 
 var multer = require('multer');
 var upload = multer({
