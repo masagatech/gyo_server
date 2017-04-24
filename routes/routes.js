@@ -2,14 +2,17 @@ var rs = require("../appmodule/util/resp.js");
 var globals = require("../globals.js");
 var fs = require('fs');
 
-var dashboard = require("../appmodule/schoolapi/dashboard.js");
-var driverinfo = require("../appmodule/schoolapi/driverinfo.js");
-var student = require("../appmodule/schoolapi/student.js");
-var batch = require("../appmodule/schoolapi/batch.js");
-var pickdrop = require("../appmodule/schoolapi/pickdrop.js");
 var common = require("../appmodule/schoolapi/common.js");
+var dashboard = require("../appmodule/schoolapi/dashboard.js");
+var batch = require("../appmodule/schoolapi/batch.js");
+var driver = require("../appmodule/schoolapi/driver.js");
+var driverinfo = require("../appmodule/schoolapi/driverinfo.js");
+var owner = require("../appmodule/schoolapi/owner.js");
+var student = require("../appmodule/schoolapi/student.js");
+var pickdrop = require("../appmodule/schoolapi/pickdrop.js");
 
 var multer = require('multer');
+
 var upload = multer({
     limits: {
         fieldNameSize: 999999999,
@@ -17,7 +20,6 @@ var upload = multer({
     },
     dest: 'www/uploads/'
 });
-
 
 var appRouter = function(app) {
     //##################################### API Details / #########################################
@@ -42,39 +44,51 @@ var appRouter = function(app) {
 
     //##################################### Dashboard #############################################
 
-    app.post(globals.globvar.rootAPI + "/getdashboard", dashboard.getDashboard);
+    app.post(globals.globvar.rootAPI + "/getDashboard", dashboard.getDashboard);
     
     //##################################### Dashboard #############################################
-
-    //##################################### Driver ################################################
-
-    app.post(globals.globvar.rootAPI + "/savedriverinfo", driverinfo.saveDriverInfo);
-    app.post(globals.globvar.rootAPI + "/getdriverinfogrid", driverinfo.getDriverGrid);
-    app.post(globals.globvar.rootAPI + "/getdriverinfodetail", driverinfo.getDriverDetail);
-
-    //##################################### Driver ################################################
 
     //##################################### Batch ###############################################
 
     app.post(globals.globvar.rootAPI + "/saveBatchInfo", batch.saveBatchInfo);
-    // app.post(globals.globvar.rootAPI + "/getBatchGrid", batch.getBatchGrid);
-    app.post(globals.globvar.rootAPI + "/getBatchDetail", batch.getBatchDetail);
+    app.post(globals.globvar.rootAPI + "/getBatchDetails", batch.getBatchDetails);
 
     //##################################### Batch ###############################################
+
+    //##################################### Driver ################################################
+
+    app.post(globals.globvar.rootAPI + "/saveDriverInfo", driver.saveDriverInfo);
+    app.post(globals.globvar.rootAPI + "/getDriverGrid", driver.getDriverGrid);
+    app.post(globals.globvar.rootAPI + "/getDriverDetails", driver.getDriverDetails);
+
+    //##################################### Driver ################################################
+
+    //##################################### Driver Info ################################################
+
+    app.post(globals.globvar.rootAPI + "/saveDriverInfo", driverinfo.saveDriverInfo);
+    app.post(globals.globvar.rootAPI + "/getDriverInfoGrid", driverinfo.getDriverInfoGrid);
+    app.post(globals.globvar.rootAPI + "/getDriverInfoDetails", driverinfo.getDriverInfoDetails);
+
+    //##################################### Driver Info ################################################
+
+    //##################################### Owner ################################################
+
+    app.post(globals.globvar.rootAPI + "/saveOwnerInfo", owner.saveOwnerInfo);
+    app.post(globals.globvar.rootAPI + "/getOwnerDetails", owner.getOwnerDetails);
+
+    //##################################### Owner ################################################
 
     //##################################### Student ###############################################
 
     app.post(globals.globvar.rootAPI + "/saveStudentInfo", student.saveStudentInfo);
-    // app.post(globals.globvar.rootAPI + "/getStudentGrid", student.getStudentGrid);
-    app.post(globals.globvar.rootAPI + "/getStudentDetail", student.getStudentDetail);
+    app.post(globals.globvar.rootAPI + "/getStudentDetails", student.getStudentDetails);
 
     //##################################### Student ###############################################
 
     //##################################### Pick and Drop ###############################################
 
     app.post(globals.globvar.rootAPI + "/savePickDropInfo", pickdrop.savePickDropInfo);
-    // app.post(globals.globvar.rootAPI + "/getPickDropGrid", pickdrop.getPickDropGrid);
-    app.post(globals.globvar.rootAPI + "/getPickDropDetail", pickdrop.getPickDropDetail);
+    app.post(globals.globvar.rootAPI + "/getPickDropDetails", pickdrop.getPickDropDetails);
 
     //##################################### Student ###############################################
 
