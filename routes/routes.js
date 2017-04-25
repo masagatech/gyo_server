@@ -89,7 +89,7 @@ var appRouter = function(app) {
     app.post(globals.globvar.rootAPI + "/savePickDropInfo", pickdrop.savePickDropInfo);
     app.post(globals.globvar.rootAPI + "/getPickDropDetails", pickdrop.getPickDropDetails);
 
-    //##################################### Student ###################################################
+    //##################################### Pick and Drop ###################################################
 
     //##################################### VIVEK #####################################################
 
