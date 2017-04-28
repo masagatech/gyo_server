@@ -2,11 +2,14 @@ var rs = require("../appmodule/util/resp.js");
 var globals = require("../globals.js");
 var fs = require('fs');
 
+var menu = require("../appmodule/schoolapi/menu.js");
 var common = require("../appmodule/schoolapi/common.js");
 var school = require("../appmodule/schoolapi/school.js");
+var holiday = require("../appmodule/schoolapi/holiday.js");
 var batch = require("../appmodule/schoolapi/batch.js");
 var driver = require("../appmodule/schoolapi/driver.js");
 var owner = require("../appmodule/schoolapi/owner.js");
+var user = require("../appmodule/schoolapi/user.js");
 var student = require("../appmodule/schoolapi/student.js");
 var pickdrop = require("../appmodule/schoolapi/pickdrop.js");
 
@@ -43,6 +46,12 @@ var appRouter = function(app) {
 
     //##################################### VIVEK #####################################################
 
+    //##################################### Menu ####################################################
+
+    app.post(globals.globvar.rootAPI + "/getMenuDetails", menu.getMenuDetails);
+    
+    //##################################### Common ####################################################
+
     //##################################### Common ####################################################
 
     app.get(globals.globvar.rootAPI + "/getAutoData", common.getAutoData);
@@ -55,6 +64,13 @@ var appRouter = function(app) {
     app.post(globals.globvar.rootAPI + "/getSchoolDetails", school.getSchoolDetails);
 
     //##################################### Student ###################################################
+
+    //##################################### Holiday ####################################################
+
+    app.post(globals.globvar.rootAPI + "/saveHoliday", holiday.saveHoliday);
+    app.post(globals.globvar.rootAPI + "/getHoliday", holiday.getHoliday);
+
+    //##################################### Holiday ###################################################
 
     //##################################### Batch #####################################################
 
@@ -76,6 +92,13 @@ var appRouter = function(app) {
     app.post(globals.globvar.rootAPI + "/getOwnerDetails", owner.getOwnerDetails);
 
     //##################################### Owner #####################################################
+
+    //##################################### User #####################################################
+
+    app.post(globals.globvar.rootAPI + "/saveUserInfo", user.saveUserInfo);
+    app.post(globals.globvar.rootAPI + "/getUserDetails", user.getUserDetails);
+
+    //##################################### User #####################################################
 
     //##################################### Student ###################################################
 
