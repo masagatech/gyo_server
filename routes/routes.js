@@ -2,6 +2,7 @@ var rs = require("../appmodule/util/resp.js");
 var globals = require("../globals.js");
 var fs = require('fs');
 
+var login = require("../appmodule/schoolapi/login.js");
 var menu = require("../appmodule/schoolapi/menu.js");
 var common = require("../appmodule/schoolapi/common.js");
 var school = require("../appmodule/schoolapi/school.js");
@@ -46,11 +47,19 @@ var appRouter = function(app) {
 
     //##################################### VIVEK #####################################################
 
+    //##################################### Login ####################################################
+
+    app.post(globals.globvar.rootAPI + "/getLogin", login.getLogin);
+    app.post(globals.globvar.rootAPI + "/getLogout", login.getLogout);
+    app.post(globals.globvar.rootAPI + "/savePassword", login.savePassword);
+    
+    //##################################### Login ####################################################
+
     //##################################### Menu ####################################################
 
     app.post(globals.globvar.rootAPI + "/getMenuDetails", menu.getMenuDetails);
     
-    //##################################### Common ####################################################
+    //##################################### Menu ####################################################
 
     //##################################### Common ####################################################
 
@@ -97,6 +106,9 @@ var appRouter = function(app) {
 
     app.post(globals.globvar.rootAPI + "/saveUserInfo", user.saveUserInfo);
     app.post(globals.globvar.rootAPI + "/getUserDetails", user.getUserDetails);
+
+    app.post(globals.globvar.rootAPI + "/saveUserRights", user.saveUserRights);
+    app.post(globals.globvar.rootAPI + "/getUserRights", user.getUserRights);
 
     //##################################### User #####################################################
 
