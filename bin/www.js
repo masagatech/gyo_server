@@ -12,8 +12,8 @@ var app = require('express')();
 var server = require('http').createServer(app);
 var io = require('socket.io')(server);
 
-var mondb = require("../db/mongodbservice.js"); //mongo db import
-mondb.start();
+// var mondb = require("../db/mongodbservice.js"); //mongo db import
+// mondb.start();
 
 var socketserver = require("./socketserver.js"); //socket server for instant message
 socketserver.io = io;
