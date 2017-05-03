@@ -51,6 +51,7 @@ app.get('/chat', function(req, res) {
 //##############################################################################################	
 
 var routes = require("../routes/routes.js")(app);
+var schroute = require("../routes/schapi.js")(app);
 
 //##############################################################################################
 
@@ -64,6 +65,6 @@ app.use(function(req, res, next) {
 ///start API server
 
 
-var expserver = server.listen(81, "0.0.0.0", function() {
-    console.log("Listening on port %s...", expserver.address().port);
+var expserver = server.listen(8082, "0.0.0.0", function() {
+    console.log("API Server is listening on port %s...", expserver.address().port);
 });

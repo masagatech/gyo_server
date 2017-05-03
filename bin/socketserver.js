@@ -5,9 +5,9 @@ socketserver.socketPub = [];
 
 socketserver.start = function() {
     socketserver.io.on('connection', function(client) {
-        console.log("new client Connected");
+        //console.log("new client Connected");
 
-        client.emit('msg', "connected");
+        //client.emit('msg', "connected");
 
         client.on('disconnect', function() {
             //client.emit('msg', "client disconnected!");
@@ -21,8 +21,13 @@ socketserver.start = function() {
 
         client.on('register', function(msg) {
             // client.
+            console.log("register");
+            client.join(msg);
+            client.emit("msgd", { "evt": "registered", "tripid": msg });
 
         });
+
+        client.emit("msgd", { "evt": "regreq" });
 
     });
 }
