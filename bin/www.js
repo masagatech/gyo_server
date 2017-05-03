@@ -1,16 +1,36 @@
+//$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+//$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
 //service stuff
 //udp listner
 
-var express = require("express");
-var bodyParser = require("body-parser");
-var app = express();
+//var bodyParser = require("./udp-server");
 
+
+
+var app = require('express')();
+var server = require('http').createServer(app);
+var io = require('socket.io')(server);
+
+var mondb = require("../db/mongodbservice.js"); //mongo db import
+mondb.start();
+
+var socketserver = require("./socketserver.js"); //socket server for instant message
+socketserver.io = io;
+socketserver.start();
+
+
+
+var bodyParser = require("body-parser");
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
+
+
 //##############################################################################################
-app.all('/*', function(req, res, next) {
+app.all('goyoapi/*', function(req, res, next) {
     // CORS headers
+    console.log("resquest");
     res.header("Access-Control-Allow-Origin", "*"); // restrict it to the required domain
 
     res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
@@ -22,6 +42,12 @@ app.all('/*', function(req, res, next) {
         next();
     }
 });
+
+app.get('/chat', function(req, res) {
+    res.sendFile(__dirname.replace("\\bin", "") + '\\httpdocs\\index.html');
+    // res.send('<h1>Hello world</h1>');
+});
+
 //##############################################################################################	
 
 var routes = require("../routes/routes.js")(app);
@@ -38,8 +64,7 @@ app.use(function(req, res, next) {
 //#############################################################################################
 ///start API server
 
+
 var expserver = server.listen(8082, "0.0.0.0", function() {
     console.log("API Server is listening on port %s...", expserver.address().port);
 });
-
-//var reportServer = require("./report-server.js");
