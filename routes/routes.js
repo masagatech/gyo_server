@@ -13,6 +13,7 @@ var owner = require("../appmodule/schoolapi/owner.js");
 var user = require("../appmodule/schoolapi/user.js");
 var student = require("../appmodule/schoolapi/student.js");
 var pickdrop = require("../appmodule/schoolapi/pickdrop.js");
+var reports = require("../appmodule/schoolapi/reports.js");
 
 var dashboard = require("../appmodule/schoolapi/dashboard.js");
 var driverinfo = require("../appmodule/schoolapi/driverinfo.js");
@@ -126,6 +127,12 @@ var appRouter = function(app) {
     app.post(globals.globvar.rootAPI + "/getPickDropDetails", pickdrop.getPickDropDetails);
 
     //##################################### Pick and Drop ###################################################
+
+    //##################################### Reports #############################################
+
+    app.post(globals.globvar.rootAPI + "/getAttendanceReports", reports.getAttendanceReports);
+
+    //##################################### Reports ###################################################
 
     //##################################### VIVEK #####################################################
 
