@@ -7,13 +7,13 @@
 //var bodyParser = require("./udp-server");
 
 
-
+var conf = require("serverconf");
 var app = require('express')();
 var server = require('http').createServer(app);
 var io = require('socket.io')(server);
 
-// var mondb = require("../db/mongodbservice.js"); //mongo db import
-// mondb.start();
+var mondb = require("../db/mongodbservice.js"); //mongo db import
+mondb.start();
 
 var socketserver = require("./socketserver.js"); //socket server for instant message
 socketserver.io = io;
@@ -28,7 +28,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 
 //##############################################################################################
-app.all('goyoapi/*', function(req, res, next) {
+app.all('/*', function(req, res, next) {
     // CORS headers
     console.log("resquest");
     res.header("Access-Control-Allow-Origin", "*"); // restrict it to the required domain
@@ -65,6 +65,6 @@ app.use(function(req, res, next) {
 ///start API server
 
 
-var expserver = server.listen(8082, "0.0.0.0", function() {
+var expserver = server.listen(conf.server.port, conf.server.ip, function() {
     console.log("API Server is listening on port %s...", expserver.address().port);
 });
