@@ -1,6 +1,6 @@
 var mondb = require("../../db/mongodbservice.js");
-var rs = require("../util/resp.js");
-var globals = require("../../globals.js");
+var rs = require("gen").res;
+var globals = require("gen").globals;
 var datetime = require('node-datetime');
 var socketserver = require("../../bin/socketserver.js"); //socket server for instant message
 

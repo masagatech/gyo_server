@@ -7,7 +7,7 @@
 //var bodyParser = require("./udp-server");
 
 
-var conf = require("serverconf");
+var conf = require("gen").conf;
 var app = require('express')();
 var server = require('http').createServer(app);
 var io = require('socket.io')(server);
@@ -18,7 +18,6 @@ mondb.start();
 var socketserver = require("./socketserver.js"); //socket server for instant message
 socketserver.io = io;
 socketserver.start();
-
 
 
 var bodyParser = require("body-parser");

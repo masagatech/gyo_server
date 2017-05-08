@@ -1,6 +1,6 @@
 var mongoose = require('mongoose');
 
-var globals = require("../globals.js");
+var globals = require("gen").globals;
 
 var mondb = module.exports = {};
 

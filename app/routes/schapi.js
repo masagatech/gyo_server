@@ -1,9 +1,10 @@
-var globals = require("../globals.js");
+var globals = require("gen").globals;
 
 var tripapi = require("../appmodule/schoolapi/tripapi.js");
 var tripsinfo = require("../appmodule/z_apitrips/tripsinfo.js");
 var parents = require("../appmodule/schoolapi/parents.js");
-parents
+var notify = require("../appmodule/schoolapi/notificationapi.js");
+
 
 var appSchRouter = function(app) {
     //##################################### Pick and Drop ###############################################
@@ -18,7 +19,8 @@ var appSchRouter = function(app) {
     //##################################### Student ###############################################
     //##################################### Parent ###############################################
     app.post(globals.globvar.rootAPI + "/cust/getmykids", parents.mykids);
-
+    //##################################### FCM notification ###############################################
+    app.get(globals.globvar.rootAPI + "/notify", notify.getUserNotification);
 }
 
 module.exports = appSchRouter;

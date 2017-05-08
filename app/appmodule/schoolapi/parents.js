@@ -1,6 +1,6 @@
-var db = require("../../db/dbservice.js");
-var rs = require("../util/resp.js");
-var globals = require("../../globals.js");
+var db = require("db");
+var rs = require("gen").res;
+var globals = require("gen").globals;
 
 var parent = module.exports = {};
 

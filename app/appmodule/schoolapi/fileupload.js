@@ -1,5 +1,5 @@
-var db = require("../../db/dbservice.js");
-var rs = require("../util/resp.js");
+var db = require("db");
+var rs = require("gen").res;
 var path = require('path');
 var formidable = require('formidable');
 var fileupload = module.exports = {};

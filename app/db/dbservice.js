@@ -1,5 +1,6 @@
-var globals = require("../globals.js");
+var globals = require("gen").globals;
 var pg = require("pg");
+
 var db = module.exports = {};
 
 db.constr = globals.constr();
