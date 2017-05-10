@@ -18,6 +18,8 @@ var reports = require("../appmodule/schoolapi/reports.js");
 var dashboard = require("../appmodule/schoolapi/dashboard.js");
 var driverinfo = require("../appmodule/schoolapi/driverinfo.js");
 
+var order = require("../appmodule/marketing/order.js");
+
 var multer = require('multer');
 
 var upload = multer({
@@ -126,13 +128,21 @@ var appRouter = function(app) {
     app.post(globals.globvar.rootAPI + "/savePickDropInfo", pickdrop.savePickDropInfo);
     app.post(globals.globvar.rootAPI + "/getPickDropDetails", pickdrop.getPickDropDetails);
 
-    //##################################### Pick and Drop ###################################################
+    //##################################### Pick and Drop #############################################
 
-    //##################################### Reports #############################################
+    //##################################### Reports ###################################################
 
     app.post(globals.globvar.rootAPI + "/getAttendanceReports", reports.getAttendanceReports);
 
     //##################################### Reports ###################################################
+
+    //##################################### Order #####################################################
+
+    app.post(globals.globvar.rootAPI + "/saveOrderInfo", order.saveOrderInfo);
+    app.post(globals.globvar.rootAPI + "/updateOrderInfo", order.updateOrderInfo);
+
+    //##################################### Order #####################################################
+
 
     //##################################### VIVEK #####################################################
 
