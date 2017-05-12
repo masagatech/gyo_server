@@ -29,7 +29,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 //##############################################################################################
 app.all('/*', function(req, res, next) {
     // CORS headers
-    console.log("resquest");
+
     res.header("Access-Control-Allow-Origin", "*"); // restrict it to the required domain
 
     res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
