@@ -19,6 +19,7 @@ var dashboard = require("../appmodule/schoolapi/dashboard.js");
 var driverinfo = require("../appmodule/schoolapi/driverinfo.js");
 
 var order = require("../appmodule/marketing/order.js");
+var mrktndb = require("../appmodule/marketing/dashboard.js");
 
 var multer = require('multer');
 
@@ -142,6 +143,12 @@ var appRouter = function(app) {
     app.post(globals.globvar.rootAPI + "/updateOrderInfo", order.updateOrderInfo);
 
     //##################################### Order #####################################################
+
+    //##################################### Marketing Dashboard #######################################
+
+    app.post(globals.globvar.rootAPI + "/getMarketingDB", mrktndb.getMarketingDB);
+
+    //##################################### Marketing Dashboard #######################################
 
 
     //##################################### VIVEK #####################################################
