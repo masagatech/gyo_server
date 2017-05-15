@@ -139,8 +139,10 @@ var appRouter = function(app) {
 
     //##################################### Order #####################################################
 
-    app.post(globals.globvar.rootAPI + "/saveOrderInfo", order.saveOrderInfo);
-    app.post(globals.globvar.rootAPI + "/updateOrderInfo", order.updateOrderInfo);
+    app.post(globals.globvar.marketapi + "/saveOrderInfo", order.saveOrderInfo);
+    app.post(globals.globvar.marketapi + "/updateOrderInfo", order.updateOrderInfo);
+    app.post(globals.globvar.marketapi + "/getOrderDetail", order.getOrderDetail);
+    app.post(globals.globvar.marketapi + "/getOrder", order.getOrder);
 
     //##################################### Order #####################################################
 

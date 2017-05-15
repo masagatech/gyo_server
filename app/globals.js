@@ -2,6 +2,7 @@ var global = module.exports = {};
 
 global.globvar = {
     "rootAPI": "/goyoapi",
+    "marketapi": "/marketapi"
 }
 
 global.schema = function schema(params) {
