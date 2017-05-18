@@ -8,7 +8,7 @@
         "node": "~6.0"
     },
     "scripts": {
-        "start": "concurrently \"node ./app/bin/www\" \"http-server www --cors\""
+        "start": "concurrently \"node ./app/bin/www\" \"http-server www --cors --port 8081\""
     },
     "dependencies": {
         "bluebird": "^3.5.0",

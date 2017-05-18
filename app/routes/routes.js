@@ -3,6 +3,7 @@ var globals = require("../globals.js");
 var fs = require('fs');
 
 var login = require("../appmodule/schoolapi/login.js");
+var fileupload = require('../appmodule/schoolapi/fileupload.js');
 var menu = require("../appmodule/schoolapi/menu.js");
 var common = require("../appmodule/schoolapi/common.js");
 var school = require("../appmodule/schoolapi/school.js");
@@ -59,6 +60,13 @@ var appRouter = function(app) {
 
     //##################################### Login ####################################################
 
+    //##################################### File Upload ####################################################
+
+    app.post(globals.globvar.rootAPI + "/uploads", fileupload.uploadFile);
+    // app.get(globals.globvar.rootAPI + "/getFilePath", fileupload.getFilePath);
+
+    //##################################### File Upload ####################################################
+
     //##################################### Menu ####################################################
 
     app.post(globals.globvar.rootAPI + "/getMenuDetails", menu.getMenuDetails);
@@ -68,7 +76,9 @@ var appRouter = function(app) {
     //##################################### Common ####################################################
 
     app.get(globals.globvar.rootAPI + "/getAutoData", common.getAutoData);
+    
     app.post(globals.globvar.rootAPI + "/getDashboard", common.getDashboard);
+    app.post(globals.globvar.rootAPI + "/getMOM", common.getMOM);
 
     //##################################### Common ####################################################
 

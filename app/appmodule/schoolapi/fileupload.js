@@ -1,70 +1,45 @@
 var db = require("db");
 var rs = require("gen").res;
+var express = require('express');
 var path = require('path');
 var formidable = require('formidable');
 var fileupload = module.exports = {};
 
-
-//file upload example
-
 fileupload.uploadFile = function uploadFile(req, res, done) {
-    function s4() {
-        return Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1);
-    }
-
-    var guid = s4() + s4() + '-' + s4() + '-' + s4() + '-' + s4() + '-' + s4() + s4() + s4();
-
     var form = new formidable.IncomingForm();
-    var i = 0;
-
-    //Formidable uploads to operating systems tmp dir by default
-
-    form.uploadDir = "./www/uploads"; //set upload directory
+    form.uploadDir = "www/uploads"; //set upload directory
     form.keepExtensions = true; //keep file extension
+    
+    var files = [];
+    var fields = [];
 
-    form.parse(req, function(err, fields, files) {
+    form.on('field', function(field, value) {
+        fields.push([field, value]);
+    })
+
+    form.on('file', function(field, file) {
+        files.push([field, file]);
+    })
+    
+    form.on('end', function() {
         res.writeHead(200, { 'content-type': 'text/plain' });
-        res.write(JSON.stringify(files.fileUploaded));
+        var sortedFiles = [];
 
-        i = i + 1;
+        for(var i = 0; i <= files.length -1; i++) {
+            var upl =  files[i][1];    
+            
+            sortedFiles.push({
+                "name":upl.name,
+                "type": upl.type,
+                "size":upl.size,
+                "path":upl.path
+            });
+        }
 
-        console.log("form.bytesReceived");
-
-        var name = JSON.stringify(files.fileUploaded.name);
-        var filepath = JSON.stringify(files.fileUploaded.path);
-        var size = JSON.stringify(files.fileUploaded.size);
-        var type = JSON.stringify(files.fileUploaded.type);
-
-        //TESTING
-
-        console.log("file name: " + name);
-        console.log("file path: " + filepath);
-        console.log("file size: " + size);
-        console.log("file type: " + type);
-        console.log("astModifiedDate: " + JSON.stringify(files.fileUploaded.lastModifiedDate));
-        console.log("guid: " + guid);
-
-        //Formidable changes the name of the uploaded file
-        //Rename the file to its original name
-
-        // fs.rename(files.fileUploaded.path, './uploads/' + files.fileUploaded.name, function(err) {
-        //     if (err)
-        //         throw err;
-        //     console.log('renamed complete');
-        // });
-
+        res.write(JSON.stringify(sortedFiles));
         res.end();
     });
 
-    // if (path.extname(req.files.file.name).toLowerCase() === '.png') {
-    //     fs.rename(tempPath, targetPath, function(err) {
-    //         if (err) throw err;
-    //         console.log("Upload completed!");
-    //     });
-    // } else {
-    //     fs.unlink(tempPath, function() {
-    //         if (err) throw err;
-    //         console.error("Only .png files are allowed!");
-    //     });
-    // }
+    form.parse(req);
 }
+
