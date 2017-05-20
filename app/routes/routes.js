@@ -19,8 +19,10 @@ var reports = require("../appmodule/schoolapi/reports.js");
 var dashboard = require("../appmodule/schoolapi/dashboard.js");
 var driverinfo = require("../appmodule/schoolapi/driverinfo.js");
 
-var order = require("../appmodule/marketing/order.js");
+var mrktnorder = require("../appmodule/marketing/order.js");
 var mrktndb = require("../appmodule/marketing/dashboard.js");
+
+var murorder = require("../appmodule/murchant/order.js");
 
 var multer = require('multer');
 
@@ -76,7 +78,7 @@ var appRouter = function(app) {
     //##################################### Common ####################################################
 
     app.get(globals.globvar.rootAPI + "/getAutoData", common.getAutoData);
-    
+
     app.post(globals.globvar.rootAPI + "/getDashboard", common.getDashboard);
     app.post(globals.globvar.rootAPI + "/getMOM", common.getMOM);
 
@@ -147,14 +149,21 @@ var appRouter = function(app) {
 
     //##################################### Reports ###################################################
 
-    //##################################### Order #####################################################
+    //##################################### Marketing Order #####################################################
 
-    app.post(globals.globvar.marketapi + "/saveOrderInfo", order.saveOrderInfo);
-    app.post(globals.globvar.marketapi + "/updateOrderInfo", order.updateOrderInfo);
-    app.post(globals.globvar.marketapi + "/getOrderDetail", order.getOrderDetail);
-    app.post(globals.globvar.marketapi + "/getOrder", order.getOrder);
+    app.post(globals.globvar.marketapi + "/saveOrderInfo", mrktnorder.saveOrderInfo);
+    app.post(globals.globvar.marketapi + "/updateOrderInfo", mrktnorder.updateOrderInfo);
+    app.post(globals.globvar.marketapi + "/getOrderDetail", mrktnorder.getOrderDetail);
+    app.post(globals.globvar.marketapi + "/getOrder", mrktnorder.getOrder);
 
-    //##################################### Order #####################################################
+    //##################################### Marketing Order #####################################################
+
+    //##################################### Murchant Order #####################################################
+
+    app.post(globals.globvar.rootAPI + "/saveOrderInfo", murorder.saveOrderInfo);
+    app.post(globals.globvar.rootAPI + "/getOrderDetails", murorder.getOrderDetails);
+
+    //##################################### Murchant Order #####################################################
 
     //##################################### Marketing Dashboard #######################################
 
