@@ -19,6 +19,7 @@ var appSchRouter = function(app) {
     //##################################### Student ###############################################
     //##################################### Parent ###############################################
     app.post(globals.globvar.rootAPI + "/cust/getmykids", parents.mykids);
+    app.post(globals.globvar.rootAPI + "/cust/activatekid", parents.activatekid);
     //##################################### FCM notification ###############################################
     app.get(globals.globvar.rootAPI + "/notify", notify.getUserNotification);
 }
