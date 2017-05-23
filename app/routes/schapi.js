@@ -16,6 +16,7 @@ var appSchRouter = function(app) {
     app.post(globals.globvar.rootAPI + "/tripapi/picdropcrew", tripapi.picdrpcrew);
     app.post(globals.globvar.rootAPI + "/tripapi/storedelta", tripsinfo.createtripdetails);
     app.post(globals.globvar.rootAPI + "/tripapi/getdelta", tripsinfo.gettripdelta);
+    app.post(globals.globvar.rootAPI + "/tripapi/sendreachingalert", tripapi.sendreachingalert);
     //##################################### Student ###############################################
     //##################################### Parent ###############################################
     app.post(globals.globvar.rootAPI + "/cust/getmykids", parents.mykids);
