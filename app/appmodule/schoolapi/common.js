@@ -27,3 +27,11 @@ common.getDashboard = function getDashboard(req, res, done) {
         rs.resp(res, 401, "error : " + err);
     }, 1)
 }
+
+common.getDropDownData = function getDropDownData(req, res, done) {
+    db.callProcedure("select " + globals.schema("funget_dropdown") + "($1,$2::json);", ['db', req.body], function(data) {
+        rs.resp(res, 200, data.rows);
+    }, function(err) {
+        rs.resp(res, 401, "error : " + err);
+    }, 1)
+}
