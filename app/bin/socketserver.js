@@ -27,6 +27,13 @@ socketserver.start = function() {
 
         });
 
+         client.on('unregister', function(msg) {
+            // client.
+            client.leave(msg);
+            client.emit("msgd", { "evt": "unregistered", "tripid": msg });
+
+        });
+
         client.emit("msgd", { "evt": "regreq" });
 
     });

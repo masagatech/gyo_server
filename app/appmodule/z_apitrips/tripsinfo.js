@@ -39,11 +39,17 @@ tripsinfo.createtripdetails = function(req, res, done) {
         mondb.mongoose.model('tripdetails').create(req.body, function(err, data) {
             if (err) {
                 //console.log(err);
-                rs.resp(res, 400, err);
+                if(res)
+                {
+                    rs.resp(res, 400, err);
+                }
                 return;
             }
             //console.log(data);
-            rs.resp(res, 200, data._id);
+            if(res)
+                {
+                    rs.resp(res, 200, data._id);
+                }
             try {
                 // console.log(req.body);
                 var data = {
@@ -61,10 +67,18 @@ tripsinfo.createtripdetails = function(req, res, done) {
             }
         });
     } catch (ex) {
-        rs.resp(res, 400, ex.message);
+         if(res){
+            rs.resp(res, 400, ex.message);
+         }
         //console.error(ex.message);
     }
 }
+
+tripsinfo.stop =function(data){
+    socketserver.io.sockets.in(data.tripid).emit('msgd', { "evt": "stop", "data": data });
+}
+
+
 
 tripsinfo.gettripdelta = function(req, res, done) {
     var limit = req.body.limit || 1;
