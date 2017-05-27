@@ -22,8 +22,6 @@ var driverinfo = require("../appmodule/schoolapi/driverinfo.js");
 var mrktnorder = require("../appmodule/marketing/order.js");
 var mrktndb = require("../appmodule/marketing/dashboard.js");
 
-var murorder = require("../appmodule/murchant/order.js");
-
 var multer = require('multer');
 
 var upload = multer({
@@ -158,13 +156,6 @@ var appRouter = function(app) {
     app.post(globals.globvar.marketapi + "/getOrder", mrktnorder.getOrder);
 
     //##################################### Marketing Order #####################################################
-
-    //##################################### Murchant Order #####################################################
-
-    app.post(globals.globvar.rootAPI + "/saveOrderInfo", murorder.saveOrderInfo);
-    app.post(globals.globvar.rootAPI + "/getOrderDetails", murorder.getOrderDetails);
-
-    //##################################### Murchant Order #####################################################
 
     //##################################### Marketing Dashboard #######################################
 

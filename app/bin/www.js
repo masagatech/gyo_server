@@ -23,23 +23,23 @@ socketserver.start();
 var bodyParser = require("body-parser");
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-console.log(path.join(__dirname.replace(/\\app\\bin/gi,""), '\\www\\uploads'));
+console.log(path.join(__dirname.replace(/\\app\\bin/gi, ""), '\\www\\uploads'));
 
 //###############################################################################################
 
 app.all('/*', function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "*"); // restrict it to the required domain
     res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
-    
+
     // Set custom headers for CORS
     res.header('Access-Control-Allow-Headers', 'Content-type,Accept,App-Id,Password');
-   if (req.method == 'OPTIONS') {
+    if (req.method == 'OPTIONS') {
         res.status(200).end();
     } else {
         next();
     }
 });
-app.use('/images',express.static(path.join(__dirname.replace(/\\app\\bin/gi,""), '\\www\\uploads')));
+app.use('/images', express.static(path.join(__dirname.replace(/\\app\\bin/gi, ""), '\\www\\uploads')));
 app.get('/chat', function(req, res) {
     res.sendFile(__dirname.replace("\\bin", "") + '\\httpdocs\\index.html');
     // res.send('<h1>Hello world</h1>');
@@ -49,6 +49,8 @@ app.get('/chat', function(req, res) {
 
 var routes = require("../routes/routes.js")(app);
 var schroute = require("../routes/schapi.js")(app);
+var mrchtroute = require("../routes/merchant.js")(app);
+
 
 // ##############################################################################################
 
