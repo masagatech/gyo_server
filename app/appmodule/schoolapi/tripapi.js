@@ -40,6 +40,7 @@ trip.starttrip = function(req, res, done) {
                             });
             
             try {
+                req.body.loc = '['+ req.body.loc +']'
                 var _dtr = {
                     body: req.body
                 }
