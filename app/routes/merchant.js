@@ -1,5 +1,6 @@
 var globals = require("gen").globals;
 
+var rider = require('../appmodule/merchant/rider.js');
 var outlet = require('../appmodule/merchant/outlet.js');
 var restaurant = require('../appmodule/merchant/restaurant.js');
 var category = require('../appmodule/merchant/category.js');
@@ -21,6 +22,11 @@ var appRouter = function(app) {
     //#############################################################################################
 
     //############################ VIVEK / ####################################
+
+    //############################ Rider #####################################
+    app.post(root + "/getRiderDetails", rider.getRiderDetails);
+    app.post(root + "/saveRiderInfo", rider.saveRiderInfo);
+    //#############################################################################################
 
     //############################ Outlet #####################################
     app.post(root + "/getOutletDetails", outlet.getOutletDetails);
