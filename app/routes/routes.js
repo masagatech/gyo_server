@@ -4,8 +4,10 @@ var fs = require('fs');
 
 var login = require("../appmodule/schoolapi/login.js");
 var fileupload = require('../appmodule/schoolapi/fileupload.js');
+var company = require("../appmodule/schoolapi/company.js");
 var menu = require("../appmodule/schoolapi/menu.js");
 var common = require("../appmodule/schoolapi/common.js");
+
 var location = require("../appmodule/schoolapi/location.js");
 var school = require("../appmodule/schoolapi/school.js");
 var holiday = require("../appmodule/schoolapi/holiday.js");
@@ -68,6 +70,13 @@ var appRouter = function(app) {
     // app.get(globals.globvar.rootAPI + "/getFilePath", fileupload.getFilePath);
 
     //##################################### File Upload ####################################################
+
+    //##################################### Company ####################################################
+
+    app.post(globals.globvar.rootAPI + "/getCompanyDetails", company.getCompanyDetails);
+    app.post(globals.globvar.rootAPI + "/saveCompanyInfo", company.saveCompanyInfo);
+
+    //##################################### Login ####################################################
 
     //##################################### Menu ####################################################
 
