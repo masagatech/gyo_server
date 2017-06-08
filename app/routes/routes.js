@@ -4,7 +4,7 @@ var fs = require('fs');
 
 var login = require("../appmodule/schoolapi/login.js");
 var fileupload = require('../appmodule/schoolapi/fileupload.js');
-var company = require("../appmodule/schoolapi/company.js");
+var workspace = require("../appmodule/schoolapi/workspace.js");
 var menu = require("../appmodule/schoolapi/menu.js");
 var common = require("../appmodule/schoolapi/common.js");
 
@@ -71,10 +71,10 @@ var appRouter = function(app) {
 
     //##################################### File Upload ####################################################
 
-    //##################################### Company ####################################################
+    //##################################### Workspace ####################################################
 
-    app.post(globals.globvar.rootAPI + "/getCompanyDetails", company.getCompanyDetails);
-    app.post(globals.globvar.rootAPI + "/saveCompanyInfo", company.saveCompanyInfo);
+    app.post(globals.globvar.rootAPI + "/getWorkspaceDetails", workspace.getWorkspaceDetails);
+    app.post(globals.globvar.rootAPI + "/saveWorkspaceInfo", workspace.saveWorkspaceInfo);
 
     //##################################### Login ####################################################
 

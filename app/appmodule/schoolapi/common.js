@@ -13,7 +13,7 @@ common.getAutoData = function getAutoData(req, res, done) {
 }
 
 common.getMOM = function getMOM(req, res, done) {
-    db.callProcedure("select " + globals.schema("funget_dashboard") + "($1,$2::json);", ['db', req.body], function(data) {
+    db.callProcedure("select " + globals.schema("funget_mom") + "($1,$2::json);", ['mom', req.body], function(data) {
         rs.resp(res, 200, data.rows);
     }, function(err) {
         rs.resp(res, 401, "error : " + err);
