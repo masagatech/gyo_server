@@ -9,6 +9,7 @@ var menu = require("../appmodule/schoolapi/menu.js");
 var common = require("../appmodule/schoolapi/common.js");
 
 var location = require("../appmodule/schoolapi/location.js");
+var stops = require("../appmodule/schoolapi/stops.js");
 var school = require("../appmodule/schoolapi/school.js");
 var holiday = require("../appmodule/schoolapi/holiday.js");
 var batch = require("../appmodule/schoolapi/batch.js");
@@ -100,6 +101,14 @@ var appRouter = function(app) {
     app.post(globals.globvar.rootAPI + "/getLocationDetails", location.getLocationDetails);
 
     //##################################### Location ###################################################
+
+    //##################################### Stops ####################################################
+
+    app.post(globals.globvar.rootAPI + "/saveRoutesInfo", stops.saveRoutesInfo);
+    app.post(globals.globvar.rootAPI + "/saveStopsInfo", stops.saveStopsInfo);
+    app.post(globals.globvar.rootAPI + "/getStopsDetails", stops.getStopsDetails);
+
+    //##################################### Stops ###################################################
 
     //##################################### School ####################################################
 
