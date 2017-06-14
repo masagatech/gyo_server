@@ -41,6 +41,8 @@ trip.starttrip = function(req, res, done) {
             
             try {
                 req.body.loc = '['+ req.body.loc +']'
+                req.body.tripid = _d.tripid;
+                req.body.flag = "start";
                 var _dtr = {
                     body: req.body
                 }
@@ -63,11 +65,19 @@ trip.stoptrip = function(req, res, done) {
         var _d =data.rows[0].funsave_api_startstoptrip;
         rs.resp(res, 200, _d);
         if(_d.resstatus){
-            var sendData = {"tripid":_d.tripid,"flag" : "stoptrip"};
+
+            var sendData = req.body;
+            sendData["flag"] = "stop";
+            //{"tripid":_d.tripid,"flag" : "stoptrip"};
             //sending stop notification 
             trip.sendNotification(sendData);
             //sending stop status to connected members
-            tripentry.stop(sendData);
+            try {
+                  tripentry.stop(sendData);
+            } catch (error) {
+                
+            }
+          
         }
     }, function(err) {
         rs.resp(res, 401, "error : " + err);
@@ -106,67 +116,73 @@ var fcm = require("gen").fcm();
        db.callProcedure("select " + globals.schema("funget_api_getnotifyids") + "($1,$2,$3::json);", ['tripnotify','tripnotify1', _data], 
        function(data) {
           
+           try {
+               
+                    var devicetokens = data.rows[0];
+                    var tokens = [];
+                    var msg = data.rows[1][0];
+                    
 
-           var devicetokens = data.rows[0];
-           var tokens = [];
-           var msg = data.rows[1][0];
-           
+
+                    for(var i=0;i<=devicetokens.length -1;i++){
+                            tokens.push(devicetokens[i].devtok);
+                    }
+                    
+                        if(res){
+                            if(_data.flag == "reaching"){
+                                if(msg.title =="al"){
+                                    var _d = {
+                                        "status": false
+                                    };
+                                    rs.resp(res, 200, _d);
+                                    return;
+                                }else{
+                                    var _d = {
+                                        "status": true
+                                    };
+                                    rs.resp(res, 200, _d);
+                                }
+                            
+                            }
+                        }
+
+                    if(_data.flag == "stoptrip"){
+                            if(msg.title =="no"){
+                                return;
+                            }
+                        }
 
 
-           for(var i=0;i<=devicetokens.length -1;i++){
-                tokens.push(devicetokens[i].devtok);
+                    _data["body"] = msg.body;
+                    _data["title"] = msg.title;
+                    var message = {
+                                    "registration_ids": tokens,
+                                    "notification": {
+                                        "sound": "default",
+                                        "body": msg.body,
+                                        "title": msg.title,
+                                    },
+
+                                    "data":_data,
+                                    "priority": "HIGH",
+                                    "time_to_live": (60 * 15)
+                                };
+                            fcm.send(message, function(err, response) {
+
+                                if (err) {
+
+                                    //console.log("Something has gone wrong!");
+
+                                } else {
+                                    //console.log("Successfully sent with response: ", response);
+
+                                }
+                            });
+
+                
+           } catch (error) {
+               console.log(error);
            }
-           
-            if(res){
-                if(_data.flag == "reaching"){
-                    if(msg.title =="al"){
-                        var _d = {
-                            "status": false
-                        };
-                        rs.resp(res, 200, _d);
-                        return;
-                    }else{
-                         var _d = {
-                            "status": true
-                        };
-                        rs.resp(res, 200, _d);
-                    }
-                   
-                }
-            }
-
-           if(_data.flag == "stoptrip"){
-                if(msg.title =="no"){
-                    return;
-                }
-            }
-
-
-           _data["body"] = msg.body;
-           _data["title"] = msg.title;
-        var message = {
-                        "registration_ids": tokens,
-                        "notification": {
-                            "sound": "default",
-                             "body": msg.body,
-                            "title": msg.title,
-                        },
-
-                        "data":_data,
-                        "priority": "HIGH",
-                        "time_to_live": (60 * 15)
-                    };
-                fcm.send(message, function(err, response) {
-
-                    if (err) {
-
-                        //console.log("Something has gone wrong!");
-
-                    } else {
-                        //console.log("Successfully sent with response: ", response);
-
-                    }
-                });
 
     }, function(err) {
       

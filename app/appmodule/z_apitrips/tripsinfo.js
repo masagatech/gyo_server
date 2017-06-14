@@ -22,7 +22,9 @@ var LocationSchema = new Schema({
     bearing: Number,
     appvr: String,
     uid: String,
-    pdid: Number
+    pdid: Number,
+    btr:String,
+    flag:String
 });
 
 mondb.mongoose.model('tripdetails', LocationSchema);
@@ -36,6 +38,8 @@ tripsinfo.createtripdetails = function(req, res, done) {
             }
         }
         var loc = req.body.loc;
+       
+
         mondb.mongoose.model('tripdetails').create(req.body, function(err, data) {
             if (err) {
                 //console.log(err);
@@ -58,7 +62,8 @@ tripsinfo.createtripdetails = function(req, res, done) {
                     "speed": req.body.speed,
                     "bearng": req.body.bearing,
                     "tripid": req.body.tripid,
-                    "sertm": req.body.sertm
+                    "sertm": req.body.sertm,
+                    "btr":req.body.btr
                 }
 
                 socketserver.io.sockets.in(req.body.tripid).emit('msgd', { "evt": "data", "data": data });
@@ -74,7 +79,31 @@ tripsinfo.createtripdetails = function(req, res, done) {
     }
 }
 
-tripsinfo.stop =function(data){
+tripsinfo.stop =function(data1){
+
+data1.loc = '['+ data1.loc +']';
+
+    tripsinfo.createtripdetails({ body:data1 });
+
+
+    
+        if (data1) {
+            data1.loc = JSON.parse(data1.loc);
+            data1.sertm = Date.now();
+        }
+    
+
+       var data = {
+                    "lat": data1.loc[0],
+                    "lon": data1.loc[1],
+                    "speed": data1.speed,
+                    "bearng": data1.bearing,
+                    "tripid": data1.tripid,
+                    "sertm": data1.sertm,
+                    "btr":data1.btr,
+                    "flag":"stop"
+                }
+                 console.log(data);
     socketserver.io.sockets.in(data.tripid).emit('msgd', { "evt": "stop", "data": data });
 }
 
@@ -82,7 +111,7 @@ tripsinfo.stop =function(data){
 
 tripsinfo.gettripdelta = function(req, res, done) {
     var limit = req.body.limit || 1;
-    var d = mondb.mongoose.model('tripdetails').find({ 'tripid': req.body.tripid }).select('tripid loc bearing sertm speed').sort({ 'sertm': -1 }).limit(limit);
+    var d = mondb.mongoose.model('tripdetails').find({ 'tripid': req.body.tripid }).select('tripid loc bearing sertm speed btr flag').sort({ 'sertm': -1 }).limit(limit);
     d.exec(function(err, data) {
         if (err) {
             rs.resp(res, 400, err);
