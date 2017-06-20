@@ -178,6 +178,7 @@ var appRouter = function(app) {
 
     //##################################### Reports ###################################################
 
+    app.post(globals.globvar.rootAPI + "/getRouteWisePassengerReports", reports.getRouteWisePassengerReports);
     app.post(globals.globvar.rootAPI + "/getAttendanceReports", reports.getAttendanceReports);
 
     //##################################### Reports ###################################################
