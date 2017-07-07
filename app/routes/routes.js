@@ -23,6 +23,7 @@ var reports = require("../appmodule/schoolapi/reports.js");
 
 var dashboard = require("../appmodule/schoolapi/dashboard.js");
 var driverinfo = require("../appmodule/schoolapi/driverinfo.js");
+var breakdown = require("../appmodule/schoolapi/breakdown.js");
 
 var mrktnorder = require("../appmodule/marketing/order.js");
 var mrktndb = require("../appmodule/marketing/dashboard.js");
@@ -217,6 +218,13 @@ var appRouter = function(app) {
     app.post(globals.globvar.rootAPI + "/saveDriverInfo", driverinfo.saveDriverInfo);
     app.post(globals.globvar.rootAPI + "/getDriverInfoGrid", driverinfo.getDriverInfoGrid);
     app.post(globals.globvar.rootAPI + "/getDriverInfoDetails", driverinfo.getDriverInfoDetails);
+
+    //##################################### Driver Info ################################################
+
+    //##################################### Break Down ###############################################
+
+    app.post(globals.globvar.rootAPI + "/saveBreakDown", breakdown.saveBreakDown);
+    app.post(globals.globvar.rootAPI + "/getBreakDown", breakdown.getBreakDown);
 
     //##################################### Driver Info ################################################
 
