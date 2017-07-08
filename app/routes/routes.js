@@ -182,13 +182,13 @@ var appRouter = function(app) {
 
     app.post(globals.globvar.rootAPI + "/saveSpeedVialation", speed.saveSpeedVialation);
 
-    //##################################### Driver Info ################################################
+    //##################################### Speed ################################################
 
     //##################################### Reports ###################################################
 
     app.post(globals.globvar.rootAPI + "/getAttendanceReports", reports.getAttendanceReports);
     app.post(globals.globvar.rootAPI + "/getRouteWisePassengerReports", reports.getRouteWisePassengerReports);
-    app.post(globals.globvar.rootAPI + "/getSpeedReports", reports.getSpeedReports);
+    app.post(globals.globvar.rootAPI + "/getSpeedVialationReports", reports.getSpeedVialationReports);
 
     //##################################### Reports ###################################################
 

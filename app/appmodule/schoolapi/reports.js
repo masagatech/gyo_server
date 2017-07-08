@@ -13,15 +13,15 @@ pidr.getAttendanceReports = function getAttendanceReports(req, res, done) {
 }
 
 pidr.getRouteWisePassengerReports = function getRouteWisePassengerReports(req, res, done) {
-    db.callProcedure("select " + globals.schema("funget_rpt_routewisepassenger") + "($1,$2::json);", ['att', req.body], function(data) {
+    db.callProcedure("select " + globals.schema("funget_rpt_routewisepassenger") + "($1,$2::json);", ['rt', req.body], function(data) {
         rs.resp(res, 200, data.rows);
     }, function(err) {
         rs.resp(res, 401, "error : " + err);
     }, 1)
 }
 
-pidr.getSpeedReports = function getSpeedReports(req, res, done) {
-    db.callProcedure("select " + globals.schema("funget_rpt_vehiclespeed") + "($1,$2::json);", ['att', req.body], function(data) {
+pidr.getSpeedVialationReports = function getSpeedVialationReports(req, res, done) {
+    db.callProcedure("select " + globals.schema("funget_rpt_speedvialation") + "($1,$2::json);", ['spd', req.body], function(data) {
         rs.resp(res, 200, data.rows);
     }, function(err) {
         rs.resp(res, 401, "error : " + err);
