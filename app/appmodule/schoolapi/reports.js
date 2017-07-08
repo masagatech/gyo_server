@@ -19,3 +19,11 @@ pidr.getRouteWisePassengerReports = function getRouteWisePassengerReports(req, r
         rs.resp(res, 401, "error : " + err);
     }, 1)
 }
+
+pidr.getSpeedReports = function getSpeedReports(req, res, done) {
+    db.callProcedure("select " + globals.schema("funget_rpt_vehiclespeed") + "($1,$2::json);", ['att', req.body], function(data) {
+        rs.resp(res, 200, data.rows);
+    }, function(err) {
+        rs.resp(res, 401, "error : " + err);
+    }, 1)
+}

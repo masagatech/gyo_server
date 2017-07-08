@@ -15,15 +15,15 @@ var holiday = require("../appmodule/schoolapi/holiday.js");
 var batch = require("../appmodule/schoolapi/batch.js");
 var driver = require("../appmodule/schoolapi/driver.js");
 var vehicle = require("../appmodule/schoolapi/vehicle.js");
-var owner = require("../appmodule/schoolapi/owner.js");
 var user = require("../appmodule/schoolapi/user.js");
 var student = require("../appmodule/schoolapi/student.js");
 var pickdrop = require("../appmodule/schoolapi/pickdrop.js");
+var breakdown = require("../appmodule/schoolapi/breakdown.js");
+var speed = require("../appmodule/schoolapi/speed.js");
 var reports = require("../appmodule/schoolapi/reports.js");
 
 var dashboard = require("../appmodule/schoolapi/dashboard.js");
 var driverinfo = require("../appmodule/schoolapi/driverinfo.js");
-var breakdown = require("../appmodule/schoolapi/breakdown.js");
 
 var mrktnorder = require("../appmodule/marketing/order.js");
 var mrktndb = require("../appmodule/marketing/dashboard.js");
@@ -147,13 +147,6 @@ var appRouter = function(app) {
 
     //##################################### Driver ####################################################
 
-    //##################################### Owner #####################################################
-
-    app.post(globals.globvar.rootAPI + "/saveOwnerInfo", owner.saveOwnerInfo);
-    app.post(globals.globvar.rootAPI + "/getOwnerDetails", owner.getOwnerDetails);
-
-    //##################################### Owner #####################################################
-
     //##################################### User #####################################################
 
     app.post(globals.globvar.rootAPI + "/saveUserInfo", user.saveUserInfo);
@@ -178,10 +171,24 @@ var appRouter = function(app) {
 
     //##################################### Pick and Drop #############################################
 
+    //##################################### Break Down ###############################################
+
+    app.post(globals.globvar.rootAPI + "/saveBreakDown", breakdown.saveBreakDown);
+    app.post(globals.globvar.rootAPI + "/getBreakDown", breakdown.getBreakDown);
+
+    //##################################### Driver Info ################################################
+
+    //##################################### Speed ###############################################
+
+    app.post(globals.globvar.rootAPI + "/saveSpeedVialation", speed.saveSpeedVialation);
+
+    //##################################### Driver Info ################################################
+
     //##################################### Reports ###################################################
 
-    app.post(globals.globvar.rootAPI + "/getRouteWisePassengerReports", reports.getRouteWisePassengerReports);
     app.post(globals.globvar.rootAPI + "/getAttendanceReports", reports.getAttendanceReports);
+    app.post(globals.globvar.rootAPI + "/getRouteWisePassengerReports", reports.getRouteWisePassengerReports);
+    app.post(globals.globvar.rootAPI + "/getSpeedReports", reports.getSpeedReports);
 
     //##################################### Reports ###################################################
 
@@ -218,13 +225,6 @@ var appRouter = function(app) {
     app.post(globals.globvar.rootAPI + "/saveDriverInfo", driverinfo.saveDriverInfo);
     app.post(globals.globvar.rootAPI + "/getDriverInfoGrid", driverinfo.getDriverInfoGrid);
     app.post(globals.globvar.rootAPI + "/getDriverInfoDetails", driverinfo.getDriverInfoDetails);
-
-    //##################################### Driver Info ################################################
-
-    //##################################### Break Down ###############################################
-
-    app.post(globals.globvar.rootAPI + "/saveBreakDown", breakdown.saveBreakDown);
-    app.post(globals.globvar.rootAPI + "/getBreakDown", breakdown.getBreakDown);
 
     //##################################### Driver Info ################################################
 
