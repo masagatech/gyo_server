@@ -20,6 +20,7 @@ var student = require("../appmodule/schoolapi/student.js");
 var pickdrop = require("../appmodule/schoolapi/pickdrop.js");
 var breakdown = require("../appmodule/schoolapi/breakdown.js");
 var speed = require("../appmodule/schoolapi/speed.js");
+var genset = require("../appmodule/schoolapi/general.js");
 var reports = require("../appmodule/schoolapi/reports.js");
 
 var dashboard = require("../appmodule/schoolapi/dashboard.js");
@@ -183,6 +184,13 @@ var appRouter = function(app) {
     app.post(globals.globvar.rootAPI + "/saveSpeedVialation", speed.saveSpeedVialation);
 
     //##################################### Speed ################################################
+
+    //##################################### Break Down ###############################################
+
+    app.post(globals.globvar.rootAPI + "/saveGeneralSetting", genset.saveGeneralSetting);
+    app.post(globals.globvar.rootAPI + "/getGeneralSetting", genset.getGeneralSetting);
+
+    //##################################### Driver Info ################################################
 
     //##################################### Reports ###################################################
 
