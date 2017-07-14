@@ -12,6 +12,7 @@ var location = require("../appmodule/schoolapi/location.js");
 var stops = require("../appmodule/schoolapi/stops.js");
 var school = require("../appmodule/schoolapi/school.js");
 var holiday = require("../appmodule/schoolapi/holiday.js");
+var lvpsngr = require("../appmodule/schoolapi/studentleave.js");
 var batch = require("../appmodule/schoolapi/batch.js");
 var driver = require("../appmodule/schoolapi/driver.js");
 var vehicle = require("../appmodule/schoolapi/vehicle.js");
@@ -124,6 +125,13 @@ var appRouter = function(app) {
 
     app.post(globals.globvar.rootAPI + "/saveHoliday", holiday.saveHoliday);
     app.post(globals.globvar.rootAPI + "/getHoliday", holiday.getHoliday);
+
+    //##################################### Holiday ###################################################
+
+    //##################################### Leave Passgenger ####################################################
+
+    app.post(globals.globvar.rootAPI + "/saveLeavePassenger", lvpsngr.saveLeavePassenger);
+    app.post(globals.globvar.rootAPI + "/getLeavePassenger", lvpsngr.getLeavePassenger);
 
     //##################################### Holiday ###################################################
 
