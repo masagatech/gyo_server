@@ -19,3 +19,19 @@ brkdwn.getBreakDown = function getBreakDown(req, res, done) {
         rs.resp(res, 401, "error : " + err);
     }, 1)
 }
+
+brkdwn.saveBreakDownSet = function saveBreakDownSet(req, res, done) {
+    db.callFunction("select " + globals.schema("funsave_breakdownset") + "($1::json);", [req.body], function(data) {
+        rs.resp(res, 200, data.rows);
+    }, function(err) {
+        rs.resp(res, 401, "error : " + err);
+    })
+}
+
+brkdwn.getBreakDownSet = function getBreakDownSet(req, res, done) {
+    db.callProcedure("select " + globals.schema("funget_breakdownset") + "($1,$2::json);", ['bd', req.body], function(data) {
+        rs.resp(res, 200, data.rows);
+    }, function(err) {
+        rs.resp(res, 401, "error : " + err);
+    }, 1)
+}

@@ -164,6 +164,9 @@ var appRouter = function(app) {
     app.post(globals.globvar.rootAPI + "/saveUserRights", user.saveUserRights);
     app.post(globals.globvar.rootAPI + "/getUserRights", user.getUserRights);
 
+    app.post(globals.globvar.rootAPI + "/saveUserVehicleMap", user.saveUserVehicleMap);
+    app.post(globals.globvar.rootAPI + "/getUserVehicleMap", user.getUserVehicleMap);
+
     //##################################### User #####################################################
 
     //##################################### Student ###################################################
@@ -184,6 +187,9 @@ var appRouter = function(app) {
 
     app.post(globals.globvar.rootAPI + "/saveBreakDown", breakdown.saveBreakDown);
     app.post(globals.globvar.rootAPI + "/getBreakDown", breakdown.getBreakDown);
+
+    app.post(globals.globvar.rootAPI + "/saveBreakDownSet", breakdown.saveBreakDownSet);
+    app.post(globals.globvar.rootAPI + "/getBreakDownSet", breakdown.getBreakDownSet);
 
     //##################################### Driver Info ################################################
 
