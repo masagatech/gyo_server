@@ -37,4 +37,5 @@ socketserver.start = function() {
         client.emit("msgd", { "evt": "regreq" });
 
     });
+    console.log("Socket Server Started!!!");
 }

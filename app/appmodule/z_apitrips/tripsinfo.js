@@ -24,6 +24,7 @@ var LocationSchema = new Schema({
     uid: String,
     pdid: Number,
     btr:String,
+    alwspeed:Number,
     flag:String
 });
 
@@ -60,11 +61,12 @@ tripsinfo.createtripdetails = function(req, res, done) {
                     "lat": loc[0],
                     "lon": loc[1],
                     "speed": req.body.speed,
+                    "alwspeed":req.body.alwspeed,
                     "bearng": req.body.bearing,
                     "tripid": req.body.tripid,
                     "sertm": req.body.sertm,
                     "btr":req.body.btr
-                }
+                };
 
                 socketserver.io.sockets.in(req.body.tripid).emit('msgd', { "evt": "data", "data": data });
             } catch (e) {
@@ -81,32 +83,27 @@ tripsinfo.createtripdetails = function(req, res, done) {
 
 tripsinfo.stop =function(data1){
 
-data1.loc = '['+ data1.loc +']';
+    data1.loc = '['+ data1.loc +']';
 
-    tripsinfo.createtripdetails({ body:data1 });
-
-
-    
+    tripsinfo.createtripdetails({ body:data1 });    
         if (data1) {
             data1.loc = JSON.parse(data1.loc);
             data1.sertm = Date.now();
         }
-    
-
        var data = {
                     "lat": data1.loc[0],
                     "lon": data1.loc[1],
                     "speed": data1.speed,
+                    "alwspeed":data1.alwspeed,
                     "bearng": data1.bearing,
                     "tripid": data1.tripid,
                     "sertm": data1.sertm,
                     "btr":data1.btr,
                     "flag":"stop"
-                }
-                 console.log(data);
+                };
+
     socketserver.io.sockets.in(data.tripid).emit('msgd', { "evt": "stop", "data": data });
 }
-
 
 
 tripsinfo.gettripdelta = function(req, res, done) {
@@ -119,5 +116,4 @@ tripsinfo.gettripdelta = function(req, res, done) {
         }
         rs.resp(res, 200, data);
     });
-
 }
