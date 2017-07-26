@@ -20,6 +20,14 @@ common.getMOM = function getMOM(req, res, done) {
     }, 1)
 }
 
+common.saveMOM = function saveMOM(req, res, done) {
+    db.callFunction("select " + globals.schema("funsave_mom") + "($1::json);", [req.body], function(data) {
+        rs.resp(res, 200, data.rows);
+    }, function(err) {
+        rs.resp(res, 401, "error : " + err);
+    })
+}
+
 common.getDashboard = function getDashboard(req, res, done) {
     db.callProcedure("select " + globals.schema("funget_dashboard") + "($1,$2::json);", ['db', req.body], function(data) {
         rs.resp(res, 200, data.rows);

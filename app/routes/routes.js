@@ -96,6 +96,7 @@ var appRouter = function(app) {
 
     app.post(globals.globvar.rootAPI + "/getDashboard", common.getDashboard);
     app.post(globals.globvar.rootAPI + "/getMOM", common.getMOM);
+    app.post(globals.globvar.rootAPI + "/saveMOM", common.saveMOM);
 
     //##################################### Common ####################################################
 
