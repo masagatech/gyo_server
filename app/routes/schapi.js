@@ -17,12 +17,14 @@ var appSchRouter = function(app) {
     app.post(globals.globvar.rootAPI + "/tripapi/storedelta", tripsinfo.createtripdetails);
     app.post(globals.globvar.rootAPI + "/tripapi/getdelta", tripsinfo.gettripdelta);
     app.post(globals.globvar.rootAPI + "/tripapi/sendreachingalert", tripapi.sendreachingalert);
+    app.post(globals.globvar.rootAPI + "/tripapi/getvahicleupdates", tripsinfo.getvhupdtes);
     //##################################### Student ###############################################
     //##################################### Parent ###############################################
     app.post(globals.globvar.rootAPI + "/cust/getmykids", parents.mykids);
     app.post(globals.globvar.rootAPI + "/cust/activatekid", parents.activatekid);
     //##################################### FCM notification ###############################################
     app.get(globals.globvar.rootAPI + "/notify", notify.getUserNotification);
+    
 }
 
 module.exports = appSchRouter;
