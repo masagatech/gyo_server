@@ -4,6 +4,7 @@ var tripapi = require("../appmodule/schoolapi/tripapi.js");
 var tripsinfo = require("../appmodule/z_apitrips/tripsinfo.js");
 var parents = require("../appmodule/schoolapi/parents.js");
 var notify = require("../appmodule/schoolapi/notificationapi.js");
+var trackboard = require("../appmodule/schoolapi/trackboard.js");
 
 
 var appSchRouter = function(app) {
@@ -18,6 +19,8 @@ var appSchRouter = function(app) {
     app.post(globals.globvar.rootAPI + "/tripapi/getdelta", tripsinfo.gettripdelta);
     app.post(globals.globvar.rootAPI + "/tripapi/sendreachingalert", tripapi.sendreachingalert);
     app.post(globals.globvar.rootAPI + "/tripapi/getvahicleupdates", tripsinfo.getvhupdtes);
+    app.post(globals.globvar.rootAPI + "/tripapi/gettrackboard", trackboard.gettrackboard);
+    
     //##################################### Student ###############################################
     //##################################### Parent ###############################################
     app.post(globals.globvar.rootAPI + "/cust/getmykids", parents.mykids);
