@@ -27,3 +27,11 @@ pidr.getSpeedVialationReports = function getSpeedVialationReports(req, res, done
         rs.resp(res, 401, "error : " + err);
     }, 1)
 }
+
+pidr.getPassengerTripReports = function getPassengerTripReports(req, res, done) {
+    db.callProcedure("select " + globals.schema("funget_rpt_passengertrips") + "($1,$2::json);", ['spd', req.body], function(data) {
+        rs.resp(res, 200, data.rows);
+    }, function(err) {
+        rs.resp(res, 401, "error : " + err);
+    }, 1)
+}
