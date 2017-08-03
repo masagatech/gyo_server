@@ -209,6 +209,8 @@ tripsinfo.gettripdelta = function (req, res, done) {
 
 tripsinfo.getvhupdtes = function (req, res, done) {
 
+    if (req.body.ismob) { req.body.vhids = [req.body.vhids.replace("'", "")] }
+    console.log(req.body.vhids);
 
     var d = mondb.mongoose.model('vhups').find({ 'vhid': { $in: req.body.vhids } }).select('vhid tripid loc bearing sertm alwspeed speed btr flag');
     d.exec(function (err, data) {
