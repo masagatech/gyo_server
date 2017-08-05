@@ -27,3 +27,11 @@ menus.getMenuAccess = function getMenuAccess(req, res, done) {
         rs.resp(res, 401, "error : " + err);
     }, 1)
 }
+
+menus.getMenuLog = function getMenuLog(req, res, done) {
+    db.callProcedure("select " + globals.schema("funget_menulog") + "($1,$2::json);", ['ml', req.body], function(data) {
+        rs.resp(res, 200, data.rows);
+    }, function(err) {
+        rs.resp(res, 401, "error : " + err);
+    }, 1)
+}

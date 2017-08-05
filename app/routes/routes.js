@@ -86,6 +86,7 @@ var appRouter = function(app) {
 
     app.post(globals.globvar.rootAPI + "/getMenuDetails", menu.getMenuDetails);
     app.post(globals.globvar.rootAPI + "/getMenuAccess", menu.getMenuAccess);
+    app.post(globals.globvar.rootAPI + "/getMenuLog", menu.getMenuLog);
 
     //##################################### Menu ####################################################
 
@@ -167,6 +168,8 @@ var appRouter = function(app) {
 
     app.post(globals.globvar.rootAPI + "/saveUserVehicleMap", user.saveUserVehicleMap);
     app.post(globals.globvar.rootAPI + "/getUserVehicleMap", user.getUserVehicleMap);
+
+    app.post(globals.globvar.rootAPI + "/getUserLoginLog", user.getUserLoginLog);
 
     //##################################### User #####################################################
 
