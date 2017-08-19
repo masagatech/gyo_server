@@ -41,10 +41,10 @@ app.all('/*', function(req, res, next) {
 });
 // app.use('/images', express.static(path.join(__dirname.replace(/\\app\\bin/gi, ""), '\\www\\uploads')));
 app.use('/images', express.static(__dirname.replace('app', "www").replace('bin', 'uploads')));
-app.get('/chat', function(req, res) {
-    res.sendFile(__dirname.replace("\\bin", "") + '\\httpdocs\\index.html');
-    // res.send('<h1>Hello world</h1>');
-});
+// app.get('/chat', function(req, res) {
+//     res.sendFile(__dirname.replace("\\bin", "") + '\\httpdocs\\index.html');
+//     // res.send('<h1>Hello world</h1>');
+// });
 
 // ##############################################################################################	
 
