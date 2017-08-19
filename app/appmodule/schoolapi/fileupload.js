@@ -5,14 +5,14 @@ var path = require('path');
 var formidable = require('formidable');
 var fileupload = module.exports = {};
 // Include the node file module
-var fs = require('fs');
 var Jimp = require("jimp");
 // Include ImageMagick
-var gm = require('gm').subClass({ imageMagick: true });
 
 
 fileupload.uploadFile = function uploadFile(req, res, done) {
-    let mode = req.query.mode || 'multi';
+    let width = req.query.width || 200;
+    //let height = req.query.height || 200 ;
+    
 
 
     var form = new formidable.IncomingForm();
@@ -27,11 +27,12 @@ fileupload.uploadFile = function uploadFile(req, res, done) {
     })
 
     form.on('file', function (field, file) {
+
         //gm(file.path).resize(200);
         // open a file called "lenna.png" 
         Jimp.read(file.path, function (err, lenna) {
             if (err) throw err;
-            lenna.resize(200,Jimp.AUTO)            // resize 
+            lenna.resize(Number(width),Jimp.AUTO)            // resize 
                 .quality(80)                  // set greyscale 
                 .write(file.path); // save 
         });
