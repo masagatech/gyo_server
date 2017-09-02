@@ -14,6 +14,14 @@ user.saveUserInfo = function saveUserInfo(req, res, done) {
     })
 }
 
+user.updateUserInfo = function updateUserInfo(req, res, done) {
+    db.callFunction("select " + globals.schema("funupdate_userinfo") + "($1::json);", [req.body], function(data) {
+        rs.resp(res, 200, data.rows);
+    }, function(err) {
+        rs.resp(res, 401, "error : " + err);
+    })
+}
+
 user.getUserDetails = function getUserDetails(req, res, done) {
     db.callProcedure("select " + globals.schema("funget_userdetails") + "($1,$2::json);", ['u', req.body], function(data) {
         rs.resp(res, 200, data.rows);
