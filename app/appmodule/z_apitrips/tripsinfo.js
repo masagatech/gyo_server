@@ -27,7 +27,12 @@ var LocationSchema = new Schema({
     btr: String,
     alwspeed: Number,
     vhid: Number,
-    flag: String
+    flag: String,
+    altd:Number,
+    accr:Number,
+    actvt:String,
+    actper:Number
+    
 });
 
 
@@ -49,7 +54,11 @@ var LastUpdateVehSchema = new Schema({
     btr: String,
     alwspeed: Number,
     vhid: { type: Number, index: true },
-    flag: String
+    flag: String,
+    altd:Number,
+    accr:Number,
+    actvt:String,
+    actper:Number
 });
 
 
@@ -95,7 +104,12 @@ tripsinfo.createtripdetails = function (req, res, done) {
                     "sertm": req.body.sertm,
                     "btr": req.body.btr,
                     "vhid": req.body.vhid,
-                    "flag": req.body.flag
+                    "flag": req.body.flag,
+                    "accr":req.body.accr,
+                    "altd":req.body.altd,
+                    "actvt":req.body.actvt,
+                    "actper":req.body.actper
+
                 };
 
 

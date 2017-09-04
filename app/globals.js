@@ -24,7 +24,7 @@ global.monconstr = function constr() {
     return 'mongodb://127.0.0.1:27017/goyosch';
 };
 
-global.pgdbconnection = {
+global.pgdbconnection = { 
     user: 'postgres', //env var: PGUSER
     database: 'goyo_school', //env var: PGDATABASE
     password: '123', //env var: PGPASSWORD
