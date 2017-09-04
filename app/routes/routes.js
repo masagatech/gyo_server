@@ -20,6 +20,7 @@ var user = require("../appmodule/schoolapi/user.js");
 var student = require("../appmodule/schoolapi/student.js");
 var pickdrop = require("../appmodule/schoolapi/pickdrop.js");
 var breakdown = require("../appmodule/schoolapi/breakdown.js");
+var notification = require("../appmodule/schoolapi/notification.js");
 var speed = require("../appmodule/schoolapi/speed.js");
 var genset = require("../appmodule/schoolapi/general.js");
 var reports = require("../appmodule/schoolapi/reports.js");
@@ -198,27 +199,34 @@ var appRouter = function(app) {
 
     //##################################### Driver Info ################################################
 
-    //##################################### Speed ###############################################
+    //##################################### Notification ###############################################
+
+    app.post(globals.globvar.rootAPI + "/saveNotification", notification.saveNotification);
+    app.post(globals.globvar.rootAPI + "/getNotification", notification.getNotification);
+
+    //##################################### Notification ###############################################
+
+    //##################################### Speed ######################################################
 
     app.post(globals.globvar.rootAPI + "/saveSpeedVialation", speed.saveSpeedVialation);
 
-    //##################################### Speed ################################################
+    //##################################### Speed ######################################################
 
-    //##################################### Break Down ###############################################
+    //##################################### General ####################################################
 
     app.post(globals.globvar.rootAPI + "/saveGeneralSetting", genset.saveGeneralSetting);
     app.post(globals.globvar.rootAPI + "/getGeneralSetting", genset.getGeneralSetting);
 
-    //##################################### Driver Info ################################################
+    //##################################### General ####################################################
 
-    //##################################### Reports ###################################################
+    //##################################### Reports ####################################################
 
     app.post(globals.globvar.rootAPI + "/getAttendanceReports", reports.getAttendanceReports);
     app.post(globals.globvar.rootAPI + "/getRouteWisePassengerReports", reports.getRouteWisePassengerReports);
     app.post(globals.globvar.rootAPI + "/getSpeedVialationReports", reports.getSpeedVialationReports);
     app.post(globals.globvar.rootAPI + "/getPassengerTripReports", reports.getPassengerTripReports);
 
-    //##################################### Reports ###################################################
+    //##################################### Reports ####################################################
 
     //##################################### Marketing Order #####################################################
 
@@ -229,14 +237,14 @@ var appRouter = function(app) {
 
     //##################################### Marketing Order #####################################################
 
-    //##################################### Marketing Dashboard #######################################
+    //##################################### Marketing Dashboard ########################################
 
     app.post(globals.globvar.rootAPI + "/getMarketingDB", mrktndb.getMarketingDB);
 
-    //##################################### Marketing Dashboard #######################################
+    //##################################### Marketing Dashboard ########################################
 
 
-    //##################################### VIVEK #####################################################
+    //##################################### VIVEK ######################################################
 
 
 

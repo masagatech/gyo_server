@@ -186,15 +186,16 @@ trip.sendNotification = function(_data, res) {
                             var _d = {
                                 "status": false
                             };
+
                             rs.resp(res, 200, _d);
                             return;
                         } else {
                             var _d = {
                                 "status": true
                             };
+
                             rs.resp(res, 200, _d);
                         }
-
                     }
                 }
 
@@ -219,23 +220,17 @@ trip.sendNotification = function(_data, res) {
                     "priority": "HIGH",
                     "time_to_live": (60 * 15)
                 };
+
                 fcm.send(message, function(err, response) {
-
                     if (err) {
-
-                        //console.log("Something has gone wrong!");
-
+                        console.log("Something has gone wrong!");
                     } else {
-                        //console.log("Successfully sent with response: ", response);
-
+                        console.log("Successfully sent with response: ", response);
                     }
                 });
-
-
             } catch (error) {
                 console.log(error);
             }
-
         },
 
         function(err) {
