@@ -2,8 +2,12 @@ var rs = require("../appmodule/util/resp.js");
 var globals = require("../globals.js");
 var fs = require('fs');
 
+var common = require("../appmodule/erp/common.js");
 var emp = require("../appmodule/erp/employee.js");
+var cls = require("../appmodule/erp/class.js");
 var book = require("../appmodule/erp/books.js");
+var actv = require("../appmodule/erp/activity.js");
+var assnm = require("../appmodule/erp/assignment.js");
 var ntf = require("../appmodule/erp/notification.js");
 var annc = require("../appmodule/erp/announcement.js");
 
@@ -13,19 +17,46 @@ var appRouter = function(app) {
     //##################################### VIVEK #####################################################
 
 
+    //##################################### Common ####################################################
+
+    app.get(root + "/getAutoData", common.getAutoData);
+
+    //##################################### Common ####################################################
+
     //##################################### Employee ###############################################
 
     app.post(root + "/saveEmployeeInfo", emp.saveEmployeeInfo);
     app.post(root + "/getEmployeeDetails", emp.getEmployeeDetails);
 
-    //##################################### Notification ###############################################
+    //##################################### Employee ###############################################
+
+    //##################################### Class ###############################################
+
+    app.post(root + "/saveClassInfo", cls.saveClassInfo);
+    app.post(root + "/getClassDetails", cls.getClassDetails);
+
+    //##################################### Class ###############################################
 
     //##################################### Books ###############################################
 
     app.post(root + "/saveBooksInfo", book.saveBooksInfo);
     app.post(root + "/getBooksDetails", book.getBooksDetails);
 
-    //##################################### Notification ###############################################
+    //##################################### Books ###############################################
+
+    //##################################### Activity ###############################################
+
+    app.post(root + "/saveActivityInfo", actv.saveActivityInfo);
+    app.post(root + "/getActivityDetails", actv.getActivityDetails);
+
+    //##################################### Activity ###############################################
+
+    //##################################### Assignment ###############################################
+
+    app.post(root + "/saveAssignmentInfo", assnm.saveAssignmentInfo);
+    app.post(root + "/getAssignmentDetails", assnm.getAssignmentDetails);
+
+    //##################################### Assignment ###############################################
 
     //##################################### Notification ###############################################
 

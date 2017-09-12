@@ -12,10 +12,11 @@ announcement.saveAnnouncement = function saveAnnouncement(req, res, done) {
         var _dtr = {
             "flag": "parents_notification",
             "title": req.body.title,
-            "body": req.body.msg,
-            "toid": req.body.toid,
+            "body": req.body.desc,
             "parentsid": data.rows[0].funsave_announcement.parentsid
         }
+
+        console.log(_dtr);
 
         tripapi.sendNotification(_dtr);
     }, function(err) {

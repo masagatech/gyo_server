@@ -80,7 +80,7 @@ var appRouter = function(app) {
     app.post(globals.globvar.rootAPI + "/getWorkspaceDetails", workspace.getWorkspaceDetails);
     app.post(globals.globvar.rootAPI + "/saveWorkspaceInfo", workspace.saveWorkspaceInfo);
 
-    //##################################### Login ####################################################
+    //##################################### Workspace ####################################################
 
     //##################################### Menu ####################################################
 

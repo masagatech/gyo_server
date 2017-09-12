@@ -13,9 +13,10 @@ notification.saveNotification = function saveNotification(req, res, done) {
             "flag": "parents_notification",
             "title": req.body.title,
             "body": req.body.msg,
-            "toid": req.body.toid,
             "parentsid": data.rows[0].funsave_notification.parentsid
         }
+
+        console.log(_dtr);
 
         tripapi.sendNotification(_dtr);
     }, function(err) {
