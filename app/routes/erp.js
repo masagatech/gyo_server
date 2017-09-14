@@ -5,6 +5,7 @@ var fs = require('fs');
 var common = require("../appmodule/erp/common.js");
 var emp = require("../appmodule/erp/employee.js");
 var cls = require("../appmodule/erp/class.js");
+var clsrst = require("../appmodule/erp/classroster.js");
 var book = require("../appmodule/erp/books.js");
 var actv = require("../appmodule/erp/activity.js");
 var assnm = require("../appmodule/erp/assignment.js");
@@ -36,6 +37,12 @@ var appRouter = function(app) {
     app.post(root + "/getClassDetails", cls.getClassDetails);
 
     //##################################### Class ###############################################
+
+    //##################################### Class Roster ###############################################
+
+    app.post(root + "/getClassRoster", clsrst.getClassRoster);
+
+    //##################################### Class Roster ###############################################
 
     //##################################### Books ###############################################
 
