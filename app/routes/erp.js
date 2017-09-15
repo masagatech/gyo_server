@@ -5,6 +5,7 @@ var fs = require('fs');
 var common = require("../appmodule/erp/common.js");
 var emp = require("../appmodule/erp/employee.js");
 var cls = require("../appmodule/erp/class.js");
+var acdmc = require("../appmodule/erp/academicyear.js");
 var clsrst = require("../appmodule/erp/classroster.js");
 var book = require("../appmodule/erp/books.js");
 var actv = require("../appmodule/erp/activity.js");
@@ -38,8 +39,16 @@ var appRouter = function(app) {
 
     //##################################### Class ###############################################
 
+    //##################################### Academic Year ###############################################
+
+    app.post(root + "/saveAcademicYear", acdmc.saveAcademicYear);
+    app.post(root + "/getAcademicYear", acdmc.getAcademicYear);
+
+    //##################################### Academic Year ###############################################
+
     //##################################### Class Roster ###############################################
 
+    app.post(root + "/saveClassRoster", clsrst.saveClassRoster);
     app.post(root + "/getClassRoster", clsrst.getClassRoster);
 
     //##################################### Class Roster ###############################################

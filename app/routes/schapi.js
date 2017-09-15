@@ -21,13 +21,22 @@ var appSchRouter = function(app) {
     app.post(globals.globvar.rootAPI + "/tripapi/getvahicleupdates", tripsinfo.getvhupdtes);
     app.post(globals.globvar.rootAPI + "/tripapi/gettrackboard", trackboard.gettrackboard);
 
-    //##################################### Student ###############################################
-    //##################################### Parent ###############################################
+    //##################################### Pick and Drop ###############################################
+
+    //##################################### Parent ######################################################
+
+    app.post(globals.globvar.rootAPI + "/getParentDetails", parents.getParentDetails);
+
     app.post(globals.globvar.rootAPI + "/cust/getmykids", parents.mykids);
     app.post(globals.globvar.rootAPI + "/cust/activatekid", parents.activatekid);
-    //##################################### FCM notification ###############################################
+
+    //##################################### Parent ######################################################
+
+    //##################################### FCM Notification ############################################
+
     app.get(globals.globvar.rootAPI + "/notify", notify.getUserNotification);
 
+    //##################################### FCM Notification ############################################
 }
 
 module.exports = appSchRouter;
