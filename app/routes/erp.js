@@ -51,6 +51,8 @@ var appRouter = function(app) {
     app.post(root + "/saveClassRoster", clsrst.saveClassRoster);
     app.post(root + "/getClassRoster", clsrst.getClassRoster);
 
+    app.post(root + "/saveTimeTable", clsrst.saveTimeTable);
+
     //##################################### Class Roster ###############################################
 
     //##################################### Books ###############################################

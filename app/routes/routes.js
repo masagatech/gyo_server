@@ -136,7 +136,7 @@ var appRouter = function(app) {
     app.post(globals.globvar.rootAPI + "/getPassengerLeave", lvpsngr.getPassengerLeave);
     app.post(globals.globvar.rootAPI + "/savePassengerLeaveApproval", lvpsngr.savePassengerLeaveApproval);
 
-    //##################################### Holiday ###################################################
+    //##################################### Leave Passgenger ###################################################
 
     //##################################### Batch #####################################################
 

@@ -19,3 +19,11 @@ classroster.getClassRoster = function getClassRoster(req, res, done) {
         rs.resp(res, 401, "error : " + err);
     }, 1)
 }
+
+classroster.saveTimeTable = function saveTimeTable(req, res, done) {
+    db.callFunction("select " + globals.erpschema("funsave_timetable") + "($1::json);", [req.body], function(data) {
+        rs.resp(res, 200, data.rows);
+    }, function(err) {
+        rs.resp(res, 401, "error : " + err);
+    })
+}
