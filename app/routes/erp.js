@@ -8,6 +8,7 @@ var cls = require("../appmodule/erp/class.js");
 var acdmc = require("../appmodule/erp/academicyear.js");
 var clsrst = require("../appmodule/erp/classroster.js");
 var book = require("../appmodule/erp/books.js");
+var submaptchr = require("../appmodule/erp/submaptchr.js");
 var actv = require("../appmodule/erp/activity.js");
 var assnm = require("../appmodule/erp/assignment.js");
 var ntf = require("../appmodule/erp/notification.js");
@@ -61,6 +62,13 @@ var appRouter = function(app) {
     app.post(root + "/getBooksDetails", book.getBooksDetails);
 
     //##################################### Books ###############################################
+
+    //##################################### Subject Map To Teacher ###############################################
+
+    app.post(root + "/saveSubjectMapToTeacher", submaptchr.saveSubjectMapToTeacher);
+    app.post(root + "/getSubjectMapToTeacher", submaptchr.getSubjectMapToTeacher);
+
+    //##################################### Subject Map To Teacher ###############################################
 
     //##################################### Activity ###############################################
 
