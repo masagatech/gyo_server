@@ -6,8 +6,9 @@ var common = require("../appmodule/erp/common.js");
 var emp = require("../appmodule/erp/employee.js");
 var leave = require("../appmodule/erp/leave.js");
 var cls = require("../appmodule/erp/class.js");
+var fees = require("../appmodule/erp/fees.js");
 var acdmc = require("../appmodule/erp/academicyear.js");
-var clsrst = require("../appmodule/erp/classroster.js");
+var clssch = require("../appmodule/erp/classschedule.js");
 var book = require("../appmodule/erp/books.js");
 var submaptchr = require("../appmodule/erp/submaptchr.js");
 var actv = require("../appmodule/erp/activity.js");
@@ -47,6 +48,16 @@ var appRouter = function(app) {
 
     //##################################### Class ###############################################
 
+    //##################################### Fees ###############################################
+
+    app.post(root + "/saveClassFees", fees.saveClassFees);
+    app.post(root + "/getClassFees", fees.getClassFees);
+
+    app.post(root + "/saveStudentFees", fees.saveStudentFees);
+    app.post(root + "/getStudentFees", fees.getStudentFees);
+
+    //##################################### Class ###############################################
+
     //##################################### Academic Year ###############################################
 
     app.post(root + "/saveAcademicYear", acdmc.saveAcademicYear);
@@ -54,14 +65,14 @@ var appRouter = function(app) {
 
     //##################################### Academic Year ###############################################
 
-    //##################################### Class Roster ###############################################
+    //##################################### Class Schedule ###############################################
 
-    app.post(root + "/saveClassRoster", clsrst.saveClassRoster);
-    app.post(root + "/getClassRoster", clsrst.getClassRoster);
+    app.post(root + "/saveClassSchedule", clssch.saveClassSchedule);
+    app.post(root + "/getClassSchedule", clssch.getClassSchedule);
 
-    app.post(root + "/saveTimeTable", clsrst.saveTimeTable);
+    app.post(root + "/saveTimeTable", clssch.saveTimeTable);
 
-    //##################################### Class Roster ###############################################
+    //##################################### Class Schedule ###############################################
 
     //##################################### Books ###############################################
 
