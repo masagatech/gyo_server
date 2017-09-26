@@ -15,6 +15,7 @@ var actv = require("../appmodule/erp/activity.js");
 var assnm = require("../appmodule/erp/assignment.js");
 var ntf = require("../appmodule/erp/notification.js");
 var annc = require("../appmodule/erp/announcement.js");
+var album = require("../appmodule/erp/album.js");
 
 const root = globals.globvar.rootAPI + "/erp";
 
@@ -100,7 +101,7 @@ var appRouter = function(app) {
     app.post(root + "/saveAssignmentInfo", assnm.saveAssignmentInfo);
     app.post(root + "/getAssignmentDetails", assnm.getAssignmentDetails);
 
-    //##################################### Assignment ###############################################
+    //##################################### Assignment #################################################
 
     //##################################### Notification ###############################################
 
@@ -115,6 +116,16 @@ var appRouter = function(app) {
     app.post(root + "/getAnnouncement", annc.getAnnouncement);
 
     //##################################### Announcement ###############################################
+
+    //##################################### Album ######################################################
+
+    app.post(root + "/saveAlbumInfo", album.saveAlbumInfo);
+    app.post(root + "/getAlbumDetails", album.getAlbumDetails);
+
+    app.post(root + "/savePhotoInfo", album.savePhotoInfo);
+    app.post(root + "/getPhotoDetails", album.getPhotoDetails);
+
+    //##################################### Album ######################################################
 
 
     //##################################### VIVEK ######################################################
