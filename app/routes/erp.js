@@ -15,6 +15,7 @@ var actv = require("../appmodule/erp/activity.js");
 var assnm = require("../appmodule/erp/assignment.js");
 var ntf = require("../appmodule/erp/notification.js");
 var annc = require("../appmodule/erp/announcement.js");
+var tag = require("../appmodule/erp/tag.js");
 var gallery = require("../appmodule/erp/gallery.js");
 
 const root = globals.globvar.rootAPI + "/erp";
@@ -116,6 +117,16 @@ var appRouter = function(app) {
     app.post(root + "/getAnnouncement", annc.getAnnouncement);
 
     //##################################### Announcement ###############################################
+
+    //##################################### Tag ###############################################
+
+    app.post(root + "/saveTagInfo", tag.saveTagInfo);
+    app.post(root + "/getTagDetails", tag.getTagDetails);
+
+    app.post(root + "/saveTagGroupModuleMap", tag.saveTagGroupModuleMap);
+    app.post(root + "/getTagGroupModuleMap", tag.getTagGroupModuleMap);
+
+    //##################################### Tag ###############################################
 
     //##################################### Album ######################################################
 
