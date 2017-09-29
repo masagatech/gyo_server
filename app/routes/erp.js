@@ -4,6 +4,7 @@ var fs = require('fs');
 
 var common = require("../appmodule/erp/common.js");
 var emp = require("../appmodule/erp/employee.js");
+var attnd = require("../appmodule/erp/attendance.js");
 var leave = require("../appmodule/erp/leave.js");
 var cls = require("../appmodule/erp/class.js");
 var fees = require("../appmodule/erp/fees.js");
@@ -36,6 +37,13 @@ var appRouter = function(app) {
     app.post(root + "/getEmployeeDetails", emp.getEmployeeDetails);
 
     //##################################### Employee ###############################################
+
+    //##################################### Attendance ###############################################
+
+    app.post(root + "/saveAttendance", attnd.saveAttendance);
+    app.post(root + "/getAttendance", attnd.getAttendance);
+
+    //##################################### Attendance ###############################################
 
     //##################################### Leave ###############################################
 
