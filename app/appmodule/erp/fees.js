@@ -13,11 +13,11 @@ fees.saveClassFees = function saveClassInfo(req, res, done) {
 }
 
 fees.getClassFees = function getClassFees(req, res, done) {
-    db.callProcedure("select " + globals.erpschema("funget_classfees") + "($1,$2::json);", ['cf', req.body], function(data) {
+    db.callProcedure("select " + globals.erpschema("funget_classfees") + "($1,$2,$3::json);", ['cf1', 'cf2', req.body], function(data) {
         rs.resp(res, 200, data.rows);
     }, function(err) {
         rs.resp(res, 401, "error : " + err);
-    }, 1)
+    }, 2)
 }
 
 fees.saveStudentFees = function saveStudentFees(req, res, done) {
