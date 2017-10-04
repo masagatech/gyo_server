@@ -2,6 +2,7 @@ var rs = require("../appmodule/util/resp.js");
 var globals = require("../globals.js");
 var fs = require('fs');
 
+var dashboard = require("../appmodule/erp/dashboard.js");
 var common = require("../appmodule/erp/common.js");
 var emp = require("../appmodule/erp/employee.js");
 var attnd = require("../appmodule/erp/attendance.js");
@@ -24,6 +25,12 @@ const root = globals.globvar.rootAPI + "/erp";
 var appRouter = function(app) {
     //##################################### VIVEK #####################################################
 
+
+    //##################################### Dashboard ####################################################
+
+    app.post(root + "/getERPDashboard", dashboard.getERPDashboard);
+
+    //##################################### Dashboard ####################################################
 
     //##################################### Common ####################################################
 
