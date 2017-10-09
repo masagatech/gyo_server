@@ -14,6 +14,7 @@ var clssch = require("../appmodule/erp/classschedule.js");
 var book = require("../appmodule/erp/books.js");
 var submaptchr = require("../appmodule/erp/submaptchr.js");
 var actv = require("../appmodule/erp/activity.js");
+var ass = require("../appmodule/erp/assesment.js");
 var assnm = require("../appmodule/erp/assignment.js");
 var ntf = require("../appmodule/erp/notification.js");
 var annc = require("../appmodule/erp/announcement.js");
@@ -111,6 +112,16 @@ var appRouter = function(app) {
     app.post(root + "/getActivityDetails", actv.getActivityDetails);
 
     //##################################### Activity ###############################################
+
+    //##################################### Assesment ###############################################
+
+    app.post(root + "/saveAssesmentInfo", ass.saveAssesmentInfo);
+    app.post(root + "/getAssesmentDetails", ass.getAssesmentDetails);
+
+    app.post(root + "/saveAssesmentResult", ass.saveAssesmentResult);
+    app.post(root + "/getAssesmentResult", ass.getAssesmentResult);
+
+    //##################################### Assesment #################################################
 
     //##################################### Assignment ###############################################
 
