@@ -20,16 +20,16 @@ fees.getClassFees = function getClassFees(req, res, done) {
     }, 2)
 }
 
-fees.saveStudentFees = function saveStudentFees(req, res, done) {
-    db.callFunction("select " + globals.erpschema("funsave_studentfees") + "($1::json);", [req.body], function(data) {
+fees.saveFeesCollection = function saveFeesCollection(req, res, done) {
+    db.callFunction("select " + globals.erpschema("funsave_feescollection") + "($1::json);", [req.body], function(data) {
         rs.resp(res, 200, data.rows);
     }, function(err) {
         rs.resp(res, 401, "error : " + err);
     })
 }
 
-fees.getStudentFees = function getStudentFees(req, res, done) {
-    db.callProcedure("select " + globals.erpschema("funget_Studentfees") + "($1,$2::json);", ['sf', req.body], function(data) {
+fees.getFeesCollection = function getFeesCollection(req, res, done) {
+    db.callProcedure("select " + globals.erpschema("funget_feescollection") + "($1,$2::json);", ['fcl', req.body], function(data) {
         rs.resp(res, 200, data.rows);
     }, function(err) {
         rs.resp(res, 401, "error : " + err);

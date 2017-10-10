@@ -12,9 +12,11 @@ var fees = require("../appmodule/erp/fees.js");
 var acdmc = require("../appmodule/erp/academicyear.js");
 var clssch = require("../appmodule/erp/classschedule.js");
 var book = require("../appmodule/erp/books.js");
+var chapter = require("../appmodule/erp/chapter.js");
 var submaptchr = require("../appmodule/erp/submaptchr.js");
 var actv = require("../appmodule/erp/activity.js");
 var ass = require("../appmodule/erp/assesment.js");
+var exam = require("../appmodule/erp/exam.js");
 var assnm = require("../appmodule/erp/assignment.js");
 var ntf = require("../appmodule/erp/notification.js");
 var annc = require("../appmodule/erp/announcement.js");
@@ -24,7 +26,7 @@ var gallery = require("../appmodule/erp/gallery.js");
 const root = globals.globvar.rootAPI + "/erp";
 
 var appRouter = function(app) {
-    //##################################### VIVEK #####################################################
+    //##################################### VIVEK ########################################################
 
 
     //##################################### Dashboard ####################################################
@@ -33,55 +35,55 @@ var appRouter = function(app) {
 
     //##################################### Dashboard ####################################################
 
-    //##################################### Common ####################################################
+    //##################################### Common #######################################################
 
     app.get(root + "/getAutoData", common.getAutoData);
 
-    //##################################### Common ####################################################
+    //##################################### Common #######################################################
 
-    //##################################### Employee ###############################################
+    //##################################### Employee #####################################################
 
     app.post(root + "/saveEmployeeInfo", emp.saveEmployeeInfo);
     app.post(root + "/getEmployeeDetails", emp.getEmployeeDetails);
 
-    //##################################### Employee ###############################################
+    //##################################### Employee #####################################################
 
-    //##################################### Attendance ###############################################
+    //##################################### Attendance ###################################################
 
     app.post(root + "/saveAttendance", attnd.saveAttendance);
     app.post(root + "/getAttendance", attnd.getAttendance);
 
-    //##################################### Attendance ###############################################
+    //##################################### Attendance ###################################################
 
-    //##################################### Leave ###############################################
+    //##################################### Leave ########################################################
 
     app.post(root + "/getTeacherLeave", leave.getTeacherLeave);
 
-    //##################################### Leave ###############################################
+    //##################################### Leave ########################################################
 
-    //##################################### Class ###############################################
+    //##################################### Class ########################################################
 
     app.post(root + "/saveClassInfo", cls.saveClassInfo);
     app.post(root + "/getClassDetails", cls.getClassDetails);
 
-    //##################################### Class ###############################################
+    //##################################### Class ########################################################
 
-    //##################################### Fees ###############################################
+    //##################################### Fees #########################################################
 
     app.post(root + "/saveClassFees", fees.saveClassFees);
     app.post(root + "/getClassFees", fees.getClassFees);
 
-    app.post(root + "/saveStudentFees", fees.saveStudentFees);
-    app.post(root + "/getStudentFees", fees.getStudentFees);
+    app.post(root + "/saveFeesCollection", fees.saveFeesCollection);
+    app.post(root + "/getFeesCollection", fees.getFeesCollection);
 
-    //##################################### Class ###############################################
+    //##################################### Class ########################################################
 
-    //##################################### Academic Year ###############################################
+    //##################################### Academic Year ################################################
 
     app.post(root + "/saveAcademicYear", acdmc.saveAcademicYear);
     app.post(root + "/getAcademicYear", acdmc.getAcademicYear);
 
-    //##################################### Academic Year ###############################################
+    //##################################### Academic Year ################################################
 
     //##################################### Class Schedule ###############################################
 
@@ -92,28 +94,35 @@ var appRouter = function(app) {
 
     //##################################### Class Schedule ###############################################
 
-    //##################################### Books ###############################################
+    //##################################### Books ########################################################
 
     app.post(root + "/saveBooksInfo", book.saveBooksInfo);
     app.post(root + "/getBooksDetails", book.getBooksDetails);
 
-    //##################################### Books ###############################################
+    //##################################### Books ########################################################
 
-    //##################################### Subject Map To Teacher ###############################################
+    //##################################### Chapter ######################################################
+
+    app.post(root + "/saveChapterInfo", chapter.saveChapterInfo);
+    app.post(root + "/getChapterDetails", chapter.getChapterDetails);
+
+    //##################################### Chapter ######################################################
+
+    //##################################### Subject Map To Teacher #######################################
 
     app.post(root + "/saveSubjectMapToTeacher", submaptchr.saveSubjectMapToTeacher);
     app.post(root + "/getSubjectMapToTeacher", submaptchr.getSubjectMapToTeacher);
 
-    //##################################### Subject Map To Teacher ###############################################
+    //##################################### Subject Map To Teacher #######################################
 
-    //##################################### Activity ###############################################
+    //##################################### Activity #####################################################
 
     app.post(root + "/saveActivityInfo", actv.saveActivityInfo);
     app.post(root + "/getActivityDetails", actv.getActivityDetails);
 
-    //##################################### Activity ###############################################
+    //##################################### Activity #####################################################
 
-    //##################################### Assesment ###############################################
+    //##################################### Assesment ####################################################
 
     app.post(root + "/saveAssesmentInfo", ass.saveAssesmentInfo);
     app.post(root + "/getAssesmentDetails", ass.getAssesmentDetails);
@@ -121,30 +130,40 @@ var appRouter = function(app) {
     app.post(root + "/saveAssesmentResult", ass.saveAssesmentResult);
     app.post(root + "/getAssesmentResult", ass.getAssesmentResult);
 
-    //##################################### Assesment #################################################
+    //##################################### Assesment ####################################################
 
-    //##################################### Assignment ###############################################
+    //##################################### Exam ####################################################
+
+    app.post(root + "/saveExamInfo", exam.saveExamInfo);
+    app.post(root + "/getExamDetails", exam.getExamDetails);
+
+    app.post(root + "/saveExamResult", exam.saveExamResult);
+    app.post(root + "/getExamResult", exam.getExamResult);
+
+    //##################################### Exam ####################################################
+
+    //##################################### Assignment ###################################################
 
     app.post(root + "/saveAssignmentInfo", assnm.saveAssignmentInfo);
     app.post(root + "/getAssignmentDetails", assnm.getAssignmentDetails);
 
-    //##################################### Assignment #################################################
+    //##################################### Assignment ###################################################
 
-    //##################################### Notification ###############################################
+    //##################################### Notification #################################################
 
     app.post(root + "/saveNotification", ntf.saveNotification);
     app.post(root + "/getNotification", ntf.getNotification);
 
-    //##################################### Notification ###############################################
+    //##################################### Notification #################################################
 
-    //##################################### Announcement ###############################################
+    //##################################### Announcement #################################################
 
     app.post(root + "/saveAnnouncement", annc.saveAnnouncement);
     app.post(root + "/getAnnouncement", annc.getAnnouncement);
 
-    //##################################### Announcement ###############################################
+    //##################################### Announcement #################################################
 
-    //##################################### Tag ###############################################
+    //##################################### Tag ##########################################################
 
     app.post(root + "/saveTagInfo", tag.saveTagInfo);
     app.post(root + "/getTagDetails", tag.getTagDetails);
@@ -152,19 +171,19 @@ var appRouter = function(app) {
     app.post(root + "/saveTagGroupModuleMap", tag.saveTagGroupModuleMap);
     app.post(root + "/getTagGroupModuleMap", tag.getTagGroupModuleMap);
 
-    //##################################### Tag ###############################################
+    //##################################### Tag ##########################################################
 
-    //##################################### Album ######################################################
+    //##################################### Album ########################################################
 
     app.post(root + "/saveAlbumInfo", gallery.saveAlbumInfo);
     app.post(root + "/getAlbumDetails", gallery.getAlbumDetails);
 
     app.post(root + "/getGalleryDetails", gallery.getGalleryDetails);
 
-    //##################################### Album ######################################################
+    //##################################### Album ########################################################
 
 
-    //##################################### VIVEK ######################################################
+    //##################################### VIVEK ########################################################
 }
 
 module.exports = appRouter;
