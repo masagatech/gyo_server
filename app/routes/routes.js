@@ -8,7 +8,9 @@ var workspace = require("../appmodule/schoolapi/workspace.js");
 var menu = require("../appmodule/schoolapi/menu.js");
 var common = require("../appmodule/schoolapi/common.js");
 
+var qualification = require("../appmodule/schoolapi/qualification.js");
 var location = require("../appmodule/schoolapi/location.js");
+
 var stops = require("../appmodule/schoolapi/stops.js");
 var school = require("../appmodule/schoolapi/school.js");
 var holiday = require("../appmodule/schoolapi/holiday.js");
@@ -100,6 +102,13 @@ var appRouter = function(app) {
     app.post(globals.globvar.rootAPI + "/saveMOM", common.saveMOM);
 
     //##################################### Common ####################################################
+
+    //##################################### Qualification ####################################################
+
+    app.post(globals.globvar.rootAPI + "/saveQualificationInfo", qualification.saveQualificationInfo);
+    app.post(globals.globvar.rootAPI + "/getQualificationDetails", qualification.getQualificationDetails);
+
+    //##################################### Qualification ###################################################
 
     //##################################### Location ####################################################
 
