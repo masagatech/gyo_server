@@ -5,7 +5,7 @@ var fs = require('fs');
 var dashboard = require("../appmodule/erp/dashboard.js");
 var common = require("../appmodule/erp/common.js");
 var emp = require("../appmodule/erp/employee.js");
-var admission = require("../appmodule/erp/admission.js");
+var admsn = require("../appmodule/erp/admission.js");
 var attnd = require("../appmodule/erp/attendance.js");
 var leave = require("../appmodule/erp/leave.js");
 var cls = require("../appmodule/erp/class.js");
@@ -42,12 +42,13 @@ var appRouter = function(app) {
 
     //##################################### Common #######################################################
 
-    //##################################### Adminssion #####################################################
+    //##################################### Admission #####################################################
 
-    app.post(root + "/saveAdmissionInfo", admission.saveAdmissionInfo);
-    app.post(root + "/getAdmissionDetails", admission.getAdmissionDetails);
+    app.post(root + "/saveAdmissionInfo", admsn.saveAdmissionInfo);
+    app.post(globals.globvar.rootAPI + "/saveStudentInfo", admsn.saveStudentInfo);
+    app.post(globals.globvar.rootAPI + "/getStudentDetails", admsn.getStudentDetails);
 
-    //##################################### Adminssion #####################################################
+    //##################################### Admisssion #####################################################
 
     //##################################### Employee #####################################################
 

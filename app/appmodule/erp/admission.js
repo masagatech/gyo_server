@@ -12,8 +12,16 @@ admsn.saveAdmissionInfo = function saveAdmissionInfo(req, res, done) {
     })
 }
 
-admsn.getAdmissionDetails = function getAdmissionDetails(req, res, done) {
-    db.callProcedure("select " + globals.erpschema("funget_admissiondetails") + "($1,$2::json);", ['admsn', req.body], function(data) {
+admsn.saveStudentInfo = function saveStudentInfo(req, res, done) {
+    db.callFunction("select " + globals.schema("funsave_studentinfo") + "($1::json);", [req.body], function(data) {
+        rs.resp(res, 200, data.rows);
+    }, function(err) {
+        rs.resp(res, 401, "error : " + err);
+    })
+}
+
+admsn.getStudentDetails = function getStudentDetails(req, res, done) {
+    db.callProcedure("select " + globals.schema("funget_studentdetails") + "($1,$2::json);", ['sd', req.body], function(data) {
         rs.resp(res, 200, data.rows);
     }, function(err) {
         rs.resp(res, 401, "error : " + err);

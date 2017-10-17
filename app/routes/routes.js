@@ -19,7 +19,6 @@ var batch = require("../appmodule/schoolapi/batch.js");
 var driver = require("../appmodule/schoolapi/driver.js");
 var vehicle = require("../appmodule/schoolapi/vehicle.js");
 var user = require("../appmodule/schoolapi/user.js");
-var student = require("../appmodule/schoolapi/student.js");
 var pickdrop = require("../appmodule/schoolapi/pickdrop.js");
 var breakdown = require("../appmodule/schoolapi/breakdown.js");
 var speed = require("../appmodule/schoolapi/speed.js");
@@ -183,13 +182,6 @@ var appRouter = function(app) {
     app.post(globals.globvar.rootAPI + "/getUserLoginLog", user.getUserLoginLog);
 
     //##################################### User #####################################################
-
-    //##################################### Student ###################################################
-
-    app.post(globals.globvar.rootAPI + "/saveStudentInfo", student.saveStudentInfo);
-    app.post(globals.globvar.rootAPI + "/getStudentDetails", student.getStudentDetails);
-
-    //##################################### Student ###################################################
 
     //##################################### Pick and Drop #############################################
 
