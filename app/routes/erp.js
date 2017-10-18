@@ -47,6 +47,7 @@ var appRouter = function(app) {
     app.post(root + "/saveAdmissionInfo", admsn.saveAdmissionInfo);
     app.post(globals.globvar.rootAPI + "/saveStudentInfo", admsn.saveStudentInfo);
     app.post(globals.globvar.rootAPI + "/getStudentDetails", admsn.getStudentDetails);
+    app.post(globals.globvar.rootAPI + "/viewStudentDetails", admsn.viewStudentDetails);
 
     //##################################### Admisssion #####################################################
 

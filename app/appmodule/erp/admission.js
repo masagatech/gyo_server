@@ -27,3 +27,11 @@ admsn.getStudentDetails = function getStudentDetails(req, res, done) {
         rs.resp(res, 401, "error : " + err);
     }, 1)
 }
+
+admsn.viewStudentDetails = function viewStudentDetails(req, res, done) {
+    db.callProcedure("select " + globals.schema("funget_studentview") + "($1,$2,$3::json);", ['sd1', 'sd2', req.body], function(data) {
+        rs.resp(res, 200, data.rows);
+    }, function(err) {
+        rs.resp(res, 401, "error : " + err);
+    }, 2)
+}
