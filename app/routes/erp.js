@@ -5,6 +5,7 @@ var fs = require('fs');
 var dashboard = require("../appmodule/erp/dashboard.js");
 var common = require("../appmodule/erp/common.js");
 var emp = require("../appmodule/erp/employee.js");
+var prspct = require("../appmodule/erp/prospectus.js");
 var admsn = require("../appmodule/erp/admission.js");
 var attnd = require("../appmodule/erp/attendance.js");
 var leave = require("../appmodule/erp/leave.js");
@@ -41,6 +42,13 @@ var appRouter = function(app) {
     app.get(root + "/getAutoData", common.getAutoData);
 
     //##################################### Common #######################################################
+
+    //##################################### Prospectus #####################################################
+
+    app.post(root + "/saveProspectusInfo", prspct.saveProspectusInfo);
+    app.post(root + "/getProspectusDetails", prspct.getProspectusDetails);
+
+    //##################################### Prospectus #####################################################
 
     //##################################### Admission #####################################################
 
