@@ -50,6 +50,13 @@ var appRouter = function(app) {
 
     //##################################### Prospectus #####################################################
 
+    //##################################### Prospectus Issues #####################################################
+
+    app.post(root + "/saveProspectusIssues", prspct.saveProspectusIssues);
+    app.post(root + "/getProspectusIssues", prspct.getProspectusIssues);
+
+    //##################################### Prospectus Issues #####################################################
+
     //##################################### Admission #####################################################
 
     app.post(root + "/saveAdmissionInfo", admsn.saveAdmissionInfo);
