@@ -63,6 +63,7 @@ var appRouter = function(app) {
     app.post(globals.globvar.rootAPI + "/saveStudentInfo", admsn.saveStudentInfo);
     app.post(globals.globvar.rootAPI + "/getStudentDetails", admsn.getStudentDetails);
     app.post(globals.globvar.rootAPI + "/viewStudentDetails", admsn.viewStudentDetails);
+    app.post(globals.globvar.rootAPI + "/getPassengerDetails", admsn.getPassengerDetails);
 
     //##################################### Admisssion #####################################################
 
@@ -116,6 +117,7 @@ var appRouter = function(app) {
     app.post(root + "/getClassSchedule", clssch.getClassSchedule);
 
     app.post(root + "/saveTimeTable", clssch.saveTimeTable);
+    app.post(root + "/getTimeTable", clssch.getTimeTable);
 
     //##################################### Class Schedule ###############################################
 

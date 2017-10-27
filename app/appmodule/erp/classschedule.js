@@ -27,3 +27,11 @@ classschedule.saveTimeTable = function saveTimeTable(req, res, done) {
         rs.resp(res, 401, "error : " + err);
     })
 }
+
+classschedule.getTimeTable = function getTimeTable(req, res, done) {
+    db.callProcedure("select " + globals.erpschema("funget_timetable") + "($1,$2::json);", ['tmt', req.body], function(data) {
+        rs.resp(res, 200, data.rows);
+    }, function(err) {
+        rs.resp(res, 401, "error : " + err);
+    }, 1)
+}
