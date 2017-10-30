@@ -12,7 +12,7 @@ var leave = require("../appmodule/erp/leave.js");
 var cls = require("../appmodule/erp/class.js");
 var fees = require("../appmodule/erp/fees.js");
 var acdmc = require("../appmodule/erp/academicyear.js");
-var clssch = require("../appmodule/erp/classschedule.js");
+var clstmt = require("../appmodule/erp/classtimetable.js");
 var book = require("../appmodule/erp/books.js");
 var chapter = require("../appmodule/erp/chapter.js");
 var submaptchr = require("../appmodule/erp/submaptchr.js");
@@ -111,15 +111,15 @@ var appRouter = function(app) {
 
     //##################################### Academic Year ################################################
 
-    //##################################### Class Schedule ###############################################
+    //##################################### Class TimeTable ###############################################
 
-    app.post(root + "/saveClassSchedule", clssch.saveClassSchedule);
-    app.post(root + "/getClassSchedule", clssch.getClassSchedule);
+    app.post(root + "/saveClassTimeTable", clstmt.saveClassTimeTable);
+    app.post(root + "/getClassTimeTable", clstmt.getClassTimeTable);
 
-    app.post(root + "/saveTimeTable", clssch.saveTimeTable);
-    app.post(root + "/getTimeTable", clssch.getTimeTable);
+    app.post(root + "/saveTimeTable", clstmt.saveTimeTable);
+    app.post(root + "/getTimeTable", clstmt.getTimeTable);
 
-    //##################################### Class Schedule ###############################################
+    //##################################### Class TimeTable ###############################################
 
     //##################################### Books ########################################################
 
