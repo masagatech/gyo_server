@@ -8,7 +8,6 @@ var emp = require("../appmodule/erp/employee.js");
 var prspct = require("../appmodule/erp/prospectus.js");
 var admsn = require("../appmodule/erp/admission.js");
 var attnd = require("../appmodule/erp/attendance.js");
-var leave = require("../appmodule/erp/leave.js");
 var cls = require("../appmodule/erp/class.js");
 var fees = require("../appmodule/erp/fees.js");
 var acdmc = require("../appmodule/erp/academicyear.js");
@@ -61,6 +60,8 @@ var appRouter = function(app) {
 
     app.post(root + "/saveAdmissionInfo", admsn.saveAdmissionInfo);
     app.post(globals.globvar.rootAPI + "/saveStudentInfo", admsn.saveStudentInfo);
+    app.post(globals.globvar.rootAPI + "/saveStudentVehicleMap", admsn.saveStudentVehicleMap);
+
     app.post(globals.globvar.rootAPI + "/getStudentDetails", admsn.getStudentDetails);
     app.post(globals.globvar.rootAPI + "/viewStudentDetails", admsn.viewStudentDetails);
     app.post(globals.globvar.rootAPI + "/getPassengerDetails", admsn.getPassengerDetails);
@@ -80,12 +81,6 @@ var appRouter = function(app) {
     app.post(root + "/getAttendance", attnd.getAttendance);
 
     //##################################### Attendance ###################################################
-
-    //##################################### Leave ########################################################
-
-    app.post(root + "/getTeacherLeave", leave.getTeacherLeave);
-
-    //##################################### Leave ########################################################
 
     //##################################### Class ########################################################
 

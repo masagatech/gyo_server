@@ -140,13 +140,15 @@ var appRouter = function(app) {
 
     //##################################### Holiday ###################################################
 
-    //##################################### Leave Passgenger ####################################################
+    //##################################### Leave Passgenger ##########################################
 
     app.post(globals.globvar.rootAPI + "/savePassengerLeave", lvpsngr.savePassengerLeave);
     app.post(globals.globvar.rootAPI + "/getPassengerLeave", lvpsngr.getPassengerLeave);
     app.post(globals.globvar.rootAPI + "/savePassengerLeaveApproval", lvpsngr.savePassengerLeaveApproval);
 
-    //##################################### Leave Passgenger ###################################################
+    app.post(globals.globvar.rootAPI + "/getLeaveReports", lvpsngr.getLeaveReports);
+
+    //##################################### Leave Passgenger ##########################################
 
     //##################################### Batch #####################################################
 

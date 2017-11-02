@@ -43,3 +43,11 @@ admsn.getPassengerDetails = function getPassengerDetails(req, res, done) {
         rs.resp(res, 401, "error : " + err);
     }, 1)
 }
+
+admsn.saveStudentVehicleMap = function saveStudentVehicleMap(req, res, done) {
+    db.callFunction("select " + globals.schema("funsave_studsvehmap") + "($1::json);", [req.body], function(data) {
+        rs.resp(res, 200, data.rows);
+    }, function(err) {
+        rs.resp(res, 401, "error : " + err);
+    })
+}

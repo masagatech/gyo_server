@@ -37,3 +37,13 @@ lvpsngr.savePassengerLeaveApproval = function savePassengerLeaveApproval(req, re
         rs.resp(res, 401, "error : " + err);
     })
 }
+
+// Reports
+
+lvpsngr.getLeaveReports = function getLeaveReports(req, res, done) {
+    db.callProcedure("select " + globals.erpschema("funget_rpt_leavedetails") + "($1,$2::json);", ['lr', req.body], function(data) {
+        rs.resp(res, 200, data.rows);
+    }, function(err) {
+        rs.resp(res, 401, "error : " + err);
+    }, 1)
+}
