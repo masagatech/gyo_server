@@ -3,7 +3,6 @@ var rs = require("gen").res;
 var globals = require("gen").globals;
 
 var ass = module.exports = {};
-var tripapi = require("../erp/assesment.js");
 
 // Assesment Bench
 
