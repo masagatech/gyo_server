@@ -95,6 +95,7 @@ var appRouter = function(app) {
 
     //##################################### Common ####################################################
 
+    app.get(globals.globvar.rootAPI + "/getAppVersion", common.getAppVersion);
     app.get(globals.globvar.rootAPI + "/getAutoData", common.getAutoData);
     app.post(globals.globvar.rootAPI + "/getDropDownData", common.getDropDownData);
 
@@ -243,7 +244,7 @@ var appRouter = function(app) {
 
     //##################################### Medicine #####################################################
 
-    app.post(globals.globvar.rootAPI + "/saveMedicineInfo", medicine.saveMedicineInfo);
+    app.post(globals.globvar.rootAPI + "/saveMedicineInfo", upload.any(), medicine.saveMedicineInfo);
     app.post(globals.globvar.rootAPI + "/getMedicineDetails", medicine.getMedicineDetails);
 
     //##################################### Marketing Order #####################################################

@@ -23,6 +23,7 @@ var ntf = require("../appmodule/erp/notification.js");
 var annc = require("../appmodule/erp/announcement.js");
 var tag = require("../appmodule/erp/tag.js");
 var gallery = require("../appmodule/erp/gallery.js");
+var trips = require("../appmodule/erp/trips.js");
 
 const root = globals.globvar.rootAPI + "/erp";
 
@@ -203,6 +204,14 @@ var appRouter = function(app) {
     app.post(root + "/getGalleryDetails", gallery.getGalleryDetails);
 
     //##################################### Album ########################################################
+
+    //##################################### TRIP API ############################################################
+
+    app.post(root + "/tripapi/start", trips.starttrip);
+    app.post(root + "/tripapi/stop", trips.stoptrip);
+    app.post(root + "/tripapi/getEmpStatus", trips.getEmpStatus);
+
+    //##################################### TRIP API ############################################################
 
 
     //##################################### VIVEK ########################################################
