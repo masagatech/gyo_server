@@ -20,6 +20,14 @@ admsn.saveStudentInfo = function saveStudentInfo(req, res, done) {
     })
 }
 
+admsn.saveStudentRollover = function saveStudentRollover(req, res, done) {
+    db.callFunction("select " + globals.schema("funsave_studentrollover") + "($1::json);", [req.body], function(data) {
+        rs.resp(res, 200, data.rows);
+    }, function(err) {
+        rs.resp(res, 401, "error : " + err);
+    })
+}
+
 admsn.getStudentDetails = function getStudentDetails(req, res, done) {
     db.callProcedure("select " + globals.schema("funget_studentdetails") + "($1,$2::json);", ['sd', req.body], function(data) {
         rs.resp(res, 200, data.rows);

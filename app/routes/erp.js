@@ -62,6 +62,7 @@ var appRouter = function(app) {
     app.post(root + "/saveAdmissionInfo", admsn.saveAdmissionInfo);
     app.post(globals.globvar.rootAPI + "/saveStudentInfo", admsn.saveStudentInfo);
     app.post(globals.globvar.rootAPI + "/saveStudentVehicleMap", admsn.saveStudentVehicleMap);
+    app.post(globals.globvar.rootAPI + "/saveStudentRollover", admsn.saveStudentRollover);
 
     app.post(globals.globvar.rootAPI + "/getStudentDetails", admsn.getStudentDetails);
     app.post(globals.globvar.rootAPI + "/viewStudentDetails", admsn.viewStudentDetails);
@@ -209,6 +210,7 @@ var appRouter = function(app) {
 
     app.post(root + "/tripapi/start", trips.starttrip);
     app.post(root + "/tripapi/stop", trips.stoptrip);
+    app.get(root + "/tripapi/getEmpStatus", trips.getEmpStatus);
     app.post(root + "/tripapi/getEmpStatus", trips.getEmpStatus);
 
     //##################################### TRIP API ############################################################

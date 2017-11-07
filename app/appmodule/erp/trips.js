@@ -29,9 +29,9 @@ trips.stoptrip = function(req, res, done) {
 }
 
 trips.getEmpStatus = function getEmpStatus(req, res, done) {
-    db.callProcedure("select " + globals.erpschema("funget_api_getempstate") + "($1,$2::json);", ['trips', req.body], function(data) {
+    db.callFunction("select " + globals.erpschema("funget_empstatus") + "($1::json);", [req.query], function(data) {
         rs.resp(res, 200, data.rows);
     }, function(err) {
         rs.resp(res, 401, "error : " + err);
-    }, 1)
+    })
 }
