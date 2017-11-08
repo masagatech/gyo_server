@@ -171,6 +171,9 @@ var appRouter = function(app) {
     app.post(root + "/saveAssignmentInfo", assnm.saveAssignmentInfo);
     app.post(root + "/getAssignmentDetails", assnm.getAssignmentDetails);
 
+    app.post(root + "/saveTeacherRemark", assnm.saveTeacherRemark);
+    app.post(root + "/getTeacherRemark", assnm.getTeacherRemark);
+
     //##################################### Assignment ###################################################
 
     //##################################### Notification #################################################

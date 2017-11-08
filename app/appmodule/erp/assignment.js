@@ -31,3 +31,30 @@ assignment.getAssignmentDetails = function getAssignmentDetails(req, res, done) 
         rs.resp(res, 401, "error : " + err);
     }, 1)
 }
+
+assignment.saveTeacherRemark = function saveTeacherRemark(req, res, done) {
+    db.callFunction("select " + globals.erpschema("funsave_teacherremark") + "($1::json);", [req.body], function(data) {
+        rs.resp(res, 200, data.rows);
+
+        var _dtr = {
+            "flag": "parents_notification",
+            "title": req.body.title,
+            "body": req.body.msg,
+            "parentsid": data.rows[0].funsave_teacherremark.parentsid
+        }
+
+        console.log(_dtr);
+
+        tripapi.sendNotification(_dtr);
+    }, function(err) {
+        rs.resp(res, 401, "error : " + err);
+    })
+}
+
+assignment.getTeacherRemark = function getTeacherRemark(req, res, done) {
+    db.callProcedure("select " + globals.erpschema("funget_teacherremark") + "($1,$2::json);", ['assnm', req.body], function(data) {
+        rs.resp(res, 200, data.rows);
+    }, function(err) {
+        rs.resp(res, 401, "error : " + err);
+    }, 1)
+}
