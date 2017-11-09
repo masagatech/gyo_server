@@ -23,6 +23,7 @@ var ntf = require("../appmodule/erp/notification.js");
 var annc = require("../appmodule/erp/announcement.js");
 var tag = require("../appmodule/erp/tag.js");
 var gallery = require("../appmodule/erp/gallery.js");
+var content = require("../appmodule/erp/content.js");
 var trips = require("../appmodule/erp/trips.js");
 
 const root = globals.globvar.rootAPI + "/erp";
@@ -43,21 +44,21 @@ var appRouter = function(app) {
 
     //##################################### Common #######################################################
 
-    //##################################### Prospectus #####################################################
+    //##################################### Prospectus ###################################################
 
     app.post(root + "/saveProspectusInfo", prspct.saveProspectusInfo);
     app.post(root + "/getProspectusDetails", prspct.getProspectusDetails);
 
-    //##################################### Prospectus #####################################################
+    //##################################### Prospectus ###################################################
 
-    //##################################### Prospectus Issues #####################################################
+    //##################################### Prospectus Issues ############################################
 
     app.post(root + "/saveProspectusIssues", prspct.saveProspectusIssues);
     app.post(root + "/getProspectusIssues", prspct.getProspectusIssues);
 
-    //##################################### Prospectus Issues #####################################################
+    //##################################### Prospectus Issues ############################################
 
-    //##################################### Admission #####################################################
+    //##################################### Admission ####################################################
 
     app.post(root + "/saveAdmissionInfo", admsn.saveAdmissionInfo);
     app.post(globals.globvar.rootAPI + "/saveStudentInfo", admsn.saveStudentInfo);
@@ -68,7 +69,7 @@ var appRouter = function(app) {
     app.post(globals.globvar.rootAPI + "/viewStudentDetails", admsn.viewStudentDetails);
     app.post(globals.globvar.rootAPI + "/getPassengerDetails", admsn.getPassengerDetails);
 
-    //##################################### Admisssion #####################################################
+    //##################################### Admisssion ###################################################
 
     //##################################### Employee #####################################################
 
@@ -108,7 +109,7 @@ var appRouter = function(app) {
 
     //##################################### Academic Year ################################################
 
-    //##################################### Class TimeTable ###############################################
+    //##################################### Class TimeTable ##############################################
 
     app.post(root + "/saveClassTimeTable", clstmt.saveClassTimeTable);
     app.post(root + "/getClassTimeTable", clstmt.getClassTimeTable);
@@ -116,7 +117,7 @@ var appRouter = function(app) {
     app.post(root + "/saveTimeTable", clstmt.saveTimeTable);
     app.post(root + "/getTimeTable", clstmt.getTimeTable);
 
-    //##################################### Class TimeTable ###############################################
+    //##################################### Class TimeTable ##############################################
 
     //##################################### Books ########################################################
 
@@ -156,7 +157,7 @@ var appRouter = function(app) {
 
     //##################################### Assesment ####################################################
 
-    //##################################### Exam ####################################################
+    //##################################### Exam #########################################################
 
     app.post(root + "/saveExamInfo", exam.saveExamInfo);
     app.post(root + "/getExamDetails", exam.getExamDetails);
@@ -164,7 +165,7 @@ var appRouter = function(app) {
     app.post(root + "/saveExamResult", exam.saveExamResult);
     app.post(root + "/getExamResult", exam.getExamResult);
 
-    //##################################### Exam ####################################################
+    //##################################### Exam #########################################################
 
     //##################################### Assignment ###################################################
 
@@ -209,14 +210,24 @@ var appRouter = function(app) {
 
     //##################################### Album ########################################################
 
-    //##################################### TRIP API ############################################################
+    //##################################### Content ######################################################
+
+    app.post(root + "/getContentDetails", content.getContentDetails);
+
+    app.post(root + "/saveContentInfo", content.saveContentInfo);
+    app.post(root + "/saveContentDetails", content.saveContentDetails);
+    app.post(root + "/saveContentEntityMap", content.saveContentEntityMap);
+
+    //##################################### Content ######################################################
+
+    //##################################### TRIP API #####################################################
 
     app.post(root + "/tripapi/start", trips.starttrip);
     app.post(root + "/tripapi/stop", trips.stoptrip);
     app.get(root + "/tripapi/getEmpStatus", trips.getEmpStatus);
     app.post(root + "/tripapi/getEmpStatus", trips.getEmpStatus);
 
-    //##################################### TRIP API ############################################################
+    //##################################### TRIP API #####################################################
 
 
     //##################################### VIVEK ########################################################
