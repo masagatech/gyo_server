@@ -2,6 +2,8 @@ var db = require("db");
 var rs = require("gen").res;
 var globals = require("gen").globals;
 
+var fs = require('fs');
+
 var common = module.exports = {};
 
 common.getAppVersion = function getAppVersion(req, res, done) {

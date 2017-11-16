@@ -39,15 +39,12 @@ app.all('/*', function(req, res, next) {
         next();
     }
 });
-// app.use('/images', express.static(path.join(__dirname.replace(/\\app\\bin/gi, ""), '\\www\\uploads')));
+
 app.use('/images', express.static(__dirname.replace('app', "www").replace('bin', 'uploads')));
-// app.get('/chat', function(req, res) {
-//     res.sendFile(__dirname.replace("\\bin", "") + '\\httpdocs\\index.html');
-//     // res.send('<h1>Hello world</h1>');
-// });
 
 // ##############################################################################################	
 
+var bulkupload = require("../routes/bulkupload.js")(app);
 var routes = require("../routes/routes.js")(app);
 var erp = require("../routes/erp.js")(app);
 var schroute = require("../routes/schapi.js")(app);
