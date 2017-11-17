@@ -67,7 +67,6 @@ var appRouter = function(app) {
 
     app.post(globals.globvar.rootAPI + "/getStudentDetails", admsn.getStudentDetails);
     app.post(globals.globvar.rootAPI + "/viewStudentDetails", admsn.viewStudentDetails);
-    app.post(globals.globvar.rootAPI + "/getPassengerDetails", admsn.getPassengerDetails);
 
     //##################################### Admisssion ###################################################
 
