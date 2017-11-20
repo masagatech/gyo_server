@@ -24,6 +24,7 @@ var annc = require("../appmodule/erp/announcement.js");
 var tag = require("../appmodule/erp/tag.js");
 var gallery = require("../appmodule/erp/gallery.js");
 var content = require("../appmodule/erp/content.js");
+var library = require("../appmodule/erp/library.js");
 var trips = require("../appmodule/erp/trips.js");
 
 const root = globals.globvar.rootAPI + "/erp";
@@ -218,6 +219,17 @@ var appRouter = function(app) {
     app.post(root + "/saveContentEntityMap", content.saveContentEntityMap);
 
     //##################################### Content ######################################################
+
+    //##################################### Library ######################################################
+
+    app.post(root + "/getLibraryDetails", library.getLibraryDetails);
+    app.post(root + "/getLibraryBooks", library.getLibraryBooks);
+
+    app.post(root + "/saveLibraryInfo", library.saveLibraryInfo);
+    app.post(root + "/saveLibraryBooks", library.saveLibraryBooks);
+    app.post(root + "/saveLibraryBookIssued", library.saveLibraryBookIssued);
+
+    //##################################### Library ######################################################
 
     //##################################### TRIP API #####################################################
 
