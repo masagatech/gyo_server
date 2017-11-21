@@ -9,6 +9,10 @@ global.schema = function schema(params) {
     return "ginv." + params;
 };
 
+global.erpschema = function erpschema(params) {
+    return "erp." + params;
+};
+
 global.schema2 = function schema2(params) {
     return "mrktn." + params;
 };
@@ -24,7 +28,17 @@ global.monconstr = function constr() {
     return 'mongodb://127.0.0.1:27017/goyosch';
 };
 
-global.pgdbconnection = { 
+// global.pgdbconnection = {
+//     user: 'postgres', //env var: PGUSER
+//     database: 'goyo_school', //env var: PGDATABASE
+//     password: '123', //env var: PGPASSWORD
+//     host: 'localhost', // Server hosting the postgres database
+//     port: 5432, //env var: PGPORT
+//     max: 10, // max number of clients in the pool
+//     idleTimeoutMillis: 30000, // how long a client is allowed to remain idle before being closed
+// };
+
+global.pgdbconnection = {
     user: 'postgres', //env var: PGUSER
     database: 'goyo_school', //env var: PGDATABASE
     password: '123', //env var: PGPASSWORD

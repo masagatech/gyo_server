@@ -153,8 +153,9 @@ var appRouter = function(app) {
     //##################################### Leave Passgenger ################################################
 
     app.post(globals.globvar.rootAPI + "/savePassengerLeave", lvpsngr.savePassengerLeave);
-    app.post(globals.globvar.rootAPI + "/getPassengerLeave", lvpsngr.getPassengerLeave);
     app.post(globals.globvar.rootAPI + "/savePassengerLeaveApproval", lvpsngr.savePassengerLeaveApproval);
+    app.post(globals.globvar.rootAPI + "/getPassengerLeave", lvpsngr.getPassengerLeave);
+    app.post(globals.globvar.rootAPI + "/exportPassengerLeave", lvpsngr.exportPassengerLeave);
 
     app.post(globals.globvar.rootAPI + "/getLeaveReports", lvpsngr.getLeaveReports);
 
