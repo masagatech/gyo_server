@@ -32,6 +32,16 @@ library.saveLibraryBooks = function saveLibraryBooks(req, res, done) {
     })
 }
 
+library.getLibraryBooks = function getLibraryBooks(req, res, done) {
+    db.callProcedure("select " + globals.erpschema("funget_librarybooks") + "($1,$2::json);", ['librbk', req.body], function(data) {
+        rs.resp(res, 200, data.rows);
+    }, function(err) {
+        rs.resp(res, 401, "error : " + err);
+    }, 1)
+}
+
+// Library Book Issued
+
 library.saveLibraryBookIssued = function saveLibraryBookIssued(req, res, done) {
     db.callFunction("select " + globals.erpschema("funsave_librarybookissued") + "($1::json);", [req.body], function(data) {
         rs.resp(res, 200, data.rows);
@@ -40,8 +50,8 @@ library.saveLibraryBookIssued = function saveLibraryBookIssued(req, res, done) {
     })
 }
 
-library.getLibraryBooks = function getLibraryBooks(req, res, done) {
-    db.callProcedure("select " + globals.erpschema("funget_librarybooks") + "($1,$2::json);", ['librbk', req.body], function(data) {
+library.getLibraryBookIssued = function getLibraryBookIssued(req, res, done) {
+    db.callProcedure("select " + globals.erpschema("funget_librarybookissued") + "($1,$2::json);", ['librbkissd', req.body], function(data) {
         rs.resp(res, 200, data.rows);
     }, function(err) {
         rs.resp(res, 401, "error : " + err);

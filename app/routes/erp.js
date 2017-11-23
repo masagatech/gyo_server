@@ -224,6 +224,7 @@ var appRouter = function(app) {
 
     app.post(root + "/getLibraryDetails", library.getLibraryDetails);
     app.post(root + "/getLibraryBooks", library.getLibraryBooks);
+    app.post(root + "/getLibraryBookIssued", library.getLibraryBookIssued);
 
     app.post(root + "/saveLibraryInfo", library.saveLibraryInfo);
     app.post(root + "/saveLibraryBooks", library.saveLibraryBooks);
