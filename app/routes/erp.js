@@ -9,6 +9,7 @@ var prspct = require("../appmodule/erp/prospectus.js");
 var admsn = require("../appmodule/erp/admission.js");
 var attnd = require("../appmodule/erp/attendance.js");
 var cls = require("../appmodule/erp/class.js");
+var sub = require("../appmodule/erp/subject.js");
 var fees = require("../appmodule/erp/fees.js");
 var acdmc = require("../appmodule/erp/academicyear.js");
 var clstmt = require("../appmodule/erp/classtimetable.js");
@@ -91,6 +92,13 @@ var appRouter = function(app) {
     app.post(root + "/getClassDetails", cls.getClassDetails);
 
     //##################################### Class ########################################################
+
+    //##################################### Subject ########################################################
+
+    app.post(root + "/saveSubjectInfo", sub.saveSubjectInfo);
+    app.post(root + "/getSubjectDetails", sub.getSubjectDetails);
+
+    //##################################### Subject ########################################################
 
     //##################################### Fees #########################################################
 
