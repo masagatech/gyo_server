@@ -3,8 +3,9 @@ var rs = require("gen").res;
 var globals = require("gen").globals;
 
 var fs = require('fs');
-
 var common = module.exports = {};
+
+const sendmail = require('sendmail')();
 
 common.getAppVersion = function getAppVersion(req, res, done) {
     db.callProcedure("select " + globals.schema("funget_appversion") + "($1,$2::json);", ['auto', req.query], function(data) {
@@ -52,4 +53,18 @@ common.getDropDownData = function getDropDownData(req, res, done) {
     }, function(err) {
         rs.resp(res, 401, "error : " + err);
     }, 1)
+}
+
+// Send Email
+
+common.sendEmail = function sendEmail() {
+    sendmail({
+        from: 'vivek.pandey5188@gmail.com',
+        to: 'pandey.vivek5188@gmail.com',
+        subject: 'test sendmail',
+        html: 'Mail of test sendmail',
+    }, function(err, reply) {
+        console.log(err && err.stack);
+        console.dir(reply);
+    });
 }

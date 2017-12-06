@@ -280,6 +280,12 @@ var appRouter = function(app) {
 
     //##################################### Driver Info #####################################################
 
+    // Semd Mail
+
+    app.post(globals.globvar.rootAPI + "/sendEmail", common.sendEmail);
+
+    // Semd Mail
+
     //##################################### File Uploads ####################################################
 
     app.post(globals.globvar.rootAPI + "/uploads", upload.any(), function(req, res) {
