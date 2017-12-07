@@ -22,18 +22,18 @@ prspct.getProspectusDetails = function getProspectusDetails(req, res, done) {
     }, 1)
 }
 
-// Prospectus Issues
+// Prospectus Issued
 
-prspct.saveProspectusIssues = function saveProspectusIssues(req, res, done) {
-    db.callFunction("select " + globals.erpschema("funsave_prospectusissues") + "($1::json);", [req.body], function(data) {
+prspct.saveProspectusIssued = function saveProspectusIssued(req, res, done) {
+    db.callFunction("select " + globals.erpschema("funsave_prospectusissued") + "($1::json);", [req.body], function(data) {
         rs.resp(res, 200, data.rows);
     }, function(err) {
         rs.resp(res, 401, "error : " + err);
     })
 }
 
-prspct.getProspectusIssues = function getProspectusIssues(req, res, done) {
-    db.callProcedure("select " + globals.erpschema("funget_prospectusissues") + "($1,$2::json);", ['prspctiss', req.body], function(data) {
+prspct.getProspectusIssued = function getProspectusIssued(req, res, done) {
+    db.callProcedure("select " + globals.erpschema("funget_prospectusissued") + "($1,$2::json);", ['prspctiss', req.body], function(data) {
         rs.resp(res, 200, data.rows);
     }, function(err) {
         rs.resp(res, 401, "error : " + err);

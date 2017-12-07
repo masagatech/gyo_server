@@ -57,7 +57,19 @@ common.getDropDownData = function getDropDownData(req, res, done) {
 
 // Send Email
 
-common.sendEmail = function sendEmail() {
+// common.sendEmail = function sendEmail() {
+//     sendmail({
+//         from: 'vivek.pandey5188@gmail.com',
+//         to: 'pandey.vivek5188@gmail.com',
+//         subject: 'test sendmail',
+//         html: 'Mail of test sendmail',
+//     }, function(err, reply) {
+//         console.log(err && err.stack);
+//         console.dir(reply);
+//     });
+// }
+
+common.sendEmail = function sendEmail(req, res, done) {
     sendmail({
         from: 'vivek.pandey5188@gmail.com',
         to: 'pandey.vivek5188@gmail.com',
