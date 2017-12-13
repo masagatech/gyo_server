@@ -38,6 +38,7 @@ global.monconstr = function constr() {
 //     idleTimeoutMillis: 30000, // how long a client is allowed to remain idle before being closed
 // };
 
+
 global.pgdbconnection = {
     user: 'postgres', //env var: PGUSER
     database: 'goyo_school', //env var: PGDATABASE
