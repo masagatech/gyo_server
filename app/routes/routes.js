@@ -20,6 +20,7 @@ var batch = require("../appmodule/schoolapi/batch.js");
 var driver = require("../appmodule/schoolapi/driver.js");
 var vehicle = require("../appmodule/schoolapi/vehicle.js");
 var user = require("../appmodule/schoolapi/user.js");
+var userdt = require("../appmodule/schoolapi/userdetails.js");
 var pickdrop = require("../appmodule/schoolapi/pickdrop.js");
 var breakdown = require("../appmodule/schoolapi/breakdown.js");
 var speed = require("../appmodule/schoolapi/speed.js");
@@ -180,13 +181,17 @@ var appRouter = function(app) {
     app.post(globals.globvar.rootAPI + "/saveVehicleInfo", vehicle.saveVehicleInfo);
     app.post(globals.globvar.rootAPI + "/getVehicleDetails", vehicle.getVehicleDetails);
 
-    //##################################### Driver ##########################################################
+    //##################################### Vehicle ##########################################################
 
-    //##################################### User ############################################################
+    //##################################### User #############################################################
 
     app.post(globals.globvar.rootAPI + "/saveUserInfo", user.saveUserInfo);
     app.post(globals.globvar.rootAPI + "/updateUserInfo", user.updateUserInfo);
     app.post(globals.globvar.rootAPI + "/getUserDetails", user.getUserDetails);
+
+    //##################################### User #############################################################
+
+    //##################################### User Details #####################################################
 
     app.post(globals.globvar.rootAPI + "/saveUserRights", user.saveUserRights);
     app.post(globals.globvar.rootAPI + "/getUserRights", user.getUserRights);
@@ -196,16 +201,19 @@ var appRouter = function(app) {
 
     app.post(globals.globvar.rootAPI + "/getUserLoginLog", user.getUserLoginLog);
 
-    //##################################### User ############################################################
+    app.post(globals.globvar.rootAPI + "/saveUserCardDetails", userdt.saveUserCardDetails);
+    app.post(globals.globvar.rootAPI + "/getUserCardDetails", userdt.getUserCardDetails);
 
-    //##################################### Pick and Drop ###################################################
+    //##################################### User Details #####################################################
+
+    //##################################### Pick and Drop ####################################################
 
     app.post(globals.globvar.rootAPI + "/savePickDropInfo", pickdrop.savePickDropInfo);
     app.post(globals.globvar.rootAPI + "/getPickDropDetails", pickdrop.getPickDropDetails);
 
-    //##################################### Pick and Drop ###################################################
+    //##################################### Pick and Drop ####################################################
 
-    //##################################### Break Down ######################################################
+    //##################################### Break Down #######################################################
 
     app.post(globals.globvar.rootAPI + "/saveBreakDown", breakdown.saveBreakDown);
     app.post(globals.globvar.rootAPI + "/getBreakDown", breakdown.getBreakDown);
@@ -213,72 +221,72 @@ var appRouter = function(app) {
     app.post(globals.globvar.rootAPI + "/saveBreakDownSet", breakdown.saveBreakDownSet);
     app.post(globals.globvar.rootAPI + "/getBreakDownSet", breakdown.getBreakDownSet);
 
-    //##################################### Driver Info #####################################################
+    //##################################### Driver Info ######################################################
 
-    //##################################### Speed ###########################################################
+    //##################################### Speed ############################################################
 
     app.post(globals.globvar.rootAPI + "/saveSpeedVialation", speed.saveSpeedVialation);
 
-    //##################################### Speed ###########################################################
+    //##################################### Speed ############################################################
 
-    //##################################### General #########################################################
+    //##################################### General ##########################################################
 
     app.post(globals.globvar.rootAPI + "/saveGeneralSetting", genset.saveGeneralSetting);
     app.post(globals.globvar.rootAPI + "/getGeneralSetting", genset.getGeneralSetting);
 
-    //##################################### General #########################################################
+    //##################################### General ##########################################################
 
-    //##################################### Reports #########################################################
+    //##################################### Reports ##########################################################
 
     app.post(globals.globvar.rootAPI + "/getAttendanceReports", reports.getAttendanceReports);
     app.post(globals.globvar.rootAPI + "/getRouteWisePassengerReports", reports.getRouteWisePassengerReports);
     app.post(globals.globvar.rootAPI + "/getSpeedVialationReports", reports.getSpeedVialationReports);
     app.post(globals.globvar.rootAPI + "/getPassengerTripReports", reports.getPassengerTripReports);
 
-    //##################################### Reports #########################################################
+    //##################################### Reports ##########################################################
 
-    //##################################### Marketing Order #################################################
+    //##################################### Marketing Order ##################################################
 
     app.post(globals.globvar.marketapi + "/saveOrderInfo", mrktnorder.saveOrderInfo);
     app.post(globals.globvar.marketapi + "/updateOrderInfo", mrktnorder.updateOrderInfo);
     app.post(globals.globvar.marketapi + "/getOrderDetail", mrktnorder.getOrderDetail);
     app.post(globals.globvar.marketapi + "/getOrder", mrktnorder.getOrder);
 
-    //##################################### Marketing Order #################################################
+    //##################################### Marketing Order ##################################################
 
-    //##################################### Marketing Dashboard #############################################
+    //##################################### Marketing Dashboard ##############################################
 
     app.post(globals.globvar.rootAPI + "/getMarketingDB", mrktndb.getMarketingDB);
 
-    //##################################### Marketing Dashboard #############################################
+    //##################################### Marketing Dashboard ##############################################
 
-    //##################################### Medicine ########################################################
+    //##################################### Medicine #########################################################
 
     app.post(globals.globvar.rootAPI + "/saveMedicineInfo", upload.any(), medicine.saveMedicineInfo);
     app.post(globals.globvar.rootAPI + "/getMedicineDetails", medicine.getMedicineDetails);
 
-    //##################################### Marketing Order #################################################
+    //##################################### Marketing Order ##################################################
 
 
-    //##################################### VIVEK ###########################################################
+    //##################################### VIVEK ############################################################
 
 
 
-    //##################################### PRATIK ##########################################################
+    //##################################### PRATIK ###########################################################
 
-    //##################################### Dashboard #######################################################
+    //##################################### Dashboard ########################################################
 
     app.post(globals.globvar.rootAPI + "/getDashboard", dashboard.getDashboard);
 
-    //##################################### Dashboard #######################################################
+    //##################################### Dashboard ########################################################
 
-    //##################################### Driver Info #####################################################
+    //##################################### Driver Info ######################################################
 
     app.post(globals.globvar.rootAPI + "/saveDriverInfo", driverinfo.saveDriverInfo);
     app.post(globals.globvar.rootAPI + "/getDriverInfoGrid", driverinfo.getDriverInfoGrid);
     app.post(globals.globvar.rootAPI + "/getDriverInfoDetails", driverinfo.getDriverInfoDetails);
 
-    //##################################### Driver Info #####################################################
+    //##################################### Driver Info ######################################################
 
     // Semd Mail
 
@@ -286,7 +294,7 @@ var appRouter = function(app) {
 
     // Semd Mail
 
-    //##################################### File Uploads ####################################################
+    //##################################### File Uploads #####################################################
 
     app.post(globals.globvar.rootAPI + "/uploads", upload.any(), function(req, res) {
         var tmp_path = req.files[0].path;
@@ -304,9 +312,9 @@ var appRouter = function(app) {
         src.on('error', function(err) { res.send({ error: "upload failed" }); });
     });
 
-    //##################################### File Uploads ####################################################
+    //##################################### File Uploads #####################################################
 
-    //##################################### PRATIK ##########################################################
+    //##################################### PRATIK ###########################################################
 }
 
 module.exports = appRouter;
