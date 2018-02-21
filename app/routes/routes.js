@@ -105,6 +105,8 @@ var appRouter = function(app) {
     app.post(globals.globvar.rootAPI + "/getMOM", common.getMOM);
     app.post(globals.globvar.rootAPI + "/saveMOM", common.saveMOM);
 
+    app.post(globals.globvar.rootAPI + "/getEmailSMS_Setting", common.getEmailSMS_Setting);
+
     //##################################### Common ##########################################################
 
     //##################################### Qualification ###################################################
@@ -287,12 +289,6 @@ var appRouter = function(app) {
     app.post(globals.globvar.rootAPI + "/getDriverInfoDetails", driverinfo.getDriverInfoDetails);
 
     //##################################### Driver Info ######################################################
-
-    // Semd Mail
-
-    app.post(globals.globvar.rootAPI + "/sendEmail", common.sendEmail);
-
-    // Semd Mail
 
     //##################################### File Uploads #####################################################
 

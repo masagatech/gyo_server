@@ -55,28 +55,12 @@ common.getDropDownData = function getDropDownData(req, res, done) {
     }, 1)
 }
 
-// Send Email
+// SMS / Email
 
-// common.sendEmail = function sendEmail() {
-//     sendmail({
-//         from: 'vivek.pandey5188@gmail.com',
-//         to: 'pandey.vivek5188@gmail.com',
-//         subject: 'test sendmail',
-//         html: 'Mail of test sendmail',
-//     }, function(err, reply) {
-//         console.log(err && err.stack);
-//         console.dir(reply);
-//     });
-// }
-
-common.sendEmail = function sendEmail(req, res, done) {
-    sendmail({
-        from: 'vivek.pandey5188@gmail.com',
-        to: 'pandey.vivek5188@gmail.com',
-        subject: 'test sendmail',
-        html: 'Mail of test sendmail',
-    }, function(err, reply) {
-        console.log(err && err.stack);
-        console.dir(reply);
-    });
+sms_email.getEmailSMS_Setting = function getEmailSMS_Setting(req, res, done) {
+    db.callFunction("select " + globals.schema("funget_emailsms_setting") + "($1::json);", [req.body], function(data) {
+        rs.resp(res, 200, data.rows);
+    }, function(err) {
+        rs.resp(res, 401, "error : " + err);
+    })
 }
