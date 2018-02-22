@@ -57,10 +57,10 @@ common.getDropDownData = function getDropDownData(req, res, done) {
 
 // SMS / Email
 
-sms_email.getEmailSMS_Setting = function getEmailSMS_Setting(req, res, done) {
-    db.callFunction("select " + globals.schema("funget_emailsms_setting") + "($1::json);", [req.body], function(data) {
+common.getEmailSMS_Setting = function getEmailSMS_Setting(req, res, done) {
+    db.callProcedure("select " + globals.schema("funget_emailsms_setting") + "($1,$2::json);", ['es', req.query], function(data) {
         rs.resp(res, 200, data.rows);
     }, function(err) {
         rs.resp(res, 401, "error : " + err);
-    })
+    }, 1)
 }
