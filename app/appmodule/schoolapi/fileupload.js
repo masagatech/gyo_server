@@ -26,9 +26,16 @@ fileupload.uploadFile = function uploadFile(req, res, done) {
         if (width !== 'noresize') {
             Jimp.read(file.path, function(err, lenna) {
                 if (err) throw err;
-                lenna.resize(Number(width), Jimp.AUTO) // resize 
-                    .quality(80) // set greyscale 
-                    .write(file.path); // save 
+
+                if (file.type == "image/png" || file.type == "image/jpeg" || file.type == "image/jpg" || file.type == "image/gif" || file.type == "image/bmp") {
+                    console.log("Image");
+
+                    lenna.resize(Number(width), Jimp.AUTO) // resize
+                        .quality(80) // set greyscale
+                        .write(file.path); // save
+                } else {
+                    console.log("Document");
+                }
             });
         }
         files.push([field, file]);

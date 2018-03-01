@@ -12,37 +12,12 @@ admsn.saveAdmissionInfo = function saveAdmissionInfo(req, res, done) {
     })
 }
 
-admsn.uploadStudentInfo = function uploadStudentInfo(req, res, done) {
-    var tmp_path = req.files[0].path;
-    var target_path = 'www/uploads/exceluploads/' + req.files[0].originalname;
-    var src = fs.createReadStream(tmp_path);
-    var dest = fs.createWriteStream(target_path);
-
-    src.pipe(dest);
-
-    fs.unlink(req.files[0].path, function(err) {
-        if (err) return console.log(err);
-    });
-
-    src.on('end', function() {
-        rs.resp(res, 200, req.body.id);
-
-        xlsxtojson({
-            input: target_path,
-            output: null,
-            lowerCaseHeaders: true
-        }, function(err, result) {
-            // if (err) {
-            //     return res.json({ error_code: 1, err_desc: err, data: null });
-            // }
-            // res.json({ error_code: 0, err_desc: null, data: result });
-
-            rs.resp(res, 200, result);
-
-            // console.log(result);
-        });
-    });
-    src.on('error', function(err) { res.send({ error: "upload failed" }); });
+admsn.saveMultiStudentInfo = function saveMultiStudentInfo(req, callback) {
+    db.callFunction("select " + globals.erpschema("funsave_multistudentinfo") + "($1::json);", [req], function(data) {
+        callback(data.rows);
+    }, function(err) {
+        callback("error : " + err);
+    })
 }
 
 admsn.saveStudentInfo = function saveStudentInfo(req, res, done) {

@@ -10,6 +10,7 @@ var fs = require('fs');
 
 var admsn = require("../appmodule/erp/admission.js");
 
+var root = globals.globvar.rootAPI + "/menu";
 var multer = require('multer');
 
 var upload = multer({
@@ -17,43 +18,19 @@ var upload = multer({
         fieldNameSize: 999999999,
         fieldSize: 999999999
     },
-    dest: 'www/uploads/'
+    dest: 'www/exceluploads/'
 });
 
 var appRouter = function(app) {
     app.use(bodyParser.json());
 
-    var storage = multer.diskStorage({ //multers disk storage settings
-        destination: function(req, file, cb) {
-            cb(null, './excelupload/')
-        },
-        filename: function(req, file, cb) {
-            var datetimestamp = Date.now();
-            cb(null, file.fieldname + '-' + datetimestamp + '.' + file.originalname.split('.')[file.originalname.split('.').length - 1])
-        }
-    });
-
-    var excelupload = multer({ //multer settings
-        storage: storage,
-        fileFilter: function(req, file, callback) { //file filter
-            if (['xls', 'xlsx'].indexOf(file.originalname.split('.')[file.originalname.split('.').length - 1]) === -1) {
-                return callback(new Error('Wrong extension type'));
-            }
-            callback(null, true);
-        }
-    }).single('file');
-
-    // app.post(globals.globvar.rootAPI + '/exceluploads', admsn.uploadStudentInfo);
-
-
-
     /** API path that will upload the files */
 
-    app.post(globals.globvar.rootAPI + '/exceluploads', upload.any(), function(req, res) {
-        var exceltojson; //Initialization
+    app.post(globals.globvar.rootAPI + '/bulkUpload', upload.any(), function(req, res) {
+        var exceltojson; // Initialization
 
         var tmp_path = req.files[0].path;
-        var target_path = 'www/uploads/exceluploads/' + req.files[0].originalname;
+        var target_path = 'www/exceluploads/' + req.files[0].originalname;
         var src = fs.createReadStream(tmp_path);
         var dest = fs.createWriteStream(target_path);
 
@@ -77,20 +54,34 @@ var appRouter = function(app) {
                     lowerCaseHeaders: true
                 }, function(err, result) {
                     if (err) {
-                        return res.json({ error_code: 1, err_desc: err, data: null });
+                        res.json({ error_code: 1, err_desc: err, data: null });
+                    } else {
+
                     }
 
-                    res.json({ error_code: 0, err_desc: null, data: result });
-
-                    // rs.resp(res, 200, res.data);
-                    // rs.resp(res, 200, req.body);
-
                     console.log(result);
+
+                    if (req.body.bulktype === "student") {
+                        var params = {
+                            "ayid": req.body.ayid,
+                            "enttid": req.body.enttid,
+                            "wsautoid": req.body.wsautoid,
+                            "cuid": req.body.cuid,
+                            "multistudent": result
+                        };
+
+                        console.log(params);
+
+                        admsn.saveMultiStudentInfo(params, function(d) {
+                            res.json({ data: d });
+                        });
+                    }
                 });
             } catch (e) {
                 res.json({ error_code: 1, err_desc: "Corupted excel file" });
             }
         });
+
         src.on('error', function(err) { res.send({ error: "upload failed" }); });
     });
 }

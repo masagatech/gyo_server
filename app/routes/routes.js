@@ -304,8 +304,13 @@ var appRouter = function(app) {
             if (err) return console.log(err);
         });
 
-        src.on('end', function() { rs.resp(res, 200, req.body.id); });
-        src.on('error', function(err) { res.send({ error: "upload failed" }); });
+        src.on('end', function() {
+            rs.resp(res, 200, req.body.id);
+        });
+
+        src.on('error', function(err) {
+            res.send({ error: "upload failed" });
+        });
     });
 
     //##################################### File Uploads #####################################################
