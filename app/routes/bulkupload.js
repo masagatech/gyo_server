@@ -85,6 +85,10 @@ var appRouter = function(app) {
 
                     }
 
+                    var resdata = JSON.stringify(result);
+
+                    console.log(JSON.parse(resdata));
+
                     var _status = 1;
                     var _message = '';
 
