@@ -3,6 +3,7 @@ var rs = require("gen").res;
 var globals = require("gen").globals;
 
 var fees = module.exports = {};
+var tripapi = require("../schoolapi/tripapi.js");
 
 fees.saveClassFees = function saveClassInfo(req, res, done) {
     db.callFunction("select " + globals.erpschema("funsave_classfees") + "($1::json);", [req.body], function(data) {
@@ -23,6 +24,17 @@ fees.getClassFees = function getClassFees(req, res, done) {
 fees.saveFeesCollection = function saveFeesCollection(req, res, done) {
     db.callFunction("select " + globals.erpschema("funsave_feescollection") + "($1::json);", [req.body], function(data) {
         rs.resp(res, 200, data.rows);
+
+        var _dtr = {
+            "flag": "parents_notification",
+            "title": data.rows[0].funsave_feescollection.ntftitle,
+            "body": data.rows[0].funsave_feescollection.ntfmsg,
+            "parentsid": data.rows[0].funsave_feescollection.parentsid
+        }
+
+        console.log(_dtr);
+
+        tripapi.sendNotification(_dtr);
     }, function(err) {
         rs.resp(res, 401, "error : " + err);
     })
