@@ -32,14 +32,6 @@ const root = globals.globvar.rootAPI + "/erp";
 
 var multer = require('multer');
 
-var upload = multer({
-    limits: {
-        fieldNameSize: 999999999,
-        fieldSize: 999999999
-    },
-    dest: 'www/uploads/assignment'
-});
-
 var appRouter = function(app) {
     //##################################### VIVEK ########################################################
 
