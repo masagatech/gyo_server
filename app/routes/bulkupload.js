@@ -9,6 +9,7 @@ var rs = require("../appmodule/util/resp.js");
 var fs = require('fs');
 
 var admsn = require("../appmodule/erp/admission.js");
+var exmres = require("../appmodule/erp/exam.js");
 
 var root = globals.globvar.rootAPI + "/menu";
 var multer = require('multer');
@@ -25,32 +26,6 @@ var appRouter = function(app) {
     app.use(bodyParser.json());
 
     /** API path that will upload the files */
-
-    function checkDuplicates(arr, justCheck) {
-        var len = arr.length,
-            tmp = {},
-            arrtmp = arr.slice(),
-            dupes = [];
-
-        arrtmp.sort();
-
-        while (len--) {
-            var val = arrtmp[len];
-
-            if (/nul|nan|infini/i.test(String(val))) {
-                val = String(val);
-            }
-
-            if (tmp[JSON.stringify(val)]) {
-                if (justCheck) { return true; }
-                dupes.push(val);
-            }
-
-            tmp[JSON.stringify(val)] = true;
-        }
-
-        return justCheck ? false : dupes.length ? dupes : null;
-    }
 
     app.post(globals.globvar.rootAPI + '/bulkUpload', upload.any(), function(req, res) {
         var exceltojson; // Initialization
@@ -85,92 +60,43 @@ var appRouter = function(app) {
 
                     }
 
-                    var resdata = JSON.stringify(result);
+                    // var resdata = JSON.stringify(result);
 
-                    console.log(JSON.parse(resdata));
-
-                    var _status = 1;
-                    var _message = '';
+                    // console.log(resdata);
 
                     if (req.body.bulktype === "student") {
-                        if (checkDuplicates(result, true)) {
-                            _status = 0;
-                            _message = "Duplicate Records Not Allowed";
-                        } else {
-                            for (var i = 0; i < result.length; i++) {
-                                if (result[i].first_name == "") {
-                                    _status = 0;
-                                    _message = "Empty First Name";
+                        var params = {
+                            "ayid": req.body.ayid,
+                            "enttid": req.body.enttid,
+                            "wsautoid": req.body.wsautoid,
+                            "cuid": req.body.cuid,
+                            "multistudent": result
+                        };
 
-                                    break;
-                                } else if (result[i].middle_name == "") {
-                                    _status = 0;
-                                    _message = "Empty Middle Name";
+                        admsn.bulkUploadStudents(params, res, result, function(data) {
+                            res.json({ status: 1, message: "Saved Successfully Completed", data: data });
+                        });
+                    }
 
-                                    break;
-                                } else if (result[i].last_name == "") {
-                                    _status = 0;
-                                    _message = "Empty Last Name";
+                    console.log(req.body.bulktype);
 
-                                    break;
-                                } else if (result[i].roll_no == "") {
-                                    _status = 0;
-                                    _message = "Empty Roll No In " + result[i].first_name;
+                    if (req.body.bulktype === "examresult") {
+                        var params = {
+                            "savetype": "bulk",
+                            "smstrid": req.body.smstrid,
+                            "clsid": req.body.clsid,
+                            "ayid": req.body.ayid,
+                            "enttid": req.body.enttid,
+                            "wsautoid": req.body.wsautoid,
+                            "cuid": req.body.cuid,
+                            "bulkexamresult": result
+                        };
 
-                                    break;
-                                } else if (result[i].class_name == "") {
-                                    _status = 0;
-                                    _message = "Empty Class Name In " + result[i].first_name;
+                        console.log(params)
 
-                                    break;
-                                } else if (result[i].dob == "") {
-                                    _status = 0;
-                                    _message = "Empty DOB In " + result[i].first_name;
-
-                                    break;
-                                } else if (result[i].address == "") {
-                                    _status = 0;
-                                    _message = "Empty Address In " + result[i].first_name;
-
-                                    break;
-                                } else if (result[i].father_name == "") {
-                                    _status = 0;
-                                    _message = "Empty Father Name In " + result[i].first_name;
-
-                                    break;
-                                } else if (result[i].father_mobile == "") {
-                                    _status = 0;
-                                    _message = "Empty Father Mobile In " + result[i].first_name;
-
-                                    break;
-                                } else if (result[i].father_email == "") {
-                                    _status = 0;
-                                    _message = "Empty Father Email In " + result[i].first_name;
-
-                                    break;
-                                } else {
-                                    _status = 1;
-                                    _message = "";
-                                }
-                            }
-                        }
-
-                        if (_status == 1) {
-                            var params = {
-                                "ayid": req.body.ayid,
-                                "enttid": req.body.enttid,
-                                "wsautoid": req.body.wsautoid,
-                                "cuid": req.body.cuid,
-                                "multistudent": result
-                            };
-
-                            admsn.saveMultiStudentInfo(params, function(data) {
-                                res.json({ status: _status, message: _message, data: data });
-                            });
-                        } else {
-                            res.json({ status: _status, message: _message, data: null });
-                            // res.send(500, _message);
-                        }
+                        exmres.bulkUploadExamResult(params, res, result, function(data) {
+                            res.json({ status: 1, message: "Saved Successfully Completed", data: data });
+                        });
                     }
                 });
             } catch (e) {

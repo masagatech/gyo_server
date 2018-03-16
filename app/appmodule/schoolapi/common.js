@@ -7,6 +7,32 @@ var common = module.exports = {};
 
 const sendmail = require('sendmail')();
 
+common.checkDuplicates = function checkDuplicates(arr, justCheck) {
+    var len = arr.length,
+        tmp = {},
+        arrtmp = arr.slice(),
+        dupes = [];
+
+    arrtmp.sort();
+
+    while (len--) {
+        var val = arrtmp[len];
+
+        if (/nul|nan|infini/i.test(String(val))) {
+            val = String(val);
+        }
+
+        if (tmp[JSON.stringify(val)]) {
+            if (justCheck) { return true; }
+            dupes.push(val);
+        }
+
+        tmp[JSON.stringify(val)] = true;
+    }
+
+    return justCheck ? false : dupes.length ? dupes : null;
+}
+
 common.getAppVersion = function getAppVersion(req, res, done) {
     db.callProcedure("select " + globals.schema("funget_appversion") + "($1,$2::json);", ['auto', req.query], function(data) {
         rs.resp(res, 200, data.rows);

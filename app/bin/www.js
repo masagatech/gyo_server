@@ -59,4 +59,6 @@ var expserver = server.listen(conf.server.port, conf.server.ip, function() {
     console.log("API Server is listening on port %s...", expserver.address().port);
 });
 
+var reportServer = require("./report-server.js");
+
 // ##############################################################################################

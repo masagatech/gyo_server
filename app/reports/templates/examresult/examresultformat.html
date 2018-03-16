@@ -1,0 +1,95 @@
+<html>
+
+<head>
+    <meta charset="utf-8" />
+
+    <style>
+        .table {
+            border-collapse: collapse;
+            font-size: 12px;
+            width: 100%;
+            border: 1px solid rgba(204, 204, 204, 0.35);
+        }
+        
+        .table thead {
+            background: #000000;
+            color: red;
+            padding: 5px;
+        }
+        
+        .table td {
+            padding: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <table border="1" class="table" cellspacing="0" cellpadding="5">
+        <thead>
+            <tr>
+                <td>
+                    exam_date
+                </td>
+                <td>
+                    from_time
+                </td>
+                <td>
+                    to_time
+                </td>
+                <td>
+                    roll_no
+                </td>
+                <td>
+                    student_name
+                </td>
+                <td>
+                    subject_name
+                </td>
+                <td>
+                    marks
+                </td>
+                <td>
+                    out_of_marks
+                </td>
+                <td>
+                    remark
+                </td>
+            </tr>
+        </thead>
+        <tbody>
+            {{#data}}
+            <tr>
+                <td width="150px">
+                    {{exam_date}}
+                </td>
+                <td width="100px">
+                    {{from_time}}
+                </td>
+                <td width="100px">
+                    {{to_time}}
+                </td>
+                <td width="150px">
+                    {{roll_no}}
+                </td>
+                <td width="100px">
+                    {{student_name}}
+                </td>
+                <td width="100px">
+                    {{subject_name}}
+                </td>
+                <td width="100px">
+                    {{marks}}
+                </td>
+                <td width="100px">
+                    {{out_of_marks}}
+                </td>
+                <td width="100px">
+                    {{remark}}
+                </td>
+            </tr>
+            {{/data}}
+        </tbody>
+    </table>
+</body>
+
+</html>

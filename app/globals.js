@@ -1,5 +1,15 @@
 var global = module.exports = {};
 
+// database settings
+
+global.prodmode = {
+    "local": 1,
+    "localprod": 2,
+    "prod": 3
+}
+
+global.mode = global.prodmode.prod;
+
 global.globvar = {
     "rootAPI": "/goyoapi",
     "marketapi": "/marketapi"
@@ -26,6 +36,20 @@ global.constr = function constr() {
 global.monconstr = function constr() {
     //return 'postgres://postgres:123@192.168.1.107:5432/goyo_marketing';
     return 'mongodb://127.0.0.1:27017/goyosch';
+};
+
+global.reportTemplatePath = function reportTemplatePath() {
+    if (global.mode == global.prodmode.prod)
+        return __dirname + '/reports/templates';
+    else
+        return __dirname + '/reports/templates';
+};
+
+global.reportRootPath = function reportRootPath() {
+    if (global.mode == global.prodmode.prod)
+        return __dirname + '/reports';
+    else
+        return __dirname + '/reports';
 };
 
 // global.pgdbconnection = {
