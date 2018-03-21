@@ -1,5 +1,7 @@
 var global = module.exports = {};
 
+global.milegerurl = "http://35.154.114.229:6979/goyoapi/tripapi/report";
+
 // database settings
 
 global.prodmode = {

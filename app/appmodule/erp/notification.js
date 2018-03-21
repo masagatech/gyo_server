@@ -9,16 +9,27 @@ notification.saveNotification = function saveNotification(req, res, done) {
     db.callFunction("select " + globals.erpschema("funsave_notification") + "($1::json);", [req.body], function(data) {
         rs.resp(res, 200, data.rows);
 
-        var _dtr = {
+        // Parents Notification
+
+        var _prntntf = {
             "flag": "parents_notification",
             "title": req.body.title,
             "body": req.body.msg,
-            "parentsid": data.rows[0].funsave_notification.parentsid
+            "prntids": data.rows[0].funsave_notification.prntids
         }
 
-        console.log(_dtr);
+        tripapi.sendNotification(_prntntf);
 
-        tripapi.sendNotification(_dtr);
+        // Teacher Notification
+
+        var _tchrntf = {
+            "flag": "notification",
+            "title": req.body.title,
+            "body": req.body.msg,
+            "tchrids": data.rows[0].funsave_notification.tchrids
+        }
+
+        tripapi.sendNotification(_tchrntf);
     }, function(err) {
         rs.resp(res, 401, "error : " + err);
     })

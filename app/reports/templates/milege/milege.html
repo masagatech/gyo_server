@@ -1,0 +1,76 @@
+<html>
+
+<head>
+    <meta charset="utf-8" />
+
+    <style>
+        table {
+            border-collapse: collapse;
+            font-size: 12px;
+            width: 100%;
+            border: 1px solid rgba(204, 204, 204, 0.35);
+        }
+        
+        table>thead {
+            background: #009688;
+            color: #ffffff;
+            padding: 5px;
+        }
+        
+        table td {
+            padding: 5px;
+        }
+        
+        small {
+            display: block
+        }
+    </style>
+</head>
+
+<body>
+    <table border="1" cellspacing="0" cellpadding="5">
+        <thead>
+            <tr>
+                <td>
+                    IMEI
+                </td>
+                <td align="center">
+                    From Date
+                </td>
+                <td align="center">
+                    To Date
+                </td>
+                <td align="right">
+                    Max Speed
+                </td>
+                <td align="right">
+                    Milege
+                </td>
+            </tr>
+        </thead>
+        <tbody>
+            {{#data}}
+            <tr>
+                <td width="150px">
+                    {{vhname.[0].vhname}}
+                    <small>{{_id.vhid}}</small>
+                </td>
+                <td width="100px" align="center">
+                    {{{formatDate frmdate "short"}}}
+                </td>
+                <td width="100px" align="center">
+                    {{{formatDate todate "short"}}}
+                </td>
+                <td width="100px" align="right">
+                    {{maxspd}}
+                </td>
+                <td width="150px" align="right">
+                    {{{formatnumber milege}}}
+                </td>
+            </tr>
+            {{/data}}
+        </tbody>
+    </table>
+</body>
+
+</html>
