@@ -17,6 +17,11 @@
             padding: 5px;
         }
         
+        table>tfoot {
+            background: rgba(204, 204, 204, 0.35);
+            padding: 5px;
+        }
+        
         table td {
             padding: 5px;
         }
@@ -24,11 +29,23 @@
         small {
             display: block
         }
+        
+        .show {
+            display: inline-table!important;
+        }
+        
+        .hide {
+            display: none!important;
+        }
     </style>
 </head>
 
 <body>
-    <table border="1" cellspacing="0" cellpadding="5">
+    <div class="{{{emptydatamsg}}}" align="center">
+        <h4>No Data Found</h4>
+    </div>
+
+    <table class="{{{showtable}}}" border="1" cellspacing="0" cellpadding="5">
         <thead>
             <tr>
                 <td>
@@ -70,6 +87,17 @@
             </tr>
             {{/data}}
         </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="3" align="right">Total</td>
+                <td align="right">
+                    {{{maxspd_total}}}
+                </td>
+                <td align="right">
+                    {{{milege_total}}}
+                </td>
+            </tr>
+        </tfoot>
     </table>
 </body>
 

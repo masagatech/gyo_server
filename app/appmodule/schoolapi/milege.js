@@ -8,7 +8,7 @@ var download = gen.download;
 var http = require('http');
 var request = require('request');
 
-var reportsapi = require("../../reports/apis/reports.js");
+var rptmilegeapi = require("../../reports/templates/milege/milege.js");
 
 var milege = module.exports = {};
 
@@ -23,15 +23,6 @@ milege.getMilegeDetails = function getMilegeDetails(req, res, done) {
 
     request.post(
         globals.milegerurl, {
-            // json: {
-            //     "reporttyp": "milege",
-            //     "params": {
-            //         "vhid": ["351777090309137","35177709030940"],
-            //         "frmdt": "2017-09-01T00:00:00+05:30",
-            //         "todate": "2018-02-15T00:00:00+05:30"
-            //     }
-            // }
-
             json: {
                 "reporttyp": rpttype,
                 "params": {
@@ -45,8 +36,8 @@ milege.getMilegeDetails = function getMilegeDetails(req, res, done) {
         function(error, response, data) {
             if (req.query.vwtype == "download") {
                 download(req, res, {
-                    data: data.data
-                }, { 'all': 'milege/milege.html' }, reportsapi.getReports);
+                    data: data.data == null ? [] : data.data
+                }, { 'all': 'milege/milege.html' }, rptmilegeapi.getMilegeReports);
             } else {
                 rs.resp(res, 200, data.data);
             }
