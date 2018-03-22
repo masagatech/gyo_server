@@ -1,0 +1,87 @@
+<html>
+
+<head>
+    <meta charset="utf-8" />
+
+    <style>
+        table {
+            border-collapse: collapse;
+            font-size: 12px;
+            width: 100%;
+            border: 1px solid rgba(204, 204, 204, 0.35);
+        }
+        
+        table>thead {
+            background: #009688;
+            color: #ffffff;
+            padding: 5px;
+        }
+        
+        table>tfoot {
+            background: rgba(204, 204, 204, 0.35);
+            padding: 5px;
+        }
+        
+        table td {
+            padding: 5px;
+        }
+        
+        small {
+            display: block
+        }
+        
+        .show {
+            display: inline-table!important;
+        }
+        
+        .hide {
+            display: none!important;
+        }
+    </style>
+</head>
+
+<body>
+    <h4 align="center">{{{emptydatamsg}}}</h4>
+
+    <table class="{{{showdata}}}" border="1" cellspacing="0" cellpadding="5">
+        <thead>
+            <tr>
+                <td>
+                    IMEI
+                </td>
+                <td align="center">
+                    Date
+                </td>
+                <td align="right">
+                    Count
+                </td>
+            </tr>
+        </thead>
+        <tbody>
+            {{#data}}
+            <tr>
+                <td width="150px">
+                    {{vhname.[0].vhname}}
+                    <small>{{_id.vhid}}</small>
+                </td>
+                <td width="100px" align="center">
+                    {{{formatDate _id.date "short"}}}
+                </td>
+                <td width="100px" align="right">
+                    {{count}}
+                </td>
+            </tr>
+            {{/data}}
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="2" align="right">Total</td>
+                <td align="right">
+                    {{{count_total}}}
+                </td>
+            </tr>
+        </tfoot>
+    </table>
+</body>
+
+</html>

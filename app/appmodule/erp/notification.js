@@ -4,10 +4,13 @@ var globals = require("gen").globals;
 
 var notification = module.exports = {};
 var tripapi = require("../schoolapi/tripapi.js");
+var sms_email = require("../schoolapi/sendsms_email.js");
 
 notification.saveNotification = function saveNotification(req, res, done) {
     db.callFunction("select " + globals.erpschema("funsave_notification") + "($1::json);", [req.body], function(data) {
         rs.resp(res, 200, data.rows);
+
+        var _ntfdata = data.rows[0].funsave_notification;
 
         // Parents Notification
 
@@ -15,7 +18,7 @@ notification.saveNotification = function saveNotification(req, res, done) {
             "flag": "parents_notification",
             "title": req.body.title,
             "body": req.body.msg,
-            "prntids": data.rows[0].funsave_notification.prntids
+            "prntids": _ntfdata.prntids
         }
 
         tripapi.sendNotification(_prntntf);
@@ -26,10 +29,32 @@ notification.saveNotification = function saveNotification(req, res, done) {
             "flag": "notification",
             "title": req.body.title,
             "body": req.body.msg,
-            "tchrids": data.rows[0].funsave_notification.tchrids
+            "tchrids": _ntfdata.tchrids
         }
 
         tripapi.sendNotification(_tchrntf);
+
+        var _uphone = _ntfdata.uphone;
+        var _uemail = _ntfdata.uemail;
+
+        var _title = req.body.title;
+        var _msg = req.body.msg;
+
+        var params = {
+            "sms_to": _uphone,
+            "sms_body": _title + " : " + _msg,
+            "mail_to": _uemail,
+            "mail_subject": _title,
+            "mail_body": _msg
+        };
+
+        if (req.body.issendsms == true) {
+            sms_email.sendEmailAndSMS(params, _uphone, _uemail, "sms");
+        }
+
+        if (req.body.issendemail == true) {
+            sms_email.sendEmailAndSMS(params, _uphone, _uemail, "email");
+        }
     }, function(err) {
         rs.resp(res, 401, "error : " + err);
     })

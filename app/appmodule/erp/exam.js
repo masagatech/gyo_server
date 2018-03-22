@@ -8,8 +8,6 @@ var download = gen.download;
 var exam = module.exports = {};
 var common = require("../schoolapi/common.js");
 
-var reportsapi = require("../../reports/apis/reports.js");
-
 // Exam
 
 exam.saveExamInfo = function saveExamInfo(req, res, done) {
@@ -112,24 +110,6 @@ exam.saveExamResult = function saveExamResult(req, res, done) {
 exam.getExamResult = function getExamResult(req, res, done) {
     db.callProcedure("select " + globals.erpschema("funget_examresult") + "($1,$2::json);", ['examres', req.body], function(data) {
         rs.resp(res, 200, data.rows);
-    }, function(err) {
-        rs.resp(res, 401, "error : " + err);
-    }, 1)
-}
-
-exam.downloadExamResult = function downloadExamResult(req, res, done) {
-    db.callProcedure("select " + globals.erpschema("funget_examresult") + "($1,$2::json);", ['examresrpt', req.query], function(data) {
-        if (req.query.type == "all") {
-            download(req, res, {
-                data: data.rows,
-                params: req.query
-            }, { 'all': 'examresult/examresultformat.html' }, reportsapi.getReports);
-        } else {
-            download(req, res, {
-                data: data.rows[0],
-                params: req.query
-            }, { 'all': 'examresult/examresultformat.html' }, reportsapi.getReports);
-        }
     }, function(err) {
         rs.resp(res, 401, "error : " + err);
     }, 1)
