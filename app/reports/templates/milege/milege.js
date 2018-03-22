@@ -47,7 +47,7 @@ reports.getMilegeReports = function getMilegeReports(data) {
         return totmilege.toFixed(2);
     });
 
-    _hndlbar.registerHelper('showtable', function(params) {
+    _hndlbar.registerHelper('showdata', function(params) {
         if (milegedt.length == 0) {
             return "hide";
         } else {
