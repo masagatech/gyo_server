@@ -57,9 +57,9 @@ reports.getMilegeReports = function getMilegeReports(data) {
 
     _hndlbar.registerHelper('emptydatamsg', function(params) {
         if (milegedt.length == 0) {
-            return "show";
+            return "No Data Found";
         } else {
-            return "hide";
+            return "";
         }
     });
 
