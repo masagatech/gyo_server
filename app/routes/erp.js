@@ -25,6 +25,7 @@ var annc = require("../appmodule/erp/announcement.js");
 var tag = require("../appmodule/erp/tag.js");
 var gallery = require("../appmodule/erp/gallery.js");
 var content = require("../appmodule/erp/content.js");
+var smspack = require("../appmodule/erp/smspack.js");
 var library = require("../appmodule/erp/library.js");
 var trips = require("../appmodule/erp/trips.js");
 
@@ -227,6 +228,13 @@ var appRouter = function(app) {
     app.post(root + "/saveContentInfo", content.saveContentInfo);
     app.post(root + "/saveContentDetails", content.saveContentDetails);
     app.post(root + "/saveContentEntityMap", content.saveContentEntityMap);
+
+    //##################################### Content ######################################################
+
+    //##################################### smspack ######################################################
+
+    app.post(root + "/getSMSPack", smspack.getSMSPack);
+    app.post(root + "/saveSMSPack", smspack.saveSMSPack);
 
     //##################################### Content ######################################################
 
