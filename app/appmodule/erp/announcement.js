@@ -4,21 +4,49 @@ var globals = require("gen").globals;
 
 var announcement = module.exports = {};
 var tripapi = require("../schoolapi/tripapi.js");
+var sms_email = require("../schoolapi/sendsms_email.js");
 
 announcement.saveAnnouncement = function saveAnnouncement(req, res, done) {
     db.callFunction("select " + globals.erpschema("funsave_announcement") + "($1::json);", [req.body], function(data) {
         rs.resp(res, 200, data.rows);
 
-        var _dtr = {
+        var _anncdata = data.rows[0].funsave_announcement;
+
+        // Send Notification
+
+        var _notification = {
             "flag": "parents_notification",
             "title": req.body.title,
             "body": req.body.desc,
-            "parentsid": data.rows[0].funsave_announcement.parentsid
+            "parentsid": _anncdata.prntids
         }
 
-        console.log(_dtr);
+        tripapi.sendNotification(_notification);
 
-        tripapi.sendNotification(_dtr);
+        // Send Email And SMS
+
+        var _uphone = _anncdata.uphone;
+        var _uemail = _anncdata.uemail;
+        var _anncdate = _anncdata.anncdate;
+
+        var _title = "Announement - " + req.body.title;
+        var _msg = req.body.desc + " at, " + _anncdate;
+
+        var params = {
+            "sms_to": _uphone,
+            "sms_body": _title + " : " + _msg,
+            "mail_to": _uemail,
+            "mail_subject": _title,
+            "mail_body": _msg
+        };
+
+        if (req.body.issendsms == true) {
+            sms_email.sendEmailAndSMS(params, _uphone, _uemail, "sms");
+        }
+
+        if (req.body.issendemail == true) {
+            sms_email.sendEmailAndSMS(params, _uphone, _uemail, "email");
+        }
     }, function(err) {
         rs.resp(res, 401, "error : " + err);
     })

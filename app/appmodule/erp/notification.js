@@ -12,7 +12,7 @@ notification.saveNotification = function saveNotification(req, res, done) {
 
         var _ntfdata = data.rows[0].funsave_notification;
 
-        // Parents Notification
+        // Send Parents Notification
 
         var _prntntf = {
             "flag": "parents_notification",
@@ -23,7 +23,7 @@ notification.saveNotification = function saveNotification(req, res, done) {
 
         tripapi.sendNotification(_prntntf);
 
-        // Teacher Notification
+        // Send Teacher Notification
 
         var _tchrntf = {
             "flag": "notification",
@@ -33,6 +33,8 @@ notification.saveNotification = function saveNotification(req, res, done) {
         }
 
         tripapi.sendNotification(_tchrntf);
+
+        // Send Email And SMS
 
         var _uphone = _ntfdata.uphone;
         var _uemail = _ntfdata.uemail;
