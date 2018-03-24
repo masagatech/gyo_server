@@ -50,16 +50,10 @@
                     IMEI
                 </th>
                 <th align="center">
-                    From Date
-                </th>
-                <th align="center">
-                    To Date
+                    Date
                 </th>
                 <th align="right">
-                    Max Speed
-                </th>
-                <th align="right">
-                    Milege
+                    Count
                 </th>
             </tr>
         </thead>
@@ -71,28 +65,19 @@
                     <small>{{_id.vhid}}</small>
                 </td>
                 <td width="100px" align="center">
-                    {{{formatDate frmdate "short"}}}
-                </td>
-                <td width="100px" align="center">
-                    {{{formatDate todate "short"}}}
+                    {{{formatDate _id.date "short"}}}
                 </td>
                 <td width="100px" align="right">
-                    {{maxspd}}
-                </td>
-                <td width="150px" align="right">
-                    {{{formatnumber milege}}}
+                    {{count}}
                 </td>
             </tr>
             {{/data}}
         </tbody>
         <tfoot>
             <tr>
-                <td colspan="3" align="right">Total</td>
+                <td colspan="2" align="right">Total</td>
                 <td align="right">
-                    {{{maxspd_total}}}
-                </td>
-                <td align="right">
-                    {{{milege_total}}}
+                    {{{count_total}}}
                 </td>
             </tr>
         </tfoot>

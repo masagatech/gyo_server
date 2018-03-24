@@ -11,7 +11,8 @@ reports.getSpeedReports = function getSpeedReports(data) {
     var DateFormats = {
         short: "DD/MMM/YYYY",
         medium: "DD MMMM - YYYY",
-        long: "dddd DD.MM.YYYY HH:mm"
+        long: "dddd DD.MM.YYYY HH:mm",
+        withtime: "DD/MMM/YYYY HH:mm"
     };
 
     _hndlbar.registerHelper("formatDate", function(datetime, format) {
@@ -33,6 +34,52 @@ reports.getSpeedReports = function getSpeedReports(data) {
         }
 
         return totcount;
+    });
+
+    _hndlbar.registerHelper('speed_total', function(params) {
+        var totspeed = 0;
+
+        for (var i = 0; i < speeddt.length; i++) {
+            var _d = speeddt[i];
+
+            totspeed += _d.speed;
+        }
+
+        return totspeed;
+    });
+
+    _hndlbar.registerHelper('alwspeed_total', function(params) {
+        var totalwspeed = 0;
+
+        for (var i = 0; i < speeddt.length; i++) {
+            var _d = speeddt[i];
+
+            totalwspeed += _d.alwspeed;
+        }
+
+        return totalwspeed;
+    });
+
+    _hndlbar.registerHelper('distance', function(params) {
+        var distance = 0;
+
+        distance = parseFloat(params.speed) - parseFloat(params.alwspeed);
+
+        return distance;
+    });
+
+    _hndlbar.registerHelper('distance_total', function(params) {
+        var totspeed = 0;
+        var totalwspeed = 0;
+
+        for (var i = 0; i < speeddt.length; i++) {
+            var _d = speeddt[i];
+
+            totspeed += _d.speed;
+            totalwspeed += _d.alwspeed;
+        }
+
+        return parseFloat(totspeed) - parseFloat(totalwspeed);
     });
 
     _hndlbar.registerHelper('showdata', function(params) {

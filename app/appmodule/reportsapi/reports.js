@@ -9,6 +9,7 @@ var http = require('http');
 var request = require('request');
 
 var rptmilegeapi = require("../../reports/templates/milege/milege.js");
+
 var rptspeedapi = require("../../reports/templates/speed/speed.js");
 
 var reports = module.exports = {};
@@ -18,6 +19,7 @@ reports.getReports = function getReports(req, res, done) {
     var arrvhid = new Array();
     arrvhid = vhid.split(",");
 
+    var flag = req.query.flag;
     var rpttype = req.query.rpttype;
     var frmdt = req.query.frmdt + "T00:00:00+05:30";
     var todt = req.query.todt + "T00:00:00+05:30";
@@ -30,7 +32,7 @@ reports.getReports = function getReports(req, res, done) {
                     "vhid": arrvhid,
                     "frmdt": frmdt,
                     "todate": todt,
-                    "type": req.query.flag == "summary" ? "" : "datewise"
+                    "type": flag == "summary" ? "" : "details"
                 }
             }
         },
@@ -41,9 +43,15 @@ reports.getReports = function getReports(req, res, done) {
                         data: data.data == null ? [] : data.data
                     }, { 'all': 'milege/milege.html' }, rptmilegeapi.getMilegeReports);
                 } else {
-                    download(req, res, {
-                        data: data.data == null ? [] : data.data
-                    }, { 'all': 'speed/speed.html' }, rptspeedapi.getSpeedReports);
+                    if (flag == "summary") {
+                        download(req, res, {
+                            data: data.data == null ? [] : data.data
+                        }, { 'all': 'speed/summary.html' }, rptspeedapi.getSpeedReports);
+                    } else {
+                        download(req, res, {
+                            data: data.data == null ? [] : data.data
+                        }, { 'all': 'speed/details.html' }, rptspeedapi.getSpeedReports);
+                    }
                 }
             } else {
                 rs.resp(res, 200, data.data);

@@ -11,7 +11,7 @@
             border: 1px solid rgba(204, 204, 204, 0.35);
         }
         
-        table>thead {
+        table th {
             background: #009688;
             color: #ffffff;
             padding: 5px;
@@ -46,29 +46,41 @@
     <table class="{{{showdata}}}" border="1" cellspacing="0" cellpadding="5">
         <thead>
             <tr>
-                <td>
-                    IMEI
-                </td>
-                <td align="center">
-                    Date
-                </td>
-                <td align="right">
-                    Count
-                </td>
+                <th align="right">
+                    Vehicle
+                </th>
+                <th align="center">
+                    Time
+                </th>
+                <th>
+                    Allow Speed (KM/H)
+                </th>
+                <th align="right">
+                    Speed (KM/H)
+                </th>
+                <th align="right">
+                    Difference
+                </th>
             </tr>
         </thead>
         <tbody>
             {{#data}}
             <tr>
-                <td width="150px">
+                <td width="100px">
                     {{vhname.[0].vhname}}
-                    <small>{{_id.vhid}}</small>
+                    <small>{{vhid}}</small>
                 </td>
                 <td width="100px" align="center">
-                    {{{formatDate _id.date "short"}}}
+                    {{{formatDate sertm "withtime"}}}
                 </td>
                 <td width="100px" align="right">
-                    {{count}}
+                    {{alwspeed}}
+                </td>
+                <td width="100px" align="right">
+                    {{speed}}
+                </td>
+                <td width="100px" align="right">
+                    {{{distance this}}}
                 </td>
             </tr>
             {{/data}}
@@ -77,7 +89,13 @@
             <tr>
                 <td colspan="2" align="right">Total</td>
                 <td align="right">
-                    {{{count_total}}}
+                    {{{alwspeed_total}}}
+                </td>
+                <td align="right">
+                    {{{speed_total}}}
+                </td>
+                <td align="right">
+                    {{{distance_total}}}
                 </td>
             </tr>
         </tfoot>
