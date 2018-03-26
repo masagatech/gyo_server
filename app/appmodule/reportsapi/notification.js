@@ -15,6 +15,7 @@ notification.getNotification = function getNotification(req, res, done) {
             if (req.query.type == "manual") {
                 download(req, res, {
                     data: data.rows,
+                    data1: data.rows[0],
                     params: req.query
                 }, { 'all': 'notification/manual.html' }, rptntfapi.getNotificationReports);
             } else if (req.query.type == "system") {

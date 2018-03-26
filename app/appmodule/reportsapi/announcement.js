@@ -14,6 +14,7 @@ announcement.getAnnouncement = function getAnnouncement(req, res, done) {
         if (req.query.flag == "reports") {
             download(req, res, {
                 data: data.rows,
+                data1: data.rows[0],
                 params: req.query
             }, { 'all': 'announcement/announcement.html' }, rptanncapi.getAnnouncementReports);
         } else {
