@@ -3,12 +3,12 @@ var reports = module.exports = {};
 
 reports.getNotificationReports = function getNotificationReports(data) {
     var _hndlbar = Handlebars;
-    var mileagedt = data.data;
+    var notificationdt = data.data;
 
     var col_total = [];
 
     _hndlbar.registerHelper('showdata', function(params) {
-        if (mileagedt.length == 0) {
+        if (notificationdt.length == 0) {
             return "hide";
         } else {
             return "show";
@@ -16,7 +16,7 @@ reports.getNotificationReports = function getNotificationReports(data) {
     });
 
     _hndlbar.registerHelper('emptydatamsg', function(params) {
-        if (mileagedt.length == 0) {
+        if (notificationdt.length == 0) {
             return "No Data Found";
         } else {
             return "";
