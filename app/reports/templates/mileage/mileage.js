@@ -2,9 +2,9 @@ var Handlebars = require('handlebars');
 var moment = require('moment');
 var reports = module.exports = {};
 
-reports.getMilegeReports = function getMilegeReports(data) {
+reports.getMileageReports = function getMileageReports(data) {
     var _hndlbar = Handlebars;
-    var milegedt = data.data;
+    var mileagedt = data.data;
 
     var col_total = [];
 
@@ -26,8 +26,8 @@ reports.getMilegeReports = function getMilegeReports(data) {
     _hndlbar.registerHelper('maxspd_total', function(params) {
         var totmaxspd = 0;
 
-        for (var i = 0; i < milegedt.length; i++) {
-            var _d = milegedt[i];
+        for (var i = 0; i < mileagedt.length; i++) {
+            var _d = mileagedt[i];
 
             totmaxspd += _d.maxspd;
         }
@@ -35,20 +35,20 @@ reports.getMilegeReports = function getMilegeReports(data) {
         return totmaxspd;
     });
 
-    _hndlbar.registerHelper('milege_total', function(params) {
-        var totmilege = 0;
+    _hndlbar.registerHelper('mileage_total', function(params) {
+        var totmileage = 0;
 
-        for (var i = 0; i < milegedt.length; i++) {
-            var _d = milegedt[i];
+        for (var i = 0; i < mileagedt.length; i++) {
+            var _d = mileagedt[i];
 
-            totmilege += _d.milege;
+            totmileage += _d.mileage;
         }
 
-        return totmilege.toFixed(2);
+        return totmileage.toFixed(2);
     });
 
     _hndlbar.registerHelper('showdata', function(params) {
-        if (milegedt.length == 0) {
+        if (mileagedt.length == 0) {
             return "hide";
         } else {
             return "show";
@@ -56,7 +56,7 @@ reports.getMilegeReports = function getMilegeReports(data) {
     });
 
     _hndlbar.registerHelper('emptydatamsg', function(params) {
-        if (milegedt.length == 0) {
+        if (mileagedt.length == 0) {
             return "No Data Found";
         } else {
             return "";

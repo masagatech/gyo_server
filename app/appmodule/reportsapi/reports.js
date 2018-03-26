@@ -8,7 +8,7 @@ var download = gen.download;
 var http = require('http');
 var request = require('request');
 
-var rptmilegeapi = require("../../reports/templates/milege/milege.js");
+var rptmileageapi = require("../../reports/templates/mileage/mileage.js");
 
 var rptspeedapi = require("../../reports/templates/speed/speed.js");
 
@@ -38,10 +38,10 @@ reports.getReports = function getReports(req, res, done) {
         },
         function(error, response, data) {
             if (req.query.vwtype == "download") {
-                if (rpttype == "milege") {
+                if (rpttype == "mileage") {
                     download(req, res, {
                         data: data.data == null ? [] : data.data
-                    }, { 'all': 'milege/milege.html' }, rptmilegeapi.getMilegeReports);
+                    }, { 'all': 'mileage/mileage.html' }, rptmileageapi.getMileageReports);
                 } else {
                     if (flag == "summary") {
                         download(req, res, {

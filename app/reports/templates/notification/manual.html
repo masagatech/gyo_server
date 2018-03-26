@@ -1,0 +1,110 @@
+<html>
+
+<head>
+    <meta charset="utf-8" />
+
+    <style>
+        table {
+            border-collapse: collapse;
+            font-size: 12px;
+            width: 100%;
+            border: 1px solid rgba(204, 204, 204, 0.35);
+        }
+        
+        table thead th {
+            background: #009688;
+            color: #ffffff;
+            padding: 5px;
+            text-align: left;
+            vertical-align: top;
+        }
+        
+        table tbody th {
+            background-color: #eeeeee;
+            color: #000000;
+            padding: 5px;
+            text-align: left;
+            vertical-align: top;
+        }
+        
+        table td {
+            padding: 5px;
+            vertical-align: top;
+        }
+        
+        .show {
+            display: inline-table!important;
+        }
+        
+        .hide {
+            display: none!important;
+        }
+    </style>
+</head>
+
+<body>
+    <h4 align="center">{{{emptydatamsg}}}</h4>
+
+    <table class="{{{showdata}}}" border="1" cellspacing="0" cellpadding="5">
+        <thead>
+            <tr>
+                <th>
+                    Date
+                </th>
+                <th>
+                    Title
+                </th>
+                <th>
+                    Group
+                </th>
+                <th>
+                    For Send
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#data}}
+            <tr>
+                <th width="150px">
+                    {{createddate}}
+                </th>
+                <th width="250px">
+                    {{title}}
+                </th>
+                <th width="250px">
+                    {{grpname}}
+                </th>
+                <th>
+                    {{sendtype}}
+                </th>
+            </tr>
+            <tr>
+                <td>
+                    <b>Standard</b>
+                </td>
+                <td colspan="3">
+                    {{standard}}
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <b>Teacher</b>
+                </td>
+                <td colspan="3">
+                    {{teacher}}
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <b>Message</b>
+                </td>
+                <td colspan="3">
+                    {{msg}}
+                </td>
+            </tr>
+            {{/data}}
+        </tbody>
+    </table>
+</body>
+
+</html>
