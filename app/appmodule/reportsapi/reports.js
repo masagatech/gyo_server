@@ -27,7 +27,7 @@ reports.getReports = function getReports(req, res, done) {
     request.post(
         globals.serverapiurl, {
             json: {
-                "reporttyp": rpttype,
+                "reporttyp": rpttype == "mileage" ? "milege" : rpttype,
                 "params": {
                     "vhid": arrvhid,
                     "frmdt": frmdt,

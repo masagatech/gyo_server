@@ -41,7 +41,7 @@ reports.getMileageReports = function getMileageReports(data) {
         for (var i = 0; i < mileagedt.length; i++) {
             var _d = mileagedt[i];
 
-            totmileage += _d.mileage;
+            totmileage += _d.milege;
         }
 
         return totmileage.toFixed(2);
