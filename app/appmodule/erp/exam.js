@@ -122,7 +122,7 @@ exam.saveExamResult = function saveExamResult(req, res, done) {
             _msg += "<p>Standard : " + _classname + "</p>";
 
             _msg += "<a href='" + globals.reporturl + "/downloadExamResult?flag=studentwise&ayid=" + req.body.ayid + "&smstrid=" + req.body.smstrid +
-                "&classid=" + req.body.clsid + "&studid=" + req.body.studid + "&enttid=" + req.body.enttid + "&wsautoid=" + req.body.wsautoid + "&format=xls" +
+                "&classid=" + req.body.clsid + "&studid=" + req.body.studid + "&enttid=" + req.body.enttid + "&wsautoid=" + req.body.wsautoid + "&format=pdf" +
                 "' style='background: #009688;color: #ffffff;padding: 5px;text-align: center;font-size: 13px;vertical-align: middle;text-decoration: none;'>" +
                 "Download Exam Result" + "</a>";
 
