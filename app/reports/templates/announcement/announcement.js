@@ -26,7 +26,7 @@ reports.getAnnouncementReports = function getAnnouncementReports(data) {
     });
 
     _hndlbar.registerHelper('groupName', function(params) {
-        if (notificationdt.length == 0) {
+        if (announcementdt.length == 0) {
             return "";
         } else {
             if (dparams.grpid == 0) {
@@ -41,7 +41,11 @@ reports.getAnnouncementReports = function getAnnouncementReports(data) {
         if (announcementdt.length == 0) {
             return "hide";
         } else {
-            return "show";
+            if (headerdt.anncid == 0) {
+                return "hide";
+            } else {
+                return "show";
+            }
         }
     });
 
@@ -49,7 +53,11 @@ reports.getAnnouncementReports = function getAnnouncementReports(data) {
         if (announcementdt.length == 0) {
             return "No Data Found";
         } else {
-            return "";
+            if (headerdt.anncid == 0) {
+                return "No Data Found";
+            } else {
+                return "";
+            }
         }
     });
 

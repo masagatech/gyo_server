@@ -41,7 +41,11 @@ reports.getNotificationReports = function getNotificationReports(data) {
         if (notificationdt.length == 0) {
             return "hide";
         } else {
-            return "show";
+            if (headerdt.ntfid == 0) {
+                return "hide";
+            } else {
+                return "show";
+            }
         }
     });
 
@@ -49,7 +53,11 @@ reports.getNotificationReports = function getNotificationReports(data) {
         if (notificationdt.length == 0) {
             return "No Data Found";
         } else {
-            return "";
+            if (headerdt.ntfid == 0) {
+                return "No Data Found";
+            } else {
+                return "";
+            }
         }
     });
 
