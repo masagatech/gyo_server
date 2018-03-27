@@ -1,0 +1,111 @@
+<html>
+
+<head>
+    <meta charset="utf-8" />
+
+    <style>
+        table {
+            border-collapse: collapse;
+            font-size: 12px;
+            width: 100%;
+            border: 1px solid rgba(204, 204, 204, 0.35);
+        }
+        
+        table thead th {
+            background: #009688;
+            color: #ffffff;
+            padding: 5px;
+            text-align: left;
+            vertical-align: top;
+        }
+        
+        .table td {
+            padding: 5px;
+            vertical-align: top;
+        }
+    </style>
+</head>
+
+<body>
+    {{#data1}}
+    <h2 align="center">Exam Result : {{smstrname}}</h2>
+    <h4 align="center">{{studname}} (Roll No : {{rollno}})</h4>
+    <h4 align="center">Standard : {{classname}}</h4>
+    {{/data1}}
+
+    <table border="1" cellspacing="0" cellpadding="5">
+        <thead>
+            <tr>
+                <th width="100px">
+                    Exam Date
+                </th>
+                <th width="150px">
+                    Exam Time
+                </th>
+                <th width="150px">
+                    Subject
+                </th>
+                <th width="50px">
+                    Marks
+                </th>
+                <th width="100px">
+                    Passing Marks
+                </th>
+                <th width="100px">
+                    Out Of Marks
+                </th>
+                <th width="100px">
+                    Status
+                </th>
+                <th>
+                    Remark
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#data}}
+            <tr>
+                <td>
+                    {{examdate}}
+                </td>
+                <td>
+                    {{examtime}}
+                </td>
+                <td>
+                    {{subname}}
+                </td>
+                <td align="right">
+                    {{marks}}
+                </td>
+                <td align="right">
+                    {{passmarks}}
+                </td>
+                <td align="right">
+                    {{outofmarks}}
+                </td>
+                <td>
+                    {{status}}
+                </td>
+                <td>
+                    {{remark}}
+                </td>
+            </tr>
+            {{/data}}
+            <tr>
+                <td colspan="3" align="right">
+                    <b>Total</b>
+                </td>
+                <td width="40px" align="right">
+                    {{{marks_total}}}
+                </td>
+                <td colspan="2" align="right">
+                    {{{outofmarks_total}}}
+                </td>
+                <td colspan="2">
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+
+</html>

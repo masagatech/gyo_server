@@ -7,6 +7,7 @@ var download = gen.download;
 
 var exam = module.exports = {};
 var common = require("../schoolapi/common.js");
+var sms_email = require("../schoolapi/sendsms_email.js");
 
 // Exam
 
@@ -102,6 +103,39 @@ exam.bulkUploadExamResult = function bulkUploadExamResult(req, res, result, call
 exam.saveExamResult = function saveExamResult(req, res, done) {
     db.callFunction("select " + globals.erpschema("funsave_examresult") + "($1::json);", [req.body], function(data) {
         rs.resp(res, 200, data.rows);
+
+        if (req.body.issendemail == true) {
+            var _examdata = data.rows[0].funsave_examresult;
+
+            var _uphone = _examdata.uphone;
+            var _uemail = _examdata.uemail;
+            var _studname = _examdata.studname;
+            var _rollno = _examdata.rollno;
+            var _classname = _examdata.classname;
+
+            var _title = "Exam Result : " + _studname;
+            var _msg = "";
+
+            _msg += "<p>View Exam Result of " + req.body.examtype + " for your child.</p>";
+            _msg += "<p>Name : " + _studname + "</p>";
+            _msg += "<p>Roll No : " + _rollno + "</p>";
+            _msg += "<p>Standard : " + _classname + "</p>";
+
+            _msg += "<a href='" + globals.reporturl + "/downloadExamResult?flag=studentwise&ayid=" + req.body.ayid + "&smstrid=" + req.body.smstrid +
+                "&classid=" + req.body.clsid + "&studid=" + req.body.studid + "&enttid=" + req.body.enttid + "&wsautoid=" + req.body.wsautoid + "&format=xls" +
+                "' style='background: #009688;color: #ffffff;padding: 5px;text-align: center;font-size: 13px;vertical-align: middle;text-decoration: none;'>" +
+                "Download Exam Result" + "</a>";
+
+            var params = {
+                "sms_to": _uphone,
+                "sms_body": _msg,
+                "mail_to": _uemail,
+                "mail_subject": _title,
+                "mail_body": _msg
+            };
+
+            sms_email.sendEmailAndSMS(params, _uphone, _uemail, "email");
+        }
     }, function(err) {
         rs.resp(res, 401, "error : " + err);
     })
