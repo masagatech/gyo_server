@@ -41,8 +41,12 @@ reports.getNotificationReports = function getNotificationReports(data) {
         if (notificationdt.length == 0) {
             return "hide";
         } else {
-            if (headerdt.ntfid == 0) {
-                return "hide";
+            if (dparams.type == "manual") {
+                if (headerdt.ntfid == 0) {
+                    return "hide";
+                } else {
+                    return "show";
+                }
             } else {
                 return "show";
             }
@@ -53,8 +57,12 @@ reports.getNotificationReports = function getNotificationReports(data) {
         if (notificationdt.length == 0) {
             return "No Data Found";
         } else {
-            if (headerdt.ntfid == 0) {
-                return "No Data Found";
+            if (dparams.type == "manual") {
+                if (headerdt.ntfid == 0) {
+                    return "No Data Found";
+                } else {
+                    return "";
+                }
             } else {
                 return "";
             }
