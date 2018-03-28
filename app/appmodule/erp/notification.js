@@ -41,6 +41,7 @@ notification.saveNotification = function saveNotification(req, res, done) {
 
         var _title = req.body.title;
         var _msg = req.body.msg;
+        var _attachments = [];
 
         var params = {
             "sms_to": _uphone,
@@ -51,11 +52,11 @@ notification.saveNotification = function saveNotification(req, res, done) {
         };
 
         if (req.body.issendsms == true) {
-            sms_email.sendEmailAndSMS(params, _uphone, _uemail, "sms");
+            sms_email.sendEmailAndSMS(params, _uphone, _uemail, _attachments, "sms");
         }
 
         if (req.body.issendemail == true) {
-            sms_email.sendEmailAndSMS(params, _uphone, _uemail, "email");
+            sms_email.sendEmailAndSMS(params, _uphone, _uemail, _attachments, "email");
         }
     }, function(err) {
         rs.resp(res, 401, "error : " + err);

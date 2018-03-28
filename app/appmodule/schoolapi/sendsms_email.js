@@ -32,7 +32,7 @@ function sendSMS(_sms_username, _sms_password, _sms_sendername, _to, _msg) {
 
 // Send Email
 
-function sendEmail(_mail_via, _mail_smtp_host, _mail_smtp_port, _mail_smtp_username, _mail_smtp_password, _mail_from_name, _mail_from_email, _to, _subject, _msg) {
+function sendEmail(_mail_via, _mail_smtp_host, _mail_smtp_port, _mail_smtp_username, _mail_smtp_password, _mail_from_name, _mail_from_email, _to, _subject, _msg, _attachments) {
     let transporter = nodemailer.createTransport({
         service: _mail_via,
         host: _mail_smtp_host,
@@ -50,6 +50,7 @@ function sendEmail(_mail_via, _mail_smtp_host, _mail_smtp_port, _mail_smtp_usern
         from: '"' + _mail_from_name + ' " <' + _mail_from_email + '>',
         subject: _subject,
         html: _msg,
+        attachments: _attachments,
         text: '',
     };
 
@@ -66,7 +67,7 @@ function sendEmail(_mail_via, _mail_smtp_host, _mail_smtp_port, _mail_smtp_usern
 
 // Send SMS / Email
 
-sms_email.sendEmailAndSMS = function sendEmailAndSMS(_data, _sms_to, _mail_to, _send_type, res) {
+sms_email.sendEmailAndSMS = function sendEmailAndSMS(_data, _sms_to, _mail_to, _attachments, _send_type, res) {
     db.callProcedure("select " + globals.schema("funget_emailsms_setting") + "($1,$2::json);", ['es', _data], function(data) {
         var dstr = JSON.stringify(data.rows[0]);
         var d = JSON.parse(dstr);
@@ -96,7 +97,7 @@ sms_email.sendEmailAndSMS = function sendEmailAndSMS(_data, _sms_to, _mail_to, _
             var _mail_subject = d.subject;
             var _mail_body = d.mail_body;
 
-            sendEmail(_mail_via, _mail_smtp_host, _mail_smtp_port, _mail_smtp_username, _mail_smtp_password, _mail_from_name, _mail_from_email, _mail_to, _mail_subject, _mail_body);
+            sendEmail(_mail_via, _mail_smtp_host, _mail_smtp_port, _mail_smtp_username, _mail_smtp_password, _mail_from_name, _mail_from_email, _mail_to, _mail_subject, _mail_body, _attachments);
         }
     }, function(err) {
         rs.resp(res, 401, "error : " + err);

@@ -115,16 +115,18 @@ exam.saveExamResult = function saveExamResult(req, res, done) {
 
             var _title = "Exam Result : " + _studname;
             var _msg = "";
+            var _path = "";
+            var _attachments = [];
 
-            _msg += "<p>View Exam Result of " + req.body.examtype + " for your child.</p>";
             _msg += "<p>Name : " + _studname + "</p>";
             _msg += "<p>Roll No : " + _rollno + "</p>";
             _msg += "<p>Standard : " + _classname + "</p>";
+            _msg += "<p>See, Attachment File, Exam Result of " + req.body.examtype + " for your child.</p>";
 
-            _msg += "<a href='" + globals.reporturl + "/downloadExamResult?flag=studentwise&ayid=" + req.body.ayid + "&smstrid=" + req.body.smstrid +
-                "&classid=" + req.body.clsid + "&studid=" + req.body.studid + "&enttid=" + req.body.enttid + "&wsautoid=" + req.body.wsautoid + "&format=pdf" +
-                "' style='background: #009688;color: #ffffff;padding: 5px;text-align: center;font-size: 13px;vertical-align: middle;text-decoration: none;'>" +
-                "Download Exam Result" + "</a>";
+            _path = globals.reporturl + "/downloadExamResult?flag=studentwise&ayid=" + req.body.ayid + "&smstrid=" + req.body.smstrid +
+                "&classid=" + req.body.clsid + "&studid=" + req.body.studid + "&enttid=" + req.body.enttid + "&wsautoid=" + req.body.wsautoid + "&format=pdf";
+
+            var _attachments = [{ "filename": "Exam Result.pdf", "path": _path, contentType: 'application/pdf' }];
 
             var params = {
                 "sms_to": _uphone,
@@ -134,7 +136,7 @@ exam.saveExamResult = function saveExamResult(req, res, done) {
                 "mail_body": _msg
             };
 
-            sms_email.sendEmailAndSMS(params, _uphone, _uemail, "email");
+            sms_email.sendEmailAndSMS(params, _uphone, _uemail, _attachments, "email");
         }
     }, function(err) {
         rs.resp(res, 401, "error : " + err);

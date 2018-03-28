@@ -1,7 +1,11 @@
 var global = module.exports = {};
 
 global.serverapiurl = "http://35.154.114.229:6979/goyoapi/tripapi/report";
+
+global.uploadurl = "http://localhost:8082/images";
 global.reporturl = "http://localhost:8085";
+
+// global.uploadurl = "http://school.goyo.in:8082/images";
 // global.reporturl = "http://school.goyo.in:8085";
 
 // database settings
