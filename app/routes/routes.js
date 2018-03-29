@@ -210,6 +210,7 @@ var appRouter = function(app) {
 
     //##################################### Pick and Drop ####################################################
 
+    app.get(globals.globvar.rootAPI + "/saveTrackingInfo", pickdrop.saveTrackingInfo);
     app.post(globals.globvar.rootAPI + "/savePickDropInfo", pickdrop.savePickDropInfo);
     app.post(globals.globvar.rootAPI + "/getPickDropDetails", pickdrop.getPickDropDetails);
 

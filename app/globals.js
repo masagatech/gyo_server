@@ -1,6 +1,7 @@
 var global = module.exports = {};
 
 global.serverapiurl = "http://35.154.114.229:6979/goyoapi/tripapi/report";
+global.geofenceapiurl = "http://35.154.114.229:6979/goyoapi/tripapi/createGeoFence";
 
 global.uploadurl = "http://localhost:8082/images";
 global.reporturl = "http://localhost:8085";

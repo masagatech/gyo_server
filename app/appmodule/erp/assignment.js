@@ -34,7 +34,13 @@ assignment.saveAssignmentInfo = function saveAssignmentInfo(req, res, done) {
 
             var _title = req.body.title;
             var _msg = req.body.msg;
-            var _attachments = [{ "filename": _title + "." + _fileext, "path": globals.uploadurl + req.body.uploadassnm }];
+            var _attachments;
+
+            if (req.body.uploadassnm == undefined || req.body.uploadassnm == "") {
+                _attachments = [];
+            } else {
+                _attachments = [{ "filename": _title + "." + _fileext, "path": globals.uploadurl + "/" + req.body.uploadassnm }];
+            }
 
             var params = {
                 "sms_to": _uphone,
@@ -43,6 +49,8 @@ assignment.saveAssignmentInfo = function saveAssignmentInfo(req, res, done) {
                 "mail_subject": _title,
                 "mail_body": _msg
             };
+
+            console.log(params);
 
             sms_email.sendEmailAndSMS(params, _uphone, _uemail, _attachments, "email");
         }
@@ -71,8 +79,8 @@ assignment.saveTeacherRemark = function saveTeacherRemark(req, res, done) {
 
         var _prntntf = {
             "flag": "parents_notification",
-            "title": req.body.title,
-            "body": req.body.msg,
+            "title": "Teacher Remark",
+            "body": req.body.remark,
             "prntids": _ntfdata.prntids
         }
 

@@ -6,7 +6,9 @@ var globals = gen.globals;
 var download = gen.download;
 
 var exam = module.exports = {};
+
 var common = require("../schoolapi/common.js");
+var tripapi = require("../schoolapi/tripapi.js");
 var sms_email = require("../schoolapi/sendsms_email.js");
 
 // Exam
@@ -107,16 +109,29 @@ exam.saveExamResult = function saveExamResult(req, res, done) {
         if (req.body.issendemail == true) {
             var _examdata = data.rows[0].funsave_examresult;
 
-            var _uphone = _examdata.uphone;
-            var _uemail = _examdata.uemail;
-            var _studname = _examdata.studname;
-            var _rollno = _examdata.rollno;
-            var _classname = _examdata.classname;
+            // Send Parents Notification
+
+            var _prntntf = {
+                "flag": "parents_notification",
+                "title": "Exam Result : " + _examdata.studname,
+                "body": _examdata.ntfmsg,
+                "prntids": _examdata.prntids
+            }
+
+            tripapi.sendNotification(_prntntf);
+
+            // Send Parents Email
 
             var _title = "Exam Result : " + _studname;
             var _msg = "";
             var _path = "";
             var _attachments = [];
+
+            var _uphone = _examdata.uphone;
+            var _uemail = _examdata.uemail;
+            var _studname = _examdata.studname;
+            var _rollno = _examdata.rollno;
+            var _classname = _examdata.classname;
 
             _msg += "<p>Name : " + _studname + "</p>";
             _msg += "<p>Roll No : " + _rollno + "</p>";
