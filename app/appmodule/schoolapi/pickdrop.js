@@ -16,10 +16,22 @@ pidr.savePickDropInfo = function savePickDropInfo(req, res, done) {
     })
 }
 
+function saveTrackingData(req, res, result, callback) {
+    db.callFunction("select " + globals.schema("funsave_trackinginfo") + "($1::json);", [req], function(data) {
+        callback(data.rows);
+    }, function(err) {
+        callback("error : " + err);
+    })
+}
+
 pidr.saveTrackingInfo = function saveTrackingInfo(req, res, done) {
+    var result = [];
+
     var params = {
         "flag": "tracking",
         "batchid": req.query.batchid,
+        "pdrvid": req.query.pdrvid,
+        "ddrvid": req.query.ddrvid,
         "pvehid": req.query.pvehid,
         "dvehid": req.query.dvehid,
         "prtid": req.query.prtid,
@@ -28,7 +40,6 @@ pidr.saveTrackingInfo = function saveTrackingInfo(req, res, done) {
     }
 
     db.callProcedure("select " + globals.schema("funget_pickdropdetails") + "($1,$2::json);", ['pd', params], function(data) {
-        // rs.resp(res, 200, data.rows);
         console.log(data.rows);
 
         request.post(
@@ -38,7 +49,20 @@ pidr.saveTrackingInfo = function saveTrackingInfo(req, res, done) {
                 }
             },
             function(error, response, _data) {
-                rs.resp(res, 200, response.body);
+                // rs.resp(res, 200, _data.data);
+
+                result = _data.data;
+
+                var dparams = {
+                    "enttid": req.query.enttid,
+                    "wsautoid": req.query.wsautoid,
+                    "cuid": req.query.cuid,
+                    "trackingdata": result
+                };
+
+                saveTrackingData(dparams, res, result, function(data) {
+                    res.json({ status: 1, message: "Done", data: data });
+                });
             },
             function(err) {
                 rs.resp(res, 401, "error : " + err);

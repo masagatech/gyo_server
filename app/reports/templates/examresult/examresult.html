@@ -27,11 +27,11 @@
 </head>
 
 <body>
-    {{#data1}}
+    {{#data}}
     <h2 align="center">Exam Result : {{smstrname}}</h2>
-    <h4 align="center">{{studname}} (Roll No : {{rollno}})</h4>
+    <h4 align="center">{{studentname}} - (Roll No : {{rollno}})</h4>
     <h4 align="center">Standard : {{classname}}</h4>
-    {{/data1}}
+    {{/data}}
 
     <table border="1" cellspacing="0" cellpadding="5">
         <thead>
@@ -63,7 +63,7 @@
             </tr>
         </thead>
         <tbody>
-            {{#data}}
+            {{#data1}}
             <tr>
                 <td>
                     {{examdate}}
@@ -90,20 +90,25 @@
                     {{remark}}
                 </td>
             </tr>
-            {{/data}}
+            {{/data1}} {{#data}}
             <tr>
                 <td colspan="3" align="right">
                     <b>Total</b>
                 </td>
                 <td width="40px" align="right">
-                    {{{marks_total}}}
+                    {{totmarks}}
                 </td>
                 <td colspan="2" align="right">
-                    {{{outofmarks_total}}}
+                    {{totoutofmarks}}
                 </td>
-                <td colspan="2">
+                <td>
+                    <b>{{status}}</b>
+                </td>
+                <td>
+                    <b>Percent : </b> {{percent}} %
                 </td>
             </tr>
+            {{/data}}
         </tbody>
     </table>
 </body>

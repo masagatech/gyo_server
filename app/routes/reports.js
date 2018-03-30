@@ -15,4 +15,5 @@ module.exports = function(app) {
     app.get("/getAnnouncement", announcement.getAnnouncement);
 
     app.get("/downloadExamResult", exam.downloadExamResult);
+    app.get("/getExamResultReports", exam.getExamResultReports);
 }
