@@ -40,8 +40,6 @@ pidr.saveTrackingInfo = function saveTrackingInfo(req, res, done) {
     }
 
     db.callProcedure("select " + globals.schema("funget_pickdropdetails") + "($1,$2::json);", ['pd', params], function(data) {
-        console.log(data.rows);
-
         request.post(
             globals.geofenceapiurl, {
                 json: {
