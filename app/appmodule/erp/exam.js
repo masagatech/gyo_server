@@ -122,7 +122,7 @@ exam.saveExamResult = function saveExamResult(req, res, done) {
 
             // Send Parents Email
 
-            var _title = "Exam Result : " + _studname;
+            var _title = "";
             var _msg = "";
             var _path = "";
             var _attachments = [];
@@ -133,12 +133,14 @@ exam.saveExamResult = function saveExamResult(req, res, done) {
             var _rollno = _examdata.rollno;
             var _classname = _examdata.classname;
 
+            _title = "Exam Result : " + _studname;
+
             _msg += "<p>Name : " + _studname + "</p>";
             _msg += "<p>Roll No : " + _rollno + "</p>";
             _msg += "<p>Standard : " + _classname + "</p>";
             _msg += "<p>See, Attachment File, Exam Result of " + req.body.examtype + " for your child.</p>";
 
-            _path = globals.reporturl + "/downloadExamResult?flag=studentwise&ayid=" + req.body.ayid + "&smstrid=" + req.body.smstrid +
+            _path = globals.reporturl + "/getExamResultReports?flag=studentwise&ayid=" + req.body.ayid + "&smstrid=" + req.body.smstrid +
                 "&classid=" + req.body.clsid + "&studid=" + req.body.studid + "&enttid=" + req.body.enttid + "&wsautoid=" + req.body.wsautoid + "&format=pdf";
 
             var _attachments = [{ "filename": "Exam Result.pdf", "path": _path, contentType: 'application/pdf' }];
