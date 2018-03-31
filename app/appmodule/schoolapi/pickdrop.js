@@ -47,8 +47,6 @@ pidr.saveTrackingInfo = function saveTrackingInfo(req, res, done) {
                 }
             },
             function(error, response, _data) {
-                // rs.resp(res, 200, _data.data);
-
                 result = _data.data;
 
                 var dparams = {
