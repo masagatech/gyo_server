@@ -52,7 +52,7 @@ assignment.saveAssignmentInfo = function saveAssignmentInfo(req, res, done) {
 
             console.log(params);
 
-            sms_email.sendEmailAndSMS(params, _uphone, _uemail, _attachments, "email");
+            sms_email.sendEmailAndSMS(params, _uphone, _uemail, _attachments, "email", req.body.enttid);
         }
     }, function(err) {
         rs.resp(res, 401, "error : " + err);
@@ -104,7 +104,7 @@ assignment.saveTeacherRemark = function saveTeacherRemark(req, res, done) {
                 "mail_body": _msg
             };
 
-            sms_email.sendEmailAndSMS(params, _uphone, _uemail, _attachments, "email");
+            sms_email.sendEmailAndSMS(params, _uphone, _uemail, _attachments, "email", req.body.enttid);
         }
     }, function(err) {
         rs.resp(res, 401, "error : " + err);

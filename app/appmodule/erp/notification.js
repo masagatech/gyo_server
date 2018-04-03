@@ -52,11 +52,11 @@ notification.saveNotification = function saveNotification(req, res, done) {
         };
 
         if (req.body.issendsms == true) {
-            sms_email.sendEmailAndSMS(params, _uphone, _uemail, _attachments, "sms");
+            sms_email.sendEmailAndSMS(params, _uphone, _uemail, _attachments, "sms", req.body.enttid);
         }
 
         if (req.body.issendemail == true) {
-            sms_email.sendEmailAndSMS(params, _uphone, _uemail, _attachments, "email");
+            sms_email.sendEmailAndSMS(params, _uphone, _uemail, _attachments, "email", req.body.enttid);
         }
     }, function(err) {
         rs.resp(res, 401, "error : " + err);

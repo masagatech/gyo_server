@@ -67,7 +67,9 @@ function sendEmail(_mail_via, _mail_smtp_host, _mail_smtp_port, _mail_smtp_usern
 
 // Send SMS / Email
 
-sms_email.sendEmailAndSMS = function sendEmailAndSMS(_data, _sms_to, _mail_to, _attachments, _send_type, res) {
+sms_email.sendEmailAndSMS = function sendEmailAndSMS(_data, _sms_to, _mail_to, _attachments, _send_type, _enttid, res) {
+    _data.enttid = _enttid;
+
     db.callProcedure("select " + globals.schema("funget_emailsms_setting") + "($1,$2::json);", ['es', _data], function(data) {
         var dstr = JSON.stringify(data.rows[0]);
         var d = JSON.parse(dstr);

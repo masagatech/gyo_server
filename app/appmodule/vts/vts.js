@@ -40,6 +40,7 @@ vts.getFence = function(req, res, done) {
         "stpid": req.query.stpid,
         "stptype": req.query.stptype,
         "pdtype": req.query.pdtype,
+        "tm": req.query.tm,
         "enttid": req.query.enttid
     };
 
