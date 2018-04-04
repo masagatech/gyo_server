@@ -62,3 +62,7 @@ vts.getFence = function(req, res, done) {
         rs.resp(res, 401, "error : " + err);
     }, 1)
 }
+
+vts.getSpeed = function(req, res, done) {
+    console.log(req);
+}
