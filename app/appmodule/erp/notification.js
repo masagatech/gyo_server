@@ -14,25 +14,29 @@ notification.saveNotification = function saveNotification(req, res, done) {
 
         // Send Parents Notification
 
-        var _prntntf = {
-            "flag": "parents_notification",
-            "title": req.body.title,
-            "body": req.body.msg,
-            "prntids": _ntfdata.prntids
-        }
+        if (req.body.issendparents == true) {
+            var _prntntf = {
+                "flag": "parents_notification",
+                "title": req.body.title,
+                "body": req.body.msg,
+                "prntids": _ntfdata.prntids
+            }
 
-        tripapi.sendNotification(_prntntf);
+            tripapi.sendNotification(_prntntf);
+        }
 
         // Send Teacher Notification
 
-        var _tchrntf = {
-            "flag": "notification",
-            "title": req.body.title,
-            "body": req.body.msg,
-            "tchrids": _ntfdata.tchrids
-        }
+        if (req.body.issendteacher == true) {
+            var _tchrntf = {
+                "flag": "notification",
+                "title": req.body.title,
+                "body": req.body.msg,
+                "tchrids": _ntfdata.tchrids
+            }
 
-        tripapi.sendNotification(_tchrntf);
+            tripapi.sendNotification(_tchrntf);
+        }
 
         // Send Email And SMS
 

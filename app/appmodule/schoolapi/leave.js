@@ -21,14 +21,16 @@ lvpsngr.savePassengerLeaveApproval = function savePassengerLeaveApproval(req, re
     db.callFunction("select " + globals.schema("funsave_leaveapproval") + "($1::json);", [req.body], function(data) {
         rs.resp(res, 200, data.rows);
 
-        var _dtr = {
+        var _ntfdata = data.rows[0].funsave_leaveapproval;
+
+        var _prntntf = {
             "flag": "notification",
-            "title": data.rows[0].funsave_leaveapproval.title,
-            "body": data.rows[0].funsave_leaveapproval.msg,
-            "psngrid": data.rows[0].funsave_leaveapproval.ntfpsngrid
+            "title": "Leave : " + _ntfdata.title,
+            "body": _ntfdata.msg,
+            "psngrid": _ntfdata.ntfpsngrid
         }
 
-        tripapi.sendNotification(_dtr);
+        tripapi.sendNotification(_prntntf);
     }, function(err) {
         rs.resp(res, 401, "error : " + err);
     })

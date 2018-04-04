@@ -18,7 +18,7 @@ assignment.saveAssignmentInfo = function saveAssignmentInfo(req, res, done) {
 
         var _prntntf = {
             "flag": "parents_notification",
-            "title": req.body.title,
+            "title": "Homework : " + req.body.title,
             "body": req.body.msg,
             "prntids": _ntfdata.prntids
         }
@@ -32,7 +32,7 @@ assignment.saveAssignmentInfo = function saveAssignmentInfo(req, res, done) {
             var _uemail = _ntfdata.uemail;
             var _fileext = _ntfdata.fileext;
 
-            var _title = req.body.title;
+            var _title = "Homework : " + req.body.title;
             var _msg = req.body.msg;
             var _attachments;
 

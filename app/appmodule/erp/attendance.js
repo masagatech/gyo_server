@@ -9,16 +9,16 @@ attnd.saveAttendance = function saveAttendance(req, res, done) {
     db.callFunction("select " + globals.erpschema("funsave_attendance") + "($1::json);", [req.body], function(data) {
         rs.resp(res, 200, data.rows);
 
-        var _dtr = {
+        var _ntfdata = data.rows[0].funsave_attendance;
+
+        var _prntntf = {
             "flag": "parents_notification",
-            "title": data.rows[0].funsave_attendance.ntftitle,
-            "body": data.rows[0].funsave_attendance.ntfmsg,
-            "parentsid": data.rows[0].funsave_attendance.parentsid
+            "title": "Attendance : " + _ntfdata.ntftitle,
+            "body": _ntfdata.ntfmsg,
+            "prntids": _ntfdata.prntids
         }
 
-        console.log(_dtr);
-
-        tripapi.sendNotification(_dtr);
+        tripapi.sendNotification(_prntntf);
     }, function(err) {
         rs.resp(res, 401, "error : " + err);
     })

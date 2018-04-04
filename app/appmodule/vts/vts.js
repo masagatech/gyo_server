@@ -47,12 +47,16 @@ vts.getFence = function(req, res, done) {
     db.callProcedure("select " + globals.schema("funapisend_notification_or_not") + "($1,$2::json);", ['ntf', ntfparams], function(data) {
         var _data = data.rows[0];
 
-        if (_data.status == 0) {
-            rs.resp(res, 200, _data);
-        } else {
-            saveNotification(req, res, ntfparams, _data);
+        if (_data !== undefined) {
+            if (_data.status == 0) {
+                rs.resp(res, 200, _data);
+            } else {
+                saveNotification(req, res, ntfparams, _data);
 
-            tripapi.sendNotification(ntfparams);
+                tripapi.sendNotification(ntfparams);
+            }
+        } else {
+            rs.resp(res, 200, "No Data Found");
         }
     }, function(err) {
         rs.resp(res, 401, "error : " + err);

@@ -16,9 +16,9 @@ announcement.saveAnnouncement = function saveAnnouncement(req, res, done) {
 
         var _notification = {
             "flag": "parents_notification",
-            "title": req.body.title,
+            "title": "Announcement : " + req.body.title,
             "body": req.body.desc,
-            "parentsid": _anncdata.prntids
+            "prntids": _anncdata.prntids
         }
 
         tripapi.sendNotification(_notification);

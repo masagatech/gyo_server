@@ -169,17 +169,19 @@ trip.sendreachingalert = function(req, res, done) {
 var fcm = require("gen").fcm();
 
 trip.sendNotification = function(_data, res) {
+    console.log(_data)
     db.callProcedure("select " + globals.schema("funget_api_getnotifyids") + "($1,$2,$3::json);", ['tripnotify', 'tripnotify1', _data],
         function(data) {
             try {
                 var devicetokens = data.rows[0];
+                console.log(devicetokens)
                 var tokens = [];
                 var msg = data.rows[1][0];
 
                 for (var i = 0; i <= devicetokens.length - 1; i++) {
                     tokens.push(devicetokens[i].devtok);
                 }
-
+                console.log(tokens)
                 if (res) {
                     if (_data.flag == "reaching") {
                         if (msg.title == "al") {
@@ -221,9 +223,11 @@ trip.sendNotification = function(_data, res) {
                     "time_to_live": (60 * 15)
                 };
 
+
+
                 fcm.send(message, function(err, response) {
                     if (err) {
-                        console.log("Something has gone wrong!");
+                        console.log("Something has gone wrong!", err);
                     } else {
                         console.log("Successfully sent with response: ", response);
                     }
