@@ -29,7 +29,7 @@ lvpsngr.savePassengerLeaveApproval = function savePassengerLeaveApproval(req, re
                 "title": "Leave : " + _ntfdata.title,
                 "body": _ntfdata.msg,
                 "uid": _ntfdata.psngrid,
-                "utype": req.body.psngrtype
+                "utype": "{emp}"
             }
 
             tripapi.sendNotification(_prntntf);
