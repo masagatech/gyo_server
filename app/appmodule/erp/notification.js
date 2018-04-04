@@ -14,25 +14,26 @@ notification.saveNotification = function saveNotification(req, res, done) {
 
         // Send Parents Notification
 
-        if (req.body.issendparents == true) {
-            var _prntntf = {
-                "flag": "parents_notification",
-                "title": req.body.title,
-                "body": req.body.msg,
-                "prntids": _ntfdata.prntids
-            }
+        // if (req.body.issendparents == true) {
+        //     var _prntntf = {
+        //         "flag": "parents_notification",
+        //         "title": req.body.title,
+        //         "body": req.body.msg,
+        //         "prntids": _ntfdata.prntids
+        //     }
 
-            tripapi.sendNotification(_prntntf);
-        }
+        //     tripapi.sendNotification(_prntntf);
+        // }
 
         // Send Teacher Notification
 
         if (req.body.issendteacher == true) {
             var _tchrntf = {
-                "flag": "notification",
+                "flag": "other_notification",
                 "title": req.body.title,
                 "body": req.body.msg,
-                "tchrids": _ntfdata.tchrids
+                "uid": _ntfdata.tchrids,
+                "utype": "{emp}"
             }
 
             tripapi.sendNotification(_tchrntf);

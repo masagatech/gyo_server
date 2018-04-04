@@ -23,14 +23,17 @@ lvpsngr.savePassengerLeaveApproval = function savePassengerLeaveApproval(req, re
 
         var _ntfdata = data.rows[0].funsave_leaveapproval;
 
-        var _prntntf = {
-            "flag": "notification",
-            "title": "Leave : " + _ntfdata.title,
-            "body": _ntfdata.msg,
-            "psngrid": _ntfdata.ntfpsngrid
-        }
+        if (req.body.psngrtype !== "student") {
+            var _prntntf = {
+                "flag": "other_notification",
+                "title": "Leave : " + _ntfdata.title,
+                "body": _ntfdata.msg,
+                "uid": _ntfdata.psngrid,
+                "utype": req.body.psngrtype
+            }
 
-        tripapi.sendNotification(_prntntf);
+            tripapi.sendNotification(_prntntf);
+        }
     }, function(err) {
         rs.resp(res, 401, "error : " + err);
     })

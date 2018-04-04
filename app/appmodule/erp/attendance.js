@@ -11,14 +11,16 @@ attnd.saveAttendance = function saveAttendance(req, res, done) {
 
         var _ntfdata = data.rows[0].funsave_attendance;
 
-        var _prntntf = {
-            "flag": "parents_notification",
-            "title": "Attendance : " + _ntfdata.ntftitle,
-            "body": _ntfdata.ntfmsg,
-            "prntids": _ntfdata.prntids
-        }
+        if (req.body.psngrtype == "student") {
+            var _prntntf = {
+                "flag": "parents_notification",
+                "title": "Attendance : " + _ntfdata.ntftitle,
+                "body": _ntfdata.ntfmsg,
+                "prntids": _ntfdata.prntids
+            }
 
-        tripapi.sendNotification(_prntntf);
+            tripapi.sendNotification(_prntntf);
+        }
     }, function(err) {
         rs.resp(res, 401, "error : " + err);
     })
