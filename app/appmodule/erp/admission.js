@@ -75,7 +75,7 @@ admsn.bulkUploadStudents = function bulkUploadStudents(req, res, result, callbac
 
     if (_status == 1) {
         db.callFunction("select " + globals.erpschema("funsave_multistudentinfo") + "($1::json);", [req], function(data) {
-            callback(data.rows);
+            callback(data.rows[0]);
         }, function(err) {
             var errdt = { funsave_multistudentinfo: { msg: "Invalid Data Format - " + err, msgid: 401 } }
             callback(errdt);

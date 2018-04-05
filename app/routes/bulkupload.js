@@ -50,8 +50,8 @@ var appRouter = function(app) {
         src.on('end', function() {
             try {
                 xlsxtojson({
-                    input: target_path, //the same path where we uploaded our file
-                    output: null, //since we don't need output.json
+                    input: target_path, // the same path where we uploaded our file
+                    output: null, // since we don't need output.json
                     lowerCaseHeaders: true
                 }, function(err, result) {
                     if (err) {
@@ -59,10 +59,6 @@ var appRouter = function(app) {
                     } else {
 
                     }
-
-                    // var resdata = JSON.stringify(result);
-
-                    // console.log(resdata);
 
                     if (req.body.bulktype === "student") {
                         var params = {
@@ -92,10 +88,8 @@ var appRouter = function(app) {
                             "bulkexamresult": result
                         };
 
-                        console.log(params)
-
-                        exmres.bulkUploadExamResult(params, res, result, function(data) {
-                            res.json({ status: 1, message: "Saved Successfully Completed", data: data });
+                        exmres.bulkUploadExamResult(params, res, result, function(d) {
+                            res.json({ data: d });
                         });
                     }
                 });

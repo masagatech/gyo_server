@@ -89,9 +89,10 @@ exam.bulkUploadExamResult = function bulkUploadExamResult(req, res, result, call
 
     if (_status == 1) {
         db.callFunction("select " + globals.erpschema("funsave_examresult") + "($1::json);", [req], function(data) {
-            callback(data.rows);
+            callback(data.rows[0]);
         }, function(err) {
-            callback("error : " + err);
+            var errdt = { funsave_examresult: { msg: "Invalid Data Format - " + err, msgid: 401 } }
+            callback(errdt);
         })
 
     } else {
