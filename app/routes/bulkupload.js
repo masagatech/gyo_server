@@ -73,8 +73,8 @@ var appRouter = function(app) {
                             "multistudent": result
                         };
 
-                        admsn.bulkUploadStudents(params, res, result, function(data) {
-                            res.json({ status: 1, message: "Saved Successfully Completed", data: data });
+                        admsn.bulkUploadStudents(params, res, result, function(d) {
+                            res.json({ data: d });
                         });
                     }
 
