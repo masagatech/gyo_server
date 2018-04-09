@@ -1,0 +1,83 @@
+<html>
+
+<head>
+    <meta charset="utf-8" />
+
+    <style>
+        table {
+            border-collapse: collapse;
+            font-size: 12px;
+            width: 100%;
+            border: 1px solid rgba(204, 204, 204, 0.35);
+        }
+        
+        table thead th {
+            background: #009688;
+            color: #ffffff;
+            padding: 5px;
+            text-align: left;
+            vertical-align: top;
+        }
+        
+        .table td {
+            padding: 5px;
+            vertical-align: top;
+        }
+        
+        h4 {
+            padding: 0;
+            margin: 7px;
+        }
+    </style>
+</head>
+
+<body>
+    {{#data}}
+    <h2 align="center">Assesment Result</h2>
+    <h4 align="center">{{asstyphead}} : {{asstypname}}</h4>
+    <h4 align="center">{{studentname}} - (Roll No : {{rollno}})</h4>
+    <h4 align="center">Standard : {{classname}}</h4>
+    <h4>
+        Heading : {{heading}} - {{assdate}}
+    </h4>
+    {{/data}}
+
+    <table border="1" cellspacing="0" cellpadding="5">
+        <thead>
+            <tr>
+                <th>
+                    Sub Heading
+                </th>
+                <th>
+                    Grade
+                </th>
+                <th>
+                    Remark
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#data1}}
+            <tr>
+                <td width="300px">
+                    {{subheading}}
+                </td>
+                <td width="100px">
+                    {{grade}}
+                </td>
+                <td>
+                    {{remark1}}
+                </td>
+            </tr>
+            {{/data1}} {{#data}}
+            <tr>
+                <td colspan="3">
+                    <b>Remark</b> {{remark}}
+                </td>
+            </tr>
+            {{/data}}
+        </tbody>
+    </table>
+</body>
+
+</html>

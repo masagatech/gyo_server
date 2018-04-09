@@ -7,7 +7,7 @@ var download = gen.download;
 
 var exam = module.exports = {};
 
-var examresultapi = require("../../reports/templates/examresult/examresult.js");
+var examresultapi = require("../../reports/templates/exam/examresult.js");
 
 exam.downloadExamResult = function downloadExamResult(req, res, done) {
     db.callProcedure("select " + globals.erpschema("funget_examresult") + "($1,$2::json);", ['examresdnl', req.query], function(data) {
@@ -15,12 +15,12 @@ exam.downloadExamResult = function downloadExamResult(req, res, done) {
             download(req, res, {
                 data: data.rows,
                 params: req.query
-            }, { 'all': 'examresult/examresultformat.html' }, examresultapi.getExamResultReports);
+            }, { 'all': 'exam/examresultformat.html' }, examresultapi.getExamResultReports);
         } else {
             download(req, res, {
                 data: data.rows[0],
                 params: req.query
-            }, { 'all': 'examresult/examresultformat.html' }, examresultapi.getExamResultReports);
+            }, { 'all': 'exam/examresultformat.html' }, examresultapi.getExamResultReports);
         }
     }, function(err) {
         rs.resp(res, 401, "error : " + err);
@@ -33,7 +33,7 @@ exam.getExamResultReports = function getExamResultReports(req, res, done) {
             data: data.rows[0],
             data1: data.rows[1],
             params: req.query
-        }, { 'all': 'examresult/examresult.html' }, examresultapi.getExamResultReports);
+        }, { 'all': 'exam/examresult.html' }, examresultapi.getExamResultReports);
     }, function(err) {
         rs.resp(res, 401, "error : " + err);
     }, 2)
