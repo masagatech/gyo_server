@@ -63,7 +63,8 @@ ass.saveAssesmentResult = function saveAssesmentResult(req, res, done) {
             _msg += "<p>Name : " + _studname + "</p>";
             _msg += "<p>Roll No : " + _rollno + "</p>";
             _msg += "<p>Standard : " + _classname + "</p>";
-            _msg += "<p>See, Attachment File, " + _assdata.ntfmsg + ".</p>";
+            _msg += "<p>" + _assdata.ntfmsg + ".</p>";
+            _msg += "<p>See, Attachment File ....</p>";
 
             _path = globals.reporturl + "/getAssesmentResultReports?flag=studentwise&ayid=" + req.body.ayid +
                 "&asstypid=" + req.body.asstypid + "&asstyp=" + req.body.asstyp + "&classid=" + req.body.clsid +
