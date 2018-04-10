@@ -165,6 +165,7 @@ var appRouter = function(app) {
 
     app.post(root + "/saveAssesmentResult", ass.saveAssesmentResult);
     app.post(root + "/getAssesmentResult", ass.getAssesmentResult);
+    app.post(root + "/getAssesmentResultReports", ass.getAssesmentResultReports);
 
     //##################################### Assesment ####################################################
 

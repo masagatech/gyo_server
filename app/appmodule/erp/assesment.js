@@ -95,3 +95,11 @@ ass.getAssesmentResult = function getAssesmentResult(req, res, done) {
         rs.resp(res, 401, "error : " + err);
     }, 1)
 }
+
+ass.getAssesmentResultReports = function getAssesmentResultReports(req, res, done) {
+    db.callProcedure("select " + globals.erpschema("funget_rpt_assesmentresult") + "($1,$2,$3::json);", ['assres1', 'assres2', req.query], function(data) {
+        rs.resp(res, 200, data.rows);
+    }, function(err) {
+        rs.resp(res, 401, "error : " + err);
+    }, 2)
+}
