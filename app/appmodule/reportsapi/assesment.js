@@ -15,7 +15,7 @@ assesment.getAssesmentResultReports = function getAssesmentResultReports(req, re
             download(req, res, {
                 data: data.rows[0],
                 data1: data.rows[1],
-                data2: data.rows[0][0].column,
+                data2: data.rows[0].length == 0 ? [] : data.rows[0][0].column,
                 params: req.query
             }, { 'all': 'assesment/assesmentresult_report.html' }, assresapi.getAssesmentResultReports);
         } else {

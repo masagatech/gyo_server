@@ -28,6 +28,14 @@
             padding: 0;
             margin: 7px;
         }
+        
+        .show {
+            display: inline-table!important;
+        }
+        
+        .hide {
+            display: none!important;
+        }
     </style>
 </head>
 
@@ -38,7 +46,9 @@
     <h4 align="center">Standard : {{classname}}</h4>
     {{/data}}
 
-    <table border="1" cellspacing="0" cellpadding="5">
+    <h4 align="center">{{{emptydatamsg}}}</h4>
+
+    <table class="{{{showdata}}}" border="1" cellspacing="0" cellpadding="5">
         <thead>
             <tr>
                 <th>

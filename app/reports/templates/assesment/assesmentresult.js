@@ -4,6 +4,7 @@ var reports = module.exports = {};
 
 reports.getAssesmentResultReports = function getAssesmentResultReports(data) {
     var _hndlbar = Handlebars;
+    var assesmentdt = data.data1;
     data_header = data.data2;
 
     _hndlbar.registerHelper('date_cols', function(row) {
@@ -20,8 +21,16 @@ reports.getAssesmentResultReports = function getAssesmentResultReports(data) {
         return columns;
     });
 
+    _hndlbar.registerHelper('showdata', function(params) {
+        if (assesmentdt.length == 0) {
+            return "hide";
+        } else {
+            return "show";
+        }
+    });
+
     _hndlbar.registerHelper('emptydatamsg', function(params) {
-        if (examdt.length == 0) {
+        if (assesmentdt.length == 0) {
             return "No Data Found";
         } else {
             return "";
