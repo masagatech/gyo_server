@@ -6,13 +6,8 @@ var globals = require("gen").globals;
 var medicine = module.exports = {};
 
 medicine.saveMedicineInfo = function saveMedicineInfo(req, res) {
-    console.log(req.body);
-    console.log("1");
-
     var tmp_path = req.files[0].path;
-    console.log("2");
     req.body.uploadimg = req.files[0].originalname;
-    console.log("3");
 
     var target_path = 'www/mobile/' + req.files[0].originalname;
     var src = fs.createReadStream(tmp_path);
@@ -29,19 +24,13 @@ medicine.saveMedicineInfo = function saveMedicineInfo(req, res) {
     src.on('end', function() {
         db.callFunction("select " + globals.schema("funsave_medicineinfo") + "($1::json);", [req.body], function(data) {
             rs.resp(res, 200, data.rows);
-            console.log("a");
         }, function(err) {
             rs.resp(res, 401, "error : " + err);
-            console.log("b");
         })
-
-        console.log("c");
     });
 
     src.on('error', function(err) {
         res.send({ error: "upload failed" });
-
-        console.log("Failed");
     });
 }
 

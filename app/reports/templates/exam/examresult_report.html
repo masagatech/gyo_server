@@ -1,0 +1,102 @@
+<html>
+
+<head>
+    <meta charset="utf-8" />
+
+    <style>
+        table {
+            border-collapse: collapse;
+            font-size: 12px;
+            width: 100%;
+            border: 1px solid rgba(204, 204, 204, 0.35);
+        }
+        
+        table thead th {
+            background: #009688;
+            color: #ffffff;
+            padding: 5px;
+            text-align: center;
+            vertical-align: top;
+        }
+        
+        table tbody th {
+            background: #eeeeee;
+            color: #000000;
+            padding: 5px;
+            text-align: center;
+            vertical-align: top;
+        }
+        
+        .table td {
+            padding: 5px;
+            vertical-align: top;
+        }
+        
+        h4 {
+            padding: 0;
+            margin: 7px;
+        }
+        
+        .show {
+            display: inline-table!important;
+        }
+        
+        .hide {
+            display: none!important;
+        }
+    </style>
+</head>
+
+<body>
+    {{#data3}}
+    <h3 align="center">Exam Result - {{smstrname}}</h3>
+    <h4 align="center">Standard - {{classname}} </h4>
+    {{/data3}}
+
+    <h4 align="center">{{{emptydatamsg}}}</h4>
+
+    <table class="{{{showdata}}}" border="1" cellspacing="0" cellpadding="5">
+        <thead>
+            <tr>
+                <th>
+                    Enrollment No
+                </th>
+                <th>
+                    Roll No
+                </th>
+                <th>
+                    Student Name
+                </th>
+                {{#data2}}
+                <th colspan="3">{{subname}}</th>
+                {{/data2}}
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th></th>
+                <th></th>
+                <th></th>
+                {{#data}}
+                <th>{{status}}</th>
+                {{/data}}
+            </tr>
+            {{#data1}}
+            <tr>
+                <td width="100px" align="right">
+                    {{studid}}
+                </td>
+                <td width="80px" align="right">
+                    {{rollno}}
+                </td>
+                <td width="200px">
+                    {{studname}}
+                </td>
+                {{{date_cols this}}}
+            </tr>
+            {{/data1}}
+        </tbody>
+    </table>
+</body>
+
+</html>

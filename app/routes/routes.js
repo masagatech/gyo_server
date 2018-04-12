@@ -56,7 +56,6 @@ var appRouter = function(app) {
     }
 
     app.post(globals.globvar.rootAPI + "/", function(req, res, done) {
-        console.log(req.body)
         rs.resp(res, 200, APIInfo);
     });
 

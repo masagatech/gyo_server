@@ -28,14 +28,10 @@ fileupload.uploadFile = function uploadFile(req, res, done) {
                 if (err) throw err;
 
                 if (file.type == "image/png" || file.type == "image/jpeg" || file.type == "image/jpg" || file.type == "image/gif" || file.type == "image/bmp") {
-                    console.log("Image");
-
                     lenna.resize(Number(width), Jimp.AUTO) // resize
                         .quality(80) // set greyscale
                         .write(file.path); // save
-                } else {
-                    console.log("Document");
-                }
+                } else {}
             });
         }
         files.push([field, file]);

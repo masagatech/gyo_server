@@ -74,8 +74,6 @@ var appRouter = function(app) {
                         });
                     }
 
-                    console.log(req.body.bulktype);
-
                     if (req.body.bulktype === "examresult") {
                         var params = {
                             "savetype": "bulk",

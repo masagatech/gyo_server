@@ -5,7 +5,6 @@ var globals = require("gen").globals;
 var brkdwn = module.exports = {};
 
 brkdwn.saveBreakDown = function saveBreakDown(req, res, done) {
-    console.log("abc");
     db.callFunction("select " + globals.schema("funsave_breakdown") + "($1::json);", [req.body], function(data) {
         rs.resp(res, 200, data.rows);
     }, function(err) {

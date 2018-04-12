@@ -50,8 +50,6 @@ assignment.saveAssignmentInfo = function saveAssignmentInfo(req, res, done) {
                 "mail_body": _msg
             };
 
-            console.log(params);
-
             sms_email.sendEmailAndSMS(params, _uphone, _uemail, _attachments, "email", req.body.enttid);
         }
     }, function(err) {

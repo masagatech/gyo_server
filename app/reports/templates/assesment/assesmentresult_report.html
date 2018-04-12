@@ -34,53 +34,42 @@
 <body>
     {{#data}}
     <h2 align="center">Assesment Result</h2>
-    <h4 align="center">{{asstyphead}} : {{asstypname}}</h4>
     <h4 align="center">{{studentname}} - (Roll No : {{rollno}})</h4>
     <h4 align="center">Standard : {{classname}}</h4>
-    <h4>
-        Heading : {{heading}} - {{assdate}}
-    </h4>
     {{/data}}
 
     <table border="1" cellspacing="0" cellpadding="5">
         <thead>
             <tr>
                 <th>
+                    Heading
+                </th>
+                <th>
                     Sub Heading
                 </th>
                 <th>
-                    Grade
+                    Assesment Type
                 </th>
-                <th>
-                    Remark
-                </th>
+                {{#data2}}
+                <th>{{this.assdate}}</th>
+                {{/data2}}
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <th colspan="3">
-                    {{emptydatamsg}}
-                </th>
-            </tr>
             {{#data1}}
             <tr>
-                <td width="300px">
-                    {{subheading}}
-                </td>
-                <td width="100px">
-                    {{grade}}
+                <td width="200px">
+                    {{heading}}
                 </td>
                 <td>
-                    {{remark1}}
+                    {{subheading}}
                 </td>
-            </tr>
-            {{/data1}} {{#data}}
-            <tr>
-                <td colspan="3">
-                    <b>Remark</b> {{remark}}
+                <td width="200px">
+                    {{asstypname}}
                 </td>
+                {{{date_cols this}}}
             </tr>
-            {{/data}}
+            {{/data1}}
         </tbody>
     </table>
 </body>
