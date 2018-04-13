@@ -1,0 +1,114 @@
+<html>
+
+<head>
+    <meta charset="utf-8" />
+
+    <style>
+        table {
+            border-collapse: collapse;
+            font-size: 12px;
+            border: 1px solid rgba(204, 204, 204, 0.35);
+            width: 100%;
+        }
+        
+        table thead td {
+            background: #009688;
+            color: #ffffff;
+            padding: 5px;
+            text-align: left;
+            vertical-align: top;
+        }
+        
+        table tbody th {
+            background: #eeeeee;
+            color: #000000;
+            padding: 5px;
+            text-align: left;
+            vertical-align: top;
+        }
+        
+        table tbody td {
+            padding: 5px;
+            vertical-align: top;
+        }
+        
+        label {
+            float: left;
+        }
+        
+        span {
+            float: right;
+        }
+        
+        hr {
+            border: none;
+        }
+    </style>
+</head>
+
+<body>
+    {{#data}}
+    <table cellspacing="0" cellpadding="5">
+        <tr>
+            <td>
+                <img src="{{{uploadurl}}}/{{enttlogo}}" height="200">
+            </td>
+            <td>
+                <h1>{{enttname}}</h1>
+                <h2>Name : {{studname}}</h2>
+                <h3>Standard : {{classname}} - (Roll No : {{rollno}})</h3>
+
+                <h3>Total Paid Fees : {{paidfees}}</h3>
+                <h3>Pending Fees : {{pendfees}}</h3>
+            </td>
+            <td>
+                <span><img src="{{{logourl}}}/paid-stamp.jpg" height="200"></span>
+            </td>
+        </tr>
+    </table>
+    {{/data}}
+    <hr /> {{#data1}}
+    <table border="1" cellspacing="0" cellpadding="5">
+        <thead>
+            <tr>
+                <td>
+                    Receipt No : {{receiptno}}
+                </td>
+                <td>
+                    <span>Amount</span>
+                </td>
+                <td>
+                    <span>Date : {{receivedate}}</span>
+                </td>
+            </tr>
+        </thead>
+        <tbody>
+            {{#feesdt}}
+            <tr>
+                <td>
+                    <b>{{catname}}</b>
+                </td>
+                <td>
+                    <span>{{paidfees}}</span>
+                </td>
+                <td>
+                    {{#if ischequepay}} <b>Cheque No :</b> {{chequeno}} <br /> <b>Date :</b> {{chequedate}} <br /> <b>Status :</b> {{status}} {{/if}}
+                </td>
+            </tr>
+            {{/feesdt}}
+            <tr>
+                <th>
+                    Total Fees
+                </th>
+                <th>
+                    <span>{{paidfees}}</span>
+                </th>
+                <th>
+                </th>
+            </tr>
+        </tbody>
+    </table>
+    <hr /> {{/data1}}
+</body>
+
+</html>

@@ -8,6 +8,7 @@ var notification = require(reportsapi + "notification.js");
 var announcement = require(reportsapi + "announcement.js");
 var exam = require(reportsapi + "exam.js");
 var assesment = require(reportsapi + "assesment.js");
+var fees = require(reportsapi + "fees.js");
 
 module.exports = function(app) {
     app.get("/getReports", reports.getReports);
@@ -19,4 +20,6 @@ module.exports = function(app) {
     app.get("/getExamResultReports", exam.getExamResultReports);
 
     app.get("/getAssesmentResultReports", assesment.getAssesmentResultReports);
+
+    app.get("/getFeesReports", fees.getFeesReports);
 }

@@ -34,6 +34,7 @@ app.all('/*', function(req, res, next) {
 });
 
 app.use('/images', express.static(__dirname.replace('app', "www").replace('bin', 'uploads')));
+app.use('/logo', express.static(__dirname.replace('app', "www").replace('bin', 'logo')));
 
 // ##############################################################################################	
 

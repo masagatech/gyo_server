@@ -14,16 +14,16 @@ notification.saveNotification = function saveNotification(req, res, done) {
 
         // Send Parents Notification
 
-        // if (req.body.issendparents == true) {
-        //     var _prntntf = {
-        //         "flag": "parents_notification",
-        //         "title": req.body.title,
-        //         "body": req.body.msg,
-        //         "prntids": _ntfdata.prntids
-        //     }
+        if (req.body.issendparents == true) {
+            var _prntntf = {
+                "flag": "parents_notification",
+                "title": req.body.title,
+                "body": req.body.msg,
+                "prntids": _ntfdata.prntids
+            }
 
-        //     tripapi.sendNotification(_prntntf);
-        // }
+            tripapi.sendNotification(_prntntf);
+        }
 
         // Send Teacher Notification
 
@@ -45,8 +45,8 @@ notification.saveNotification = function saveNotification(req, res, done) {
         var _uemail = _ntfdata.uemail;
 
         var _title = req.body.title;
-        var _msg = req.body.msg;
-        var _attachments = [];
+        var _msg = req.body.mailmsg;
+        var _attachments = req.body.attachments == null ? [] : req.body.attachments;
 
         var params = {
             "sms_to": _uphone,
