@@ -1,0 +1,302 @@
+<html>
+
+<head>
+    <meta charset="utf-8" />
+
+    <style>
+        table {
+            border-collapse: collapse;
+            font-size: 12px;
+            width: 100%;
+            border: 1px solid rgba(204, 204, 204, 0.35);
+        }
+        
+        table thead th,
+        table tbody thead th {
+            background: #009688;
+            color: #ffffff;
+            padding: 5px;
+            text-align: center;
+            vertical-align: top;
+        }
+        
+        table tbody th {
+            background: #eeeeee;
+            color: #000000;
+            padding: 5px;
+            text-align: center;
+            vertical-align: top;
+        }
+        
+        table tbody td {
+            padding: 5px;
+            vertical-align: top;
+        }
+        
+        h4 {
+            padding: 0;
+            margin: 7px;
+        }
+        
+        .period,
+        .Lunch {
+            background-color: #FF9800;
+            color: #FFFFFF;
+        }
+        
+        .off {
+            background-color: #E91E63;
+            color: #FFFFFF;
+        }
+        
+        .hld {
+            background-color: #03A9F4;
+            color: #FFFFFF;
+        }
+        
+        .show {
+            display: inline-table!important;
+        }
+        
+        .hide {
+            display: none!important;
+        }
+    </style>
+</head>
+
+<body>
+    {{#weekperiodDT}}
+    <h3>Class Timetable - {{weekhead}}</h3>
+    {{/weekperiodDT}}
+
+    <h4 align="center">{{{emptydatamsg}}}</h4>
+
+    <table class="{{{showdata}}}" border="1" cellspacing="0" cellpadding="5">
+        <thead>
+            <tr>
+                <th align="center">Monday</th>
+                <th align="center">Tuesday</th>
+                <th align="center">Wednesday</th>
+                <th align="center">Thursday</th>
+                <th align="center">Friday</th>
+                <th align="center">Saturday</th>
+                <th align="center">Sunday</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#weekperiodDT}}
+            <tr class="tr-table">
+                <th align="center">{{mondate}}</th>
+                <th align="center">{{tuedate}}</th>
+                <th align="center">{{weddate}}</th>
+                <th align="center">{{thudate}}</th>
+                <th align="center">{{fridate}}</th>
+                <th align="center">{{satdate}}</th>
+                <th align="center">{{sundate}}</th>
+            </tr>
+            {{/weekperiodDT}}
+            <tr>
+                <td class="{{weekperiodDT.[0].moncode}}">
+                    {{#weekperiodDT}}{{monperiod}}{{/weekperiodDT}} {{#isvis weekperiodDT.[0].monperiod}}
+
+                    <table border="1" cellspacing="0" cellpadding="5">
+                        <thead>
+                            <tr>
+                                <th>Class</th>
+                                {{#monweekcolumn}}
+                                <th>
+                                    {{periodno}}
+                                </th>
+                                {{/monweekcolumn}}
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {{#classTimeTableDT}}
+                            <tr>
+                                <th>
+                                    {{classname}}
+                                </th>
+
+                                {{{monperioddata this}}}
+                            </tr>
+                            {{/classTimeTableDT}}
+                        </tbody>
+                    </table>
+                    {{/isvis}}
+                </td>
+                <td class="{{weekperiodDT.[0].tuecode}}">
+                    {{#weekperiodDT}}{{tueperiod}}{{/weekperiodDT}}{{#isvis weekperiodDT.[0].tueperiod}}
+
+                    <table border="1" cellspacing="0" cellpadding="5">
+                        <thead>
+                            <tr>
+                                <th>Class</th>
+                                {{#tueweekcolumn}}
+                                <th>
+                                    {{periodno}}
+                                </th>
+                                {{/tueweekcolumn}}
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {{#classTimeTableDT}}
+                            <tr>
+                                <th>
+                                    {{classname}}
+                                </th>
+
+                                {{{tueperioddata this}}}
+                            </tr>
+                            {{/classTimeTableDT}}
+                        </tbody>
+                    </table>
+                    {{/isvis}}
+                </td>
+                <td class="{{weekperiodDT.[0].wedcode}}">
+                    {{#weekperiodDT}}{{wedperiod}}{{/weekperiodDT}} {{#isvis weekperiodDT.[0].wedperiod}}
+
+                    <table border="1" cellspacing="0" cellpadding="5">
+                        <thead>
+                            <tr>
+                                <th>Class</th>
+                                {{#wedweekcolumn}}
+                                <th>
+                                    {{periodno}}
+                                </th>
+                                {{/wedweekcolumn}}
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {{#classTimeTableDT}}
+                            <tr>
+                                <th>
+                                    {{classname}}
+                                </th>
+
+                                {{{wedperioddata this}}}
+                            </tr>
+                            {{/classTimeTableDT}}
+                        </tbody>
+                    </table>
+                    {{/isvis}}
+                </td>
+                <td class="{{weekperiodDT.[0].thucode}}">
+                    {{#weekperiodDT}}{{thuperiod}}{{/weekperiodDT}}{{#isvis weekperiodDT.[0].thuperiod}}
+
+                    <table border="1" cellspacing="0" cellpadding="5">
+                        <thead>
+                            <tr>
+                                <th>
+                                    Class
+                                </th>
+                                {{#thuweekcolumn}}
+                                <th>
+                                    {{periodno}}
+                                </th>
+                                {{/thuweekcolumn}}
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {{#classTimeTableDT}}
+                            <tr>
+                                <th>
+                                    {{classname}}
+                                </th>
+
+                                {{{thuperioddata this}}}
+                            </tr>
+                            {{/classTimeTableDT}}
+                        </tbody>
+                    </table>
+                    {{/isvis}}
+                </td>
+                <td class="{{weekperiodDT.[0].fricode}}">
+                    {{#weekperiodDT}}{{friperiod}}{{/weekperiodDT}}{{#isvis weekperiodDT.[0].friperiod}}
+
+                    <table border="1" cellspacing="0" cellpadding="5">
+                        <thead>
+                            <tr>
+                                <th>Class</th>
+                                {{#friweekcolumn}}
+                                <th>
+                                    {{periodno}}
+                                </th>
+                                {{/friweekcolumn}}
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {{#classTimeTableDT}}
+                            <tr>
+                                <th>
+                                    {{classname}}
+                                </th>
+
+                                {{{friperioddata this}}}
+                            </tr>
+                            {{/classTimeTableDT}}
+                        </tbody>
+                    </table>
+                    {{/isvis}}
+                </td>
+                <td class="{{weekperiodDT.[0].satcode}}">
+                    {{#weekperiodDT}}{{satperiod}}{{/weekperiodDT}}{{#isvis weekperiodDT.[0].satperiod}}
+
+                    <table border="1" cellspacing="0" cellpadding="5">
+                        <thead>
+                            <tr>
+                                <th>Class</th>
+                                {{#satweekcolumn}}
+                                <th>
+                                    {{periodno}}
+                                </th>
+                                {{/satweekcolumn}}
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {{#classTimeTableDT}}
+                            <tr>
+                                <th>
+                                    {{classname}}
+                                </th>
+
+                                {{{satperioddata this}}}
+                            </tr>
+                            {{/classTimeTableDT}}
+                        </tbody>
+                    </table>
+                    {{/isvis}}
+                </td>
+                <td class="{{weekperiodDT.[0].suncode}}">
+                    {{#weekperiodDT}}{{sunperiod}}{{/weekperiodDT}}{{#isvis weekperiodDT.[0].sunperiod}}
+
+                    <table border="1" cellspacing="0" cellpadding="5">
+                        <thead>
+                            <tr>
+                                <th>Class</th>
+                                {{#sunweekcolumn}}
+                                <th>
+                                    {{periodno}}
+                                </th>
+                                {{/sunweekcolumn}}
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {{#classTimeTableDT}}
+                            <tr>
+                                <th>
+                                    {{classname}}
+                                </th>
+
+                                {{{sunperioddata this}}}
+                            </tr>
+                            {{/classTimeTableDT}}
+                        </tbody>
+                    </table>
+                    {{/isvis}}
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+
+</html>

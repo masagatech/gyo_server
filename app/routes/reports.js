@@ -6,6 +6,7 @@ var reportsapi = "../appmodule/reportsapi/";
 var reports = require(reportsapi + "reports.js");
 var notification = require(reportsapi + "notification.js");
 var announcement = require(reportsapi + "announcement.js");
+var classtimetable = require(reportsapi + "classtimetable.js");
 var exam = require(reportsapi + "exam.js");
 var assesment = require(reportsapi + "assesment.js");
 var fees = require(reportsapi + "fees.js");
@@ -15,6 +16,8 @@ module.exports = function(app) {
 
     app.get("/getNotification", notification.getNotification);
     app.get("/getAnnouncement", announcement.getAnnouncement);
+
+    app.get("/getClassTimeTableReports", classtimetable.getClassTimeTableReports);
 
     app.get("/downloadExamResult", exam.downloadExamResult);
     app.get("/getExamResultReports", exam.getExamResultReports);
