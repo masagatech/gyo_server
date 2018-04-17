@@ -1,0 +1,134 @@
+<html>
+
+<head>
+    <meta charset="utf-8" />
+
+    <style>
+        table {
+            border-collapse: collapse;
+            font-size: 12px;
+            width: 100%;
+            border: 1px solid rgba(204, 204, 204, 0.35);
+        }
+        
+        table thead th,
+        table tbody thead th {
+            background: #009688;
+            color: #ffffff;
+            padding: 5px;
+            text-align: center;
+            vertical-align: top;
+        }
+        
+        table tbody th {
+            background: #eeeeee;
+            color: #000000;
+            padding: 5px;
+            text-align: center;
+            vertical-align: top;
+        }
+        
+        table tbody td {
+            padding: 5px;
+            vertical-align: top;
+        }
+        
+        h3,
+        h4 {
+            padding: 0;
+            margin: 7px;
+            text-align: center;
+        }
+        
+        .show {
+            display: inline-table!important;
+        }
+        
+        .hide {
+            display: none!important;
+        }
+        
+        .Holiday {
+            background-color: #03A9F4;
+            color: #FFFFFF;
+        }
+        
+        .Exam {
+            background-color: #ffe821;
+            color: #000000;
+        }
+        
+        .Lunch {
+            background-color: #FF9800;
+            color: #FFFFFF;
+        }
+        
+        .Off {
+            background-color: #E91E63;
+            color: #FFFFFF;
+        }
+    </style>
+</head>
+
+<body>
+    <h3>Weekly Timetable</h3>
+
+    <h4>Class : {{headerColumn.[0].classname}}</h4>
+
+    <h4>{{headerColumn.[0].tchrname}}</h4>
+
+    <h4>{{{emptydatamsg}}}</h4>
+
+    <table border="1" cellspacing="0" cellpadding="5">
+        <thead>
+            <tr>
+                <th width="200px">Date / Time</th>
+                <th>Monday</th>
+                <th>Tuesday</th>
+                <th>Wednesday</th>
+                <th>Thursday</th>
+                <th>Friday</th>
+                <th>Saturday</th>
+                <th>Sunday</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#group weeklyData by="caldate"}}
+            <tr>
+                <th colspan="8">
+                    {{value}}
+                </th>
+            </tr>
+            {{#each items}}
+            <tr>
+                <td>
+                    {{caltime}}
+                </td>
+                <td class="{{mon}}">
+                    {{mon}}
+                </td>
+                <td class="{{tue}}">
+                    {{tue}}
+                </td>
+                <td class="{{wed}}">
+                    {{wed}}
+                </td>
+                <td class="{{thu}}">
+                    {{thu}}
+                </td>
+                <td class="{{fri}}">
+                    {{fri}}
+                </td>
+                <td class="{{sat}}">
+                    {{sat}}
+                </td>
+                <td class="{{sun}}">
+                    {{sun}}
+                </td>
+            </tr>
+            {{/each}} {{/group}}
+        </tbody>
+    </table>
+</body>
+
+</html>

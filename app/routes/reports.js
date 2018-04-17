@@ -17,7 +17,9 @@ module.exports = function(app) {
     app.get("/getNotification", notification.getNotification);
     app.get("/getAnnouncement", announcement.getAnnouncement);
 
-    app.get("/getClassTimeTableReports", classtimetable.getClassTimeTableReports);
+    app.get("/getClassTimeTablePeriod", classtimetable.getClassTimeTablePeriod);
+    app.get("/getClassTimeTableMonthly", classtimetable.getClassTimeTableMonthly);
+    app.get("/getClassTimeTableWeekly", classtimetable.getClassTimeTableWeekly);
 
     app.get("/downloadExamResult", exam.downloadExamResult);
     app.get("/getExamResultReports", exam.getExamResultReports);

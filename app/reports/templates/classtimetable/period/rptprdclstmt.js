@@ -2,7 +2,7 @@ var Handlebars = require('handlebars');
 var moment = require('moment');
 var reports = module.exports = {};
 
-reports.getClassTimeTableReports = function getClassTimeTableReports(data) {
+reports.getPeriodClassTimeTable = function getPeriodClassTimeTable(data) {
     var _hndlbar = Handlebars;
 
     var weekperiodDT = data.weekperiodDT;

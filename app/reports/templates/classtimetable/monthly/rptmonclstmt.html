@@ -1,0 +1,111 @@
+<html>
+
+<head>
+    <meta charset="utf-8" />
+
+    <style>
+        table {
+            border-collapse: collapse;
+            font-size: 12px;
+            width: 100%;
+            border: 1px solid rgba(204, 204, 204, 0.35);
+        }
+        
+        table thead th,
+        table tbody thead th {
+            background: #009688;
+            color: #ffffff;
+            padding: 5px;
+            text-align: center;
+            vertical-align: top;
+        }
+        
+        table tbody th {
+            background: #eeeeee;
+            color: #000000;
+            padding: 5px;
+            text-align: center;
+            vertical-align: top;
+        }
+        
+        table tbody td {
+            padding: 5px;
+            vertical-align: top;
+        }
+        
+        h3,
+        h4 {
+            padding: 0;
+            margin: 7px;
+            text-align: center;
+        }
+        
+        .show {
+            display: inline-table!important;
+        }
+        
+        .hide {
+            display: none!important;
+        }
+        
+        .Holiday {
+            background-color: #03A9F4;
+            color: #FFFFFF;
+        }
+        
+        .Exam {
+            background-color: #ffe821;
+            color: #000000;
+        }
+        
+        .Lunch {
+            background-color: #FF9800;
+            color: #FFFFFF;
+        }
+        
+        .Weekly,
+        .Off {
+            background-color: #E91E63;
+            color: #FFFFFF;
+        }
+    </style>
+</head>
+
+<body>
+    <h3>Monthly Timetable</h3>
+
+    <h4>Class : {{headerColumn.[0].classname}}</h4>
+
+    <h4>{{headerColumn.[0].tchrname}}</h4>
+
+    <h4>{{{emptydatamsg}}}</h4>
+
+    <table border="1" cellspacing="0" cellpadding="5">
+        <thead>
+            <tr>
+                <th width="200px">Date / Time</th>
+                {{#monthlyColumn}}
+                <th>
+                    {{monthname}}
+                </th>
+                {{/monthlyColumn}}
+                <th width="100px" align="right">Total</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#monthlyData}}
+            <tr class="{{class}}">
+                <td>
+                    {{subname}}
+                </td>
+                {{{getmonthlydata this}}}
+                <td align="right">
+                    {{total}}
+                </td>
+            </tr>
+            {{/monthlyData}}
+        </tbody>
+    </table>
+</body>
+
+</html>
