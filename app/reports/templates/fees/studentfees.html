@@ -43,6 +43,20 @@
         hr {
             border: none;
         }
+        
+        .bg-red {
+            background-color: #F44336 !important;
+            color: #fff;
+        }
+        
+        h3 {
+            margin: 10px 0 5px;
+        }
+        
+        h4 {
+            padding: 0 10px;
+            margin: 3px;
+        }
     </style>
 </head>
 
@@ -57,8 +71,13 @@
                 <h1>{{enttname}}</h1>
                 <h2>Name : {{studname}}</h2>
                 <h3>Standard : {{classname}} - (Roll No : {{rollno}})</h3>
+                <h3>Total Class Fees : {{classfees}}</h3>
 
-                <h3>Total Paid Fees : {{paidfees}}</h3>
+                <h3>
+                    Paid Fees : {{paidfees}}
+                    <h4>Complete Fees : {{completefees}}</h4>
+                    <h4>Process Fees : {{processfees}}</h4>
+                </h3>
                 <h3>Pending Fees : {{pendfees}}</h3>
             </td>
             <td>
@@ -67,24 +86,16 @@
         </tr>
     </table>
     {{/data}}
-    <hr /> {{#data1}}
+    <hr /> {{#group data1 by="feeshead"}}
     <table border="1" cellspacing="0" cellpadding="5">
         <thead>
             <tr>
-                <td>
-                    Receipt No : {{receiptno}}
-                </td>
-                <td>
-                    <span>Amount</span>
-                </td>
-                <td>
-                    <span>Date : {{receivedate}}</span>
-                </td>
+                {{{splitHead value}}}
             </tr>
         </thead>
         <tbody>
-            {{#feesdt}}
-            <tr>
+            {{#each items}}
+            <tr class="{{bgcolor}}">
                 <td>
                     <b>{{catname}}</b>
                 </td>
@@ -95,20 +106,13 @@
                     {{#if ischequepay}} <b>Cheque No :</b> {{chequeno}} <br /> <b>Date :</b> {{chequedate}} <br /> <b>Status :</b> {{status}} {{/if}}
                 </td>
             </tr>
-            {{/feesdt}}
+            {{/each}}
             <tr>
-                <th>
-                    Total Fees
-                </th>
-                <th>
-                    <span>{{paidfees}}</span>
-                </th>
-                <th>
-                </th>
+                {{{totalFees value}}}
             </tr>
         </tbody>
     </table>
-    <hr /> {{/data1}}
+    <hr /> {{/group}}
 </body>
 
 </html>
