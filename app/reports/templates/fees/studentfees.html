@@ -86,8 +86,10 @@
         </tr>
     </table>
     {{/data}}
-    <hr /> {{#group data1 by="feeshead"}}
+
+    <hr />
     <table border="1" cellspacing="0" cellpadding="5">
+        {{#group data1 by="feeshead"}}
         <thead>
             <tr>
                 {{{splitHead value}}}
@@ -111,8 +113,8 @@
                 {{{totalFees value}}}
             </tr>
         </tbody>
+        {{/group}}
     </table>
-    <hr /> {{/group}}
 </body>
 
 </html>

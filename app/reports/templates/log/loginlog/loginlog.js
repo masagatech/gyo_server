@@ -3,11 +3,6 @@ var moment = require('moment');
 var reports = module.exports = {};
 var globals = require("gen").globals;
 
-var handlebars = require('handlebars'),
-    groupBy = require('handlebars-group-by');
-
-groupBy.register(handlebars);
-
 reports.getLoginLogReports = function getLoginLogReports(data) {
     var _hndlbar = Handlebars;
     var dataheader = data.data;

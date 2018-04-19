@@ -14,6 +14,7 @@ var fees = require(reportsapi + "fees.js");
 
 module.exports = function(app) {
     app.get("/getLoginLogReports", log.getLoginLogReports);
+    app.get("/getMenuLogReports", log.getMenuLogReports);
 
     app.get("/getReports", reports.getReports);
 

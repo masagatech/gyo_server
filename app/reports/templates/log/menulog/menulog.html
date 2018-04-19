@@ -1,0 +1,79 @@
+<html>
+
+<head>
+    <meta charset="utf-8" />
+
+    <style>
+        table {
+            border-collapse: collapse;
+            font-size: 12px;
+            border: 1px solid rgba(204, 204, 204, 0.35);
+            width: 100%;
+        }
+        
+        table thead th {
+            background: #009688;
+            color: #ffffff;
+            padding: 5px;
+            text-align: left;
+            vertical-align: top;
+        }
+        
+        table tbody th {
+            background: #eeeeee;
+            color: #000000;
+            padding: 5px;
+            text-align: left;
+            vertical-align: top;
+        }
+        
+        table tbody td {
+            padding: 5px;
+            vertical-align: top;
+        }
+        
+        label {
+            float: left;
+        }
+        
+        span {
+            float: right;
+        }
+        
+        hr {
+            border: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div align="center">
+        {{#data}}
+        <h1>Name : {{fullname}}</h1>
+        <h3>Email : {{email}}, {{altemail}}</h3>
+        <h3>Mobile : {{mobile}}, {{altmobile}}</h3>
+        {{/data}}
+    </div>
+
+    <hr />
+    <table border="1" cellspacing="0" cellpadding="5">
+        {{#group data1 by="group"}}
+        <tbody>
+            <tr>
+                <th>
+                    {{{splitGroup value}}}
+                </th>
+            </tr>
+            {{#each items}}
+            <tr>
+                <td>
+                    {{logtime}}
+                </td>
+            </tr>
+            {{/each}}
+        </tbody>
+        {{/group}}
+    </table>
+</body>
+
+</html>
