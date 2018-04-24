@@ -22,6 +22,7 @@ var exam = require("../appmodule/erp/exam.js");
 var assnm = require("../appmodule/erp/assignment.js");
 var ntf = require("../appmodule/erp/notification.js");
 var annc = require("../appmodule/erp/announcement.js");
+var nb = require("../appmodule/erp/noticeboard.js");
 var tag = require("../appmodule/erp/tag.js");
 var gallery = require("../appmodule/erp/gallery.js");
 var content = require("../appmodule/erp/content.js");
@@ -202,6 +203,13 @@ var appRouter = function(app) {
     app.post(root + "/getAnnouncement", annc.getAnnouncement);
 
     //##################################### Announcement #################################################
+
+    //##################################### Noticeboard #################################################
+
+    app.post(root + "/saveNoticeboard", nb.saveNoticeboard);
+    app.post(root + "/getNoticeboard", nb.getNoticeboard);
+
+    //##################################### Noticeboard #################################################
 
     //##################################### Tag ##########################################################
 
