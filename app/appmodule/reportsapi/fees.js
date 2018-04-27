@@ -10,12 +10,20 @@ var fees = module.exports = {};
 var feesapi = require("../../reports/templates/fees/fees.js");
 
 fees.getFeesReports = function getFeesReports(req, res, done) {
+    var _url = "";
+
     db.callProcedure("select " + globals.erpschema("funget_rpt_feescollection") + "($1,$2,$3::json);", ['feesrpt1', 'feesrpt2', req.query], function(data) {
+        if (req.query.typ == "ledger") {
+            _url = "fees/feesledger.html";
+        } else {
+            _url = "fees/feesreceipt.html";
+        }
+
         download(req, res, {
             data: data.rows[0],
             data1: data.rows[1],
             params: req.query
-        }, { 'all': 'fees/studentfees.html' }, feesapi.getFeesReports);
+        }, { 'all': _url }, feesapi.getFeesReports);
     }, function(err) {
         rs.resp(res, 401, "error : " + err);
     }, 2)

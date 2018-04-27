@@ -1,0 +1,123 @@
+<html>
+
+<head>
+    <meta charset="utf-8" />
+
+    <style>
+        table {
+            border-collapse: collapse;
+            font-size: 12px;
+            border: 1px solid rgba(204, 204, 204, 0.35);
+            width: 100%;
+        }
+        
+        table thead td {
+            background: #009688;
+            color: #ffffff;
+            padding: 5px;
+            text-align: left;
+            vertical-align: top;
+        }
+        
+        table tbody th {
+            background: #eeeeee;
+            color: #000000;
+            padding: 5px;
+            text-align: center;
+            vertical-align: top;
+        }
+        
+        table tbody td {
+            padding: 5px;
+            vertical-align: top;
+        }
+        
+        h3 {
+            margin: 10px 0 5px;
+        }
+        
+        h4 {
+            padding: 0 10px;
+            margin: 3px;
+        }
+        
+        span {
+            float: right;
+        }
+        
+        .bg-red {
+            background-color: #F44336 !important;
+            color: #fff;
+        }
+    </style>
+</head>
+
+<body>
+    {{#data}}
+    <table cellspacing="0" cellpadding="5">
+        <tr>
+            <td>
+                <img src="{{{uploadurl}}}/{{schlogo}}" height="200">
+            </td>
+            <td align="center">
+                <h1>{{schname}}</h1>
+                <h2>{{schaddr}}</h2>
+                <h2>Phone No : {{schphone}}</h2>
+            </td>
+            <td>
+                <span><img src="{{{logourl}}}/paid-stamp.jpg" height="200"></span>
+            </td>
+        </tr>
+    </table>
+    {{/data}}
+
+    <table border="1" cellspacing="0" cellpadding="5">
+        <tbody>
+            {{#data}}
+            <tr>
+                <td>
+                    <b>Name : </b>{{studname}}
+                </td>
+                <td>
+                    <b>Course : </b>{{boardname}}
+                </td>
+                <td>
+                    <b>Class : </b>{{classname}}
+                </td>
+            </tr>
+            <tr>
+                <td colspan="3">
+                    <b>Admission No : </b>{{grno}}
+                </td>
+            </tr>
+            {{/data}} {{#group data1 by="feeshead"}}
+            <tr>
+                {{{splitHead value}}}
+            </tr>
+            <tr>
+                <th>
+                    Fee Name
+                </th>
+                <th colspan="2">
+                    Amount
+                </th>
+            </tr>
+            {{#each items}}
+            <tr class="{{bgcolor}}">
+                <td>
+                    <b>{{catname}}</b>
+                </td>
+                <td colspan="2">
+                    <span>{{paidfees}}</span>
+                </td>
+            </tr>
+            {{/each}}
+            <tr>
+                {{{totalCompleteFees value}}}
+            </tr>
+            {{/group}}
+        </tbody>
+    </table>
+</body>
+
+</html>

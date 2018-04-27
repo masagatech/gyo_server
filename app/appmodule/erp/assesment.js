@@ -39,7 +39,7 @@ ass.saveAssesmentResult = function saveAssesmentResult(req, res, done) {
             var _prntntf = {
                 "flag": "parents_notification",
                 "title": "Assesment Result : " + _assdata.studname,
-                "body": "Sended Email, on your registered email, to " + _assdata.ntfmsg,
+                "body": "Sent Email, on your registered email, to " + _assdata.ntfmsg,
                 "prntids": _assdata.prntids
             }
 

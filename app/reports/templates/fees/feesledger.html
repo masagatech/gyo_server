@@ -65,10 +65,11 @@
     <table cellspacing="0" cellpadding="5">
         <tr>
             <td>
-                <img src="{{{uploadurl}}}/{{enttlogo}}" height="200">
+                <img src="{{{uploadurl}}}/{{schlogo}}" height="200">
             </td>
             <td>
-                <h1>{{enttname}}</h1>
+                <h1>{{schname}}</h1>
+                <h2>{{schaddr}}</h2>
                 <h2>Name : {{studname}}</h2>
                 <h3>Standard : {{classname}} - (Roll No : {{rollno}})</h3>
                 <h3>Total Class Fees : {{classfees}}</h3>
@@ -79,9 +80,6 @@
                     <h4>Process Fees : {{processfees}}</h4>
                 </h3>
                 <h3>Pending Fees : {{pendfees}}</h3>
-            </td>
-            <td>
-                <span><img src="{{{logourl}}}/paid-stamp.jpg" height="200"></span>
             </td>
         </tr>
     </table>
@@ -105,12 +103,12 @@
                     <span>{{paidfees}}</span>
                 </td>
                 <td>
-                    {{#if ischequepay}} <b>Cheque No :</b> {{chequeno}} <br /> <b>Date :</b> {{chequedate}} <br /> <b>Status :</b> {{status}} {{/if}}
+                    {{#if ischequepay}} {{chqdtls}} {{/if}}
                 </td>
             </tr>
             {{/each}}
             <tr>
-                {{{totalFees value}}}
+                {{{totalPaidFees value}}}
             </tr>
         </tbody>
         {{/group}}
