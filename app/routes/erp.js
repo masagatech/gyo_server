@@ -41,6 +41,7 @@ var appRouter = function(app) {
     //##################################### Dashboard ####################################################
 
     app.post(root + "/getERPDashboard", dashboard.getERPDashboard);
+    app.post(root + "/getStudentDashboard", dashboard.getStudentDashboard);
 
     //##################################### Dashboard ####################################################
 
