@@ -2,6 +2,11 @@ var Handlebars = require('handlebars');
 var moment = require('moment');
 var reports = module.exports = {};
 
+var handlebars = require('handlebars'),
+    groupBy = require('handlebars-group-by');
+
+groupBy.register(handlebars);
+
 reports.getAssesmentResultReports = function getAssesmentResultReports(data) {
     var _hndlbar = Handlebars;
     var assesmentdt = data.data1;

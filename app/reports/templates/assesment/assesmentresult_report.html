@@ -19,7 +19,15 @@
             vertical-align: top;
         }
         
-        .table td {
+        table tbody th {
+            background: #eeeeee;
+            color: #000000;
+            padding: 5px;
+            text-align: left;
+            vertical-align: top;
+        }
+        
+        table tbody td {
             padding: 5px;
             vertical-align: top;
         }
@@ -57,16 +65,19 @@
                 <th>
                     Sub Heading
                 </th>
-                <th>
-                    Assesment Type
-                </th>
                 {{#data2}}
                 <th>{{this.assdate}}</th>
                 {{/data2}}
             </tr>
         </thead>
+        {{#group data1 by="asstypname"}}
         <tbody>
-            {{#data1}}
+            <tr>
+                <th colspan="20">
+                    {{{value}}}
+                </th>
+            </tr>
+            {{#each items}}
             <tr>
                 <td width="200px">
                     {{heading}}
@@ -74,13 +85,11 @@
                 <td>
                     {{subheading}}
                 </td>
-                <td width="200px">
-                    {{asstypname}}
-                </td>
                 {{{date_cols this}}}
             </tr>
-            {{/data1}}
+            {{/each}}
         </tbody>
+        {{/group}}
     </table>
 </body>
 
