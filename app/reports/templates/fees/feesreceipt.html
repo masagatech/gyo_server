@@ -53,7 +53,75 @@
 </head>
 
 <body>
-    {{#data}}
+    1.) School Copy
+    <br /> {{#data}}
+
+    <table cellspacing="0" cellpadding="5">
+        <tr>
+            <td>
+                <img src="{{{uploadurl}}}/{{schlogo}}" height="200">
+            </td>
+            <td align="center">
+                <h1>{{schname}}</h1>
+                <h2>{{schaddr}}</h2>
+                <h2>Phone No : {{schphone}}</h2>
+            </td>
+            <td>
+                <span><img src="{{{logourl}}}/paid-stamp.jpg" height="200"></span>
+            </td>
+        </tr>
+    </table>
+    {{/data}}
+
+    <table border="1" cellspacing="0" cellpadding="5">
+        <tbody>
+            {{#data}}
+            <tr>
+                <td>
+                    <b>Name : </b>{{studname}}
+                </td>
+                <td>
+                    <b>Course : </b>{{boardname}}
+                </td>
+                <td>
+                    <b>Class : </b>{{classname}}
+                </td>
+            </tr>
+            <tr>
+                <td colspan="3">
+                    <b>Admission No : </b>{{grno}}
+                </td>
+            </tr>
+            {{/data}} {{#group data1 by="feeshead"}}
+            <tr>
+                {{{splitHead value}}}
+            </tr>
+            <tr>
+                <th>
+                    Fee Name
+                </th>
+                <th colspan="2">
+                    Amount
+                </th>
+            </tr>
+            {{#each items}}
+            <tr class="{{bgcolor}}">
+                <td>
+                    <b>{{catname}}</b>
+                </td>
+                <td colspan="2">
+                    <span>{{paidfees}}</span>
+                </td>
+            </tr>
+            {{/each}}
+            <tr>
+                {{{totalCompleteFees value}}}
+            </tr>
+            {{/group}}
+        </tbody>
+    </table>
+
+    <hr /> 2.) Parent Copy <br /> {{#data}}
     <table cellspacing="0" cellpadding="5">
         <tr>
             <td>

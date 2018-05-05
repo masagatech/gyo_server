@@ -11,7 +11,7 @@
             width: 100%;
         }
         
-        table thead td {
+        table thead th {
             background: #009688;
             color: #ffffff;
             padding: 5px;
@@ -61,55 +61,118 @@
 </head>
 
 <body>
-    {{#data}}
+    1.) School Copy
+    <br /> {{#data}}
+
     <table cellspacing="0" cellpadding="5">
         <tr>
             <td>
-                <img src="{{{uploadurl}}}/{{schlogo}}" height="200">
+                {{#data2}}
+                <img src="{{{uploadurl}}}/{{schlogo}}" height="200"> {{/data2}}
             </td>
             <td>
+                {{#data2}}
                 <h1>{{schname}}</h1>
                 <h2>{{schaddr}}</h2>
                 <h2>Name : {{studname}}</h2>
-                <h3>Standard : {{classname}} - (Roll No : {{rollno}})</h3>
-                <h3>Total Class Fees : {{classfees}}</h3>
-
-                <h3>
-                    Paid Fees : {{paidfees}}
-                    <h4>Complete Fees : {{completefees}}</h4>
-                    <h4>Process Fees : {{processfees}}</h4>
-                </h3>
-                <h3>Pending Fees : {{pendfees}}</h3>
+                {{/data2}}
             </td>
         </tr>
     </table>
-    {{/data}}
 
     <hr />
+
     <table border="1" cellspacing="0" cellpadding="5">
-        {{#group data1 by="feeshead"}}
+        {{#group data1 by="feestitle"}}
         <thead>
+            <tr>
+                {{{splitTitle value}}}
+            </tr>
+        </thead>
+        {{#group items by="feeshead"}}
+        <tbody>
             <tr>
                 {{{splitHead value}}}
             </tr>
-        </thead>
-        <tbody>
             {{#each items}}
             <tr class="{{bgcolor}}">
                 <td>
                     <b>{{catname}}</b>
                 </td>
-                <td>
+                <td width="200px">
                     <span>{{paidfees}}</span>
                 </td>
-                <td>
-                    {{#if ischequepay}} {{chqdtls}} {{/if}}
+                <td width="500px">
+                    {{remark}}
+                    <br /> {{#if ischequepay}} {{chqdtls}} {{/if}}
                 </td>
             </tr>
             {{/each}}
             <tr>
                 {{{totalPaidFees value}}}
             </tr>
+            <tr>
+                <td colspan="3"></td>
+            </tr>
+            {{/group}}
+        </tbody>
+        {{/group}}
+    </table>
+
+    <hr /> 2.) Parent Copy
+    <br />
+
+    <table cellspacing="0" cellpadding="5">
+        <tr>
+            <td>
+                {{#data2}}
+                <img src="{{{uploadurl}}}/{{schlogo}}" height="200"> {{/data2}}
+            </td>
+            <td>
+                {{#data2}}
+                <h1>{{schname}}</h1>
+                <h2>{{schaddr}}</h2>
+                <h2>Name : {{studname}}</h2>
+                {{/data2}}
+            </td>
+        </tr>
+    </table>
+
+    <hr />
+
+    <table border="1" cellspacing="0" cellpadding="5">
+        {{#group data1 by="feestitle"}}
+        <thead>
+            <tr>
+                {{{splitTitle value}}}
+            </tr>
+        </thead>
+        {{#group items by="feeshead"}}
+        <tbody>
+            <tr>
+                {{{splitHead value}}}
+            </tr>
+            {{#each items}}
+            <tr class="{{bgcolor}}">
+                <td>
+                    <b>{{catname}}</b>
+                </td>
+                <td width="200px">
+                    <span>{{paidfees}}</span>
+                </td>
+                <td width="500px">
+                    {{remark}}
+                    <br /> {{#if ischequepay}} {{chqdtls}} {{/if}}
+                </td>
+            </tr>
+            {{/each}}
+            <tr>
+                {{{totalPaidFees value}}}
+            </tr>
+            <tr>
+                <td colspan="3"></td>
+            </tr>
+            {{/group}}
         </tbody>
         {{/group}}
     </table>

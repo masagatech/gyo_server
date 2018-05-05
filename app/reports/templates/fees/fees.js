@@ -11,10 +11,37 @@ groupBy.register(handlebars);
 reports.getFeesReports = function getFeesReports(data) {
     var _hndlbar = Handlebars;
     var feesdt = data.data1;
+    var params = data.params;
+
+    _hndlbar.registerHelper('splitTitle', function(head) {
+        var t = head.split("~");
+        var head = "";
+
+        head = "<th>Class : " + t[0] + " - " + t[1] + "</th>";
+        head += "<th colspan='2'>Paid Fees : " + t[2] + ", ";
+        head += "Complete Fees : " + t[3] + ", ";
+        head += "Process Fees : " + t[4] + ", ";
+        head += "Pending Fees : " + t[5] + "</th>";
+
+        return head;
+    });
 
     _hndlbar.registerHelper('splitHead', function(head) {
         var t = head.split("~");
-        return "<td><b>Payment Method : </b>" + t[2] + "</td><td><b>Paid on : </b>" + t[1] + "</td><td><b>Receipt No : </b>" + t[0] + "</td>";
+
+        if (params.typ == "receipt") {
+            return "<td><b>Payment Method : </b>" + t[2] + "</td><td><b>Paid on : </b>" + t[1] + "</td><td><b>Receipt No : </b>" + t[0] + "</td>";
+        } else {
+            return "<th><b>Paid on : </b>" + t[0] + "</th><th><b>Receipt No : </b>" + t[1] + "</th><th><b>Payment Method : </b>" + t[2] + "</th>";
+        }
+    });
+
+    _hndlbar.registerHelper('isDuplicateCopy', function(head) {
+        if (params.isDuplicate == "yes") {
+            return true;
+        } else {
+            return false;
+        }
     });
 
     _hndlbar.registerHelper('totalPaidFees', function(head) {
