@@ -36,14 +36,6 @@ reports.getFeesReports = function getFeesReports(data) {
         }
     });
 
-    _hndlbar.registerHelper('isDuplicateCopy', function(head) {
-        if (params.isDuplicate == "yes") {
-            return true;
-        } else {
-            return false;
-        }
-    });
-
     _hndlbar.registerHelper('totalPaidFees', function(head) {
         var t = head.split("~");
         return '<th colspan="2"><span>Total Amount : ' + t[3] + '</span></th><th></th>';
