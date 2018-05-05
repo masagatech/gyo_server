@@ -6,7 +6,6 @@
     <style>
         table {
             border-collapse: collapse;
-            font-size: 12px;
             border: 1px solid rgba(204, 204, 204, 0.35);
             width: 100%;
         }
@@ -17,6 +16,7 @@
             padding: 5px;
             text-align: left;
             vertical-align: top;
+            font-size: 13px;
         }
         
         table tbody th {
@@ -25,20 +25,13 @@
             padding: 5px;
             text-align: center;
             vertical-align: top;
+            font-size: 11px;
         }
         
         table tbody td {
             padding: 5px;
             vertical-align: top;
-        }
-        
-        h3 {
-            margin: 10px 0 5px;
-        }
-        
-        h4 {
-            padding: 0 10px;
-            margin: 3px;
+            font-size: 11px;
         }
         
         span {
@@ -50,29 +43,38 @@
             color: #fff;
         }
         
+        h3 {
+            margin: 10px 0;
+            font-size: 14px;
+        }
+        
+        h5 {
+            font-size: 12px;
+            margin: 5px 0;
+            font-weight: normal;
+        }
+        
         hr {
-            margin: 150px 0;
-            border: 0;
+            border: solid 2px red;
+            margin: 20px 0;
         }
     </style>
 </head>
 
 <body>
-    1.) School Copy
-    <br /> {{#data}}
-
+    {{#data}}
     <table cellspacing="0" cellpadding="5">
         <tr>
             <td>
-                <img src="{{{uploadurl}}}/{{schlogo}}" height="200">
+                <img src="{{{uploadurl}}}/{{schlogo}}" height="80">
             </td>
             <td align="center">
-                <h1>{{schname}}</h1>
-                <h2>{{schaddr}}</h2>
-                <h2>Phone No : {{schphone}}</h2>
+                <h3>{{schname}}</h3>
+                <h5>{{schaddr}}</h5>
+                <h5>Phone No : {{schphone}}</h5>
             </td>
             <td>
-                <span><img src="{{{logourl}}}/paid-stamp.jpg" height="200"></span>
+                <span><img src="{{{logourl}}}/paid-stamp.jpg" height="80"></span>
             </td>
         </tr>
     </table>
@@ -97,50 +99,37 @@
                     <b>Admission No : </b>{{grno}}
                 </td>
             </tr>
-            {{/data}} {{#group data1 by="feeshead"}}
+            {{/data}} {{#data1}}
             <tr>
-                {{{splitHead value}}}
+                {{{splitHead feeshead}}}
             </tr>
-            <tr>
-                <th>
-                    Fee Name
-                </th>
-                <th colspan="2">
-                    Amount
-                </th>
-            </tr>
-            {{#each items}}
             <tr class="{{bgcolor}}">
                 <td>
-                    <b>{{catname}}</b>
+                    <b>Category : </b>{{catname}}
                 </td>
-                <td colspan="2">
-                    <span>{{paidfees}}</span>
-                </td>
+                {{{totalCompleteFees feeshead}}}
             </tr>
-            {{/each}}
             <tr>
-                {{{totalCompleteFees value}}}
+
             </tr>
-            {{/group}}
+            {{/data1}}
         </tbody>
     </table>
 
-    <hr /> 2.) Parent Copy
-    <br /> {{#data}}
+    <hr /> {{#data}}
 
     <table cellspacing="0" cellpadding="5">
         <tr>
             <td>
-                <img src="{{{uploadurl}}}/{{schlogo}}" height="200">
+                <img src="{{{uploadurl}}}/{{schlogo}}" height="80">
             </td>
             <td align="center">
-                <h1>{{schname}}</h1>
-                <h2>{{schaddr}}</h2>
-                <h2>Phone No : {{schphone}}</h2>
+                <h3>{{schname}}</h3>
+                <h5>{{schaddr}}</h5>
+                <h5>Phone No : {{schphone}}</h5>
             </td>
             <td>
-                <span><img src="{{{logourl}}}/paid-stamp.jpg" height="200"></span>
+                <span><img src="{{{logourl}}}/paid-stamp.jpg" height="80"></span>
             </td>
         </tr>
     </table>
@@ -165,32 +154,20 @@
                     <b>Admission No : </b>{{grno}}
                 </td>
             </tr>
-            {{/data}} {{#group data1 by="feeshead"}}
+            {{/data}} {{#data1}}
             <tr>
-                {{{splitHead value}}}
+                {{{splitHead feeshead}}}
             </tr>
-            <tr>
-                <th>
-                    Fee Name
-                </th>
-                <th colspan="2">
-                    Amount
-                </th>
-            </tr>
-            {{#each items}}
             <tr class="{{bgcolor}}">
                 <td>
                     <b>{{catname}}</b>
                 </td>
-                <td colspan="2">
-                    <span>{{paidfees}}</span>
-                </td>
+                {{{totalCompleteFees feeshead}}}
             </tr>
-            {{/each}}
             <tr>
-                {{{totalCompleteFees value}}}
+
             </tr>
-            {{/group}}
+            {{/data1}}
         </tbody>
     </table>
 </body>

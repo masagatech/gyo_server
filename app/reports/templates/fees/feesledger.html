@@ -6,7 +6,6 @@
     <style>
         table {
             border-collapse: collapse;
-            font-size: 12px;
             border: 1px solid rgba(204, 204, 204, 0.35);
             width: 100%;
         }
@@ -17,6 +16,7 @@
             padding: 5px;
             text-align: left;
             vertical-align: top;
+            font-size: 13px;
         }
         
         table tbody th {
@@ -25,11 +25,13 @@
             padding: 5px;
             text-align: left;
             vertical-align: top;
+            font-size: 11px;
         }
         
         table tbody td {
             padding: 5px;
             vertical-align: top;
+            font-size: 11px;
         }
         
         label {
@@ -40,51 +42,45 @@
             float: right;
         }
         
-        hr {
-            border: none;
-        }
-        
         .bg-red {
             background-color: #F44336 !important;
             color: #fff;
         }
         
         h3 {
-            margin: 10px 0 5px;
+            margin: 10px 0;
+            font-size: 14px;
         }
         
-        h4 {
-            padding: 0 10px;
-            margin: 3px;
+        h5 {
+            font-size: 12px;
+            margin: 5px 0;
+            font-weight: normal;
         }
         
-        .space {
-            margin: 40px 0;
+        hr {
+            border: solid 2px red;
+            margin: 20px 0;
         }
     </style>
 </head>
 
 <body>
-    1.) School Copy
-    <br />
-
     <table cellspacing="0" cellpadding="5">
         <tr>
-            <td>
+            <td width="100px">
                 {{#data2}}
-                <img src="{{{uploadurl}}}/{{schlogo}}" height="200"> {{/data2}}
+                <img src="{{{uploadurl}}}/{{schlogo}}" height="80"> {{/data2}}
             </td>
             <td>
                 {{#data2}}
-                <h1>{{schname}}</h1>
-                <h2>{{schaddr}}</h2>
-                <h2>Name : {{studname}}</h2>
+                <h3>{{schname}}</h3>
+                <h5>{{schaddr}}</h5>
+                <h5>Name : {{studname}}</h5>
                 {{/data2}}
             </td>
         </tr>
     </table>
-
-    <hr />
 
     <table border="1" cellspacing="0" cellpadding="5">
         {{#group data1 by="feestitle"}}
@@ -123,26 +119,23 @@
         {{/group}}
     </table>
 
-    <hr class="space" /> 2.) Parent Copy
-    <br />
+    <hr />
 
     <table cellspacing="0" cellpadding="5">
         <tr>
-            <td>
+            <td width="100px">
                 {{#data2}}
-                <img src="{{{uploadurl}}}/{{schlogo}}" height="200"> {{/data2}}
+                <img src="{{{uploadurl}}}/{{schlogo}}" height="80"> {{/data2}}
             </td>
             <td>
                 {{#data2}}
-                <h1>{{schname}}</h1>
-                <h2>{{schaddr}}</h2>
-                <h2>Name : {{studname}}</h2>
+                <h3>{{schname}}</h3>
+                <h5>{{schaddr}}</h5>
+                <h5>Name : {{studname}}</h5>
                 {{/data2}}
             </td>
         </tr>
     </table>
-
-    <hr />
 
     <table border="1" cellspacing="0" cellpadding="5">
         {{#group data1 by="feestitle"}}

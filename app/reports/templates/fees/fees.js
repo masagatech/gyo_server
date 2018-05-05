@@ -28,22 +28,17 @@ reports.getFeesReports = function getFeesReports(data) {
 
     _hndlbar.registerHelper('splitHead', function(head) {
         var t = head.split("~");
-
-        if (params.typ == "receipt") {
-            return "<td><b>Payment Method : </b>" + t[2] + "</td><td><b>Paid on : </b>" + t[1] + "</td><td><b>Receipt No : </b>" + t[0] + "</td>";
-        } else {
-            return "<th><b>Paid on : </b>" + t[0] + "</th><th><b>Receipt No : </b>" + t[1] + "</th><th><b>Payment Method : </b>" + t[2] + "</th>";
-        }
+        return "<th><b>Receipt No : </b>" + t[1] + "</th><th colspan='2'><b>Paid on : </b>" + t[0] + "</th>";
     });
 
     _hndlbar.registerHelper('totalPaidFees', function(head) {
         var t = head.split("~");
-        return '<th colspan="2"><span>Total Amount : ' + t[3] + '</span></th><th></th>';
+        return '<th></th><th colspan="2"><b>Total Amount : </b>' + t[3] + '</th>';
     });
 
     _hndlbar.registerHelper('totalCompleteFees', function(head) {
         var t = head.split("~");
-        return '<th colspan="2"><span>Total Amount : ' + t[4] + '</span></th><th></th>';
+        return '<td colspan="2"><b>Total Amount : </b>' + t[4] + '</td>';
     });
 
     _hndlbar.registerHelper('replace', function(find, replace, options) {
