@@ -1,0 +1,232 @@
+<html>
+
+<head>
+    <meta charset="utf-8" />
+
+    <style>
+        table {
+            border-collapse: collapse;
+            border: 1px solid rgba(204, 204, 204, 0.35);
+            width: 100%;
+        }
+        
+        table thead td {
+            background: #009688;
+            color: #ffffff;
+            padding: 5px;
+            text-align: left;
+            vertical-align: top;
+            font-size: 8px;
+        }
+        
+        table tbody th {
+            background: #eeeeee;
+            color: #000000;
+            padding: 5px;
+            text-align: center;
+            vertical-align: top;
+            font-size: 8px;
+        }
+        
+        table tbody td {
+            padding: 5px;
+            vertical-align: top;
+            font-size: 8px;
+        }
+        
+        span {
+            float: right;
+        }
+        
+        .bg-red {
+            background-color: #F44336 !important;
+            color: #fff;
+        }
+        
+        h3 {
+            margin: 10px 0;
+            font-size: 12px;
+        }
+        
+        h5 {
+            font-size: 10px;
+            margin: 5px 0;
+            font-weight: normal;
+        }
+        
+        hr {
+            border: solid 2px red;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div align="center">
+        {{#data}}
+        <h3>{{schname}}</h3>
+
+        <table cellspacing="0" cellpadding="5">
+            <tr>
+                <td align="right">
+                    <img src="{{{uploadurl}}}/{{schlogo}}" height="70">
+                </td>
+                <td align="center">
+                    <h5>{{schaddr}}</h5>
+                    <h5>Phone : {{schphone}}</h5>
+                    <h5>Email : {{schemail}}</h5>
+                    <h5>Class : {{classname}}</h5>
+                    <h5>Course : {{boardname}}</h5>
+                </td>
+            </tr>
+        </table>
+        {{/data}}
+    </div>
+
+    <table cellspacing="0" cellpadding="5">
+        <tbody>
+            {{#data1}}
+            <tr>
+                <td align="left">
+                    <b>Receipt No # :</b> {{receiptno}}
+                </td>
+                <td align="right">
+                    <b>Date :</b> {{receivedate}}
+                </td>
+            </tr>
+            <tr>
+                <td align="left">
+                    <b>Cash Received From :</b> {{studname}}
+                </td>
+                <td align="right">
+                    <b>of Rs.</b> {{completefees}}
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <b>For :</b> {{catname}}
+                </td>
+            </tr>
+            <tr>
+                <td>
+                </td>
+                <td align="right">
+                    <table border="1" cellspacing="0" cellpadding="5">
+                        <tbody>
+                            <tr>
+                                <td>
+                                    Total Amount Due
+                                </td>
+                                <td>
+                                    {{classfees}}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Amount Received
+                                </td>
+                                <td>
+                                    {{paidfees}}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Balance Due
+                                </td>
+                                <td>
+                                    {{pendfees}}
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </td>
+            </tr>
+            {{/data1}}
+        </tbody>
+    </table>
+
+    <hr /> {{#data}}
+    <div align="center">
+        <h3>{{schname}}</h3>
+
+        <table cellspacing="0" cellpadding="5">
+            <tr>
+                <td align="right">
+                    <img src="{{{uploadurl}}}/{{schlogo}}" height="70">
+                </td>
+                <td align="center">
+                    <h5>{{schaddr}}</h5>
+                    <h5>Phone : {{schphone}}</h5>
+                    <h5>Email : {{schemail}}</h5>
+                    <h5>Class : {{classname}}</h5>
+                    <h5>Course : {{boardname}}</h5>
+                </td>
+            </tr>
+        </table>
+    </div>
+    {{/data}}
+
+    <table cellspacing="0" cellpadding="5">
+        <tbody>
+            {{#data1}}
+            <tr>
+                <td align="left">
+                    <b>Receipt No # :</b> {{receiptno}}
+                </td>
+                <td align="right">
+                    <b>Date :</b> {{receivedate}}
+                </td>
+            </tr>
+            <tr>
+                <td align="left">
+                    <b>Cash Received From :</b> {{studname}}
+                </td>
+                <td align="right">
+                    <b>of Rs.</b> {{completefees}}
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <b>For :</b> {{catname}}
+                </td>
+            </tr>
+            <tr>
+                <td>
+                </td>
+                <td align="right">
+                    <table border="1" cellspacing="0" cellpadding="5">
+                        <tbody>
+                            <tr>
+                                <td>
+                                    Total Amount Due
+                                </td>
+                                <td>
+                                    {{classfees}}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Amount Received
+                                </td>
+                                <td>
+                                    {{paidfees}}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Balance Due
+                                </td>
+                                <td>
+                                    {{pendfees}}
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </td>
+            </tr>
+            {{/data1}}
+        </tbody>
+    </table>
+</body>
+
+</html>

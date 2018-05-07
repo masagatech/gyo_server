@@ -16,7 +16,6 @@
             padding: 5px;
             text-align: left;
             vertical-align: top;
-            font-size: 8px;
         }
         
         table tbody th {
@@ -25,13 +24,11 @@
             padding: 5px;
             text-align: left;
             vertical-align: top;
-            font-size: 8px;
         }
         
         table tbody td {
             padding: 5px;
             vertical-align: top;
-            font-size: 8px;
         }
         
         label {
@@ -47,13 +44,24 @@
             color: #fff;
         }
         
+        .show {
+            display: inline-table!important;
+            width: 100%;
+        }
+        
+        .show-td {
+            display: inline-table!important;
+        }
+        
+        .hide {
+            display: none!important;
+        }
+        
         h3 {
             margin: 10px 0;
-            font-size: 12px;
         }
         
         h5 {
-            font-size: 10px;
             margin: 5px 0;
             font-weight: normal;
         }
@@ -66,19 +74,19 @@
 </head>
 
 <body>
-    <table cellspacing="0" cellpadding="5">
+    <table class="{{{showHeader}}}" cellspacing="0" cellpadding="5">
         <tr>
+            {{#data2}} {{#isShowLogo showlogo}}
             <td width="100px">
-                {{#data2}}
-                <img src="{{{uploadurl}}}/{{schlogo}}" height="80"> {{/data2}}
+                <img src="{{{uploadurl}}}/{{schlogo}}" height="70">
             </td>
-            <td>
-                {{#data2}}
-                <h3>{{schname}}</h3>
-                <h5>{{schaddr}}</h5>
-                <h5>Name : {{studname}}</h5>
-                {{/data2}}
+            {{/isShowLogo}}
+            <td colspan="3" align="center">
+                <h3 {{{font-12}}}>{{schname}}</h3>
+                <h5 {{{font-10}}}>{{schaddr}}</h5>
+                <h5 {{{font-10}}}>Name : {{studname}}</h5>
             </td>
+            {{/data2}}
         </tr>
     </table>
 
@@ -96,13 +104,13 @@
             </tr>
             {{#each items}}
             <tr class="{{bgcolor}}">
-                <td>
+                <td {{{font-08}}}>
                     {{catname}}
                 </td>
-                <td width="100px">
+                <td {{{font-08}}} width="100px">
                     <span>{{paidfees}}</span>
                 </td>
-                <td width="500px">
+                <td {{{font-08}}} width="500px">
                     {{remark}}
                     <br /> {{#if ischequepay}} {{chqdtls}} {{/if}}
                 </td>
@@ -112,67 +120,69 @@
                 {{{totalPaidFees value}}}
             </tr>
             <tr>
-                <td colspan="3"></td>
+                <td {{{font-08}}} colspan="3"></td>
             </tr>
             {{/group}}
         </tbody>
         {{/group}}
     </table>
 
-    <hr />
+    <div class="{{{showDuplicate}}}">
+        <hr />
 
-    <table cellspacing="0" cellpadding="5">
-        <tr>
-            <td width="100px">
-                {{#data2}}
-                <img src="{{{uploadurl}}}/{{schlogo}}" height="80"> {{/data2}}
-            </td>
-            <td>
-                {{#data2}}
-                <h3>{{schname}}</h3>
-                <h5>{{schaddr}}</h5>
-                <h5>Name : {{studname}}</h5>
+        <table cellspacing="0" cellpadding="5">
+            <tr>
+                {{#data2}} {{#isShowLogo showlogo}}
+                <td width="100px">
+                    <img src="{{{uploadurl}}}/{{schlogo}}" height="70">
+                </td>
+                {{/isShowLogo}}
+                <td colspan="3" align="center">
+                    <h3 {{{font-12}}}>{{schname}}</h3>
+                    <h5 {{{font-10}}}>{{schaddr}}</h5>
+                    <h5 {{{font-10}}}>Name : {{studname}}</h5>
+                </td>
                 {{/data2}}
-            </td>
-        </tr>
-    </table>
+            </tr>
+        </table>
 
-    <table border="1" cellspacing="0" cellpadding="5">
-        {{#group data1 by="feestitle"}}
-        <thead>
-            <tr>
-                {{{splitTitle value}}}
-            </tr>
-        </thead>
-        {{#group items by="feeshead"}}
-        <tbody>
-            <tr>
-                {{{splitHead value}}}
-            </tr>
-            {{#each items}}
-            <tr class="{{bgcolor}}">
-                <td>
-                    {{catname}}
-                </td>
-                <td width="100px">
-                    <span>{{paidfees}}</span>
-                </td>
-                <td width="500px">
-                    {{remark}}
-                    <br /> {{#if ischequepay}} {{chqdtls}} {{/if}}
-                </td>
-            </tr>
-            {{/each}}
-            <tr>
-                {{{totalPaidFees value}}}
-            </tr>
-            <tr>
-                <td colspan="3"></td>
-            </tr>
+        <table border="1" cellspacing="0" cellpadding="5">
+            {{#group data1 by="feestitle"}}
+            <thead>
+                <tr>
+                    {{{splitTitle value}}}
+                </tr>
+            </thead>
+            {{#group items by="feeshead"}}
+            <tbody>
+                <tr>
+                    {{{splitHead value}}}
+                </tr>
+                {{#each items}}
+                <tr class="{{bgcolor}}">
+                    <td {{{font-08}}}>
+                        {{catname}}
+                    </td>
+                    <td {{{font-08}}} width="100px">
+                        <span>{{paidfees}}</span>
+                    </td>
+                    <td {{{font-08}}} width="500px">
+                        {{remark}}
+                        <br /> {{#if ischequepay}} {{chqdtls}} {{/if}}
+                    </td>
+                </tr>
+                {{/each}}
+                <tr>
+                    {{{totalPaidFees value}}}
+                </tr>
+                <tr>
+                    <td {{{font-08}}} colspan="3"></td>
+                </tr>
+                {{/group}}
+            </tbody>
             {{/group}}
-        </tbody>
-        {{/group}}
-    </table>
+        </table>
+    </div>
 </body>
 
 </html>

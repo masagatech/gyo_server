@@ -6,26 +6,24 @@ var globals = gen.globals;
 var download = gen.download;
 
 var fees = module.exports = {};
-
 var feesapi = require("../../reports/templates/fees/fees.js");
 
 fees.getFeesReports = function getFeesReports(req, res, done) {
-    var _url = "";
-
     db.callProcedure("select " + globals.erpschema("funget_rpt_feescollection") + "($1,$2,$3::json);", ['feesrpt1', 'feesrpt2', req.query], function(data) {
-        if (req.query.flag == "studentwise") {
-            if (req.query.typ == "ledger") {
-                _url = "fees/feesledger.html";
-            } else {
-                _url = "fees/feesreceipt.html";
-            }
-
+        if (req.query.flag == "ledger") {
             download(req, res, {
                 data: data.rows[0],
                 data1: data.rows[1],
                 data2: data.rows[0][0],
                 params: req.query
-            }, { 'all': _url }, feesapi.getFeesReports);
+            }, { 'all': "fees/feesledger.html" }, feesapi.getFeesLedgerReports);
+        } else if (req.query.flag == "receipt") {
+            download(req, res, {
+                data: data.rows[0],
+                data1: data.rows[1],
+                data2: data.rows[0][0],
+                params: req.query
+            }, { 'all': "fees/feessleep.html" }, feesapi.getFeesSleepReports);
         } else {
             rs.resp(res, 200, data.rows);
         }
