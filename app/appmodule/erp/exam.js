@@ -94,10 +94,9 @@ exam.bulkUploadExamResult = function bulkUploadExamResult(req, res, result, call
             var errdt = { funsave_examresult: { msg: "Invalid Data Format - " + err, msgid: 401 } }
             callback(errdt);
         })
-
     } else {
-        res.json({ status: _status, message: _message, data: null });
-        // res.send(500, _message);
+        var errdt = { data: { funsave_examresult: { msg: _message, msgid: _status } } }
+        res.json(errdt);
     }
 }
 

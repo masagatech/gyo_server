@@ -81,7 +81,7 @@ admsn.bulkUploadStudents = function bulkUploadStudents(req, res, result, callbac
             callback(errdt);
         })
     } else {
-        var errdt = { funsave_multistudentinfo: { msg: _message, msgid: _status } }
+        var errdt = { data: { funsave_multistudentinfo: { msg: _message, msgid: _status } } }
         res.json(errdt);
     }
 }

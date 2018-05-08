@@ -10,6 +10,7 @@ var fs = require('fs');
 
 var admsn = require("../appmodule/erp/admission.js");
 var exmres = require("../appmodule/erp/exam.js");
+var fees = require("../appmodule/erp/fees.js");
 
 var root = globals.globvar.rootAPI + "/menu";
 var multer = require('multer');
@@ -87,6 +88,21 @@ var appRouter = function(app) {
                         };
 
                         exmres.bulkUploadExamResult(params, res, result, function(d) {
+                            res.json({ data: d });
+                        });
+                    }
+
+                    if (req.body.bulktype === "studentfees") {
+                        var params = {
+                            "ayid": req.body.ayid,
+                            "clsid": req.body.clsid,
+                            "enttid": req.body.enttid,
+                            "wsautoid": req.body.wsautoid,
+                            "cuid": req.body.cuid,
+                            "bulkstudentfees": result
+                        };
+
+                        fees.bulkUploadStudentFees(params, res, result, function(d) {
                             res.json({ data: d });
                         });
                     }

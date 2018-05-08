@@ -3,6 +3,8 @@ var rs = require("gen").res;
 var globals = require("gen").globals;
 
 var fees = module.exports = {};
+var common = require("../schoolapi/common.js");
+
 var tripapi = require("../schoolapi/tripapi.js");
 
 fees.saveClassFees = function saveClassInfo(req, res, done) {
@@ -46,4 +48,84 @@ fees.getFeesCollection = function getFeesCollection(req, res, done) {
     }, function(err) {
         rs.resp(res, 401, "error : " + err);
     }, 1)
+}
+
+// Bulk Student Fees
+
+fees.bulkUploadStudentFees = function bulkUploadStudentFees(req, res, result, callback) {
+    var _status = 1;
+    var _message = "";
+
+    if (common.checkDuplicates(result, true)) {
+        _status = 0;
+        _message = "Duplicate Records Not Allowed";
+    } else {
+        for (var i = 0; i < result.length; i++) {
+            if (result[i].student_name == "") {
+                _status = 0;
+                _message = "Empty Student Name";
+
+                break;
+            }
+            if (result[i].roll_no == "") {
+                _status = 0;
+                _message = "Empty Roll No In " + result[i].student_name;
+
+                break;
+            }
+            if (result[i].category == "") {
+                _status = 0;
+                _message = "Empty Category";
+
+                break;
+            }
+            if (result[i].fees == "") {
+                _status = 0;
+                _message = "Empty Fess";
+
+                break;
+            }
+            if (result[i].receive_date == "") {
+                _status = 0;
+                _message = "Empty Received Date";
+
+                break;
+            }
+            if (result[i].payment_mode == "") {
+                _status = 0;
+                _message = "Empty Payment Mode";
+
+                break;
+            }
+            if (result[i].payment_mode == "cheque") {
+                if (result[i].cheque_no == "") {
+                    _status = 0;
+                    _message = "Empty Cheque No";
+
+                    break;
+                }
+                if (result[i].cheque_date == "") {
+                    _status = 0;
+                    _message = "Empty Cheque Date";
+
+                    break;
+                }
+            }
+
+            _status = 1;
+            _message = "";
+        }
+    }
+
+    if (_status == 1) {
+        db.callFunction("select " + globals.erpschema("funsave_multistudentfees") + "($1::json);", [req], function(data) {
+            callback(data.rows[0]);
+        }, function(err) {
+            var errdt = { funsave_multistudentfees: { msg: "Invalid Data Format - " + err, msgid: 401 } }
+            callback(errdt);
+        })
+    } else {
+        var errdt = { data: { funsave_multistudentfees: { msg: _message, msgid: _status } } }
+        res.json(errdt);
+    }
 }

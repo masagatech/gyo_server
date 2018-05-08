@@ -42,7 +42,6 @@ var bulkupload = require("../routes/bulkupload.js")(app);
 var routes = require("../routes/routes.js")(app);
 var erp = require("../routes/erp.js")(app);
 var schroute = require("../routes/schapi.js")(app);
-var mrchtroute = require("../routes/merchant.js")(app);
 var vts = require("../routes/vts.js")(app);
 
 // ##############################################################################################
