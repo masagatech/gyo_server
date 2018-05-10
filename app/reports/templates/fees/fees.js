@@ -13,6 +13,22 @@ reports.getFeesSleepReports = function getFeesSleepReports(data) {
     var feesdt = data.data1;
     var params = data.params;
 
+    _hndlbar.registerHelper('summ_dtls', function(param, options) {
+        if (param == "N") {
+            return options.inverse(this);
+        } else {
+            return options.fn(this);
+        }
+    });
+
+    _hndlbar.registerHelper('showprint', function(params) {
+        if (params.format == "html") {
+            return "show";
+        } else {
+            return "hide";
+        }
+    });
+
     _hndlbar.registerHelper('uploadurl', function(params) {
         return globals.uploadurl;
     });
