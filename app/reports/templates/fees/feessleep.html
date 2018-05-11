@@ -43,6 +43,10 @@
             border: 0;
         }
         
+        .uppercase {
+            text-transform: uppercase;
+        }
+        
         span {
             float: right;
         }
@@ -133,16 +137,16 @@
                 <td colspan="2"></td>
             </tr>
 
-            <tr>
+            <tr class="uppercase">
                 <td>
                     <b>Payment Receipt</b>
                 </td>
                 <td align="right">
-                    {{#data1}}<b>Admission No :</b> {{receiptno}} {{/data1}}
+                    {{#data1}}<b>GR No :</b> {{receiptno}} {{/data1}}
                 </td>
             </tr>
 
-            <tr>
+            <tr class="uppercase">
                 <td colspan="2">
                     <table border="1" cellspacing="0" cellpadding="5">
                         {{#data2}}
@@ -151,7 +155,7 @@
                                 <b>Name :</b> {{studname}}
                             </td>
                             <td>
-                                <b>Course :</b> {{boardname}}
+                                <b>Board :</b> {{boardname}}
                             </td>
                             <td>
                                 <b>Class :</b> {{classname}}
@@ -160,7 +164,7 @@
                         {{/data2}} {{#data1}}
                         <tr>
                             <td>
-                                <b>Payment Method :</b> Bank Transfer
+                                <b>Payment Mode :</b> Bank Transfer
                             </td>
                             <td>
                                 <b>Paid on :</b> {{receivedate}}
@@ -177,15 +181,20 @@
                         </tr>
                         <tr>
                             <td colspan="3">
+                                <b>Amount (In Words) :</b> {{numeral paidfees}} Only
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="3">
                                 <b>Note :</b> Fees Collected for {{catname}}
                             </td>
                         </tr>
                         {{/summ_dtls}} {{#summ_dtls isdetails}}
                         <tr>
                             <td colspan="2">
-                                <b>Fee Name</b>
+                                <b>Fee Category</b>
                             </td>
-                            <td>
+                            <td align="right">
                                 <b>Amount</b>
                             </td>
                         </tr>
@@ -202,6 +211,11 @@
                         <tr>
                             <td colspan="3" align="right">
                                 <b>Total Amount :</b> {{paidfees}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="3">
+                                <b>Amount (In Words) :</b> {{numeral paidfees}} Only
                             </td>
                         </tr>
                         {{/summ_dtls}} {{/data1}}
@@ -253,16 +267,16 @@
                 <td colspan="2"></td>
             </tr>
 
-            <tr>
+            <tr class="uppercase">
                 <td>
                     <b>Payment Receipt</b>
                 </td>
                 <td align="right">
-                    {{#data1}}<b>Admission No :</b> {{receiptno}} {{/data1}}
+                    {{#data1}}<b>GR No :</b> {{receiptno}} {{/data1}}
                 </td>
             </tr>
 
-            <tr>
+            <tr class="uppercase">
                 <td colspan="2">
                     <table border="1" cellspacing="0" cellpadding="5">
                         {{#data2}}
@@ -271,7 +285,7 @@
                                 <b>Name :</b> {{studname}}
                             </td>
                             <td>
-                                <b>Course :</b> {{boardname}}
+                                <b>Board :</b> {{boardname}}
                             </td>
                             <td>
                                 <b>Class :</b> {{classname}}
@@ -280,7 +294,7 @@
                         {{/data2}} {{#data1}}
                         <tr>
                             <td>
-                                <b>Payment Method :</b> Bank Transfer
+                                <b>Payment Mode :</b> Bank Transfer
                             </td>
                             <td>
                                 <b>Paid on :</b> {{receivedate}}
@@ -297,15 +311,20 @@
                         </tr>
                         <tr>
                             <td colspan="3">
+                                <b>Amount (In Words) :</b> {{numeral paidfees}} Only
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="3">
                                 <b>Note :</b> Fees Collected for {{catname}}
                             </td>
                         </tr>
                         {{/summ_dtls}} {{#summ_dtls isdetails}}
                         <tr>
                             <td colspan="2">
-                                <b>Fee Name</b>
+                                <b>Fee Category</b>
                             </td>
-                            <td>
+                            <td align="right">
                                 <b>Amount</b>
                             </td>
                         </tr>
@@ -315,13 +334,18 @@
                                 {{catname}}
                             </td>
                             <td align="right">
-                                {{fees}}
+                                {{paidfees}}
                             </td>
                         </tr>
                         {{/catdetails}}
                         <tr>
                             <td colspan="3" align="right">
                                 <b>Total Amount :</b> {{paidfees}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="3">
+                                <b>Amount (In Words) :</b> {{numeral paidfees}} Only
                             </td>
                         </tr>
                         {{/summ_dtls}} {{/data1}}

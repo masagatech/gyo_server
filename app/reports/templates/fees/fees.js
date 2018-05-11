@@ -3,10 +3,12 @@ var moment = require('moment');
 var reports = module.exports = {};
 var globals = require("gen").globals;
 
-var handlebars = require('handlebars'),
-    groupBy = require('handlebars-group-by');
+var handlebars = require('handlebars');
+var groupBy = require('handlebars-group-by');
+var NumeralHelper = require("handlebars.numeral");
 
 groupBy.register(handlebars);
+NumeralHelper.registerHelpers(handlebars);
 
 reports.getFeesSleepReports = function getFeesSleepReports(data) {
     var _hndlbar = Handlebars;
@@ -18,14 +20,6 @@ reports.getFeesSleepReports = function getFeesSleepReports(data) {
             return options.inverse(this);
         } else {
             return options.fn(this);
-        }
-    });
-
-    _hndlbar.registerHelper('showprint', function(params) {
-        if (params.format == "html") {
-            return "show";
-        } else {
-            return "hide";
         }
     });
 
