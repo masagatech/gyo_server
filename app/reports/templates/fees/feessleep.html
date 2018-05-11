@@ -95,6 +95,10 @@
         .hide {
             display: none!important;
         }
+        
+        strong {
+            color: red;
+        }
     </style>
 </head>
 
@@ -198,19 +202,78 @@
                                 <b>Amount</b>
                             </td>
                         </tr>
-                        {{#catdetails}}
                         <tr>
                             <td colspan="2">
-                                {{catname}}
+                                {{catdetails.[0].catname}}
                             </td>
                             <td align="right">
-                                {{paidfees}}
+                                {{catdetails.[0].paidfees}}
                             </td>
                         </tr>
-                        {{/catdetails}}
+                        <tr>
+                            <td colspan="2">
+                                {{catdetails.[1].catname}}
+                            </td>
+                            <td align="right">
+                                {{catdetails.[1].paidfees}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                {{catdetails.[2].catname}}
+                            </td>
+                            <td align="right">
+                                {{catdetails.[2].paidfees}}
+                            </td>
+                        </tr>
+                        <!-- <tr>
+                            <td colspan="2">
+                                {{catdetails.[3].catname}}
+                            </td>
+                            <td align="right">
+                                {{catdetails.[3].paidfees}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                {{catdetails.[4].catname}}
+                            </td>
+                            <td align="right">
+                                {{catdetails.[4].paidfees}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                {{catdetails.[5].catname}}
+                            </td>
+                            <td align="right">
+                                {{catdetails.[5].paidfees}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                {{catdetails.[6].catname}}
+                            </td>
+                            <td align="right">
+                                {{catdetails.[6].paidfees}}
+                            </td>
+                        </tr> -->
+                        <tr>
+                            <td colspan="2">
+                                Other <strong>*</strong>
+                            </td>
+                            <td align="right">
+                                {{{otherfees}}}
+                            </td>
+                        </tr>
                         <tr>
                             <td colspan="3" align="right">
                                 <b>Total Amount :</b> {{paidfees}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="3">
+                                <b>Other :</b> {{{othercat}}}
                             </td>
                         </tr>
                         <tr>
@@ -328,19 +391,78 @@
                                 <b>Amount</b>
                             </td>
                         </tr>
-                        {{#catdetails}}
                         <tr>
                             <td colspan="2">
-                                {{catname}}
+                                {{catdetails.[0].catname}}
                             </td>
                             <td align="right">
-                                {{paidfees}}
+                                {{catdetails.[0].paidfees}}
                             </td>
                         </tr>
-                        {{/catdetails}}
+                        <tr>
+                            <td colspan="2">
+                                {{catdetails.[1].catname}}
+                            </td>
+                            <td align="right">
+                                {{catdetails.[1].paidfees}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                {{catdetails.[2].catname}}
+                            </td>
+                            <td align="right">
+                                {{catdetails.[2].paidfees}}
+                            </td>
+                        </tr>
+                        <!-- <tr>
+                                <td colspan="2">
+                                    {{catdetails.[3].catname}}
+                                </td>
+                                <td align="right">
+                                    {{catdetails.[3].paidfees}}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">
+                                    {{catdetails.[4].catname}}
+                                </td>
+                                <td align="right">
+                                    {{catdetails.[4].paidfees}}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">
+                                    {{catdetails.[5].catname}}
+                                </td>
+                                <td align="right">
+                                    {{catdetails.[5].paidfees}}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">
+                                    {{catdetails.[6].catname}}
+                                </td>
+                                <td align="right">
+                                    {{catdetails.[6].paidfees}}
+                                </td>
+                            </tr> -->
+                        <tr>
+                            <td colspan="2">
+                                Other <strong>*</strong>
+                            </td>
+                            <td align="right">
+                                {{{otherfees}}}
+                            </td>
+                        </tr>
                         <tr>
                             <td colspan="3" align="right">
                                 <b>Total Amount :</b> {{paidfees}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="3">
+                                <b>Other :</b> {{{othercat}}}
                             </td>
                         </tr>
                         <tr>
