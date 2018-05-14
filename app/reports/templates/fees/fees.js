@@ -65,10 +65,18 @@ reports.getFeesSleepReports = function getFeesSleepReports(data) {
         return globals.logourl;
     });
 
+    _hndlbar.registerHelper('showDuplicate', function(row) {
+        if (params.vwtype == "parent") {
+            return "hide";
+        } else {
+            return "show";
+        }
+    });
+
     return _hndlbar;
 }
 
-reports.getFeesLedgerReports = function getFeesLedgerReports(data) {
+reports.getStudentFeesReports = function getStudentFeesReports(data) {
     var _hndlbar = Handlebars;
     var feesdt = data.data1;
     var params = data.params;
@@ -125,33 +133,42 @@ reports.getFeesLedgerReports = function getFeesLedgerReports(data) {
         }
     });
 
+    _hndlbar.registerHelper('splitStudent', function(head) {
+        var t = head.split("~");
+        var head = "";
+
+        if (params.format == "pdf") {
+            head = "<th " + font08 + "><b>Class : </b>" + t[0] + " - (" + t[1] + ")</th>";
+            head += "<th " + font08 + " colspan='2'>Roll No : " + t[2] + " - Student Name : " + t[3];
+        } else {
+            head = "<th><b>Class : </b>" + t[0] + " - (" + t[1] + ")</th>";
+            head += "<th colspan='2'>Roll No : " + t[2] + " - Student Name : " + t[3];
+        }
+
+        return head;
+
+        var t = head.split("~");
+        var head = "Class : " + t[0] + " - (" + t[1] + ") - Roll No : " + t[2] + " - Student Name : " + t[3];
+
+        return head;
+    });
+
     _hndlbar.registerHelper('splitTitle', function(head) {
         var t = head.split("~");
         var head = "";
 
         if (params.format == "pdf") {
-            head = "<th " + font08 + ">Class : " + t[0] + " - " + t[1] + "</th>";
-            head += "<th " + font08 + " colspan='2'>Paid Fees : " + t[2] + ", ";
+            head = "<th " + font08 + "><b>Receipt No : </b>" + t[0] + ", <b>Paid on : </b>" + t[1] + "</th>";
+            head += "<th " + font08 + " colspan='2'>Complete Fees : " + t[3] + ", ";
         } else {
-            head = "<th>Class : " + t[0] + " - " + t[1] + "</th>";
-            head += "<th colspan='2'>Paid Fees : " + t[2] + ", ";
+            head = "<th><b>Receipt No : </b>" + t[0] + ", <b>Paid on : </b>" + t[1] + "</th>";
+            head += "<th colspan='2'>Complete Fees : " + t[3] + ", ";
         }
 
-        head += "Complete Fees : " + t[3] + ", ";
         head += "Process Fees : " + t[4] + ", ";
         head += "Pending Fees : " + t[5] + "</th>";
 
         return head;
-    });
-
-    _hndlbar.registerHelper('splitHead', function(head) {
-        var t = head.split("~");
-
-        if (params.format == "pdf") {
-            return "<th " + font08 + "><b>Receipt No : </b>" + t[1] + "</th><th " + font08 + " colspan='2'><b>Paid on : </b>" + t[0] + "</th>";
-        } else {
-            return "<th><b>Receipt No : </b>" + t[1] + "</th><th colspan='2'><b>Paid on : </b>" + t[0] + "</th>";
-        }
     });
 
     _hndlbar.registerHelper('totalPaidFees', function(head) {
