@@ -112,6 +112,7 @@ var appRouter = function(app) {
 
     app.post(root + "/saveFeesCollection", fees.saveFeesCollection);
     app.post(root + "/getFeesCollection", fees.getFeesCollection);
+    app.post(root + "/getFeesReports", fees.getFeesReports);
 
     //##################################### Class ########################################################
 

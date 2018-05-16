@@ -50,6 +50,14 @@ fees.getFeesCollection = function getFeesCollection(req, res, done) {
     }, 1)
 }
 
+fees.getFeesReports = function getFeesReports(req, res, done) {
+    db.callProcedure("select " + globals.erpschema("funget_rpt_feescollection") + "($1,$2,$3::json);", ['feesrpt1', 'feesrpt2', req.body], function(data) {
+        rs.resp(res, 200, data.rows);
+    }, function(err) {
+        rs.resp(res, 401, "error : " + err);
+    }, 2)
+}
+
 // Bulk Student Fees
 
 fees.bulkUploadStudentFees = function bulkUploadStudentFees(req, res, result, callback) {
