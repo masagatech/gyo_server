@@ -6,7 +6,6 @@ var globals = gen.globals;
 var download = gen.download;
 
 var exam = module.exports = {};
-
 var examresultapi = require("../../reports/templates/exam/examresult.js");
 
 exam.downloadExamResult = function downloadExamResult(req, res, done) {

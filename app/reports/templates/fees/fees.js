@@ -165,8 +165,17 @@ reports.getStudentFeesReports = function getStudentFeesReports(data) {
             head += "<th colspan='2'>Complete Fees : " + t[3] + ", ";
         }
 
-        head += "Process Fees : " + t[4] + ", ";
-        head += "Pending Fees : " + t[5] + "</th>";
+        head += "Process Fees : " + t[4] + "</th>";
+
+        return head;
+    });
+
+    _hndlbar.registerHelper('splitFoot', function(head) {
+        var t = head.split("~");
+        var head = "";
+
+        head += "<tr><td></td><td colspan='2' align='right'>Amount Received : " + t[4] + "</td></tr>";
+        head += "<tr><td></td><td colspan='2' align='right'>Balance Due : " + t[5] + "</td></tr>";
 
         return head;
     });
@@ -175,9 +184,9 @@ reports.getStudentFeesReports = function getStudentFeesReports(data) {
         var t = head.split("~");
 
         if (params.format == "pdf") {
-            return "<th " + font08 + "></th><th " + font08 + " colspan='2'><b>Total Amount : </b>" + t[3] + "</th>";
+            return "<th " + font08 + "></th><th " + font08 + " colspan='2'><b>Total Amount : </b>" + t[2] + "</th>";
         } else {
-            return "<th></th><th colspan='2'><b>Total Amount : </b>" + t[3] + "</th>";
+            return "<th></th><th colspan='2'><b>Total Amount : </b>" + t[2] + "</th>";
         }
     });
 

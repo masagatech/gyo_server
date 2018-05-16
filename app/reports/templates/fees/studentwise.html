@@ -4,6 +4,15 @@
     <meta charset="utf-8" />
 
     <style>
+        .card {
+            background: #fff;
+            min-height: 50px;
+            position: relative;
+            margin-bottom: 12px;
+            border-radius: 2px 2px 2px 2px;
+            border: 1px solid #cacaca;
+        }
+        
         table {
             border-collapse: collapse;
             border: 1px solid rgba(204, 204, 204, 0.35);
@@ -34,9 +43,12 @@
             vertical-align: top;
         }
         
-        .empty-td {
-            background-color: #fff !important;
-            border-color: #fff !important;
+        table tfoot td {
+            background: #000000;
+            border: 1px solid rgba(204, 204, 204, 0.35);
+            color: #ffffff;
+            padding: 5px;
+            vertical-align: top;
         }
         
         .bg-red {
@@ -63,50 +75,52 @@
         }
         
         hr {
-            border: solid 2px red;
+            border: solid 2px #0079FE;
             margin: 20px 0;
         }
     </style>
 </head>
 
 <body>
-    <table border="1" cellspacing="0" cellpadding="5">
-        {{#group data1 by="studname"}}
-        <thead>
-            <tr>
-                {{{splitStudent value}}}
-            </tr>
-        </thead>
-        <tbody>
-            {{#group items by="feestitle"}}
-            <tr>
-                {{{splitTitle value}}}
-            </tr>
-            {{#each items}}
-            <tr class="{{bgcolor}}">
-                <td {{{font-08}}}>
-                    {{catname}}
-                </td>
-                <td {{{font-08}}} width="100px" align="right">
-                    {{paidfees}}
-                </td>
-                <td {{{font-08}}} width="500px">
-                    {{remark}}
-                    <br /> {{#if ischequepay}} {{chqdtls}} {{/if}}
-                </td>
-            </tr>
-            {{/each}}
-            <tr>
-                {{{totalPaidFees value}}}
-            </tr>
-            <tr>
-                <td class="empty-td" colspan="3">
-                </td>
-            </tr>
-            {{/group}}
-        </tbody>
-        {{/group}}
-    </table>
+    {{#group data1 by="studname"}}
+    <div class="card">
+        <table border="1" cellspacing="0" cellpadding="5">
+            <thead>
+                <tr>
+                    {{{splitStudent value}}}
+                </tr>
+            </thead>
+            <tbody>
+                {{#group items by="feestitle"}}
+                <tr>
+                    {{{splitTitle value}}}
+                </tr>
+                {{#each items}}
+                <tr class="{{bgcolor}}">
+                    <td {{{font-08}}}>
+                        {{catname}}
+                    </td>
+                    <td {{{font-08}}} width="100px" align="right">
+                        {{paidfees}}
+                    </td>
+                    <td {{{font-08}}} width="500px">
+                        {{remark}}
+                        <br /> {{#if ischequepay}} {{chqdtls}} {{/if}}
+                    </td>
+                </tr>
+                {{/each}}
+                <tr>
+                    {{{totalPaidFees value}}}
+                </tr>
+                {{/group}}
+            </tbody>
+            <tfoot>
+                {{{splitFoot value}}}
+            </tfoot>
+        </table>
+    </div>
+
+    <hr /> {{/group}}
 </body>
 
 </html>
