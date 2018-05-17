@@ -18,6 +18,7 @@ module.exports = function(app) {
     app.get("/getMenuLogReports", log.getMenuLogReports);
 
     app.get("/getReports", reports.getReports);
+    app.post("/postReports", reports.postReports);
 
     app.get("/getNotification", notification.getNotification);
     app.get("/getAnnouncement", announcement.getAnnouncement);
