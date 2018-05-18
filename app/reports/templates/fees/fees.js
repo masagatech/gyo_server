@@ -10,68 +10,8 @@ var NumeralHelper = require("handlebars.numeral");
 groupBy.register(handlebars);
 NumeralHelper.registerHelpers(handlebars);
 
-reports.getFeesSleepReports = function getFeesSleepReports(data) {
+reports.getClassFeesReports = function getClassFeesReports(data) {
     var _hndlbar = Handlebars;
-    var feesdt = data.data1;
-    var params = data.params;
-
-    _hndlbar.registerHelper('summ_dtls', function(param, options) {
-        if (param == "N") {
-            return options.inverse(this);
-        } else {
-            return options.fn(this);
-        }
-    });
-
-    // _hndlbar.registerHelper('othercat', function(params) {
-    //     var _othfees = "";
-    //     var _othercat = "";
-
-    //     for (var i = 0; i < feesdt.length; i++) {
-    //         _othfees = feesdt[i].catdetails;
-
-    //         for (var j = 7; j < _othfees.length; j++) {
-    //             _othercat += _othfees[j].catname + " - " + _othfees[j].paidfees + ", ";
-    //         }
-    //     }
-
-    //     return _othercat;
-    // });
-
-    // _hndlbar.registerHelper('otherfees', function(params) {
-    //     var _othtotfess = 0;
-
-    //     for (var i = 0; i < feesdt.length; i++) {
-    //         _othtotfess = parseFloat(feesdt[i].paidfees) -
-    //             (
-    //                 feesdt[i].catdetails[0] == undefined ? "" : parseFloat(feesdt[i].catdetails[0].paidfees) +
-    //                 feesdt[i].catdetails[1] == undefined ? "" : parseFloat(feesdt[i].catdetails[1].paidfees) +
-    //                 feesdt[i].catdetails[2] == undefined ? "" : parseFloat(feesdt[i].catdetails[2].paidfees) +
-    //                 feesdt[i].catdetails[3] == undefined ? "" : parseFloat(feesdt[i].catdetails[3].paidfees) +
-    //                 feesdt[i].catdetails[4] == undefined ? "" : parseFloat(feesdt[i].catdetails[4].paidfees) +
-    //                 feesdt[i].catdetails[5] == undefined ? "" : parseFloat(feesdt[i].catdetails[5].paidfees) +
-    //                 feesdt[i].catdetails[6] == undefined ? "" : parseFloat(feesdt[i].catdetails[6].paidfees)
-    //             );
-    //     }
-
-    //     return _othtotfess;
-    // });
-
-    _hndlbar.registerHelper('uploadurl', function(params) {
-        return globals.uploadurl;
-    });
-
-    _hndlbar.registerHelper('logourl', function(params) {
-        return globals.logourl;
-    });
-
-    _hndlbar.registerHelper('showDuplicate', function(row) {
-        if (params.vwtype == "parent") {
-            return "hide";
-        } else {
-            return "show";
-        }
-    });
 
     return _hndlbar;
 }
@@ -196,6 +136,72 @@ reports.getStudentFeesReports = function getStudentFeesReports(data) {
 
     _hndlbar.registerHelper('logourl', function(params) {
         return globals.logourl;
+    });
+
+    return _hndlbar;
+}
+
+reports.getFeesSleepReports = function getFeesSleepReports(data) {
+    var _hndlbar = Handlebars;
+    var feesdt = data.data1;
+    var params = data.params;
+
+    _hndlbar.registerHelper('summ_dtls', function(param, options) {
+        if (param == "N") {
+            return options.inverse(this);
+        } else {
+            return options.fn(this);
+        }
+    });
+
+    // _hndlbar.registerHelper('othercat', function(params) {
+    //     var _othfees = "";
+    //     var _othercat = "";
+
+    //     for (var i = 0; i < feesdt.length; i++) {
+    //         _othfees = feesdt[i].catdetails;
+
+    //         for (var j = 7; j < _othfees.length; j++) {
+    //             _othercat += _othfees[j].catname + " - " + _othfees[j].paidfees + ", ";
+    //         }
+    //     }
+
+    //     return _othercat;
+    // });
+
+    // _hndlbar.registerHelper('otherfees', function(params) {
+    //     var _othtotfess = 0;
+
+    //     for (var i = 0; i < feesdt.length; i++) {
+    //         _othtotfess = parseFloat(feesdt[i].paidfees) -
+    //             (
+    //                 feesdt[i].catdetails[0] == undefined ? "" : parseFloat(feesdt[i].catdetails[0].paidfees) +
+    //                 feesdt[i].catdetails[1] == undefined ? "" : parseFloat(feesdt[i].catdetails[1].paidfees) +
+    //                 feesdt[i].catdetails[2] == undefined ? "" : parseFloat(feesdt[i].catdetails[2].paidfees) +
+    //                 feesdt[i].catdetails[3] == undefined ? "" : parseFloat(feesdt[i].catdetails[3].paidfees) +
+    //                 feesdt[i].catdetails[4] == undefined ? "" : parseFloat(feesdt[i].catdetails[4].paidfees) +
+    //                 feesdt[i].catdetails[5] == undefined ? "" : parseFloat(feesdt[i].catdetails[5].paidfees) +
+    //                 feesdt[i].catdetails[6] == undefined ? "" : parseFloat(feesdt[i].catdetails[6].paidfees)
+    //             );
+    //     }
+
+    //     return _othtotfess;
+    // });
+
+    _hndlbar.registerHelper('uploadurl', function(params) {
+        return globals.uploadurl;
+    });
+
+    _hndlbar.registerHelper('logourl', function(params) {
+        return globals.logourl;
+    });
+
+    _hndlbar.registerHelper('showDuplicate', function(row) {
+        if (params.vwtype == "parent") {
+            return "hide";
+        } else {
+            return "show";
+        }
     });
 
     return _hndlbar;

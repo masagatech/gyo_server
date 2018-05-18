@@ -1,0 +1,109 @@
+<html>
+
+<head>
+    <meta charset="utf-8" />
+
+    <style>
+        .card {
+            background: #fff;
+            min-height: 50px;
+            position: relative;
+            margin-bottom: 12px;
+            border-radius: 2px 2px 2px 2px;
+            border: 1px solid #cacaca;
+        }
+        
+        table {
+            border-collapse: collapse;
+            border: 1px solid rgba(204, 204, 204, 0.35);
+            width: 100%;
+        }
+        
+        table thead th {
+            background: #009688;
+            border: 1px solid rgba(204, 204, 204, 0.35);
+            color: #ffffff;
+            padding: 5px;
+            text-align: left;
+            vertical-align: top;
+        }
+        
+        table tbody th {
+            background: #eeeeee;
+            border: 1px solid rgba(204, 204, 204, 0.35);
+            color: #000000;
+            padding: 5px;
+            text-align: left;
+            vertical-align: top;
+        }
+        
+        table tbody td {
+            border: 1px solid rgba(204, 204, 204, 0.35);
+            padding: 5px;
+            vertical-align: top;
+        }
+        
+        table tfoot td {
+            background: #000000;
+            border: 1px solid rgba(204, 204, 204, 0.35);
+            color: #ffffff;
+            padding: 5px;
+            vertical-align: top;
+        }
+    </style>
+</head>
+
+<body>
+    <table class="table table-bordered table-responsive">
+        <thead>
+            <tr>
+                <th width="150px">
+                    Class
+                </th>
+                <th>
+                    Category
+                </th>
+                <th width="150px">
+                    Paid Fees
+                </th>
+                <th width="150px">
+                    Pending Fees
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let row of feesCollectionDT">
+                <td>
+                    {{row.classname}}
+                </td>
+                <td>
+                    {{row.catname}}
+                </td>
+                <td align="right">
+                    <a role="button" (click)="openStudentFeesPopup(row, 'paid')">
+                        {{row.paidfees | _currency:loginUser.globsettings[0]}}
+                    </a>
+                </td>
+                <td align="right">
+                    <a role="button" (click)="openStudentFeesPopup(row, 'pending')">
+                        {{row.pendfees | _currency:loginUser.globsettings[0]}}
+                    </a>
+                </td>
+            </tr>
+            <tr class="tr-table">
+                <td></td>
+                <td align="right">
+                    <b>Total Amount</b>
+                </td>
+                <td align="right">
+                    {{totpaidfees | _currency:loginUser.globsettings[0]}}
+                </td>
+                <td align="right">
+                    {{totpendfees | _currency:loginUser.globsettings[0]}}
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+
+</html>

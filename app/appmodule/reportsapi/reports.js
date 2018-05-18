@@ -22,6 +22,7 @@ reports.postReports = function postReports(req, res, done) {
     arrvhid = vhid.split(",");
 
     var flag = req.body.flag;
+    req.query.format = req.body.format;
     var rpttype = req.body.rpttype;
     var frmdt = req.body.frmdt + "T00:00:00+05:30";
     var todt = req.body.todt + "T00:00:00+05:30";
