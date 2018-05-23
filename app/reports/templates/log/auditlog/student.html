@@ -1,0 +1,141 @@
+<html>
+
+<head>
+    <meta charset="utf-8" />
+
+    <style>
+        table {
+            border-collapse: collapse;
+            font-size: 12px;
+            width: 100%;
+            border: 1px solid rgba(204, 204, 204, 0.35);
+        }
+        
+        table thead th {
+            background: #009688;
+            color: #ffffff;
+            padding: 5px;
+            text-align: left;
+            vertical-align: top;
+        }
+        
+        table tbody th {
+            background-color: #eeeeee;
+            color: #000000;
+            padding: 5px;
+            text-align: left;
+            vertical-align: top;
+        }
+        
+        table tbody td {
+            padding: 5px;
+            vertical-align: top;
+        }
+    </style>
+</head>
+
+<body>
+    <h4 align="center">
+        Audit Log - Student
+    </h4>
+
+    <table border="1" cellspacing="0" cellpadding="5">
+        <thead>
+            <tr>
+                <th>
+                    Board
+                </th>
+                <th>
+                    CU ID
+                </th>
+                <th>
+                    GR No
+                </th>
+                <th>
+                    Class
+                </th>
+                <th>
+                    Roll No
+                </th>
+                <th>
+                    Name
+                </th>
+                <th>
+                    Social Category
+                </th>
+                <th>
+                    Gender
+                </th>
+                <th>
+                    Date of Birth
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#data}}
+            <tr>
+                <th colspan="9">
+                    <b>Student Name : </b>{{studentname}}
+                </th>
+            </tr>
+            <tr>
+                <td>
+                    {{boardname}}
+                </td>
+                <td>
+                    {{cuid}}
+                </td>
+                <td>
+                    {{grno}}
+                </td>
+                <td>
+                    {{ayname}}
+                </td>
+                <td>
+                    {{classname}}
+                </td>
+                <td>
+                    {{rollno}}
+                </td>
+                <td>
+                    {{soccatname}}
+                </td>
+                <td>
+                    {{gender}}
+                </td>
+                <td>
+                    {{dob}}
+                </td>
+            </tr>
+            <tr>
+                <td colspan="9">
+                    <b>Prospectus : </b> {{prspctname}}, <b>Form No : </b> {{prspctno}}
+                </td>
+            </tr>
+            <tr>
+                <td colspan="9">
+                    <b>Contact : </b> {{address}}, {{country}}, {{state}}, {{city}}, {{area}}, {{pincode}}<br />
+                    <b>Aadhar No : </b>{{aadharno}}<br />
+                    <b>Birth Place : </b>{{birthplace}}
+                </td>
+            </tr>
+            <tr>
+                <td colspan="9">
+                    <b>Father Details : </b><br />
+                    <b>Code : </b>{{fathercode}}, <b>Name : </b>{{fathername}}, <b>Mobile : </b>{{mobileno1}}, <b>Email : </b>{{email1}}<br />
+                    <b>School Name : </b>{{fthrschnm}}, <b>Occupation : </b>{{fthrocptn}}, <b>Salary : </b>{{fthrsalary}}
+                </td>
+            </tr>
+            <tr>
+                <td colspan="9">
+                    <b>Mother Details : </b><br />
+                    <b>Code : </b>{{mothercode}}, <b>Name : </b>{{mothername}}, <b>Mobile : </b>{{mobileno2}}, <b>Email : </b>{{email2}}<br />
+                    <b>School Name : </b>{{mthrschnm}}, <b>Occupation : </b>{{mthrocptn}}, <b>Salary : </b>{{mthrsalary}}
+                </td>
+            </tr>
+            {{/data}}
+        </tbody>
+    </table>
+</body>
+
+</html>

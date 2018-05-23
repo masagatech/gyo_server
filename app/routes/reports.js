@@ -14,25 +14,39 @@ var attnd = require(reportsapi + "attendance.js");
 var fees = require(reportsapi + "fees.js");
 
 module.exports = function(app) {
-    app.get("/getLoginLogReports", log.getLoginLogReports);
-    app.get("/getMenuLogReports", log.getMenuLogReports);
+    // Mileage and Speed Reports
 
     app.get("/getReports", reports.getReports);
     app.post("/postReports", reports.postReports);
 
+    // Log Reports
+
+    app.get("/getLoginLogReports", log.getLoginLogReports);
+    app.get("/getMenuLogReports", log.getMenuLogReports);
+    app.get("/getAuditLogReports", log.getAuditLogReports);
+
+    // Notification Reports
+
     app.get("/getNotification", notification.getNotification);
     app.get("/getAnnouncement", announcement.getAnnouncement);
+
+    // TimeTable Reports
 
     app.get("/getClassTimeTablePeriod", classtimetable.getClassTimeTablePeriod);
     app.get("/getClassTimeTableMonthly", classtimetable.getClassTimeTableMonthly);
     app.get("/getClassTimeTableWeekly", classtimetable.getClassTimeTableWeekly);
 
+    // Exam and Assesment Reports
+
     app.get("/downloadExamResult", exam.downloadExamResult);
     app.get("/getExamResultReports", exam.getExamResultReports);
+    app.get("/getAssesmentResultReports", assesment.getAssesmentResultReports);
+
+    // Attendance Reports
 
     app.get("/getAttendanceReports", attnd.getAttendanceReports);
 
-    app.get("/getAssesmentResultReports", assesment.getAssesmentResultReports);
+    // Fees Reports
 
     app.get("/getFeesReports", fees.getFeesReports);
 }

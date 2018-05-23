@@ -1,7 +1,7 @@
 var Handlebars = require('handlebars');
 var reports = module.exports = {};
 
-reports.getReports = function getReports(data) {
+reports.getAuditLogReports = function getAuditLogReports(data) {
     var _hndlbar = Handlebars;
 
     return _hndlbar;
