@@ -18,21 +18,19 @@ var reports = module.exports = {};
 
 reports.postReports = function postReports(req, res, done) {
     var vhid = req.body.vhid;
-    var arrvhid = new Array();
-    arrvhid = vhid.split(",");
 
     var flag = req.body.flag;
     req.query.format = req.body.format;
     var rpttype = req.body.rpttype;
-    var frmdt = req.body.frmdt + "T00:00:00+05:30";
-    var todt = req.body.todt + "T00:00:00+05:30";
+    var frmdt = req.body.frmdt;
+    var todt = req.body.todt;
 
     request.post(
         globals.serverapiurl, {
             json: {
                 "reporttyp": rpttype == "mileage" ? "milege" : rpttype,
                 "params": {
-                    "vhid": arrvhid,
+                    "vhid": vhid,
                     "frmdt": frmdt,
                     "todate": todt,
                     "type": flag == "summary" ? "" : "details"

@@ -2,6 +2,7 @@ var rs = require("../appmodule/util/resp.js");
 var globals = require("../globals.js");
 var fs = require('fs');
 
+var audit = require("../appmodule/erp/auditlog.js");
 var dashboard = require("../appmodule/erp/dashboard.js");
 var common = require("../appmodule/erp/common.js");
 var emp = require("../appmodule/erp/employee.js");
@@ -37,6 +38,13 @@ var multer = require('multer');
 var appRouter = function(app) {
     //##################################### VIVEK ########################################################
 
+
+    //##################################### Audit Log ###################################################
+
+    app.post(root + "/saveAuditLog", audit.saveAuditLog);
+    app.post(root + "/getAuditLog", audit.getAuditLog);
+
+    //##################################### Audit Log ###################################################
 
     //##################################### Dashboard ####################################################
 
