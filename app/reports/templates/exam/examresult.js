@@ -9,16 +9,12 @@ reports.getExamResultReports = function getExamResultReports(data) {
 
     _hndlbar.registerHelper('date_cols', function(row) {
         var columns = '';
-        let data = '';
+        var data = '';
 
         for (var i = 0; i < data_header.length; i++) {
             data = row[data_header[i].subhead];
             columns = columns + '<td width="70px" class="' + data + '" align="center">' + (data == null ? '-' : data) + '</td>'
         }
-
-        // columns += '<th class="text-center" >' + total + '</th>';
-
-        console.log(data_header);
 
         return columns;
     });

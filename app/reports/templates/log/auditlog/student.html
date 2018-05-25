@@ -31,6 +31,20 @@
             padding: 5px;
             vertical-align: top;
         }
+        
+        table tbody td table {
+            padding: 5px;
+            vertical-align: top;
+            border: 0;
+        }
+        
+        .show {
+            display: inline-table!important;
+        }
+        
+        .hide {
+            display: none!important;
+        }
     </style>
 </head>
 
@@ -39,103 +53,60 @@
         Audit Log - Student
     </h4>
 
-    <table border="1" cellspacing="0" cellpadding="5">
+    <h4 align="center">{{{emptydatamsg}}}</h4>
+
+    {{#group data by="name"}}
+    <table class="{{{showdata}}}" border="1" cellspacing="0" cellpadding="5">
         <thead>
             <tr>
-                <th>
-                    Board
-                </th>
-                <th>
-                    CU ID
-                </th>
-                <th>
-                    GR No
-                </th>
-                <th>
-                    Class
-                </th>
-                <th>
-                    Roll No
-                </th>
-                <th>
-                    Name
-                </th>
-                <th>
-                    Social Category
-                </th>
-                <th>
-                    Gender
-                </th>
-                <th>
-                    Date of Birth
+                <th colspan="3">
+                    Student Name : {{value}}
                 </th>
             </tr>
         </thead>
         <tbody>
-            {{#data}}
+            {{#each items}}
             <tr>
-                <th colspan="9">
-                    <b>Student Name : </b>{{studentname}}
+                <th colspan="2">
+                    <b>Created By : </b>{{createdby}}, <b>Created On : </b>{{createdon}}
                 </th>
             </tr>
             <tr>
                 <td>
-                    {{boardname}}
+                    <h4>Old Value</h4>
                 </td>
                 <td>
-                    {{cuid}}
-                </td>
-                <td>
-                    {{grno}}
-                </td>
-                <td>
-                    {{ayname}}
-                </td>
-                <td>
-                    {{classname}}
-                </td>
-                <td>
-                    {{rollno}}
-                </td>
-                <td>
-                    {{soccatname}}
-                </td>
-                <td>
-                    {{gender}}
-                </td>
-                <td>
-                    {{dob}}
+                    <h4>New Value</h4>
                 </td>
             </tr>
             <tr>
-                <td colspan="9">
-                    <b>Prospectus : </b> {{prspctname}}, <b>Form No : </b> {{prspctno}}
+                <td width="50%">
+                    <table cellspacing="0" cellpadding="5">
+                        {{#oldvaldt}}
+                        <tr>
+                            <td>
+                                {{{fieldvalue this}}}
+                            </td>
+                        </tr>
+                        {{/oldvaldt}}
+                    </table>
+                </td>
+                <td width="50%">
+                    <table cellspacing="0" cellpadding="5">
+                        {{#newvaldt}}
+                        <tr>
+                            <td>
+                                {{{fieldvalue this}}}
+                            </td>
+                        </tr>
+                        {{/newvaldt}}
+                    </table>
                 </td>
             </tr>
-            <tr>
-                <td colspan="9">
-                    <b>Contact : </b> {{address}}, {{country}}, {{state}}, {{city}}, {{area}}, {{pincode}}<br />
-                    <b>Aadhar No : </b>{{aadharno}}<br />
-                    <b>Birth Place : </b>{{birthplace}}
-                </td>
-            </tr>
-            <tr>
-                <td colspan="9">
-                    <b>Father Details : </b><br />
-                    <b>Code : </b>{{fathercode}}, <b>Name : </b>{{fathername}}, <b>Mobile : </b>{{mobileno1}}, <b>Email : </b>{{email1}}<br />
-                    <b>School Name : </b>{{fthrschnm}}, <b>Occupation : </b>{{fthrocptn}}, <b>Salary : </b>{{fthrsalary}}
-                </td>
-            </tr>
-            <tr>
-                <td colspan="9">
-                    <b>Mother Details : </b><br />
-                    <b>Code : </b>{{mothercode}}, <b>Name : </b>{{mothername}}, <b>Mobile : </b>{{mobileno2}}, <b>Email : </b>{{email2}}<br />
-                    <b>School Name : </b>{{mthrschnm}}, <b>Occupation : </b>{{mthrocptn}}, <b>Salary : </b>{{mthrsalary}}
-                </td>
-            </tr>
-            {{/data}}
+            {{/each}}
         </tbody>
     </table>
+    {{/group}}
 </body>
 
 </html>

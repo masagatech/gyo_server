@@ -51,18 +51,18 @@ log.getMenuLogReports = function getMenuLogReports(req, res, done) {
 
 log.getAuditLogReports = function getAuditLogReports(req, res, done) {
     db.callProcedure("select " + globals.erpschema("funget_auditlog") + "($1,$2::json);", ['alrpt1', req.query], function(data) {
-        var formname = "";
-        var apiname = "";
-
-        if (req.query.module == "student") {
-            formname = "log/auditlog/student.html";
-        }
-
-        apiname = auditlogapi.getAuditLogReports;
-
         if (req.query.flag == "reports") {
+            var formname = "";
+            var apiname = "";
+
+            if (req.query.module == "student") {
+                formname = "log/auditlog/student.html";
+            }
+
+            apiname = auditlogapi.getAuditLogReports;
+
             download(req, res, {
-                data: data.rows[0],
+                data: data.rows,
                 params: req.query
             }, { 'all': formname }, apiname);
         } else {
