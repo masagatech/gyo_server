@@ -16,9 +16,13 @@ var school = require("../appmodule/schoolapi/school.js");
 var psngr = require("../appmodule/schoolapi/passenger.js");
 var holiday = require("../appmodule/schoolapi/holiday.js");
 var lvpsngr = require("../appmodule/schoolapi/leave.js");
+
+var inventory = require("../appmodule/schoolapi/inventory.js");
 var batch = require("../appmodule/schoolapi/batch.js");
 var driver = require("../appmodule/schoolapi/driver.js");
 var vehicle = require("../appmodule/schoolapi/vehicle.js");
+
+
 var user = require("../appmodule/schoolapi/user.js");
 var userdt = require("../appmodule/schoolapi/userdetails.js");
 var pickdrop = require("../appmodule/schoolapi/pickdrop.js");
@@ -161,7 +165,28 @@ var appRouter = function(app) {
 
     app.post(globals.globvar.rootAPI + "/getLeaveReports", lvpsngr.getLeaveReports);
 
-    //##################################### Leave Passgenger #################################################
+    //##################################### Leave Passgenger ################################################
+
+    //##################################### Device ##########################################################
+
+    app.post(globals.globvar.rootAPI + "/saveDeviceInfo", inventory.saveDeviceInfo);
+    app.post(globals.globvar.rootAPI + "/getDeviceDetails", inventory.getDeviceDetails);
+
+    //##################################### Device ##########################################################
+
+    //##################################### Sim #############################################################
+
+    app.post(globals.globvar.rootAPI + "/saveSimInfo", inventory.saveSimInfo);
+    app.post(globals.globvar.rootAPI + "/getSimDetails", inventory.getSimDetails);
+
+    //##################################### Sim ############################################################
+
+    //##################################### Device Sim Map #################################################
+
+    app.post(globals.globvar.rootAPI + "/saveDeiviceSimMapping", inventory.saveDeiviceSimMapping);
+    app.post(globals.globvar.rootAPI + "/getDeiviceSimMapping", inventory.getDeiviceSimMapping);
+
+    //##################################### Device Sim Map #################################################
 
     //##################################### Batch ############################################################
 

@@ -60,8 +60,6 @@ reports.getAuditLogReports = function getAuditLogReports(data) {
             }
 
             columns = columns + '</table>';
-
-            console.log(columns);
         } else {
             if (row.val == "") {
                 columns = columns + '<b>' + row.key + ' : </b> No Entry';

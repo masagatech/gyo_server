@@ -12,6 +12,8 @@ var admsn = require("../appmodule/erp/admission.js");
 var exmres = require("../appmodule/erp/exam.js");
 var fees = require("../appmodule/erp/fees.js");
 
+var inventroy = require("../appmodule/schoolapi/inventory.js");
+
 var root = globals.globvar.rootAPI + "/menu";
 var multer = require('multer');
 
@@ -103,6 +105,19 @@ var appRouter = function(app) {
                         };
 
                         fees.bulkUploadStudentFees(params, res, result, function(d) {
+                            res.json({ data: d });
+                        });
+                    }
+
+                    if (req.body.bulktype === "inventory") {
+                        var params = {
+                            "savetype": req.body.savetype,
+                            "wsautoid": req.body.wsautoid,
+                            "cuid": req.body.cuid,
+                            "bulkinventroy": result
+                        };
+
+                        inventroy.bulkUploadInventory(params, res, result, req.body.savetype, function(d) {
                             res.json({ data: d });
                         });
                     }
