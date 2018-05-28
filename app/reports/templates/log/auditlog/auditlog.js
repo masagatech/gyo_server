@@ -63,7 +63,7 @@ reports.getAuditLogReports = function getAuditLogReports(data) {
             tbldata = JSON.parse(row.val);
 
             columns = columns + '<h4>' + row.key + '</h4>';
-            columns = columns + '<table cellspacing="0" cellpadding="5">';
+            columns = columns + '<table border="1" cellspacing="0" cellpadding="5">';
 
             if (tbldata.length > 0) {
                 if (row.fldname == "othdocfile") {
