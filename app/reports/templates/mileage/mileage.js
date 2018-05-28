@@ -6,8 +6,6 @@ reports.getMileageReports = function getMileageReports(data) {
     var _hndlbar = Handlebars;
     var mileagedt = data.data;
 
-    var col_total = [];
-
     var DateFormats = {
         short: "DD/MMM/YYYY",
         medium: "DD MMMM - YYYY",

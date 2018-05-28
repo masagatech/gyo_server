@@ -50,25 +50,17 @@ log.getMenuLogReports = function getMenuLogReports(req, res, done) {
 // Audit Log
 
 log.getAuditLogReports = function getAuditLogReports(req, res, done) {
-    db.callProcedure("select " + globals.erpschema("funget_auditlog") + "($1,$2::json);", ['alrpt1', req.query], function(data) {
+    db.callProcedure("select " + globals.erpschema("funget_auditlog") + "($1,$2,$3::json);", ['alrpt1', 'alrpt2', req.query], function(data) {
         if (req.query.flag == "reports") {
-            var formname = "";
-            var apiname = "";
-
-            if (req.query.module == "student") {
-                formname = "log/auditlog/student.html";
-            }
-
-            apiname = auditlogapi.getAuditLogReports;
-
             download(req, res, {
-                data: data.rows,
+                data: data.rows[0],
+                data1: data.rows[1],
                 params: req.query
-            }, { 'all': formname }, apiname);
+            }, { 'all': 'log/auditlog/auditlog.html' }, auditlogapi.getAuditLogReports);
         } else {
             rs.resp(res, 200, data.rows);
         }
     }, function(err) {
         rs.resp(res, 401, "error : " + err);
-    }, 1)
+    }, 2)
 }
