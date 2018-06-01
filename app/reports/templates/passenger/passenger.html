@@ -44,13 +44,18 @@
 </head>
 
 <body>
-    {{#psngrhead}}
-    <h3 {{{font-10}}}>
-        <b>{{{psngrtype_head}}} Details </b> {{ayname}} {{prspctname}} {{boardname}} {{classname}} {{gender}} {{castcatname}} {{studname}}
-    </h3>
-    {{/psngrhead}}
-
-    <hr />
+    <table cellspacing="0" cellpadding="0">
+        {{#psngrhead}}
+        <tr>
+            <td>
+                <h3 {{{font-10}}}><b>{{{psngrtype_head}}} Details </b> {{gender}} {{psngrname}}</h3>
+            </td>
+            <td align="right">
+                <h3 {{{font-10}}}>Total {{{psngrtype_head}}} : {{{count_data}}}</h3>
+            </td>
+        </tr>
+        {{/psngrhead}}
+    </table>
 
     <div class="table-overflow">
         <table border="1" class="table table-bordered table-responsive" cellspacing="0" cellpadding="5">
@@ -66,7 +71,7 @@
                 </tr>
             </thead>
             <tbody>
-                {{#psngrdata}}
+                {{{nodatafound}}} {{#psngrdata}}
                 <tr>
                     <td align="center">
                         {{{psngrphoto_col this}}}

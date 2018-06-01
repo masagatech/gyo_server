@@ -39,6 +39,22 @@ reports.getPassengerReports = function getPassengerReports(data) {
         }
     });
 
+    // Count Data
+
+    _hndlbar.registerHelper('count_data', function(row) {
+        return psngrdata.length;
+    });
+
+    // No Data Found
+
+    _hndlbar.registerHelper('nodatafound', function(row) {
+        if (psngrdata.length == 0) {
+            return '<tr><td colspan="7">No Data Found</th></td>';
+        } else {
+            return '';
+        }
+    });
+
     // Passenger Type
 
     _hndlbar.registerHelper('psngrtype_head', function(row) {
@@ -59,15 +75,19 @@ reports.getPassengerReports = function getPassengerReports(data) {
         var psngrphoto_col = "";
 
         if (row.gndrkey == "M") {
-            psngrphoto_col += '<img alt="' + row.psngrname + '" height="60" src="' + globals.uploadurl + row.psngrphoto + '" onerror="this.src=\'assets/img/default-male.png\';">';
+            psngrphoto_col += '<img height="60" width="60" src="' + globals.uploadurl + "/" + row.psngrphoto + '" onerror="this.src=\'assets/img/default-male.png\';">';
         } else if (row.gndrkey == "F") {
-            psngrphoto_col += '<img alt="' + row.psngrname + '" height="60" src="' + globals.uploadurl + row.psngrphoto + '" onerror="this.src=\'assets/img/default-female.png\';">';
+            psngrphoto_col += '<img height="60" width="60" src="' + globals.uploadurl + "/" + row.psngrphoto + '" onerror="this.src=\'assets/img/default-female.png\';">';
         } else {
-            psngrphoto_col += '<img alt="' + row.psngrname + '" height="60" src="' + globals.uploadurl + row.psngrphoto + '" onerror="this.src=\'assets/img/noimage.gif\';"">';
+            psngrphoto_col += '<img height="60" width="60" src="' + globals.uploadurl + "/" + row.psngrphoto + '" onerror="this.src=\'assets/img/noimage.gif\';"">';
         }
 
         if (row.gndrval != "" && row.gndrval != null) {
-            psngrphoto_col += "<div>" + row.gndrval + "</div>";
+            psngrphoto_col += "<br />" + row.gndrval;
+        }
+
+        if (row.psngrdob != "" && row.psngrdob != null) {
+            psngrphoto_col += "<br /><b>Age : </b>" + row.psngrage;
         }
 
         return psngrphoto_col;
@@ -79,15 +99,27 @@ reports.getPassengerReports = function getPassengerReports(data) {
         var studphoto_col = "";
 
         if (row.gndrkey == "M") {
-            studphoto_col += '<img alt="' + row.studname + '" height="60" src="' + globals.uploadurl + row.FilePath + '" onerror="this.src=\'assets/img/default-male.png\';">';
+            studphoto_col += '<img height="60" width="60" src="' + globals.uploadurl + "/" + row.FilePath + '" onerror="this.src=\'assets/img/default-male.png\';">';
         } else if (row.gndrkey == "F") {
-            studphoto_col += '<img alt="' + row.studname + '" height="60" src="' + globals.uploadurl + row.FilePath + '" onerror="this.src=\'assets/img/default-female.png\';">';
+            studphoto_col += '<img height="60" width="60" src="' + globals.uploadurl + "/" + row.FilePath + '" onerror="this.src=\'assets/img/default-female.png\';">';
         } else {
-            studphoto_col += '<img alt="' + row.studname + '" height="60" src="' + globals.uploadurl + row.FilePath + '" onerror="this.src=\'assets/img/noimage.gif\';"">';
+            studphoto_col += '<img height="60" width="60" src="' + globals.uploadurl + "/" + row.FilePath + '" onerror="this.src=\'assets/img/noimage.gif\';"">';
         }
 
         if (row.gndrval != "" && row.gndrval != null) {
-            studphoto_col += "<div>" + row.gndrval + "</div>";
+            if (params.format == "pdf") {
+                studphoto_col += "<div " + font07 + ">" + row.gndrval + "</div>";
+            } else {
+                studphoto_col += "<div " + font12 + ">" + row.gndrval + "</div>";
+            }
+        }
+
+        if (row.dob != "" && row.dob != null) {
+            if (params.format == "pdf") {
+                studphoto_col += "<div " + font07 + "><b>Age : </b>" + row.age + "</div>";
+            } else {
+                studphoto_col += "<div " + font12 + "><b>Age : </b>" + row.age + "</div>";
+            }
         }
 
         return studphoto_col;
