@@ -4,6 +4,11 @@
     <meta charset="utf-8" />
 
     <style>
+        .table-overflow {
+            width: 100%;
+            overflow: auto;
+        }
+        
         table {
             border-collapse: collapse;
             width: 100%;
@@ -44,24 +49,24 @@
         }
         
         .P {
-            background-color: #8BC34A;
-            color: #ffffff;
+            background-color: #d3e8bb;
+            color: #000000;
         }
         
         .A,
         .WO {
-            background-color: #E91E63;
-            color: #ffffff;
+            background-color: #e8bbbb;
+            color: #000000;
         }
         
         .LV {
-            background-color: #FF9800;
-            color: #ffffff;
+            background-color: #e6d38f;
+            color: #000000;
         }
         
         .H {
-            background-color: #03A9F4;
-            color: #ffffff;
+            background-color: #bbdce8;
+            color: #000000;
         }
         
         .show {
@@ -77,58 +82,75 @@
 <body>
     {{#attndhead}}
     <h2 {{{font-13}}}>{{psngrtype}} Attendance</h2>
-    <h3 {{{font-10}}}>Academic Year : {{ayname}}</h3>
+    <h3 {{{font-10}}}>Academic Year : {{ayname}} ({{attnddate}})</h3>
     {{{class_head}}}
-    <h3 {{{font-10}}}>Month : {{attndmonth}}</h3>
+    <h3 {{{font-10}}}>{{attndmonth}}</h3>
     <h3 {{{font-10}}}>Attendace Type : {{attndtype}}</h3>
     {{/attndhead}}
 
-    <table border="1" cellspacing="0" cellpadding="5">
-        <thead>
-            <tr>
-                {{#psngrcolumn}}
-                <th {{{font-07}}} width="50px">{{val}}</th>
-                {{/psngrcolumn}}
-                <th {{{font-07}}} width="300px">
-                    {{#attndhead}} {{psngrtype}} {{/attndhead}} Name
-                </th>
-                {{#attndcolumn}}
-                <th {{{font-07}}} width="15px">{{val}}</th>
-                {{/attndcolumn}}
-                <th {{{font-07}}} width="15px">P</th>
-                <th {{{font-07}}} width="15px">A</th>
-                <th {{{font-07}}} width="15px">LV</th>
-                <th {{{font-07}}} width="15px">WO</th>
-                <th {{{font-07}}} width="15px">H</th>
-            </tr>
-        </thead>
-        <tbody>
-            {{#attnddata}}
-            <tr>
-                {{{psngr_value this}}}
-                <td {{{font-07}}}>
-                    {{psngrname}}
-                </td>
-                {{{attnd_value this}}}
-                <td {{{font-07}}} class="P">
-                    <b>{{P}}</b>
-                </td>
-                <td {{{font-07}}} class="A">
-                    <b>{{A}}</b>
-                </td>
-                <td {{{font-07}}} class="WO">
-                    <b>{{WO}}</b>
-                </td>
-                <td {{{font-07}}} class="LV">
-                    <b>{{LV}}</b>
-                </td>
-                <td {{{font-07}}} class="H">
-                    <b>{{H}}</b>
-                </td>
-            </tr>
-            {{/attnddata}}
-        </tbody>
-    </table>
+    <div class="table-overflow">
+        <table border="1" class="table table-bordered table-responsive" cellspacing="0" cellpadding="5" style="all:unset;">
+            <thead>
+                {{#isvis params.attndmonth}}
+                <tr>
+                    <th {{{font-07}}}></th>
+                    <th {{{font-07}}}></th>
+                    <th {{{font-07}}}></th>
+                    {{#monthcolumn}}
+                    <th {{{font-07}}} colspan="5">{{val}}</th>
+                    {{/monthcolumn}}
+                    <th {{{font-07}}}></th>
+                    <th {{{font-07}}}></th>
+                    <th {{{font-07}}}></th>
+                    <th {{{font-07}}}></th>
+                    <th {{{font-07}}}></th>
+                </tr>
+                {{/isvis}}
+                <tr>
+                    {{#psngrcolumn}}
+                    <th {{{font-07}}}>{{val}}</th>
+                    {{/psngrcolumn}}
+                    <th {{{font-07}}}>
+                        {{#attndhead}} {{psngrtype}} {{/attndhead}} Name
+                    </th>
+                    {{#attndcolumn}}
+                    <th {{{font-07}}}>{{{splitHead day}}}</th>
+                    {{/attndcolumn}}
+                    <th {{{font-07}}}>P</th>
+                    <th {{{font-07}}}>A</th>
+                    <th {{{font-07}}}>LV</th>
+                    <th {{{font-07}}}>WO</th>
+                    <th {{{font-07}}}>H</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#attnddata}}
+                <tr>
+                    {{{psngr_value this}}}
+                    <td {{{font-07}}}>
+                        {{psngrname}}
+                    </td>
+                    {{{attnd_value this}}}
+                    <td {{{font-07}}} class="P">
+                        <b>{{P}}</b>
+                    </td>
+                    <td {{{font-07}}} class="A">
+                        <b>{{A}}</b>
+                    </td>
+                    <td {{{font-07}}} class="WO">
+                        <b>{{WO}}</b>
+                    </td>
+                    <td {{{font-07}}} class="LV">
+                        <b>{{LV}}</b>
+                    </td>
+                    <td {{{font-07}}} class="H">
+                        <b>{{H}}</b>
+                    </td>
+                </tr>
+                {{/attnddata}}
+            </tbody>
+        </table>
+    </div>
 </body>
 
 </html>

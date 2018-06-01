@@ -40,6 +40,25 @@ reports.getAttendanceReports = function getAttendanceReports(data) {
         }
     });
 
+    // Hide When
+
+    _hndlbar.registerHelper('isvis', function(param, options) {
+        if (param !== "" || param == "NA") {
+            return options.inverse(this);
+        } else {
+            return options.fn(this);
+        }
+    });
+
+    _hndlbar.registerHelper('splitHead', function(head) {
+        if (params.attndmonth == "") {
+            var t = head.split("-");
+            return t[1];
+        } else {
+            return head;
+        }
+    });
+
     _hndlbar.registerHelper('class_head', function(row) {
         var columns = "";
 
@@ -57,37 +76,45 @@ reports.getAttendanceReports = function getAttendanceReports(data) {
     });
 
     _hndlbar.registerHelper('psngr_value', function(row) {
-        var columns = '';
-        let data = '';
+        var _columns = '';
+        let _data = '';
+        let _class = '';
 
         for (var i = 0; i < psngrcolumn.length; i++) {
-            data = row[psngrcolumn[i].val];
+            _data = row[psngrcolumn[i].key];
 
             if (params.format == "pdf") {
-                columns = columns + '<td ' + font07 + ' class="' + data + '" align="center">' + (data == null ? '-' : data) + '</td>';
+                _columns = _columns + '<td ' + font07 + ' class="' + _data + '" align="center">' + (_data == null ? '-' : _data) + '</td>';
             } else {
-                columns = columns + '<td ' + font12 + ' class="' + data + '" align="center">' + (data == null ? '-' : data) + '</td>';
+                _columns = _columns + '<td ' + font12 + ' class="' + _data + '" align="center">' + (_data == null ? '-' : _data) + '</td>';
             }
         }
 
-        return columns;
+        return _columns;
     });
 
     _hndlbar.registerHelper('attnd_value', function(row) {
-        var columns = '';
-        let data = '';
+        var _columns = '';
+        let _data = '';
+        let _class = '';
 
         for (var i = 0; i < attndcolumn.length; i++) {
-            data = row[attndcolumn[i].val];
+            if (params.attndmonth == "") {
+                _class = attndcolumn[i].day.split('-')[1];
+            } else {
+                _class = row[attndcolumn[i].day];
+            }
+
+            _data = row[attndcolumn[i].day];
 
             if (params.format == "pdf") {
-                columns = columns + '<td ' + font07 + ' class="' + data + '" align="center">' + (data == null ? '-' : data) + '</td>';
+                _columns = _columns + '<td ' + font07 + ' class="' + _class + '" align="center">' + (_data == null ? '-' : _data) + '</td>';
             } else {
-                columns = columns + '<td ' + font12 + ' class="' + data + '" align="center">' + (data == null ? '-' : data) + '</td>';
+                _columns = _columns + '<td ' + font12 + ' class="' + _class + '" align="center">' + (_data == null ? '-' : _data) + '</td>';
             }
         }
 
-        return columns;
+        return _columns;
     });
 
     return _hndlbar;

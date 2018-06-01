@@ -15,6 +15,7 @@ attnd.getAttendanceReports = function getAttendanceReports(req, res, done) {
                 attndhead: data.rows[0],
                 psngrcolumn: data.rows[0][0].psngrcolumn,
                 attndcolumn: data.rows[0][0].attndcolumn,
+                monthcolumn: data.rows[0][0].attndcolumn.filter(function(x) { return x.id == 1 }),
                 attnddata: data.rows[1],
                 params: req.query
             }, { 'all': 'attendance/studentattendance.html' }, attendanceapi.getAttendanceReports);

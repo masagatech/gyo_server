@@ -5,6 +5,7 @@ var reportsapi = "../appmodule/reportsapi/";
 
 var log = require(reportsapi + "log.js");
 var reports = require(reportsapi + "reports.js");
+var passenger = require(reportsapi + "passenger.js");
 var notification = require(reportsapi + "notification.js");
 var announcement = require(reportsapi + "announcement.js");
 var classtimetable = require(reportsapi + "classtimetable.js");
@@ -18,6 +19,10 @@ module.exports = function(app) {
 
     app.get("/getReports", reports.getReports);
     app.post("/postReports", reports.postReports);
+
+    // Passenger Reports
+
+    app.get("/getPassengerReports", passenger.getPassengerReports);
 
     // Log Reports
 

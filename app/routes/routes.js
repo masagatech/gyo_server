@@ -145,7 +145,6 @@ var appRouter = function(app) {
 
     app.post(globals.globvar.rootAPI + "/savePassengerInfo", psngr.savePassengerInfo);
     app.post(globals.globvar.rootAPI + "/getPassengerDetails", psngr.getPassengerDetails);
-    app.post(globals.globvar.rootAPI + "/getPassengerReports", psngr.getPassengerReports);
 
     //##################################### Passenger #######################################################
 
