@@ -182,6 +182,9 @@ var appRouter = function(app) {
 
     //##################################### Exam #########################################################
 
+    app.post(root + "/saveExamGrade", exam.saveExamGrade);
+    app.post(root + "/getExamGrade", exam.getExamGrade);
+
     app.post(root + "/saveExamInfo", exam.saveExamInfo);
     app.post(root + "/getExamDetails", exam.getExamDetails);
 

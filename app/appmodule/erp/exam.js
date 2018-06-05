@@ -11,7 +11,25 @@ var common = require("../schoolapi/common.js");
 var tripapi = require("../schoolapi/tripapi.js");
 var sms_email = require("../schoolapi/sendsms_email.js");
 
-// Exam
+// Exam Grade
+
+exam.saveExamGrade = function saveExamGrade(req, res, done) {
+    db.callFunction("select " + globals.erpschema("funsave_examGrade") + "($1::json);", [req.body], function(data) {
+        rs.resp(res, 200, data.rows);
+    }, function(err) {
+        rs.resp(res, 401, "error : " + err);
+    })
+}
+
+exam.getExamGrade = function getExamGrade(req, res, done) {
+    db.callProcedure("select " + globals.erpschema("funget_examGrade") + "($1,$2::json);", ['exgrd', req.body], function(data) {
+        rs.resp(res, 200, data.rows);
+    }, function(err) {
+        rs.resp(res, 401, "error : " + err);
+    }, 1)
+}
+
+// Exam List
 
 exam.saveExamInfo = function saveExamInfo(req, res, done) {
     db.callFunction("select " + globals.erpschema("funsave_examinfo") + "($1::json);", [req.body], function(data) {
