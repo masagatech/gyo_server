@@ -1,0 +1,128 @@
+<html>
+
+<head>
+    <meta charset="utf-8" />
+
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            border: solid 1px rgba(204, 204, 204, 0.35);
+            margin-top: 10px!important;
+            font-size: 11px;
+        }
+        
+        table thead th {
+            background: #009688;
+            color: #ffffff;
+            padding: 3px!important;
+            text-align: center;
+            vertical-align: top;
+            font-size: 11px;
+        }
+        
+        table tbody th {
+            background: #eeeeee;
+            border: 1px solid rgba(204, 204, 204, 0.35);
+            color: #000000;
+            padding: 3px!important;
+            text-align: left;
+            vertical-align: top;
+            font-size: 11px;
+        }
+        
+        table tbody td {
+            padding: 3px!important;
+            vertical-align: top;
+            font-size: 11px;
+        }
+        
+        h3 {
+            margin: 10px 0;
+        }
+        
+        .total {
+            background-color: #000000;
+            color: #ffffff;
+            font-weight: bold;
+        }
+        
+        .total td {
+            font-size: 12px!important;
+        }
+    </style>
+</head>
+
+<body>
+    {{#dataheader}}
+    <table cellspacing="0" cellpadding="5">
+        <tr>
+            <td align="left">
+                <img src="{{{uploadurl}}}/{{enttlogo}}" height="80">
+            </td>
+            <td align="center">
+                <h3 {{{font-13}}}>{{enttname}}</h3>
+
+                <h3 {{{font-10}}}>
+                    Academic Year : {{ayname}}
+                </h3>
+
+                <h3 {{{font-10}}}>
+                    Class : {{classname}}, Month : {{attndmonth}}
+                </h3>
+
+                <h3 {{{font-13}}}>
+                    Reports : {{psngrtype}} Attendance ({{status}})
+                </h3>
+            </td>
+            <td align="right">
+                <h3 {{{font-10}}}>
+                    Report Date : {{rptdate}}
+                </h3>
+            </td>
+        </tr>
+    </table>
+    {{/dataheader}}
+
+    <div class="table-overflow">
+        <table border="1" class="table table-bordered table-responsive" cellspacing="0" cellpadding="5">
+            {{#group datatable by="classname"}}
+            <thead>
+                <tr>
+                    <th colspan="3">
+                        <b>Class : </b> {{value}}
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each items}}
+                <tr>
+                    <th width="50px">
+                        <b>Name : </b>{{studentname}}
+                    </th>
+                    <th width="50px">
+                        <b>Roll No : </b>{{rollno}}
+                    </th>
+                    <th width="200px">
+                        <b>G.R. No. : </b>{{grno}}
+                    </th>
+                </tr>
+                {{#datehead}}
+                <tr>
+                    <td colspan="3">
+                        {{attnddate}}
+                    </td>
+                </tr>
+                {{/datehead}}
+                <tr>
+                    <td colspan="3" align="right">
+                        <b>Studentwise Absent Days : </b>{{countabsent}}
+                    </td>
+                </tr>
+                {{/each}}
+            </tbody> {{/group}}
+        </table>
+    </div>
+</body>
+
+</html>

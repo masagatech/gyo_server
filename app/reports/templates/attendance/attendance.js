@@ -1,13 +1,32 @@
 var Handlebars = require('handlebars');
 var moment = require('moment');
 var reports = module.exports = {};
+var globals = require("gen").globals;
+
+var handlebars = require('handlebars');
+var groupBy = require('handlebars-group-by');
+
+groupBy.register(handlebars);
+
+reports.getStudentAttendanceReports = function getStudentAttendanceReports(data) {
+    var _hndlbar = Handlebars;
+
+    _hndlbar.registerHelper('uploadurl', function(params) {
+        return globals.uploadurl;
+    });
+
+    return _hndlbar;
+}
 
 reports.getAttendanceReports = function getAttendanceReports(data) {
     var _hndlbar = Handlebars;
     var attndhead = data.attndhead;
     var psngrcolumn = data.psngrcolumn;
+    var allattndcolumn = data.allattndcolumn;
     var attndcolumn = data.attndcolumn;
-    var attnddata = data.attnddata;
+
+    var classwiseattnd = data.classwiseattnd;
+    var studentwiseattnd = data.studentwiseattnd;
     var params = data.params;
 
     var font07 = 'style = "font-size: 7px;"';
@@ -40,14 +59,29 @@ reports.getAttendanceReports = function getAttendanceReports(data) {
         }
     });
 
+    _hndlbar.registerHelper('uploadurl', function(params) {
+        return globals.uploadurl;
+    });
+
+    _hndlbar.registerHelper('attnddata', function(row) {
+        return studentwiseattnd.filter(function(x) { return x.classid == row.classid });
+    });
+
     // Hide When
 
-    _hndlbar.registerHelper('isvis', function(param, options) {
-        if (param !== "" || param == "NA") {
-            return options.inverse(this);
-        } else {
-            return options.fn(this);
+    _hndlbar.registerHelper('groupcolname', function(row) {
+        var _columns = "";
+        var _data = '';
+
+        if (row != "") {
+            if (params.attndmonth == "") {
+                _columns += '<th colspan="68"><b>Class : </b>' + row + '</th>';
+            } else {
+                _columns += '<th colspan="39"><b>Class : </b>' + row + '</th>';
+            }
         }
+
+        return _columns;
     });
 
     _hndlbar.registerHelper('splitHead', function(head) {
@@ -77,16 +111,45 @@ reports.getAttendanceReports = function getAttendanceReports(data) {
 
     _hndlbar.registerHelper('psngr_value', function(row) {
         var _columns = '';
-        let _data = '';
-        let _class = '';
+        var _data = '';
+        var _class = '';
 
         for (var i = 0; i < psngrcolumn.length; i++) {
             _data = row[psngrcolumn[i].key];
+            _columns = _columns + '<td align="center">' + (_data == null ? '-' : _data) + '</td>';
+        }
 
-            if (params.format == "pdf") {
-                _columns = _columns + '<td ' + font07 + ' class="' + _data + '" align="center">' + (_data == null ? '-' : _data) + '</td>';
+        return _columns;
+    });
+
+    _hndlbar.registerHelper('allattnd_value', function(row) {
+        var _columns = '';
+        var _data = '';
+        var _class = '';
+
+        for (var i = 0; i < allattndcolumn.length; i++) {
+            var attndmonth = allattndcolumn[i].attndmonth;
+            var status = allattndcolumn[i].day.split('-')[1];
+            var flag = status == "P" ? "average" : "statuswise";
+
+            if (params.attndmonth == "") {
+                _class = status;
             } else {
-                _columns = _columns + '<td ' + font12 + ' class="' + _data + '" align="center">' + (_data == null ? '-' : _data) + '</td>';
+                _class = row[allattndcolumn[i].day];
+            }
+
+            _data = row[allattndcolumn[i].day];
+
+            if (_data == 0 || _data == null || status == "LV" || status == "WO" || status == "H") {
+                _columns = _columns + '<td class="' + _class + '" align="center">' + (_data == null ? '-' : _data) + '</td>';
+            } else {
+                _columns = _columns + '<td class="' + _class + '" align="center">' +
+                    '<a href="' + globals.reporturl + '/getStudentAttendanceReports?flag=' + flag + '&type=download&status=' + status +
+                    '&psngrtype=' + params.psngrtype + '&attndmonth=' + attndmonth + '&attndtype=' + params.attndtype + '&ayid=' + params.ayid +
+                    '&classid=' + row.classid + '&gender=' + params.gender + '&enttid=' + params.enttid + '&wsautoid=' + params.wsautoid +
+                    '&uid=' + params.uid + '&utype=' + params.utype + '&issysadmin=' + params.issysadmin + '&format=pdf" target="_blank">' +
+                    (_data == null ? '-' : _data) +
+                    '</a></td>';
             }
         }
 
@@ -95,8 +158,8 @@ reports.getAttendanceReports = function getAttendanceReports(data) {
 
     _hndlbar.registerHelper('attnd_value', function(row) {
         var _columns = '';
-        let _data = '';
-        let _class = '';
+        var _data = '';
+        var _class = '';
 
         for (var i = 0; i < attndcolumn.length; i++) {
             if (params.attndmonth == "") {
@@ -106,12 +169,7 @@ reports.getAttendanceReports = function getAttendanceReports(data) {
             }
 
             _data = row[attndcolumn[i].day];
-
-            if (params.format == "pdf") {
-                _columns = _columns + '<td ' + font07 + ' class="' + _class + '" align="center">' + (_data == null ? '-' : _data) + '</td>';
-            } else {
-                _columns = _columns + '<td ' + font12 + ' class="' + _class + '" align="center">' + (_data == null ? '-' : _data) + '</td>';
-            }
+            _columns = _columns + '<td class="' + _class + '" align="center">' + (_data == null ? '-' : _data) + '</td>';
         }
 
         return _columns;

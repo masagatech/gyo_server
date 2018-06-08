@@ -1,18 +1,15 @@
-var reportPath = "../reports/apis/";
-var reportsapi = "../appmodule/reportsapi/";
-
 // report modules
 
-var log = require(reportsapi + "log.js");
-var reports = require(reportsapi + "reports.js");
-var passenger = require(reportsapi + "passenger.js");
-var notification = require(reportsapi + "notification.js");
-var announcement = require(reportsapi + "announcement.js");
-var classtimetable = require(reportsapi + "classtimetable.js");
-var exam = require(reportsapi + "exam.js");
-var assesment = require(reportsapi + "assesment.js");
-var attnd = require(reportsapi + "attendance.js");
-var fees = require(reportsapi + "fees.js");
+var log = require("../appmodule/reportsapi/log.js");
+var reports = require("../appmodule/reportsapi/reports.js");
+var passenger = require("../appmodule/reportsapi/passenger.js");
+var notification = require("../appmodule/reportsapi/notification.js");
+var announcement = require("../appmodule/reportsapi/announcement.js");
+var classtimetable = require("../appmodule/reportsapi/classtimetable.js");
+var exam = require("../appmodule/reportsapi/exam.js");
+var assesment = require("../appmodule/reportsapi/assesment.js");
+var attnd = require("../appmodule/reportsapi/attendance.js");
+var fees = require("../appmodule/reportsapi/fees.js");
 
 module.exports = function(app) {
     // Mileage and Speed Reports
@@ -50,6 +47,7 @@ module.exports = function(app) {
     // Attendance Reports
 
     app.get("/getAttendanceReports", attnd.getAttendanceReports);
+    app.get("/getStudentAttendanceReports", attnd.getStudentAttendanceReports);
 
     // Fees Reports
 
