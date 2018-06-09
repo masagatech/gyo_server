@@ -19,16 +19,18 @@
         
         table thead th {
             background: #009688;
+            font-weight: bold!important;
             color: #ffffff;
             padding: 3px!important;
             text-align: center;
             vertical-align: top;
-            font-size: 11px;
+            font-size: 12px;
         }
         
         table tbody th {
             background: #eeeeee;
-            border: 1px solid rgba(204, 204, 204, 0.35);
+            border: 2px solid rgba(204, 204, 204, 0.35)!important;
+            font-weight: bold!important;
             color: #000000;
             padding: 3px!important;
             text-align: left;
@@ -39,7 +41,7 @@
         table tbody td {
             padding: 3px!important;
             vertical-align: top;
-            font-size: 11px;
+            font-size: 10px;
         }
         
         h3 {
@@ -166,43 +168,42 @@
             <tbody>
                 {{#classwiseattnd}}
                 <tr class="{{class}}">
-                    <td align="center" colspan="2">
-                        {{classname}}
-                    </td>
-                    <td align="center">
+                    <th align="center" colspan="2">
+                        <b> {{classname}}</b>
+                    </th>
+                    <th align="center">
                         {{countpsngr}}
-                    </td>
+                    </th>
 
-                    {{{allattnd_value this}}}
+                    {{{attnd_value this}}}
 
-                    <td class="P">
+                    <th class="P">
                         <b>{{P}}</b>
-                    </td>
-                    <td class="A">
+                    </th>
+                    <th class="A">
                         <b>{{A}}</b>
-                    </td>
-                    <td class="LV">
+                    </th>
+                    <th class="LV">
                         <b>{{LV}}</b>
-                    </td>
-                    <td class="WO">
+                    </th>
+                    <th class="WO">
                         <b>{{WO}}</b>
-                    </td>
-                    <td class="H">
+                    </th>
+                    <th class="H">
                         <b>{{H}}</b>
-                    </td>
+                    </th>
                 </tr>
-                {{/classwiseattnd}}
 
                 <!-- Attendace Data -->
 
-                {{#studentwiseattnd}}
+                {{#sbarray}}
                 <tr>
                     {{{psngr_value this}}}
                     <td>
                         {{psngrname}}
                     </td>
 
-                    {{{allattnd_value this}}}
+                    {{{attnd_value this}}}
 
                     <td class="P">
                         <b>{{P}}</b>
@@ -220,7 +221,7 @@
                         <b>{{H}}</b>
                     </td>
                 </tr>
-                {{/studentwiseattnd}}
+                {{/sbarray}}{{/classwiseattnd}}
             </tbody>
         </table>
     </div>

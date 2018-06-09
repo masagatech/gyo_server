@@ -151,7 +151,7 @@
                 </tr>
             </thead>
             <tbody>
-                {{#group attnddata by="classname"}}
+                {{#group studentwiseattnd by="classname"}}
                 <tr>
                     {{{groupcolname value}}}
                 </tr>
@@ -162,7 +162,7 @@
                         {{psngrname}}
                     </td>
 
-                    {{{allattnd_value this}}}
+                    {{{attnd_value this}}}
 
                     <td class="P">
                         <b>{{P}}</b>

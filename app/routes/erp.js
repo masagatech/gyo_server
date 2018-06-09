@@ -11,6 +11,7 @@ var admsn = require("../appmodule/erp/admission.js");
 var attnd = require("../appmodule/erp/attendance.js");
 var cls = require("../appmodule/erp/class.js");
 var sub = require("../appmodule/erp/subject.js");
+var rb = require("../appmodule/erp/receiptbook.js");
 var fees = require("../appmodule/erp/fees.js");
 var acdmc = require("../appmodule/erp/academicyear.js");
 var clstmt = require("../appmodule/erp/classtimetable.js");
@@ -39,12 +40,12 @@ var appRouter = function(app) {
     //##################################### VIVEK ########################################################
 
 
-    //##################################### Audit Log ###################################################
+    //##################################### Audit Log ####################################################
 
     app.post(root + "/saveAuditLog", audit.saveAuditLog);
     app.post(root + "/getAuditLog", audit.getAuditLog);
 
-    //##################################### Audit Log ###################################################
+    //##################################### Audit Log ####################################################
 
     //##################################### Dashboard ####################################################
 
@@ -106,23 +107,34 @@ var appRouter = function(app) {
 
     //##################################### Class ########################################################
 
-    //##################################### Subject ########################################################
+    //##################################### Subject ######################################################
 
     app.post(root + "/saveSubjectInfo", sub.saveSubjectInfo);
     app.post(root + "/getSubjectDetails", sub.getSubjectDetails);
 
-    //##################################### Subject ########################################################
+    //##################################### Subject ######################################################
+
+    //##################################### Receipt Book #################################################
+
+    app.post(root + "/saveReceiptBook", rb.saveReceiptBook);
+    app.post(root + "/getReceiptBook", rb.getReceiptBook);
+
+    //##################################### Receipt Book #################################################
 
     //##################################### Fees #########################################################
 
     app.post(root + "/saveClassFees", fees.saveClassFees);
     app.post(root + "/getClassFees", fees.getClassFees);
 
+    //##################################### Fees Structure ###############################################
+
+    //##################################### Fees Collection ##############################################
+
     app.post(root + "/saveFeesCollection", fees.saveFeesCollection);
     app.post(root + "/getFeesCollection", fees.getFeesCollection);
     app.post(root + "/getFeesReports", fees.getFeesReports);
 
-    //##################################### Class ########################################################
+    //##################################### Fees Collection ##############################################
 
     //##################################### Academic Year ################################################
 
@@ -217,12 +229,12 @@ var appRouter = function(app) {
 
     //##################################### Announcement #################################################
 
-    //##################################### Noticeboard #################################################
+    //##################################### Noticeboard ##################################################
 
     app.post(root + "/saveNoticeboard", nb.saveNoticeboard);
     app.post(root + "/getNoticeboard", nb.getNoticeboard);
 
-    //##################################### Noticeboard #################################################
+    //##################################### Noticeboard ##################################################
 
     //##################################### Tag ##########################################################
 

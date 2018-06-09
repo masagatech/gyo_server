@@ -29,6 +29,13 @@ reports.getAttendanceReports = function getAttendanceReports(data) {
     var studentwiseattnd = data.studentwiseattnd;
     var params = data.params;
 
+    for (let index = 0; index < classwiseattnd.length; index++) {
+        const element = classwiseattnd[index];
+
+        var sb_array = studentwiseattnd.filter(function(x) { return x.classid == element.classid })
+        element["sbarray"] = sb_array;
+    }
+
     var font07 = 'style = "font-size: 7px;"';
     var font10 = 'style = "font-size: 10px;"';
     var font12 = 'style = "font-size: 12px;"';
@@ -63,8 +70,11 @@ reports.getAttendanceReports = function getAttendanceReports(data) {
         return globals.uploadurl;
     });
 
-    _hndlbar.registerHelper('attnddata', function(row) {
-        return studentwiseattnd.filter(function(x) { return x.classid == row.classid });
+    _hndlbar.registerHelper('attnddata', function(row, options) {
+
+        var array = studentwiseattnd.filter(function(x) { return x.classid == row.classid });
+
+        return array;
     });
 
     // Hide When
@@ -122,7 +132,7 @@ reports.getAttendanceReports = function getAttendanceReports(data) {
         return _columns;
     });
 
-    _hndlbar.registerHelper('allattnd_value', function(row) {
+    _hndlbar.registerHelper('attnd_value', function(row) {
         var _columns = '';
         var _data = '';
         var _class = '';
@@ -140,36 +150,17 @@ reports.getAttendanceReports = function getAttendanceReports(data) {
 
             _data = row[allattndcolumn[i].day];
 
-            if (_data == 0 || _data == null || status == "LV" || status == "WO" || status == "H") {
-                _columns = _columns + '<td class="' + _class + '" align="center">' + (_data == null ? '-' : _data) + '</td>';
+            if (_data == 0 || _data == null || _data == "P" || _data == "A" || _data == "LV" || _data == "WO" || _data == "H" || status == "WO" || status == "H") {
+                _columns = _columns + '<th class="' + _class + '" align="center">' + (_data == null ? '-' : _data) + '</th>';
             } else {
-                _columns = _columns + '<td class="' + _class + '" align="center">' +
+                _columns = _columns + '<th class="' + _class + '" align="center">' +
                     '<a href="' + globals.reporturl + '/getStudentAttendanceReports?flag=' + flag + '&type=download&status=' + status +
                     '&psngrtype=' + params.psngrtype + '&attndmonth=' + attndmonth + '&attndtype=' + params.attndtype + '&ayid=' + params.ayid +
                     '&classid=' + row.classid + '&gender=' + params.gender + '&enttid=' + params.enttid + '&wsautoid=' + params.wsautoid +
                     '&uid=' + params.uid + '&utype=' + params.utype + '&issysadmin=' + params.issysadmin + '&format=pdf" target="_blank">' +
                     (_data == null ? '-' : _data) +
-                    '</a></td>';
+                    '</a></th>';
             }
-        }
-
-        return _columns;
-    });
-
-    _hndlbar.registerHelper('attnd_value', function(row) {
-        var _columns = '';
-        var _data = '';
-        var _class = '';
-
-        for (var i = 0; i < attndcolumn.length; i++) {
-            if (params.attndmonth == "") {
-                _class = attndcolumn[i].day.split('-')[1];
-            } else {
-                _class = row[attndcolumn[i].day];
-            }
-
-            _data = row[attndcolumn[i].day];
-            _columns = _columns + '<td class="' + _class + '" align="center">' + (_data == null ? '-' : _data) + '</td>';
         }
 
         return _columns;
