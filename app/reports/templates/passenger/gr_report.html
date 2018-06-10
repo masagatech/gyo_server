@@ -1,0 +1,101 @@
+<html>
+
+<head>
+    <meta charset="utf-8" />
+
+    <style>
+        .table-overflow {
+            width: 100%;
+            overflow: auto;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            border: solid 1px rgba(204, 204, 204, 0.35);
+            margin-bottom: 10px;
+        }
+
+        table thead th {
+            background: #009688;
+            color: #ffffff;
+            padding: 3px;
+            text-align: center;
+            vertical-align: top;
+        }
+
+        table tbody th {
+            background: #eeeeee;
+            color: #000000;
+            padding: 5px;
+            text-align: center;
+            vertical-align: top;
+        }
+
+        table tbody td {
+            padding: 3px;
+            vertical-align: top;
+        }
+
+        h3 {
+            margin: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <table cellspacing="0" cellpadding="0">
+        {{#psngrhead}}
+        <tr>
+            <td>
+                <img src="{{{uploadurl}}}/{{enttlogo}}" width="80">
+            </td>
+            <td align="center">
+                <h3 {{{font-13}}}>{{enttname}}</h3>
+                <h3 {{{font-10}}}>{{enttaddr}}</h3>
+            </td>
+            <td align="right">
+                <h3 {{{font-10}}}>Report Date : {{rptdate}}</h3>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="3">
+                <h3 {{{font-13}}}>General Register Report ({{{grtype_head}}})</h3>
+            </td>
+        </tr>
+        {{/psngrhead}}
+    </table>
+
+    <div class="table-overflow">
+        <table border="1" class="table table-bordered table-responsive" cellspacing="0" cellpadding="5">
+            <thead>
+                <tr>
+                    <th width="100px" {{{font-07}}}>Sr. No</th>
+                    <th width="100px" {{{font-07}}}>GR. No.</th>
+                    <th width="200px" {{{font-07}}}>Class</th>
+                    <th {{{font-07}}}>Student Name</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#psngrdata}}
+                <tr>
+                    <td align="center">
+                        {{rowid}}
+                    </td>
+                    <td align="center" {{{font-07}}}>
+                        {{grno}}
+                    </td>
+                    <td align="center" {{{font-07}}}>
+                        {{classname}}
+                    </td>
+                    <td {{{font-07}}}>
+                        {{studentname}}
+                    </td>
+                </tr>
+                {{/psngrdata}}
+            </tbody>
+        </table>
+    </div>
+</body>
+
+</html>

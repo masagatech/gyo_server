@@ -9,14 +9,21 @@ var rptpsngr = module.exports = {};
 var psngrrptapi = require("../../reports/templates/passenger/passenger.js");
 
 rptpsngr.getPassengerReports = function getPassengerReports(req, res, done) {
-    db.callProcedure("select " + globals.schema("funget_rpt_passengerdetails") + "($1,$2,$3::json);", ['rptpsngr1', 'rptpsngr2', req.query], function(data) {
+    db.callProcedure("select " + globals.schema("funget_rpt_passengerdetails") + "($1,$2,$3::json);", ['rptpsngr1', 'rptpsngr2', req.query], function (data) {
         var formname = "";
         var apiname = "";
 
         if (req.query.flag == "student") {
             formname = "passenger/student.html";
-        } else {
+        }
+        else if (req.query.flag == "profile") {
             formname = "passenger/passenger.html";
+        }
+        else if (req.query.flag == "gr_report") {
+            formname = "passenger/gr_report.html";
+        }
+        else {
+            formname = "passenger/birthday.html";
         }
 
         apiname = psngrrptapi.getPassengerReports;
@@ -26,7 +33,7 @@ rptpsngr.getPassengerReports = function getPassengerReports(req, res, done) {
             psngrdata: data.rows[1],
             params: req.query
         }, { 'all': formname }, apiname);
-    }, function(err) {
+    }, function (err) {
         rs.resp(res, 401, "error : " + err);
     }, 2)
 }

@@ -3,12 +3,11 @@ var moment = require('moment');
 var reports = module.exports = {};
 var globals = require("gen").globals;
 
-var handlebars = require('handlebars');
 var groupBy = require('handlebars-group-by');
 var NumeralHelper = require("handlebars.numeral");
 
-groupBy.register(handlebars);
-NumeralHelper.registerHelpers(handlebars);
+groupBy.register(Handlebars);
+NumeralHelper.registerHelpers(Handlebars);
 
 reports.getClassFeesReports = function getClassFeesReports(data) {
     var _hndlbar = Handlebars;

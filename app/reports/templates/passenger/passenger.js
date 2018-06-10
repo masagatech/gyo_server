@@ -2,6 +2,9 @@ var Handlebars = require('handlebars');
 var reports = module.exports = {};
 var globals = require("gen").globals;
 
+var groupBy = require('handlebars-group-by');
+groupBy.register(Handlebars);
+
 reports.getPassengerReports = function getPassengerReports(data) {
     var _hndlbar = Handlebars;
 
@@ -67,6 +70,22 @@ reports.getPassengerReports = function getPassengerReports(data) {
         } else {
             return "Passenger";
         }
+    });
+
+    // GR Type Head
+
+    _hndlbar.registerHelper('grtype_head', function(row) {
+        if (params.grtype == "original") {
+            return "Original";
+        } else {
+            return "Provisional";
+        }
+    });
+
+    // Upload URL
+
+    _hndlbar.registerHelper('uploadurl', function(row) {
+        return globals.uploadurl;
     });
 
     // Passenger Photo
