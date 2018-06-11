@@ -9,20 +9,30 @@ var rptpsngr = module.exports = {};
 var psngrrptapi = require("../../reports/templates/passenger/passenger.js");
 
 rptpsngr.getPassengerReports = function getPassengerReports(req, res, done) {
-    db.callProcedure("select " + globals.schema("funget_rpt_passengerdetails") + "($1,$2,$3::json);", ['rptpsngr1', 'rptpsngr2', req.query], function (data) {
+    db.callProcedure("select " + globals.schema("funget_rpt_passengerdetails") + "($1,$2,$3::json);", ['rptpsngr1', 'rptpsngr2', req.query], function(data) {
         var formname = "";
         var apiname = "";
+        var psngrheadcolumn = [];
 
         if (req.query.flag == "student") {
             formname = "passenger/student.html";
-        }
-        else if (req.query.flag == "profile") {
+            psngrheadcolumn = [];
+        } else if (req.query.flag == "profile") {
             formname = "passenger/passenger.html";
-        }
-        else if (req.query.flag == "gr_report") {
-            formname = "passenger/gr_report.html";
-        }
-        else {
+            psngrheadcolumn = [];
+        } else if (req.query.flag == "gr_summary") {
+            formname = "passenger/gr_summary.html";
+            psngrheadcolumn = [];
+        } else if (req.query.flag == "gr_details") {
+            formname = "passenger/gr_details.html";
+            psngrheadcolumn = [];
+        } else if (req.query.flag == "catwise_summary") {
+            formname = "passenger/catwise_summary.html";
+            psngrheadcolumn = data.rows[0][0].catcolumn;
+        } else if (req.query.flag == "catwise_details") {
+            formname = "passenger/catwise_details.html";
+            psngrheadcolumn = [];
+        } else {
             formname = "passenger/birthday.html";
         }
 
@@ -30,10 +40,11 @@ rptpsngr.getPassengerReports = function getPassengerReports(req, res, done) {
 
         download(req, res, {
             psngrhead: data.rows[0],
+            psngrheadcolumn: psngrheadcolumn,
             psngrdata: data.rows[1],
             params: req.query
         }, { 'all': formname }, apiname);
-    }, function (err) {
+    }, function(err) {
         rs.resp(res, 401, "error : " + err);
     }, 2)
 }

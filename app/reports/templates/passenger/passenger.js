@@ -9,6 +9,7 @@ reports.getPassengerReports = function getPassengerReports(data) {
     var _hndlbar = Handlebars;
 
     var psngrhead = data.psngrhead;
+    var psngrheadcolumn = data.psngrheadcolumn;
     var psngrdata = data.psngrdata;
     var params = data.params;
 
@@ -76,10 +77,42 @@ reports.getPassengerReports = function getPassengerReports(data) {
 
     _hndlbar.registerHelper('grtype_head', function(row) {
         if (params.grtype == "original") {
-            return "Original";
+            return "- Original";
+        } else if (params.grtype == "original") {
+            return "- Provisional";
         } else {
-            return "Provisional";
+            return "";
         }
+    });
+
+    // Count Total Student
+
+    _hndlbar.registerHelper('countstudent', function(row) {
+        return psngrdata.length;
+    });
+
+    // Count Student Category Wise
+
+    _hndlbar.registerHelper('countcatwise', function(row) {
+        var array = psngrdata.filter(function(x) { return x.castcatname == row });
+        return array.length;
+    });
+
+    // Count Student Gender Wise
+
+    _hndlbar.registerHelper('gender_head', function(row) {
+        var ccname = row.split("~")[0];
+        var gender = row.split("~")[1];
+
+        var array = psngrdata.filter(function(x) { return x.castcatname == ccname }).filter(function(x) { return x.gndrval == gender });
+        return "<b>" + gender + " (" + array.length + ")</b>";
+    });
+
+    // Split
+
+    _hndlbar.registerHelper('split_gender', function(row) {
+        var t = row.split("~")[1];
+        return t;
     });
 
     // Upload URL
@@ -304,6 +337,27 @@ reports.getPassengerReports = function getPassengerReports(data) {
         }
 
         return contactinfo_col;
+    });
+
+    // 
+
+    _hndlbar.registerHelper('castcat_value', function(row) {
+        var _columns = '';
+        var _data = '';
+
+        for (var i = 0; i < psngrheadcolumn.length; i++) {
+            var status = psngrheadcolumn[i].key;
+
+            _data = row[psngrheadcolumn[i].key];
+
+            if (params.format == "pdf") {
+                _columns = _columns + '<td align="center" style="' + font07 + '">' + (_data == null ? '0' : _data) + '</td>';
+            } else {
+                _columns = _columns + '<td align="center">' + (_data == null ? '0' : _data) + '</td>';
+            }
+        }
+
+        return _columns;
     });
 
     return _hndlbar;

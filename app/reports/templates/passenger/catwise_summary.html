@@ -1,0 +1,153 @@
+<html>
+
+<head>
+    <meta charset="utf-8" />
+
+    <style>
+        .table-overflow {
+            width: 100%;
+            overflow: auto;
+        }
+        
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            border: solid 1px rgba(204, 204, 204, 0.35);
+            margin-top: 10px!important;
+            font-size: 11px;
+        }
+        
+        table thead th {
+            background: #009688;
+            color: #ffffff;
+            padding: 3px!important;
+            text-align: center;
+            vertical-align: top;
+            font-size: 11px;
+        }
+        
+        table tbody th {
+            background: #eeeeee;
+            border: 1px solid rgba(204, 204, 204, 0.35);
+            color: #000000;
+            padding: 3px!important;
+            text-align: left;
+            vertical-align: top;
+            font-size: 11px;
+        }
+        
+        table tbody td {
+            padding: 3px!important;
+            vertical-align: top;
+            font-size: 11px;
+        }
+        
+        h3 {
+            margin: 10px 0;
+        }
+        
+        .total {
+            background-color: #eeeeee;
+            border: 1px solid rgba(204, 204, 204, 0.35);
+            color: #000000;
+            padding: 3px!important;
+            text-align: left;
+            vertical-align: top;
+        }
+        
+        .total td {
+            font-weight: bold;
+            font-size: 12px!important;
+        }
+        
+        .alltotal {
+            background-color: #000000;
+            border: 1px solid rgba(204, 204, 204, 0.35);
+            color: #ffffff;
+            padding: 3px!important;
+            text-align: left;
+            vertical-align: top;
+        }
+        
+        .alltotal td {
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+    <table cellspacing="0" cellpadding="0">
+        {{#psngrhead}}
+        <tr>
+            <td>
+                <img src="{{{uploadurl}}}/{{enttlogo}}" width="80">
+            </td>
+            <td align="center">
+                <h3 {{{font-13}}}>{{enttname}}</h3>
+                <h3 {{{font-10}}}>{{enttaddr}}</h3>
+            </td>
+            <td rowspan="3" align="right">
+                <h3 {{{font-10}}}>Report Date : {{rptdate}}</h3>
+                <br /> {{#gndrcolumn}}
+                <h3 {{{font-10}}}>{{gender}} : {{{countstud}}}</h3>
+                {{/gndrcolumn}}
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <h3 {{{font-13}}}>Category Wise Report {{{grtype_head}}}</h3>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <h3 {{{font-10}}}>Class : {{classname}}</h3>
+            </td>
+        </tr>
+        {{/psngrhead}}
+    </table>
+
+    <div class="table-overflow">
+        <table border="1" class="table table-bordered table-responsive" cellspacing="0" cellpadding="5">
+            <thead>
+                <tr>
+                    <th width="70px" {{{font-07}}}>
+                        Sr. No.
+                    </th>
+                    <th width="80px" {{{font-07}}}>
+                        Class Name
+                    </th>
+                    <th width="80px" {{{font-07}}}>
+                        Gender
+                    </th>
+                    {{#psngrheadcolumn}}
+                    <th width="100px" {{{font-07}}}>{{val}}</th>
+                    {{/psngrheadcolumn}}
+                    <th width="80px" {{{font-07}}}>
+                        Total
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#psngrdata}}
+                <tr class="{{gndrkey}}">
+                    <td align="center" {{{font-07}}}>
+                        {{rowid}}
+                    </td>
+                    <td {{{font-07}}}>
+                        {{classname}}
+                    </td>
+                    <td {{{font-07}}}>
+                        {{gndrval}}
+                    </td>
+                    {{{castcat_value this}}}
+                    <td {{{font-07}}} align="center">
+                        {{total}}
+                    </td>
+                </tr>
+                {{/psngrdata}}
+            </tbody>
+        </table>
+    </div>
+</body>
+
+</html>

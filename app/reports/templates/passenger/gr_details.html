@@ -13,7 +13,7 @@
             border-collapse: collapse;
             width: 100%;
             border: solid 1px rgba(204, 204, 204, 0.35);
-            margin-top: 10px;
+            margin-bottom: 10px;
         }
         
         table thead th {
@@ -28,7 +28,7 @@
             background: #eeeeee;
             color: #000000;
             padding: 5px;
-            text-align: center;
+            text-align: left;
             vertical-align: top;
         }
         
@@ -59,11 +59,16 @@
             </td>
         </tr>
         <tr>
+            <td colspan="3">
+                <h3 {{{font-13}}}>General Register Report {{{grtype_head}}}</h3>
+            </td>
+        </tr>
+        <tr>
             <td colspan="2">
-                <h3 {{{font-10}}}><b>{{{psngrtype_head}}} Details </b> {{gender}} {{psngrname}}</h3>
+                <h3 {{{font-10}}}>Class : {{classname}}</h3>
             </td>
             <td align="right">
-                <h3 {{{font-10}}}>Total {{{psngrtype_head}}} : {{{count_data}}}</h3>
+                <h3 {{{font-10}}}>Total Student : {{{countstudent}}}</h3>
             </td>
         </tr>
         {{/psngrhead}}
@@ -73,38 +78,56 @@
         <table border="1" class="table table-bordered table-responsive" cellspacing="0" cellpadding="5">
             <thead>
                 <tr>
-                    <th width="50px" {{{font-07}}}>Photo</th>
-                    <th width="150px" {{{font-07}}}>{{{psngrtype_head}}} Name</th>
-                    <th width="100px" {{{font-07}}}>Aadhar No</th>
-                    <th width="100px" {{{font-07}}}>Mobile</th>
-                    <th width="100px" {{{font-07}}}>Email</th>
-                    <th width="250px" {{{font-07}}}>Contact</th>
-                    <th width="50px" {{{font-07}}}>Status</th>
+                    <th width="60px" {{{font-07}}}>Sr. No.</th>
+                    <th width="70px" {{{font-07}}}>GR. No.</th>
+                    <th width="70px" {{{font-07}}}>Class</th>
+                    <th width="200px" {{{font-07}}}>Student Name</th>
+                    <th width="70px" {{{font-07}}}>Gender</th>
+                    <th width="100px" {{{font-07}}}>Category</th>
+                    <th width="120px" {{{font-07}}}>Birth Date</th>
+                    <th {{{font-07}}}>Address</th>
+                    <th width="80px" {{{font-07}}}>Bl. Gr.</th>
+                    <th width="150px" {{{font-07}}}>Contact No</th>
+                    <th width="150px" {{{font-07}}}>Email</th>
                 </tr>
             </thead>
             <tbody>
-                {{{nodatafound}}} {{#psngrdata}}
+                {{#psngrdata}}
                 <tr>
-                    <td align="center">
-                        {{{psngrphoto_col this}}}
+                    <td align="center" {{{font-07}}}>
+                        {{rowid}}
+                    </td>
+                    <td align="center" {{{font-07}}}>
+                        {{grno}}
+                    </td>
+                    <td align="center" {{{font-07}}}>
+                        {{classname}}
                     </td>
                     <td {{{font-07}}}>
-                        <b>{{psngrname}}</b><br /> ({{psngrtypenm}})
+                        {{studentname}}
                     </td>
                     <td {{{font-07}}}>
-                        {{aadharno}}
+                        {{gender}}
                     </td>
                     <td {{{font-07}}}>
-                        {{mobileno1}}<br /> {{mobileno2}}
+                        {{castcatname}}
                     </td>
                     <td {{{font-07}}}>
-                        {{email1}}<br /> {{email2}}
+                        {{dob}}
                     </td>
                     <td {{{font-07}}}>
-                        {{{contactinfo_col this}}}
+                        {{address}}
                     </td>
                     <td {{{font-07}}}>
-                        {{status}}
+                        {{bldgrpname}}
+                    </td>
+                    <td {{{font-07}}}>
+                        <p><b>F : </b>{{mobileno1}}</p>
+                        <p><b>M : </b>{{mobileno2}}</p>
+                    </td>
+                    <td {{{font-07}}}>
+                        <p><b>F : </b>{{email1}}</p>
+                        <p><b>M : </b>{{email2}}</p>
                     </td>
                 </tr>
                 {{/psngrdata}}
