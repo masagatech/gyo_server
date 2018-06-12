@@ -87,7 +87,7 @@ reports.getAttendanceReports = function getAttendanceReports(data) {
             if (params.attndmonth == "") {
                 _columns += '<th colspan="68"><b>Class : </b>' + row + '</th>';
             } else {
-                _columns += '<th colspan="39"><b>Class : </b>' + row + '</th>';
+                _columns += '<th colspan="34"><b>Class : </b>' + row + '</th>';
             }
         }
 
@@ -151,9 +151,9 @@ reports.getAttendanceReports = function getAttendanceReports(data) {
             _data = row[allattndcolumn[i].day];
 
             if (_data == 0 || _data == null || _data == "P" || _data == "A" || _data == "LV" || _data == "WO" || _data == "H" || status == "WO" || status == "H") {
-                _columns = _columns + '<th class="' + _class + '" align="center">' + (_data == null ? '-' : _data) + '</th>';
+                _columns = _columns + '<th align="center" class="' + _class + '" align="center">' + (_data == null ? '-' : _data) + '</th>';
             } else {
-                _columns = _columns + '<th class="' + _class + '" align="center">' +
+                _columns = _columns + '<th align="center" class="' + _class + '" align="center">' +
                     '<a href="' + globals.reporturl + '/getStudentAttendanceReports?flag=' + flag + '&type=download&status=' + status +
                     '&psngrtype=' + params.psngrtype + '&attndmonth=' + attndmonth + '&attndtype=' + params.attndtype + '&ayid=' + params.ayid +
                     '&classid=' + row.classid + '&gender=' + params.gender + '&enttid=' + params.enttid + '&wsautoid=' + params.wsautoid +

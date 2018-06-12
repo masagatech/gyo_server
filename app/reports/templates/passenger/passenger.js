@@ -301,6 +301,8 @@ reports.getPassengerReports = function getPassengerReports(data) {
         return prntinfo_col;
     });
 
+    // Contact Info
+
     _hndlbar.registerHelper('contactinfo_col', function(row) {
         var contactinfo_col = "";
 
@@ -339,21 +341,21 @@ reports.getPassengerReports = function getPassengerReports(data) {
         return contactinfo_col;
     });
 
-    // 
+    // Student Head Column
 
-    _hndlbar.registerHelper('castcat_value', function(row) {
+    _hndlbar.registerHelper('psngrhead_column', function(row) {
         var _columns = '';
         var _data = '';
+        var _class = '';
 
         for (var i = 0; i < psngrheadcolumn.length; i++) {
-            var status = psngrheadcolumn[i].key;
-
             _data = row[psngrheadcolumn[i].key];
+            _class = psngrheadcolumn[i].class;
 
             if (params.format == "pdf") {
-                _columns = _columns + '<td align="center" style="' + font07 + '">' + (_data == null ? '0' : _data) + '</td>';
+                _columns = _columns + '<td width="70px" align="center" class="' + _class + '" style="' + font07 + '">' + (_data == null ? '0' : _data) + '</td>';
             } else {
-                _columns = _columns + '<td align="center">' + (_data == null ? '0' : _data) + '</td>';
+                _columns = _columns + '<td width="70px" align="center" class="' + _class + '">' + (_data == null ? '0' : _data) + '</td>';
             }
         }
 

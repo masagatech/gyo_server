@@ -21,17 +21,15 @@
             background: #009688;
             color: #ffffff;
             padding: 3px!important;
-            text-align: center;
             vertical-align: top;
             font-size: 11px;
         }
         
         table tbody th {
             background: #eeeeee;
-            border: 1px solid rgba(204, 204, 204, 0.35);
+            border: 1px solid rgba(204, 204, 204, 0.35)!important;
             color: #000000;
             padding: 3px!important;
-            text-align: left;
             vertical-align: top;
             font-size: 11px;
         }
@@ -106,22 +104,16 @@
             <td align="center">
                 <h3 {{{font-13}}}>{{enttname}}</h3>
 
-                <h3 {{{font-10}}}>
-                    Academic Year : {{ayname}} ({{attnddate}})
-                </h3>
-
-                <h3 {{{font-10}}}>
-                    Class : {{classname}}, Month : {{attndmonth}}, Attendace Type : {{attndtype}}
-                </h3>
-
-                <h3 {{{font-13}}}>
-                    Reports : {{psngrtype}} Attendance
-                </h3>
+                <h3 {{{font-10}}}>Academic Year : {{ayname}} ({{attnddate}})</h3>
+                <h3 {{{font-10}}}>Class : {{classname}}, Month : {{attndmonth}}, Attendace Type : {{attndtype}}</h3>
+                <h3 {{{font-13}}}>Reports : {{psngrtype}} Attendance</h3>
             </td>
             <td align="right">
-                <h3 {{{font-10}}}>
-                    Report Date : {{rptdate}}
-                </h3>
+                <h3 {{{font-10}}}>Report Date : {{rptdate}}</h3>
+                <br>
+                <h3 {{{font-10}}}>Total Month Days : {{cntwkdcurrm}}</h3>
+                <h3 {{{font-10}}}>Days Upto Last Month : {{cntwkdprevm}}</h3>
+                <h3 {{{font-10}}}>Days Upto This Month : {{cntwkmonth}}</h3>
             </td>
         </tr>
     </table>
@@ -148,12 +140,19 @@
                     <th width="20px">LV</th>
                     <th width="20px">WO</th>
                     <th width="20px">H</th>
+                    <th width="20px">Previous Present</th>
+                    <th width="20px">Total Present</th>
                 </tr>
             </thead>
             <tbody>
                 {{#group studentwiseattnd by="classname"}}
                 <tr>
                     {{{groupcolname value}}}
+                    <th colspan="5">
+                        Current Month List
+                    </th>
+                    <th></th>
+                    <th></th>
                 </tr>
                 {{#each items}}
                 <tr>
@@ -164,20 +163,26 @@
 
                     {{{attnd_value this}}}
 
-                    <td class="P">
+                    <td class="P" align="center">
                         <b>{{P}}</b>
                     </td>
-                    <td class="A">
+                    <td class="A" align="center">
                         <b>{{A}}</b>
                     </td>
-                    <td class="LV">
+                    <td class="LV" align="center">
                         <b>{{LV}}</b>
                     </td>
-                    <td class="WO">
+                    <td class="WO" align="center">
                         <b>{{WO}}</b>
                     </td>
-                    <td class="H">
+                    <td class="H" align="center">
                         <b>{{H}}</b>
+                    </td>
+                    <td class="P" align="center">
+                        <b>{{prevpresent}}</b>
+                    </td>
+                    <td class="P align=" center "">
+                        <b>{{totalpresent}}</b>
                     </td>
                 </tr>
                 {{/each}} {{/group}}

@@ -51,8 +51,9 @@
             border: 1px solid rgba(204, 204, 204, 0.35);
             color: #000000;
             padding: 3px!important;
-            text-align: left;
+            text-align: center;
             vertical-align: top;
+            font-weight: bold;
         }
         
         .total td {
@@ -61,15 +62,17 @@
         }
         
         .alltotal {
-            background-color: #000000;
+            background-color: #000000!important;
             border: 1px solid rgba(204, 204, 204, 0.35);
             color: #ffffff;
             padding: 3px!important;
-            text-align: left;
+            text-align: center;
             vertical-align: top;
         }
         
         .alltotal td {
+            background-color: #000000!important;
+            color: #ffffff!important;
             font-weight: bold;
         }
     </style>
@@ -86,7 +89,7 @@
                 <h3 {{{font-13}}}>{{enttname}}</h3>
                 <h3 {{{font-10}}}>{{enttaddr}}</h3>
             </td>
-            <td rowspan="3" align="right">
+            <td rowspan="2" align="right">
                 <h3 {{{font-10}}}>Report Date : {{rptdate}}</h3>
                 <br /> {{#gndrcolumn}}
                 <h3 {{{font-10}}}>{{gender}} : {{{countstud}}}</h3>
@@ -95,12 +98,7 @@
         </tr>
         <tr>
             <td colspan="2">
-                <h3 {{{font-13}}}>Category Wise Report {{{grtype_head}}}</h3>
-            </td>
-        </tr>
-        <tr>
-            <td colspan="2">
-                <h3 {{{font-10}}}>Class : {{classname}}</h3>
+                <h3 {{{font-13}}}>Age Wise Report</h3>
             </td>
         </tr>
         {{/psngrhead}}
@@ -110,37 +108,32 @@
         <table border="1" class="table table-bordered table-responsive" cellspacing="0" cellpadding="5">
             <thead>
                 <tr>
-                    <th width="70px" {{{font-07}}}>
-                        Sr. No.
-                    </th>
                     <th width="80px" {{{font-07}}}>
-                        Class Name
+                        Age
                     </th>
-                    <th width="80px" {{{font-07}}}>
-                        Gender
-                    </th>
-                    {{#psngrheadcolumn}}
-                    <th width="100px" {{{font-07}}}>{{val}}</th>
-                    {{/psngrheadcolumn}}
+                    {{#parentheadcolumn}}
+                    <th width="80px" {{{font-07}}} colspan="3">{{val}}</th>
+                    {{/parentheadcolumn}}
                     <th width="80px" {{{font-07}}}>
                         Total
                     </th>
                 </tr>
             </thead>
             <tbody>
+                <tr>
+                    <th {{{font-07}}}></th>
+                    {{#psngrheadcolumn}}
+                    <th {{{font-07}}}>{{subval}}</th>
+                    {{/psngrheadcolumn}}
+                    <th class="alltotal" {{{font-07}}}></th>
+                </tr>
                 {{#psngrdata}}
-                <tr class="{{gndrkey}}">
-                    <td align="center" {{{font-07}}}>
-                        {{rowid}}
-                    </td>
+                <tr class="{{class}}">
                     <td {{{font-07}}}>
-                        {{classname}}
-                    </td>
-                    <td {{{font-07}}}>
-                        {{gndrval}}
+                        <b>{{agehead}}</b>
                     </td>
                     {{{psngrhead_column this}}}
-                    <td {{{font-07}}} align="center">
+                    <td class="alltotal" {{{font-07}}} align="center">
                         {{total}}
                     </td>
                 </tr>

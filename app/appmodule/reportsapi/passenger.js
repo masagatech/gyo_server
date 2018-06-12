@@ -12,28 +12,42 @@ rptpsngr.getPassengerReports = function getPassengerReports(req, res, done) {
     db.callProcedure("select " + globals.schema("funget_rpt_passengerdetails") + "($1,$2,$3::json);", ['rptpsngr1', 'rptpsngr2', req.query], function(data) {
         var formname = "";
         var apiname = "";
+
+        var parentheadcolumn = [];
         var psngrheadcolumn = [];
 
         if (req.query.flag == "student") {
             formname = "passenger/student.html";
+            parentheadcolumn = [];
             psngrheadcolumn = [];
         } else if (req.query.flag == "profile") {
             formname = "passenger/passenger.html";
+            parentheadcolumn = [];
             psngrheadcolumn = [];
         } else if (req.query.flag == "gr_summary") {
             formname = "passenger/gr_summary.html";
+            parentheadcolumn = [];
             psngrheadcolumn = [];
         } else if (req.query.flag == "gr_details") {
             formname = "passenger/gr_details.html";
+            parentheadcolumn = [];
             psngrheadcolumn = [];
         } else if (req.query.flag == "catwise_summary") {
             formname = "passenger/catwise_summary.html";
+            parentheadcolumn = [];
             psngrheadcolumn = data.rows[0][0].catcolumn;
         } else if (req.query.flag == "catwise_details") {
             formname = "passenger/catwise_details.html";
+            parentheadcolumn = [];
             psngrheadcolumn = [];
+        } else if (req.query.flag == "agewise") {
+            formname = "passenger/agewise.html";
+            parentheadcolumn = data.rows[0][0].stdgndrcolumn.filter(function(x) { return x.id == 1 });
+            psngrheadcolumn = data.rows[0][0].stdgndrcolumn;
         } else {
             formname = "passenger/birthday.html";
+            parentheadcolumn = [];
+            psngrheadcolumn = [];
         }
 
         apiname = psngrrptapi.getPassengerReports;
@@ -41,6 +55,7 @@ rptpsngr.getPassengerReports = function getPassengerReports(req, res, done) {
         download(req, res, {
             psngrhead: data.rows[0],
             psngrheadcolumn: psngrheadcolumn,
+            parentheadcolumn: parentheadcolumn,
             psngrdata: data.rows[1],
             params: req.query
         }, { 'all': formname }, apiname);
