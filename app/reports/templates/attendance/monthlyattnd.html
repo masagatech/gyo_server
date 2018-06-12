@@ -33,7 +33,6 @@
             font-weight: bold!important;
             color: #000000;
             padding: 3px!important;
-            text-align: left;
             vertical-align: top;
             font-size: 11px;
         }
@@ -145,17 +144,14 @@
                     <th></th>
                 </tr>
                 <tr>
-                    <th width="50px">
-                        GR No
-                    </th>
-                    <th width="50px">
-                        Roll No
-                    </th>
+                    {{#psngrcolumn}}
+                    <th width="50px">{{val}}</th>
+                    {{/psngrcolumn}}
                     <th width="200px">
-                        {{#attndhead}} {{psngrtypenm}} Name {{/attndhead}}
+                        {{#attndhead}} {{psngrtype}} Name {{/attndhead}}
                     </th>
                     {{#allattndcolumn}}
-                    <th width="20px">{{{splitHead day}}}</th>
+                    <th width="20px" align="center">{{{splitHead day}}}</th>
                     {{/allattndcolumn}}
                     <th width="20px">P</th>
                     <th width="20px">A</th>
@@ -177,19 +173,19 @@
 
                     {{{attnd_value this}}}
 
-                    <th class="P">
+                    <th class="P" align="center">
                         <b>{{P}}</b>
                     </th>
-                    <th class="A">
+                    <th class="A" align="center">
                         <b>{{A}}</b>
                     </th>
-                    <th class="LV">
+                    <th class="LV" align="center">
                         <b>{{LV}}</b>
                     </th>
-                    <th class="WO">
+                    <th class="WO" align="center">
                         <b>{{WO}}</b>
                     </th>
-                    <th class="H">
+                    <th class="H" align="center">
                         <b>{{H}}</b>
                     </th>
                 </tr>
@@ -205,19 +201,19 @@
 
                     {{{attnd_value this}}}
 
-                    <td class="P">
+                    <td class="P" align="center">
                         <b>{{P}}</b>
                     </td>
-                    <td class="A">
+                    <td class="A" align="center">
                         <b>{{A}}</b>
                     </td>
-                    <td class="LV">
+                    <td class="LV" align="center">
                         <b>{{LV}}</b>
                     </td>
-                    <td class="WO">
+                    <td class="WO" align="center">
                         <b>{{WO}}</b>
                     </td>
-                    <td class="H">
+                    <td class="H" align="center">
                         <b>{{H}}</b>
                     </td>
                 </tr>
