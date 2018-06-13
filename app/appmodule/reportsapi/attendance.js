@@ -48,8 +48,12 @@ attnd.getStudentAttendanceReports = function getStudentAttendanceReports(req, re
 
         if (req.query.flag == "average") {
             formname = "attendance/averageattnd.html";
-        } else {
-            formname = "attendance/statuswiseattnd.html";
+        } else if (req.query.flag == "studwiseattnd") {
+            formname = "attendance/studwiseattnd.html";
+        } else if (req.query.flag == "clswiseattnd") {
+            formname = "attendance/clswiseattnd.html";
+        } else if (req.query.flag == "monthlypresence") {
+            formname = "attendance/monthlypresence.html";
         }
 
         if (req.query.type == "download") {

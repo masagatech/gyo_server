@@ -24,18 +24,35 @@
             border: 1px solid rgba(204, 204, 204, 0.35);
             color: #000000;
             padding: 3px!important;
-            text-align: center;
+            text-align: left;
+            vertical-align: top;
+        }
+        
+        table tfoot th {
+            background: #000000;
+            color: #ffffff;
+            padding: 3px!important;
+            text-align: right;
             vertical-align: top;
         }
         
         table tbody td {
             padding: 3px!important;
-            text-align: center;
             vertical-align: top;
         }
         
         h3 {
             margin: 10px 0;
+        }
+        
+        .total {
+            background-color: #000000;
+            color: #ffffff;
+            font-weight: bold;
+        }
+        
+        .total td {
+            font-size: 12px!important;
         }
     </style>
 </head>
@@ -59,7 +76,7 @@
                 </h3>
 
                 <h3 {{{font-07}}}>
-                    Reports : {{psngrtype}} Attendance ({{status}} Average)
+                    Reports : {{psngrtype}} Attendance (Class wise {{status}})
                 </h3>
             </td>
             <td align="right">
@@ -73,51 +90,51 @@
 
     <div class="table-overflow">
         <table border="1" class="table table-bordered table-responsive" cellspacing="0" cellpadding="5">
+            {{#group datatable by="classname"}}
             <thead>
                 <tr>
-                    <th width="50px" {{{font-10}}}>
-                        Sr. No.
+                    <th width="250px" {{{font-07}}}>
+                        <b>Class : </b> {{value}}
                     </th>
-                    <th width="100px" {{{font-10}}}>
-                        Class
+                    <th width="100px">
+                        Roll No
                     </th>
-                    <th width="100px" {{{font-10}}}>
-                        Total Student
+                    <th width="100px">
+                        GR No
                     </th>
-                    <th width="100px" {{{font-10}}}>
-                        Working Days
-                    </th>
-                    <th width="200px" {{{font-10}}}>
-                        Average
-                    </th>
-                    <th {{{font-10}}}>
-                        Remark
+                    <th>
+                        Name
                     </th>
                 </tr>
             </thead>
             <tbody>
-                {{#datatable}}
+                {{#group items by="attnddate"}}
                 <tr>
-                    <td {{{font-07}}}>
-                        {{autoid}}
+                    <th colspan="4" {{{font-07}}}>
+                        <b>Date : </b>{{{attndclass value}}}
+                    </th>
+                </tr>
+                {{#each items}}
+                <tr>
+                    <td {{{font-07}}}></td>
+                    <td {{{font-07}}} align="center">
+                        {{rollno}}
+                    </td>
+                    <td {{{font-07}}} align="center">
+                        {{grno}}
                     </td>
                     <td {{{font-07}}}>
-                        {{classname}}
-                    </td>
-                    <td {{{font-07}}}>
-                        {{countstuds}}
-                    </td>
-                    <td {{{font-07}}}>
-                        {{countwkdays}}
-                    </td>
-                    <td {{{font-07}}}>
-                        {{average}} %
-                    </td>
-                    <td {{{font-07}}} align="left">
+                        {{studentname}}
                     </td>
                 </tr>
-                {{/datatable}}
+                {{/each}}
+                <tr>
+                    <td colspan="4" {{{font-07}}} align="right">
+                        <b>Datewise Absent Student : </b>{{{attndstud value}}}
+                    </td>
+                </tr>
             </tbody>
+            {{/group}} {{/group}}
         </table>
     </div>
 </body>

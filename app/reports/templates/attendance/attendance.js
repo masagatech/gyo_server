@@ -10,9 +10,65 @@ groupBy.register(handlebars);
 
 reports.getStudentAttendanceReports = function getStudentAttendanceReports(data) {
     var _hndlbar = Handlebars;
+    var attndhead = data.attndhead;
+    var psngrcolumn = data.psngrcolumn;
+    var allattndcolumn = data.allattndcolumn;
+    var attndcolumn = data.attndcolumn;
+
+    var classwiseattnd = data.classwiseattnd;
+    var studentwiseattnd = data.studentwiseattnd;
+    var params = data.params;
+
+    var font07 = 'style = "font-size: 7px;"';
+    var font10 = 'style = "font-size: 10px;"';
+    var font12 = 'style = "font-size: 12px;"';
+    var font13 = 'style = "font-size: 13px;"';
+    var font18 = 'style = "font-size: 18px;"';
+
+    _hndlbar.registerHelper('font-07', function(row) {
+        if (params.format == "pdf") {
+            return font07;
+        } else {
+            return font12;
+        }
+    });
+
+    _hndlbar.registerHelper('font-10', function(row) {
+        if (params.format == "pdf") {
+            return font10;
+        } else {
+            return font13;
+        }
+    });
+
+    _hndlbar.registerHelper('font-13', function(row) {
+        if (params.format == "pdf") {
+            return font13;
+        } else {
+            return font18;
+        }
+    });
 
     _hndlbar.registerHelper('uploadurl', function(params) {
         return globals.uploadurl;
+    });
+
+    // Get Class Name For Class Attendance Reports
+
+    _hndlbar.registerHelper('attndclass', function(clshead) {
+        var _clshead = clshead.split("~");
+        var _attndclass = _clshead[0];
+
+        return _attndclass;
+    });
+
+    // Get Total Studer By Class For Class Attendance Reports
+
+    _hndlbar.registerHelper('attndstud', function(clshead) {
+        var _clshead = clshead.split("~");
+        var _attndstud = _clshead[1];
+
+        return _attndstud;
     });
 
     return _hndlbar;
@@ -71,9 +127,7 @@ reports.getAttendanceReports = function getAttendanceReports(data) {
     });
 
     _hndlbar.registerHelper('attnddata', function(row, options) {
-
         var array = studentwiseattnd.filter(function(x) { return x.classid == row.classid });
-
         return array;
     });
 
@@ -81,27 +135,50 @@ reports.getAttendanceReports = function getAttendanceReports(data) {
 
     _hndlbar.registerHelper('groupcolname', function(row) {
         var _columns = "";
-        var _data = '';
+        var _colspan = 0;
 
         if (row != "") {
             if (params.attndmonth == "") {
-                _columns += '<th colspan="68"><b>Class : </b>' + row + '</th>';
+                _colspan = 68;
             } else {
-                _columns += '<th colspan="34"><b>Class : </b>' + row + '</th>';
+                _colspan = parseInt(row.split('~')[1]) + 3;
             }
+
+            _columns += '<th colspan="' + _colspan + '"><b>Class : </b>' + row.split('~')[0] + '</th>';
         }
 
         return _columns;
     });
 
-    _hndlbar.registerHelper('splitHead', function(head) {
+    // Split Head
+
+    _hndlbar.registerHelper('splitHead', function(head, attndmonth) {
         if (params.attndmonth == "") {
-            var t = head.split("-");
-            return t[1];
+            var _head = head.split("-");
+            var _status = _head[1];
+
+            var _statuslink = "";
+
+            if (_status == "P" || _status == "A") {
+                var flag = _status == "P" ? "average" : "studwiseattnd";
+
+                _statuslink = '<a href="' + globals.reporturl + '/getStudentAttendanceReports?flag=' + flag + '&type=download&status=' + _status +
+                    '&psngrtype=' + params.psngrtype + '&attndmonth=' + attndmonth + '&attndtype=' + params.attndtype + '&ayid=' + params.ayid +
+                    '&classid=0&gender=' + params.gender + '&enttid=' + params.enttid + '&wsautoid=' + params.wsautoid +
+                    '&uid=' + params.uid + '&utype=' + params.utype + '&issysadmin=' + params.issysadmin + '&format=pdf" target="_blank">' +
+                    _status +
+                    '</a>';
+            } else {
+                _statuslink = _status;
+            }
+
+            return _statuslink;
         } else {
             return head;
         }
     });
+
+    // Get Class Head
 
     _hndlbar.registerHelper('class_head', function(row) {
         var columns = "";
@@ -119,6 +196,8 @@ reports.getAttendanceReports = function getAttendanceReports(data) {
         return columns;
     });
 
+    // Get Passenger Column Data
+
     _hndlbar.registerHelper('psngr_value', function(row) {
         var _columns = '';
         var _data = '';
@@ -132,6 +211,8 @@ reports.getAttendanceReports = function getAttendanceReports(data) {
         return _columns;
     });
 
+    // Get Attendance Column Data
+
     _hndlbar.registerHelper('attnd_value', function(row) {
         var _columns = '';
         var _data = '';
@@ -140,7 +221,7 @@ reports.getAttendanceReports = function getAttendanceReports(data) {
         for (var i = 0; i < allattndcolumn.length; i++) {
             var attndmonth = allattndcolumn[i].attndmonth;
             var status = allattndcolumn[i].day.split('-')[1];
-            var flag = status == "P" ? "average" : "statuswise";
+            var flag = status == "P" ? "average" : "studwiseattnd";
 
             if (params.attndmonth == "") {
                 _class = status;
@@ -150,7 +231,7 @@ reports.getAttendanceReports = function getAttendanceReports(data) {
 
             _data = row[allattndcolumn[i].day];
 
-            if (_data == 0 || _data == null || _data == "P" || _data == "A" || _data == "LV" || _data == "WO" || _data == "H" || status == "WO" || status == "H") {
+            if (_data == 0 || _data == null || _data == "P" || _data == "A" || _data == "LV" || _data == "WO" || _data == "H" || status == "LV" || status == "WO" || status == "H") {
                 _columns = _columns + '<th align="center" class="' + _class + '" align="center">' + (_data == null ? '-' : _data) + '</th>';
             } else {
                 _columns = _columns + '<th align="center" class="' + _class + '" align="center">' +

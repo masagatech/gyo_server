@@ -24,18 +24,35 @@
             border: 1px solid rgba(204, 204, 204, 0.35);
             color: #000000;
             padding: 3px!important;
-            text-align: center;
+            text-align: left;
+            vertical-align: top;
+        }
+        
+        table tfoot th {
+            background: #000000;
+            color: #ffffff;
+            padding: 3px!important;
+            text-align: right;
             vertical-align: top;
         }
         
         table tbody td {
             padding: 3px!important;
-            text-align: center;
             vertical-align: top;
         }
         
         h3 {
             margin: 10px 0;
+        }
+        
+        .total {
+            background-color: #000000;
+            color: #ffffff;
+            font-weight: bold;
+        }
+        
+        .total td {
+            font-size: 12px!important;
         }
     </style>
 </head>
@@ -59,7 +76,7 @@
                 </h3>
 
                 <h3 {{{font-07}}}>
-                    Reports : {{psngrtype}} Attendance ({{status}} Average)
+                    Reports : {{psngrtype}} Attendance (Monthly Presence)
                 </h3>
             </td>
             <td align="right">
@@ -75,45 +92,67 @@
         <table border="1" class="table table-bordered table-responsive" cellspacing="0" cellpadding="5">
             <thead>
                 <tr>
-                    <th width="50px" {{{font-10}}}>
-                        Sr. No.
+                    <th width="100px">
+                        Roll No
                     </th>
-                    <th width="100px" {{{font-10}}}>
-                        Class
+                    <th width="100px">
+                        GR No
                     </th>
-                    <th width="100px" {{{font-10}}}>
-                        Total Student
+                    <th>
+                        Name
                     </th>
-                    <th width="100px" {{{font-10}}}>
-                        Working Days
+                    <th>
+                        Total Presence This Month
                     </th>
-                    <th width="200px" {{{font-10}}}>
-                        Average
+                    <th>
+                        Absent This Month
                     </th>
-                    <th {{{font-10}}}>
-                        Remark
+                    <th>
+                        Leave This Month
+                    </th>
+                    <th>
+                        June To May Total Presence
+                    </th>
+                    <th>
+                        June To May Total Absent
+                    </th>
+                    <th>
+                        June To May Leave
+                    </th>
+                    <th>
+                        Absent Date of This Month
                     </th>
                 </tr>
             </thead>
             <tbody>
                 {{#datatable}}
                 <tr>
-                    <td {{{font-07}}}>
-                        {{autoid}}
+                    <td {{{font-07}}} align="center">
+                        {{rollno}}
+                    </td>
+                    <td {{{font-07}}} align="center">
+                        {{grno}}
                     </td>
                     <td {{{font-07}}}>
-                        {{classname}}
+                        {{studentname}}
                     </td>
-                    <td {{{font-07}}}>
-                        {{countstuds}}
+                    <td {{{font-07}}} align="center">
+                        {{countp}}
                     </td>
-                    <td {{{font-07}}}>
-                        {{countwkdays}}
+                    <td {{{font-07}}} align="center">
+                        {{counta}}
                     </td>
-                    <td {{{font-07}}}>
-                        {{average}} %
+                    <td {{{font-07}}} align="center">
+                        {{countlv}}
                     </td>
-                    <td {{{font-07}}} align="left">
+                    <td {{{font-07}}} align="center">
+                    </td>
+                    <td {{{font-07}}} align="center">
+                    </td>
+                    <td {{{font-07}}} align="center">
+                    </td>
+                    <td {{{font-07}}} align="center">
+                        {{absentday}}
                     </td>
                 </tr>
                 {{/datatable}}

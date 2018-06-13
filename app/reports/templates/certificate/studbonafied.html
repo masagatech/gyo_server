@@ -1,0 +1,186 @@
+<html>
+
+<head>
+    <meta charset="utf-8" />
+
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            border: solid 1px rgba(204, 204, 204, 0.35);
+            margin-bottom: 10px;
+        }
+        
+        table thead th {
+            background: #009688;
+            color: #ffffff;
+            padding: 3px;
+            text-align: center;
+            vertical-align: top;
+            width: 12px;
+        }
+        
+        table tbody th {
+            background: #eeeeee;
+            color: #000000;
+            padding: 5px;
+            text-align: center;
+            vertical-align: top;
+            width: 11px;
+        }
+        
+        table tbody td {
+            padding: 3px;
+            vertical-align: top;
+            width: 10px;
+        }
+        
+        .show {
+            display: inline-table!important;
+            width: 100%;
+        }
+        
+        .hide {
+            display: none!important;
+        }
+        
+        .pull-left {
+            float: left;
+        }
+        
+        .pull-right {
+            float: left;
+            margin: 0 5px;
+        }
+        
+        h4,
+        h5,
+        h6 {
+            margin: 2px 0;
+        }
+    </style>
+</head>
+
+<body>
+    <button id="btnPrint" type="button" class="hide" onClick="window.print()">Print</button>
+
+    <table cellspacing="0" cellpadding="0">
+        {{#data}}
+        <tr>
+            <td colspan="2">
+                <div class="pull-left">
+                    <img src="{{{uploadurl}}}/{{schlogo}}" height="50" onerror="this.src='assets/img/noimage.gif';">
+                </div>
+                <div class="pull-right">
+                    <h4>{{schname}}</h4>
+                    <h5>{{schaddr}}</h5>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <p><b>S.S.C Index No : </b>{{sscindex}}</p>
+                <p><b>H.S.C Index No : </b>{{hscindex}}</p>
+            </td>
+            <td align="right">
+                {{{getPhotoGenderWise studphoto}}}
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2" align="center">
+                <h5>Bona Fied Certificate</h5>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <hr />
+            </td>
+        </tr>
+        <tr>
+            <td width="30%">
+                This is to Certify that {{studtitle}} :
+            </td>
+            <td>
+                {{studname}}
+            </td>
+        </tr>
+        <tr>
+            <td>
+                is/was a student of standard :
+            </td>
+            <td>
+                {{classname}} In Year : {{ayname}}
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Her Birthdate is ( In Figure ) :
+            </td>
+            <td>
+                {{dob}}
+            </td>
+        </tr>
+        <tr>
+            <td>
+                ( In Word ) :
+            </td>
+            <td>
+                {{numeral day}} {{month}} {{numeral year}}
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Her Caste or Subcaste :
+            </td>
+            <td>
+                {{castcatname}} {{familycast}}
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Her Birthplace :
+            </td>
+            <td>
+                {{birthplace}}
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Her G.R.No. :
+            </td>
+            <td>
+                {{grno}}
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <hr />
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <h5>She is / was Bonafide student of this School.</h5>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <h5>Date : {{rptdate}}</h5>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <p>Place : </b>{{place}}</p>
+            </td>
+            <td align="right">
+                Principal Sign.
+            </td>
+        </tr>
+        {{/data}}
+    </table>
+</body>
+
+<script>
+    document.getElementById("btnPrint").click();
+</script>
+
+</html>

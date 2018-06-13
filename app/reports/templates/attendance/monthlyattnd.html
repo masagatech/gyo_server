@@ -27,6 +27,14 @@
             font-size: 12px;
         }
         
+        table thead th a {
+            color: #ffffff;
+        }
+        
+        table thead th a:hover {
+            color: #ffffff;
+        }
+        
         table tbody th {
             background: #eeeeee;
             border: 2px solid rgba(204, 204, 204, 0.35)!important;
@@ -151,7 +159,7 @@
                         {{#attndhead}} {{psngrtype}} Name {{/attndhead}}
                     </th>
                     {{#allattndcolumn}}
-                    <th width="20px" align="center">{{{splitHead day}}}</th>
+                    <th width="20px" align="center">{{{splitHead day attndmonth}}}</th>
                     {{/allattndcolumn}}
                     <th width="20px">P</th>
                     <th width="20px">A</th>

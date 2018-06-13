@@ -61,22 +61,22 @@
                 <img src="{{{uploadurl}}}/{{enttlogo}}" height="80">
             </td>
             <td align="center">
-                <h3 {{{font-13}}}>{{enttname}}</h3>
+                <h3 {{{font-10}}}>{{enttname}}</h3>
 
-                <h3 {{{font-10}}}>
+                <h3 {{{font-07}}}>
                     Academic Year : {{ayname}}
                 </h3>
 
-                <h3 {{{font-10}}}>
+                <h3 {{{font-07}}}>
                     Class : {{classname}}, Month : {{attndmonth}}
                 </h3>
 
-                <h3 {{{font-13}}}>
-                    Reports : {{psngrtype}} Attendance ({{status}})
+                <h3 {{{font-07}}}>
+                    Reports : {{psngrtype}} Attendance (Student wise {{status}})
                 </h3>
             </td>
             <td align="right">
-                <h3 {{{font-10}}}>
+                <h3 {{{font-07}}}>
                     Report Date : {{rptdate}}
                 </h3>
             </td>
@@ -89,7 +89,7 @@
             {{#group datatable by="classname"}}
             <thead>
                 <tr>
-                    <th colspan="3">
+                    <th colspan="3" {{{font-07}}}>
                         <b>Class : </b> {{value}}
                     </th>
                 </tr>
@@ -97,25 +97,25 @@
             <tbody>
                 {{#each items}}
                 <tr>
-                    <th width="50px">
+                    <th width="50px" {{{font-07}}}>
                         <b>Name : </b>{{studentname}}
                     </th>
-                    <th width="50px">
+                    <th width="50px" {{{font-07}}}>
                         <b>Roll No : </b>{{rollno}}
                     </th>
-                    <th width="200px">
+                    <th width="200px" {{{font-07}}}>
                         <b>G.R. No. : </b>{{grno}}
                     </th>
                 </tr>
                 {{#datehead}}
                 <tr>
-                    <td colspan="3">
+                    <td colspan="3" {{{font-07}}}>
                         {{attnddate}}
                     </td>
                 </tr>
                 {{/datehead}}
                 <tr>
-                    <td colspan="3" align="right">
+                    <td colspan="3" align="right" {{{font-07}}}>
                         <b>Studentwise Absent Days : </b>{{countabsent}}
                     </td>
                 </tr>
