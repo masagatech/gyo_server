@@ -14,7 +14,6 @@
             width: 100%;
             border: solid 1px rgba(204, 204, 204, 0.35);
             margin-top: 10px!important;
-            font-size: 11px;
         }
         
         table thead th {
@@ -24,7 +23,6 @@
             padding: 3px!important;
             text-align: center;
             vertical-align: top;
-            font-size: 12px;
         }
         
         table thead th a {
@@ -42,13 +40,11 @@
             color: #000000;
             padding: 3px!important;
             vertical-align: top;
-            font-size: 11px;
         }
         
         table tbody td {
             padding: 3px!important;
             vertical-align: top;
-            font-size: 10px;
         }
         
         h3 {
@@ -143,7 +139,7 @@
                     <th colspan="2"></th>
                     <th></th>
                     {{#monthcolumn}}
-                    <th colspan="5">{{val}}</th>
+                    <th colspan="5" {{{font-10}}}>{{val}}</th>
                     {{/monthcolumn}}
                     <th></th>
                     <th></th>
@@ -153,47 +149,47 @@
                 </tr>
                 <tr>
                     {{#psngrcolumn}}
-                    <th width="50px">{{val}}</th>
+                    <th width="50px" {{{font-07}}}>{{val}}</th>
                     {{/psngrcolumn}}
-                    <th width="200px">
+                    <th width="200px" {{{font-07}}}>
                         {{#attndhead}} {{psngrtype}} Name {{/attndhead}}
                     </th>
                     {{#allattndcolumn}}
-                    <th width="20px" align="center">{{{splitHead day attndmonth}}}</th>
+                    <th width="20px" {{{font-07}}} align="center">{{{splitHead day attndmonth}}}</th>
                     {{/allattndcolumn}}
-                    <th width="20px">P</th>
-                    <th width="20px">A</th>
-                    <th width="20px">LV</th>
-                    <th width="20px">WO</th>
-                    <th width="20px">H</th>
+                    <th width="20px" {{{font-07}}}>P</th>
+                    <th width="20px" {{{font-07}}}>A</th>
+                    <th width="20px" {{{font-07}}}>LV</th>
+                    <th width="20px" {{{font-07}}}>WO</th>
+                    <th width="20px" {{{font-07}}}>H</th>
                 </tr>
             </thead>
 
             <tbody>
                 {{#classwiseattnd}}
                 <tr class="{{class}}">
-                    <th align="center" colspan="2">
+                    <th align="center" {{{font-07}}} colspan="2">
                         <b> {{classname}}</b>
                     </th>
-                    <th align="center">
+                    <th align="center" {{{font-07}}}>
                         {{countpsngr}}
                     </th>
 
                     {{{attnd_value this}}}
 
-                    <th class="P" align="center">
+                    <th class="P" {{{font-07}}} align="center">
                         <b>{{P}}</b>
                     </th>
-                    <th class="A" align="center">
+                    <th class="A" {{{font-07}}} align="center">
                         <b>{{A}}</b>
                     </th>
-                    <th class="LV" align="center">
+                    <th class="LV" {{{font-07}}} align="center">
                         <b>{{LV}}</b>
                     </th>
-                    <th class="WO" align="center">
+                    <th class="WO" {{{font-07}}} align="center">
                         <b>{{WO}}</b>
                     </th>
-                    <th class="H" align="center">
+                    <th class="H" {{{font-07}}} align="center">
                         <b>{{H}}</b>
                     </th>
                 </tr>
@@ -203,25 +199,25 @@
                 {{#sbarray}}
                 <tr>
                     {{{psngr_value this}}}
-                    <td>
+                    <td {{{font-07}}}>
                         {{psngrname}}
                     </td>
 
                     {{{attnd_value this}}}
 
-                    <td class="P" align="center">
+                    <td class="P" {{{font-07}}} align="center">
                         <b>{{P}}</b>
                     </td>
-                    <td class="A" align="center">
+                    <td class="A" {{{font-07}}} align="center">
                         <b>{{A}}</b>
                     </td>
-                    <td class="LV" align="center">
+                    <td class="LV" {{{font-07}}} align="center">
                         <b>{{LV}}</b>
                     </td>
-                    <td class="WO" align="center">
+                    <td class="WO" {{{font-07}}} align="center">
                         <b>{{WO}}</b>
                     </td>
-                    <td class="H" align="center">
+                    <td class="H" {{{font-07}}} align="center">
                         <b>{{H}}</b>
                     </td>
                 </tr>

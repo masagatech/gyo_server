@@ -19,11 +19,11 @@ reports.getStudentAttendanceReports = function getStudentAttendanceReports(data)
     var studentwiseattnd = data.studentwiseattnd;
     var params = data.params;
 
-    var font07 = 'style = "font-size: 7px;"';
-    var font10 = 'style = "font-size: 10px;"';
-    var font12 = 'style = "font-size: 12px;"';
-    var font13 = 'style = "font-size: 13px;"';
-    var font18 = 'style = "font-size: 18px;"';
+    var font07 = 'style = "font-size: 7px!important;"';
+    var font10 = 'style = "font-size: 10px!important;"';
+    var font12 = 'style = "font-size: 12px!important;"';
+    var font13 = 'style = "font-size: 13px!important;"';
+    var font18 = 'style = "font-size: 18px!important;"';
 
     _hndlbar.registerHelper('font-07', function(row) {
         if (params.format == "pdf") {
@@ -92,11 +92,11 @@ reports.getAttendanceReports = function getAttendanceReports(data) {
         element["sbarray"] = sb_array;
     }
 
-    var font07 = 'style = "font-size: 7px;"';
-    var font10 = 'style = "font-size: 10px;"';
-    var font12 = 'style = "font-size: 12px;"';
-    var font13 = 'style = "font-size: 13px;"';
-    var font18 = 'style = "font-size: 18px;"';
+    var font07 = 'style = "font-size: 7px!important;"';
+    var font10 = 'style = "font-size: 10px!important;"';
+    var font12 = 'style = "font-size: 12px!important;"';
+    var font13 = 'style = "font-size: 13px!important;"';
+    var font18 = 'style = "font-size: 18px!important;"';
 
     _hndlbar.registerHelper('font-07', function(row) {
         if (params.format == "pdf") {
@@ -205,7 +205,7 @@ reports.getAttendanceReports = function getAttendanceReports(data) {
 
         for (var i = 0; i < psngrcolumn.length; i++) {
             _data = row[psngrcolumn[i].key];
-            _columns = _columns + '<td align="center">' + (_data == null ? '-' : _data) + '</td>';
+            _columns = _columns + '<td align="center" ' + font07 + '>' + (_data == null ? '-' : _data) + '</td>';
         }
 
         return _columns;
@@ -232,9 +232,9 @@ reports.getAttendanceReports = function getAttendanceReports(data) {
             _data = row[allattndcolumn[i].day];
 
             if (_data == 0 || _data == null || _data == "P" || _data == "A" || _data == "LV" || _data == "WO" || _data == "H" || status == "LV" || status == "WO" || status == "H") {
-                _columns = _columns + '<th align="center" class="' + _class + '" align="center">' + (_data == null ? '-' : _data) + '</th>';
+                _columns = _columns + '<th align="center" ' + font07 + ' class="' + _class + '">' + (_data == null ? '-' : _data) + '</th>';
             } else {
-                _columns = _columns + '<th align="center" class="' + _class + '" align="center">' +
+                _columns = _columns + '<th align="center" ' + font07 + ' class="' + _class + '">' +
                     '<a href="' + globals.reporturl + '/getStudentAttendanceReports?flag=' + flag + '&type=download&status=' + status +
                     '&psngrtype=' + params.psngrtype + '&attndmonth=' + attndmonth + '&attndtype=' + params.attndtype + '&ayid=' + params.ayid +
                     '&classid=' + row.classid + '&gender=' + params.gender + '&enttid=' + params.enttid + '&wsautoid=' + params.wsautoid +
