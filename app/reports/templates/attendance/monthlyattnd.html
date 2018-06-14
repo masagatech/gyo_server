@@ -136,7 +136,9 @@
         <table border="1" class="table table-bordered table-responsive" cellspacing="0" cellpadding="5">
             <thead>
                 <tr>
+                    {{#isvis}}
                     <th colspan="2"></th>
+                    {{/isvis}}
                     <th></th>
                     {{#monthcolumn}}
                     <th colspan="5" {{{font-10}}}>{{val}}</th>
@@ -148,10 +150,11 @@
                     <th></th>
                 </tr>
                 <tr>
-                    {{#psngrcolumn}}
-                    <th width="50px" {{{font-07}}}>{{val}}</th>
-                    {{/psngrcolumn}}
-                    <th width="200px" {{{font-07}}}>
+                    {{#isvis}}
+                    <th width="50px" {{{font-07}}}>GR. No</th>
+                    <th width="50px" {{{font-07}}}>Roll No</th>
+                    {{/isvis}}
+                    <th width="250px" {{{font-07}}}>
                         {{#attndhead}} {{psngrtype}} Name {{/attndhead}}
                     </th>
                     {{#allattndcolumn}}
@@ -168,11 +171,11 @@
             <tbody>
                 {{#classwiseattnd}}
                 <tr class="{{class}}">
-                    <th align="center" {{{font-07}}} colspan="2">
-                        <b> {{classname}}</b>
-                    </th>
+                    {{#isvis}}
+                    <th colspan="2"></th>
+                    {{/isvis}}
                     <th align="center" {{{font-07}}}>
-                        {{countpsngr}}
+                        <b> {{classname}} : </b>{{countpsngr}}
                     </th>
 
                     {{{attnd_value this}}}
@@ -198,7 +201,15 @@
 
                 {{#sbarray}}
                 <tr>
-                    {{{psngr_value this}}}
+                    {{#isvis}}
+                    <td {{{font-07}}}>
+                        {{grno}}
+                    </td>
+                    <td {{{font-07}}}>
+                        {{rollno}}
+                    </td>
+                    {{/isvis}}
+
                     <td {{{font-07}}}>
                         {{psngrname}}
                     </td>

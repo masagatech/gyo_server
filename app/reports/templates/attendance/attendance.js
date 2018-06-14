@@ -133,6 +133,16 @@ reports.getAttendanceReports = function getAttendanceReports(data) {
 
     // Hide When
 
+    _hndlbar.registerHelper('isvis', function(options) {
+        if (params.psngrtype == "student") {
+            return options.fn(this);
+        } else {
+            return options.inverse(this);
+        }
+    });
+
+    // Group Column Name
+
     _hndlbar.registerHelper('groupcolname', function(row) {
         var _columns = "";
         var _colspan = 0;
