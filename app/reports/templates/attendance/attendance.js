@@ -149,9 +149,17 @@ reports.getAttendanceReports = function getAttendanceReports(data) {
 
         if (row != "") {
             if (params.attndmonth == "") {
-                _colspan = 68;
+                if (params.psngrtype == "student") {
+                    _colspan = 68;
+                } else {
+                    _colspan = 66;
+                }
             } else {
-                _colspan = parseInt(row.split('~')[1]) + 3;
+                if (params.psngrtype == "student") {
+                    _colspan = parseInt(row.split('~')[1]) + 3;
+                } else {
+                    _colspan = parseInt(row.split('~')[1]) + 1;
+                }
             }
 
             _columns += '<th colspan="' + _colspan + '"><b>Class : </b>' + row.split('~')[0] + '</th>';
@@ -212,10 +220,17 @@ reports.getAttendanceReports = function getAttendanceReports(data) {
         var _columns = '';
         var _data = '';
         var _class = '';
+        var _fontsize = '';
+
+        if (params.format == "pdf") {
+            _fontsize = font07;
+        } else {
+            _fontsize = font12;
+        }
 
         for (var i = 0; i < psngrcolumn.length; i++) {
             _data = row[psngrcolumn[i].key];
-            _columns = _columns + '<td align="center" ' + font07 + '>' + (_data == null ? '-' : _data) + '</td>';
+            _columns = _columns + '<td align="center"' + _fontsize + '>' + (_data == null ? '-' : _data) + '</td>';
         }
 
         return _columns;
@@ -227,6 +242,13 @@ reports.getAttendanceReports = function getAttendanceReports(data) {
         var _columns = '';
         var _data = '';
         var _class = '';
+        var _fontsize = '';
+
+        if (params.format == "pdf") {
+            _fontsize = font07;
+        } else {
+            _fontsize = font12;
+        }
 
         for (var i = 0; i < allattndcolumn.length; i++) {
             var attndmonth = allattndcolumn[i].attndmonth;
@@ -242,9 +264,9 @@ reports.getAttendanceReports = function getAttendanceReports(data) {
             _data = row[allattndcolumn[i].day];
 
             if (_data == 0 || _data == null || _data == "P" || _data == "A" || _data == "LV" || _data == "WO" || _data == "H" || status == "LV" || status == "WO" || status == "H") {
-                _columns = _columns + '<th align="center" ' + font07 + ' class="' + _class + '">' + (_data == null ? '-' : _data) + '</th>';
+                _columns = _columns + '<th align="center"' + _fontsize + ' class="' + _class + '">' + (_data == null ? '-' : _data) + '</th>';
             } else {
-                _columns = _columns + '<th align="center" ' + font07 + ' class="' + _class + '">' +
+                _columns = _columns + '<th align="center"' + _fontsize + ' class="' + _class + '">' +
                     '<a href="' + globals.reporturl + '/getStudentAttendanceReports?flag=' + flag + '&type=download&status=' + status +
                     '&psngrtype=' + params.psngrtype + '&attndmonth=' + attndmonth + '&attndtype=' + params.attndtype + '&ayid=' + params.ayid +
                     '&classid=' + row.classid + '&gender=' + params.gender + '&enttid=' + params.enttid + '&wsautoid=' + params.wsautoid +

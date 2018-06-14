@@ -86,6 +86,16 @@ admsn.bulkUploadStudents = function bulkUploadStudents(req, res, result, callbac
     }
 }
 
+// Save Student Certificate
+
+admsn.saveCertificateInfo = function saveCertificateInfo(req, res, done) {
+    db.callFunction("select " + globals.erpschema("funsave_certificateinfo") + "($1::json);", [req.body], function(data) {
+        rs.resp(res, 200, data.rows);
+    }, function(err) {
+        rs.resp(res, 401, "error : " + err);
+    })
+}
+
 // Save Student By Web
 
 admsn.saveAdmissionInfo = function saveAdmissionInfo(req, res, done) {

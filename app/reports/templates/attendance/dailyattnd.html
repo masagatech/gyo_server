@@ -123,12 +123,14 @@
         <table border="1" class="table table-bordered table-responsive" cellspacing="0" cellpadding="5">
             <thead>
                 <tr>
+                    {{#isvis}}
                     <th width="50px">
                         GR No
                     </th>
                     <th width="50px">
                         Roll No
                     </th>
+                    {{/isvis}}
                     <th width="200px">
                         {{#attndhead}} {{psngrtypenm}} Name {{/attndhead}}
                     </th>
@@ -156,7 +158,15 @@
                 </tr>
                 {{#each items}}
                 <tr>
-                    {{{psngr_value this}}}
+                    {{#isvis}}
+                    <td {{{font-07}}}>
+                        {{grno}}
+                    </td>
+                    <td {{{font-07}}}>
+                        {{rollno}}
+                    </td>
+                    {{/isvis}}
+
                     <td>
                         {{psngrname}}
                     </td>

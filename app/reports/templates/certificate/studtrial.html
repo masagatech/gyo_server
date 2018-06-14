@@ -1,0 +1,147 @@
+<html>
+
+<head>
+    <meta charset="utf-8" />
+
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            border: solid 1px rgba(204, 204, 204, 0.35);
+            margin-bottom: 10px;
+        }
+        
+        table thead th {
+            background: #009688;
+            color: #ffffff;
+            padding: 3px;
+            text-align: center;
+            vertical-align: top;
+            width: 12px;
+        }
+        
+        table tbody th {
+            background: #eeeeee;
+            color: #000000;
+            padding: 5px;
+            text-align: center;
+            vertical-align: top;
+            width: 11px;
+        }
+        
+        table tbody td {
+            padding: 3px;
+            vertical-align: top;
+            width: 10px;
+        }
+        
+        .show {
+            display: inline-table!important;
+            width: 100%;
+        }
+        
+        .hide {
+            display: none!important;
+        }
+        
+        .pull-left {
+            float: left;
+        }
+        
+        .pull-right {
+            float: left;
+            margin: 0 5px;
+        }
+        
+        h4,
+        h5,
+        h6 {
+            margin: 2px 0;
+        }
+    </style>
+</head>
+
+<body>
+    <button id="btnPrint" type="button" class="hide" onClick="window.print()">Print</button>
+
+    <table cellspacing="0" cellpadding="0">
+        {{#data}}
+        <tr>
+            <td colspan="3">
+                <div class="pull-left">
+                    <img src="{{{uploadurl}}}/{{schlogo}}" height="50" onerror="this.src='assets/img/noimage.gif';">
+                </div>
+                <div class="pull-right">
+                    <h4>{{schname}}</h4>
+                    <h5>{{schaddr}}</h5>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>S.S.C Index No : </b>{{sscindex}}
+            </td>
+            <td colspan="2">
+                <b>H.S.C Index No : </b>{{hscindex}}
+            </td>
+        </tr>
+        <tr>
+            <td colspan="3" align="center">
+                <h5>Trial Certificate</h5>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="3">
+                <hr />
+            </td>
+        </tr>
+        <tr>
+            <td colspan="3">
+                This is to Certify that {{studtitle}} <u><b>{{studname}}</b></u>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="3">
+                was a bonafide student of this School. She has passed SSC / HSC Exam held in <br /> Year <u><b>{{ayname}}</b></u> By <u><b>{{trial}}</b></u> Trial.
+            </td>
+        </tr>
+        <tr>
+            <td colspan="3">
+                His Exam Centre was <u>{{place}}</u> and Exam Seat No. <u><b>{{exmseatno}}</b></u>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Her G.R.No is <u><b>{{grno}}</b></u>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="3">
+                <hr />
+            </td>
+        </tr>
+        <tr>
+            <td colspan="3">
+                <h5>Date : {{rptdate}}</h5>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <p>Place : </b>{{place}}</p>
+            </td>
+            <td align="right">
+                Class Teacher
+            </td>
+            <td align="right">
+                Principal Sign.
+            </td>
+        </tr>
+        {{/data}}
+    </table>
+</body>
+
+<script>
+    document.getElementById("btnPrint").click();
+</script>
+
+</html>
