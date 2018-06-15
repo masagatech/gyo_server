@@ -72,24 +72,22 @@
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let row of feesCollectionDT">
+            {{#data}}
+            <tr>
                 <td>
-                    {{row.classname}}
+                    {{classname}}
                 </td>
                 <td>
-                    {{row.catname}}
+                    {{catname}}
                 </td>
                 <td align="right">
-                    <a role="button" (click)="openStudentFeesPopup(row, 'paid')">
-                        {{row.paidfees}}
-                    </a>
+                    {{paidfees}}
                 </td>
                 <td align="right">
-                    <a role="button" (click)="openStudentFeesPopup(row, 'pending')">
-                        {{row.pendfees}}
-                    </a>
+                    {{pendfees}}
                 </td>
             </tr>
+            {{/data}} {{#data1}}
             <tr class="tr-table">
                 <td></td>
                 <td align="right">
@@ -102,6 +100,7 @@
                     {{totpendfees}}
                 </td>
             </tr>
+            {{/data1}}
         </tbody>
     </table>
 </body>

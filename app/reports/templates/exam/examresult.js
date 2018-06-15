@@ -13,7 +13,7 @@ reports.getExamResultReports = function getExamResultReports(data) {
 
         for (var i = 0; i < data_header.length; i++) {
             data = row[data_header[i].subhead];
-            columns = columns + '<td width="70px" class="' + data + '" align="center">' + (data == null ? '-' : data) + '</td>'
+            columns = columns + '<td width="50px" class="' + data + '" align="center">' + (data == null ? '-' : data) + '</td>'
         }
 
         return columns;

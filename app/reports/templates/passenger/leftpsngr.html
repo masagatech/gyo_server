@@ -60,7 +60,7 @@
         </tr>
         <tr>
             <td colspan="3">
-                <h3 {{{font-13}}}>{{{psngrtype_head}}} Birthday Report</h3>
+                <h3 {{{font-13}}}>{{{psngrtype_head}}} Left Report</h3>
             </td>
         </tr>
         <tr>
@@ -81,17 +81,17 @@
                     <th width="70px" {{{font-07}}}>Sr. No.</th>
                     {{#isvis}}
                     <th width="80px" {{{font-07}}}>GR. No.</th>
-                    {{/isvis}}
                     <th width="200px" {{{font-07}}}>Class</th>
+                    {{/isvis}}
                     <th {{{font-07}}}>{{{psngrtype_head}}} Name</th>
-                    <th width="150px" {{{font-07}}}>Birth Date</th>
+                    <th width="150px" {{{font-07}}}>Leaving Date</th>
                 </tr>
             </thead>
             <tbody>
-                {{#group psngrdata by="birthmonth"}}
+                {{#group psngrdata by="classtype"}}
                 <tr>
                     <th colspan="5">
-                        {{value}}
+                        {{{psngrpostion_head}}} {{value}}
                     </th>
                 </tr>
                 {{#each items}}
@@ -103,15 +103,15 @@
                     <td {{{font-07}}}>
                         {{grno}}
                     </td>
-                    {{/isvis}}
                     <td {{{font-07}}}>
                         {{classname}}
                     </td>
+                    {{/isvis}}
                     <td {{{font-07}}}>
                         {{psngrname}}
                     </td>
                     <td {{{font-07}}}>
-                        {{birthdate}}
+                        {{leftdate}}
                     </td>
                 </tr>
                 {{/each}} {{/group}}

@@ -44,8 +44,12 @@ rptpsngr.getPassengerReports = function getPassengerReports(req, res, done) {
             formname = "passenger/agewise.html";
             parentheadcolumn = data.rows[0][0].stdgndrcolumn.filter(function(x) { return x.id == 1 });
             psngrheadcolumn = data.rows[0][0].stdgndrcolumn;
-        } else {
+        } else if (req.query.flag == "birthday") {
             formname = "passenger/birthday.html";
+            parentheadcolumn = [];
+            psngrheadcolumn = [];
+        } else {
+            formname = "passenger/leftpsngr.html";
             parentheadcolumn = [];
             psngrheadcolumn = [];
         }

@@ -13,6 +13,8 @@ reports.getPassengerReports = function getPassengerReports(data) {
     var psngrdata = data.psngrdata;
     var params = data.params;
 
+    // Set Font Size
+
     var font07 = 'style = "font-size: 7px;"';
     var font10 = 'style = "font-size: 10px;"';
     var font12 = 'style = "font-size: 12px;"';
@@ -43,6 +45,16 @@ reports.getPassengerReports = function getPassengerReports(data) {
         }
     });
 
+    // Hide When
+
+    _hndlbar.registerHelper('isvis', function(options) {
+        if (params.psngrtype == "student") {
+            return options.fn(this);
+        } else {
+            return options.inverse(this);
+        }
+    });
+
     // Count Data
 
     _hndlbar.registerHelper('count_data', function(row) {
@@ -56,6 +68,18 @@ reports.getPassengerReports = function getPassengerReports(data) {
             return '<tr><td colspan="7">No Data Found</th></td>';
         } else {
             return '';
+        }
+    });
+
+    // Passenger Position
+
+    _hndlbar.registerHelper('psngrpostion_head', function(row) {
+        if (params.psngrtype == "student") {
+            return "Standard -";
+        } else if (params.psngrtype == "passenger") {
+            return "";
+        } else {
+            return "Department -";
         }
     });
 

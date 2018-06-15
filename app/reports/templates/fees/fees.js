@@ -11,6 +11,16 @@ NumeralHelper.registerHelpers(Handlebars);
 
 reports.getClassFeesReports = function getClassFeesReports(data) {
     var _hndlbar = Handlebars;
+    var feesdt = data.data1;
+    var params = data.params;
+
+    _hndlbar.registerHelper('nodatafound', function(row) {
+        if (feesdt.length == 0) {
+            return "show";
+        } else {
+            return "hide";
+        }
+    });
 
     return _hndlbar;
 }
@@ -64,6 +74,8 @@ reports.getStudentFeesReports = function getStudentFeesReports(data) {
         }
     });
 
+    // Show Logo
+
     _hndlbar.registerHelper('isShowLogo', function(param, options) {
         if (param == "hide") {
             return options.inverse(this);
@@ -71,6 +83,8 @@ reports.getStudentFeesReports = function getStudentFeesReports(data) {
             return options.fn(this);
         }
     });
+
+    // Show Student Header
 
     _hndlbar.registerHelper('splitStudent', function(head) {
         var t = head.split("~");
@@ -92,6 +106,8 @@ reports.getStudentFeesReports = function getStudentFeesReports(data) {
         return head;
     });
 
+    // Show Student Header
+
     _hndlbar.registerHelper('splitTitle', function(head) {
         var t = head.split("~");
         var head = "";
@@ -109,6 +125,8 @@ reports.getStudentFeesReports = function getStudentFeesReports(data) {
         return head;
     });
 
+    // Show Student Footer
+
     _hndlbar.registerHelper('splitFoot', function(head) {
         var t = head.split("~");
         var head = "";
@@ -118,6 +136,8 @@ reports.getStudentFeesReports = function getStudentFeesReports(data) {
 
         return head;
     });
+
+    // Show Total Paid Fees
 
     _hndlbar.registerHelper('totalPaidFees', function(head) {
         var t = head.split("~");
@@ -129,9 +149,13 @@ reports.getStudentFeesReports = function getStudentFeesReports(data) {
         }
     });
 
+    // Get Link For URL
+
     _hndlbar.registerHelper('uploadurl', function(params) {
         return globals.uploadurl;
     });
+
+    // Get Link For Logo URL
 
     _hndlbar.registerHelper('logourl', function(params) {
         return globals.logourl;
@@ -187,9 +211,13 @@ reports.getFeesSleepReports = function getFeesSleepReports(data) {
     //     return _othtotfess;
     // });
 
+    // Get Link For URL
+
     _hndlbar.registerHelper('uploadurl', function(params) {
         return globals.uploadurl;
     });
+
+    // Get Link For Logo URL
 
     _hndlbar.registerHelper('logourl', function(params) {
         return globals.logourl;

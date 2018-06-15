@@ -1,0 +1,138 @@
+<html>
+
+<head>
+    <meta charset="utf-8" />
+
+    <style>
+        table {
+            border-collapse: collapse;
+            border: 1px solid rgba(204, 204, 204, 0.35);
+            width: 100%;
+        }
+        
+        table thead th {
+            background: #009688;
+            border: 1px solid rgba(204, 204, 204, 0.35);
+            color: #ffffff;
+            padding: 5px;
+            text-align: left;
+            vertical-align: top;
+        }
+        
+        table tbody th {
+            background: #eeeeee;
+            border: 1px solid rgba(204, 204, 204, 0.35);
+            color: #000000;
+            padding: 5px;
+            text-align: left;
+            vertical-align: top;
+        }
+        
+        table tbody td {
+            border: 1px solid rgba(204, 204, 204, 0.35);
+            padding: 5px;
+            vertical-align: top;
+        }
+    </style>
+</head>
+
+<body>
+    <table border="1" class="table table-bordered table-responsive" cellspacing="0" cellpadding="5">
+        <thead>
+            <tr>
+                <th width="250px">
+                    School
+                </th>
+                <th>
+                    Academic Year
+                </th>
+                <th width="100px">
+                    GR No
+                </th>
+                <th width="100px">
+                    Class
+                </th>
+                <th width="250px">
+                    Name
+                </th>
+                <th width="150px">
+                    Receipt No
+                </th>
+                <th width="150px">
+                    Receive Date
+                </th>
+                <th width="150px">
+                    Receipt Amount
+                </th>
+                <th width="150px">
+                    Pay Type
+                </th>
+                <th width="150px">
+                    Cheque No
+                </th>
+                <th width="150px">
+                    Bank Name
+                </th>
+                <th width="150px">
+                    Receipt Book
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#data1}}
+            <tr>
+                <td>
+                    {{schname}}
+                </td>
+                <td>
+                    {{ayname}}
+                </td>
+                <td>
+                    {{grno}}
+                </td>
+                <td>
+                    {{classname}}
+                </td>
+                <td>
+                    {{studname}}
+                </td>
+                <td>
+                    {{receiptno}}
+                </td>
+                <td>
+                    {{receivedate}}
+                </td>
+                <td>
+                    {{receiveamt}}
+                </td>
+                <td>
+                    {{paymode}}
+                </td>
+                <td>
+                    {{chequeno}}
+                </td>
+                <td>
+                    {{bankname}}
+                </td>
+                <td>
+                    {{rbname}}
+                </td>
+            </tr>
+            {{/data1}} {{#data}}
+            <tr class="tr-table">
+                <td colspan="7" align="right">
+                    <b>Total Amount</b>
+                </td>
+                <td align="right">
+                    {{totpaidfees}}
+                </td>
+                <td colspan="4">
+                    {{totpendfees}}
+                </td>
+            </tr>
+            {{/data}}
+        </tbody>
+    </table>
+</body>
+
+</html>
