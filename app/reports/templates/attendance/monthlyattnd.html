@@ -4,18 +4,11 @@
     <meta charset="utf-8" />
 
     <style>
-        .table-overflow {
+        .div-header {
             width: 100%;
-            overflow: auto;
         }
-        /* .header {
-            width: 100%;
-            top: 100px;
-            position: fixed!important;
-        } */
         
         table {
-            top: 100px;
             border-collapse: collapse;
             width: 100%;
             border: solid 1px rgba(204, 204, 204, 0.35);
@@ -109,7 +102,7 @@
 
 <body>
     {{#attndhead}}
-    <div class="header">
+    <div class="div-header">
         <table cellspacing="0" cellpadding="5">
             <tr>
                 <td align="left">
@@ -140,7 +133,7 @@
     </div>
     {{/attndhead}}
 
-    <div class="table-overflow">
+    <div class="div-overflow">
         <table border="1" class="table table-bordered table-responsive" cellspacing="0" cellpadding="5">
             <thead>
                 <tr>
