@@ -12,7 +12,7 @@
         table {
             border-collapse: collapse;
             width: 100%;
-            border: solid 1px rgba(204, 204, 204, 0.35);
+            border: 1px solid #114ca5!important;
             margin-top: 10px!important;
             font-size: 11px;
         }
@@ -128,7 +128,7 @@
                 </tr>
             </thead>
             <tbody>
-                {{#psngrdata}}
+                {{{nodatafound}}} {{#psngrdata}}
                 <tr class="{{gndrkey}}">
                     <td align="center" {{{font-07}}}>
                         {{rowid}}

@@ -12,8 +12,8 @@
         table {
             border-collapse: collapse;
             width: 100%;
-            border: solid 1px rgba(204, 204, 204, 0.35);
-            margin-top: 10px;
+            border: 1px solid #114ca5!important;
+            margin-bottom: 10px;
         }
         
         table thead th {
@@ -74,12 +74,11 @@
             <thead>
                 <tr>
                     <th width="50px" {{{font-07}}}>Photo</th>
-                    <th width="150px" {{{font-07}}}>{{{psngrtype_head}}} Name</th>
+                    <th width="200px" {{{font-07}}}>{{{psngrtype_head}}} Name</th>
                     <th width="100px" {{{font-07}}}>Aadhar No</th>
                     <th width="100px" {{{font-07}}}>Mobile</th>
                     <th width="100px" {{{font-07}}}>Email</th>
                     <th width="250px" {{{font-07}}}>Contact</th>
-                    <th width="50px" {{{font-07}}}>Status</th>
                 </tr>
             </thead>
             <tbody>
@@ -102,9 +101,6 @@
                     </td>
                     <td {{{font-07}}}>
                         {{{contactinfo_col this}}}
-                    </td>
-                    <td {{{font-07}}}>
-                        {{status}}
                     </td>
                 </tr>
                 {{/psngrdata}}

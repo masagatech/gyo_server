@@ -12,7 +12,7 @@
         table {
             border-collapse: collapse;
             width: 100%;
-            border: solid 1px rgba(204, 204, 204, 0.35);
+            border: 1px solid #114ca5!important;
             margin-bottom: 10px;
         }
         
@@ -87,7 +87,7 @@
                 </tr>
             </thead>
             <tbody>
-                {{#group psngrdata by="castcatname"}}
+                {{{nodatafound}}} {{#group psngrdata by="castcatname"}}
                 <tr>
                     <th colspan="3" {{{font-10}}}>
                         {{value}}

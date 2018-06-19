@@ -12,7 +12,7 @@
         table {
             border-collapse: collapse;
             width: 100%;
-            border: solid 1px rgba(204, 204, 204, 0.35);
+            border: 1px solid #114ca5!important;
             margin-bottom: 10px;
         }
         
@@ -68,7 +68,7 @@
                 <h3 {{{font-10}}}>Class : {{classname}}</h3>
             </td>
             <td align="right">
-                <h3 {{{font-10}}}>Total Student : {{{countstudent}}}</h3>
+                <h3 {{{font-10}}}>Total {{{psngrtype_head}}} : {{{countstudent}}}</h3>
             </td>
         </tr>
         {{/psngrhead}}
@@ -88,7 +88,7 @@
                 </tr>
             </thead>
             <tbody>
-                {{#group psngrdata by="classtype"}}
+                {{{nodatafound}}} {{#group psngrdata by="classtype"}}
                 <tr>
                     <th colspan="5">
                         {{{psngrpostion_head}}} {{value}}

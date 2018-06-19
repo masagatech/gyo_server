@@ -12,7 +12,7 @@
         table {
             border-collapse: collapse;
             width: 100%;
-            border: solid 1px rgba(204, 204, 204, 0.35);
+            border: 1px solid #114ca5!important;
             margin-bottom: 10px;
         }
         
@@ -64,7 +64,7 @@
             </td>
         </tr>
         <tr>
-            <td colspan="3">
+            <td colspan="2">
                 <h3 {{{font-10}}}>Class : {{classname}}</h3>
             </td>
             <td align="right">
@@ -86,7 +86,7 @@
                 </tr>
             </thead>
             <tbody>
-                {{#psngrdata}}
+                {{{nodatafound}}} {{#psngrdata}}
                 <tr>
                     <td align="center" {{{font-07}}}>
                         {{rowid}}

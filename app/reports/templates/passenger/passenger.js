@@ -158,10 +158,6 @@ reports.getPassengerReports = function getPassengerReports(data) {
             psngrphoto_col += '<img height="60" width="60" src="' + globals.uploadurl + "/" + row.psngrphoto + '" onerror="this.src=\'assets/img/noimage.gif\';"">';
         }
 
-        if (row.gndrval != "" && row.gndrval != null) {
-            psngrphoto_col += "<br />" + row.gndrval;
-        }
-
         if (row.psngrdob != "" && row.psngrdob != null) {
             psngrphoto_col += "<br /><b>Age : </b>" + row.psngrage;
         }
@@ -180,14 +176,6 @@ reports.getPassengerReports = function getPassengerReports(data) {
             studphoto_col += '<img height="60" width="60" src="' + globals.uploadurl + "/" + row.FilePath + '" onerror="this.src=\'assets/img/default-female.png\';">';
         } else {
             studphoto_col += '<img height="60" width="60" src="' + globals.uploadurl + "/" + row.FilePath + '" onerror="this.src=\'assets/img/noimage.gif\';"">';
-        }
-
-        if (row.gndrval != "" && row.gndrval != null) {
-            if (params.format == "pdf") {
-                studphoto_col += "<div " + font07 + ">" + row.gndrval + "</div>";
-            } else {
-                studphoto_col += "<div " + font12 + ">" + row.gndrval + "</div>";
-            }
         }
 
         if (row.dob != "" && row.dob != null) {
