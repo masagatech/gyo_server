@@ -9,7 +9,7 @@ var NumeralHelper = require("handlebars.numeral");
 groupBy.register(Handlebars);
 NumeralHelper.registerHelpers(Handlebars);
 
-reports.getClassFeesReports = function getClassFeesReports(data) {
+reports.getFeesStructureReports = function getFeesStructureReports(data) {
     var _hndlbar = Handlebars;
     var feesdt = data.data1;
     var params = data.params;

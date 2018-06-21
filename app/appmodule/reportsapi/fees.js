@@ -17,7 +17,7 @@ fees.getFeesReports = function getFeesReports(req, res, done) {
                     data1: data.rows[1],
                     data2: data.rows[0][0],
                     params: req.query
-                }, { 'all': "fees/classwise.html" }, feesapi.getClassFeesReports);
+                }, { 'all': "fees/classwise.html" }, feesapi.getFeesStructureReports);
             } else if (req.query.flag == "studentwise") {
                 download(req, res, {
                     data: data.rows[0],
@@ -31,7 +31,7 @@ fees.getFeesReports = function getFeesReports(req, res, done) {
                     data1: data.rows[1],
                     data2: data.rows[0][0],
                     params: req.query
-                }, { 'all': "fees/dailywise.html" }, feesapi.getClassFeesReports);
+                }, { 'all': "fees/dailywise.html" }, feesapi.getFeesStructureReports);
             } else if (req.query.flag == "receipt") {
                 download(req, res, {
                     data: data.rows[0],

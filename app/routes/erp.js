@@ -122,12 +122,19 @@ var appRouter = function(app) {
 
     //##################################### Receipt Book #################################################
 
-    //##################################### Fees #########################################################
+    //##################################### Fees Structure ###############################################
 
-    app.post(root + "/saveClassFees", fees.saveClassFees);
-    app.post(root + "/getClassFees", fees.getClassFees);
+    app.post(root + "/saveFeesStructure", fees.saveFeesStructure);
+    app.post(root + "/getFeesStructure", fees.getFeesStructure);
 
     //##################################### Fees Structure ###############################################
+
+    //##################################### Fees Excemption ##############################################
+
+    app.post(root + "/saveFeesExcemption", fees.saveFeesExcemption);
+    app.post(root + "/getFeesExcemption", fees.getFeesExcemption);
+
+    //##################################### Fees Excemption ##############################################
 
     //##################################### Fees Collection ##############################################
 

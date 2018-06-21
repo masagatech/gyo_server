@@ -3,25 +3,47 @@ var rs = require("gen").res;
 var globals = require("gen").globals;
 
 var fees = module.exports = {};
-var common = require("../schoolapi/common.js");
 
+var common = require("../schoolapi/common.js");
 var tripapi = require("../schoolapi/tripapi.js");
 
-fees.saveClassFees = function saveClassInfo(req, res, done) {
-    db.callFunction("select " + globals.erpschema("funsave_classfees") + "($1::json);", [req.body], function(data) {
+// Fees Structure
+
+fees.saveFeesStructure = function saveFeesStructure(req, res, done) {
+    db.callFunction("select " + globals.erpschema("funsave_feesstructure") + "($1::json);", [req.body], function(data) {
         rs.resp(res, 200, data.rows);
     }, function(err) {
         rs.resp(res, 401, "error : " + err);
     })
 }
 
-fees.getClassFees = function getClassFees(req, res, done) {
-    db.callProcedure("select " + globals.erpschema("funget_classfees") + "($1,$2,$3::json);", ['cf1', 'cf2', req.body], function(data) {
+fees.getFeesStructure = function getFeesStructure(req, res, done) {
+    db.callProcedure("select " + globals.erpschema("funget_feesstructure") + "($1,$2,$3::json);", ['fs1', 'fs2', req.body], function(data) {
         rs.resp(res, 200, data.rows);
     }, function(err) {
         rs.resp(res, 401, "error : " + err);
     }, 2)
 }
+
+// Fees Excemption
+
+fees.saveFeesExcemption = function saveFeesExcemption(req, res, done) {
+    db.callFunction("select " + globals.erpschema("funsave_feesexcemption") + "($1::json);", [req.body], function(data) {
+        rs.resp(res, 200, data.rows);
+    }, function(err) {
+        rs.resp(res, 401, "error : " + err);
+    })
+}
+
+fees.getFeesExcemption = function getFeesExcemption(req, res, done) {
+    db.callProcedure("select " + globals.erpschema("funget_feesexcemption") + "($1,$2::json);", ['fs1', req.body], function(data) {
+        rs.resp(res, 200, data.rows);
+    }, function(err) {
+        rs.resp(res, 401, "error : " + err);
+    }, 1)
+}
+
+// Fees Collection
 
 fees.saveFeesCollection = function saveFeesCollection(req, res, done) {
     db.callFunction("select " + globals.erpschema("funsave_feescollection") + "($1::json);", [req.body], function(data) {
@@ -49,6 +71,8 @@ fees.getFeesCollection = function getFeesCollection(req, res, done) {
         rs.resp(res, 401, "error : " + err);
     }, 1)
 }
+
+// Fees Reports
 
 fees.getFeesReports = function getFeesReports(req, res, done) {
     db.callProcedure("select " + globals.erpschema("funget_rpt_feescollection") + "($1,$2,$3::json);", ['feesrpt1', 'feesrpt2', req.body], function(data) {
