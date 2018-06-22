@@ -78,6 +78,7 @@ var appRouter = function(app) {
 
     app.post(root + "/saveCertificateInfo", admsn.saveCertificateInfo);
     app.post(root + "/saveAdmissionInfo", admsn.saveAdmissionInfo);
+
     app.post(globals.globvar.rootAPI + "/saveStudentInfo", admsn.saveStudentInfo);
     app.post(globals.globvar.rootAPI + "/saveStudentVehicleMap", admsn.saveStudentVehicleMap);
     app.post(globals.globvar.rootAPI + "/saveStudentRollover", admsn.saveStudentRollover);
@@ -102,6 +103,9 @@ var appRouter = function(app) {
     //##################################### Attendance ###################################################
 
     //##################################### Class ########################################################
+
+    app.post(root + "/saveStandardInfo", cls.saveStandardInfo);
+    app.post(root + "/getStandardDetails", cls.getStandardDetails);
 
     app.post(root + "/saveClassInfo", cls.saveClassInfo);
     app.post(root + "/getClassDetails", cls.getClassDetails);
