@@ -48,24 +48,48 @@
             display: none!important;
         }
         
-        .Holiday {
+        table.tableRpt .Holiday,
+        .Exam,
+        .Lunch,
+        .Off {
+            background-color: transparent!important;
+        }
+        
+        .Holiday span {
             background-color: #03A9F4;
             color: #FFFFFF;
+            padding: 5px;
+            padding-top: 0px;
+            padding-bottom: 0px;
+            border: 1px solid #114ca5;
+            word-wrap: normal;
         }
         
-        .Exam {
+        .Exam span {
             background-color: #ffe821;
             color: #000000;
+            padding: 5px;
+            padding-top: 0px;
+            padding-bottom: 0px;
+            border: 1px solid #114ca5;
         }
         
-        .Lunch {
+        .Lunch span {
             background-color: #FF9800;
             color: #FFFFFF;
+            padding: 5px;
+            padding-top: 0px;
+            padding-bottom: 0px;
+            border: 1px solid #114ca5;
         }
         
-        .Off {
+        .Off span {
             background-color: #E91E63;
             color: #FFFFFF;
+            padding: 5px;
+            padding-top: 0px;
+            padding-bottom: 0px;
+            border: 1px solid #114ca5;
         }
     </style>
 </head>
@@ -79,7 +103,7 @@
 
     <h4>{{{emptydatamsg}}}</h4>
 
-    <table border="1" cellspacing="0" cellpadding="5">
+    <table border="1" cellspacing="0" class="tableRpt" cellpadding="5">
         <thead>
             <tr>
                 <th width="200px">Date / Time</th>
@@ -102,28 +126,28 @@
             {{#each items}}
             <tr>
                 <td>
-                    {{caltime}}
+                    <span>{{caltime}}</span>
                 </td>
                 <td class="{{mon}}">
-                    {{mon}}
+                    <span>{{mon}}</span>
                 </td>
                 <td class="{{tue}}">
-                    {{tue}}
+                    <span>{{tue}}</span>
                 </td>
                 <td class="{{wed}}">
-                    {{wed}}
+                    <span>{{wed}}</span>
                 </td>
                 <td class="{{thu}}">
-                    {{thu}}
+                    <span>{{thu}}</span>
                 </td>
                 <td class="{{fri}}">
-                    {{fri}}
+                    <span>{{fri}}</span>
                 </td>
                 <td class="{{sat}}">
-                    {{sat}}
+                    <span>{{sat}}</span>
                 </td>
                 <td class="{{sun}}">
-                    {{sun}}
+                    <span>{{sun}}</span>
                 </td>
             </tr>
             {{/each}} {{/group}}
