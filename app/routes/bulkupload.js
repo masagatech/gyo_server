@@ -9,6 +9,7 @@ var rs = require("../appmodule/util/resp.js");
 var fs = require('fs');
 
 var admsn = require("../appmodule/erp/admission.js");
+var psngr = require("../appmodule/schoolapi/passenger.js");
 var exmres = require("../appmodule/erp/exam.js");
 var fees = require("../appmodule/erp/fees.js");
 
@@ -73,6 +74,19 @@ var appRouter = function(app) {
                         };
 
                         admsn.bulkUploadStudents(params, res, result, function(d) {
+                            res.json({ data: d });
+                        });
+                    }
+
+                    if (req.body.bulktype === "passenger") {
+                        var params = {
+                            "enttid": req.body.enttid,
+                            "wsautoid": req.body.wsautoid,
+                            "cuid": req.body.cuid,
+                            "multipassenger": JSON.stringify(result)
+                        };
+
+                        psngr.bulkUploadPassenger(params, res, result, function(d) {
                             res.json({ data: d });
                         });
                     }
