@@ -83,7 +83,7 @@ var appRouter = function(app) {
                             "enttid": req.body.enttid,
                             "wsautoid": req.body.wsautoid,
                             "cuid": req.body.cuid,
-                            "multipassenger": JSON.stringify(result)
+                            "multipassenger": result
                         };
 
                         psngr.bulkUploadPassenger(params, res, result, function(d) {
