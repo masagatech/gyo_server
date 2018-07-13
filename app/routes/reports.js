@@ -10,6 +10,7 @@ var exam = require("../appmodule/reportsapi/exam.js");
 var assesment = require("../appmodule/reportsapi/assesment.js");
 var attnd = require("../appmodule/reportsapi/attendance.js");
 var fees = require("../appmodule/reportsapi/fees.js");
+var schedule = require("../appmodule/reportsapi/schedule.js");
 var certificate = require("../appmodule/reportsapi/certificate.js");
 
 module.exports = function(app) {
@@ -53,6 +54,7 @@ module.exports = function(app) {
     // Fees Reports
 
     app.get("/getFeesReports", fees.getFeesReports);
+    app.get("/getScheduleReports", schedule.getScheduleReports);
 
     // Student Certificate
 

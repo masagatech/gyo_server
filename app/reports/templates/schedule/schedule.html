@@ -1,0 +1,94 @@
+<html>
+
+<head>
+    <meta charset="utf-8" />
+
+    <style>
+        table {
+            border-collapse: collapse;
+            border: 1px solid rgba(204, 204, 204, 0.35);
+            width: 100%;
+        }
+        
+        table thead th {
+            background: #009688;
+            border: 1px solid rgba(204, 204, 204, 0.35);
+            color: #ffffff;
+            padding: 5px;
+            text-align: left;
+            vertical-align: top;
+        }
+        
+        table tbody th {
+            background: #eeeeee;
+            border: 1px solid rgba(204, 204, 204, 0.35);
+            color: #000000;
+            padding: 5px;
+            text-align: left;
+            vertical-align: top;
+        }
+        
+        table tbody td {
+            border: 1px solid rgba(204, 204, 204, 0.35);
+            padding: 5px;
+            vertical-align: top;
+        }
+    </style>
+</head>
+
+<body>
+    <table class="table table-bordered table-responsive">
+        <thead>
+            <tr>
+                <th>
+                    School
+                </th>
+                <th>
+                    Batch
+                </th>
+                <th>
+                    Pick Time
+                </th>
+                <th>
+                    Drop Time
+                </th>
+                <th>
+                    Student
+                </th>
+                <th>
+                    Collected
+                </th>
+                <th>
+                    Pending
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#data}}
+            <tr>
+                <td>
+                    {{schoolname}}
+                </td>
+                <td>
+                    {{batchname}}
+                </td>
+                <td>
+                    {{picktime}}
+                </td>
+                <td>
+                    {{droptime}}
+                </td>
+                <td>
+                    {{countstuds}}
+                </td>
+                <td>
+                </td>
+                <td>
+                </td>
+            </tr>
+            {{/data}}
+        </tbody>
+    </table>
+</body>
+
+</html>
