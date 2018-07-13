@@ -43,32 +43,12 @@ psngr.bulkUploadPassenger = function bulkUploadPassenger(req, res, result, callb
                 break;
             } else if (result[i].country == "") {
                 _status = 0;
-                _message = "Empty Address In " + result[i].first_name;
+                _message = "Empty Country In " + result[i].first_name;
 
                 break;
             } else if (result[i].state == "") {
                 _status = 0;
                 _message = "Empty State In " + result[i].first_name;
-
-                break;
-            } else if (result[i].pickup_route == "") {
-                _status = 0;
-                _message = "Empty Pickup Route In " + result[i].first_name;
-
-                break;
-            } else if (result[i].pickup_stops == "") {
-                _status = 0;
-                _message = "Empty Pickup Stops In " + result[i].first_name;
-
-                break;
-            } else if (result[i].drop_route == "") {
-                _status = 0;
-                _message = "Empty Drop Route In " + result[i].first_name;
-
-                break;
-            } else if (result[i].drop_stops == "") {
-                _status = 0;
-                _message = "Empty Drop Stops In " + result[i].first_name;
 
                 break;
             } else {
