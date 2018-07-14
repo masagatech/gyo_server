@@ -14,7 +14,7 @@ schedule.getScheduleReports = function getScheduleReports(req, res, done) {
             download(req, res, {
                 data: data.rows,
                 params: req.query
-            }, { 'all': "schedule/schedule.html" }, schdapi.getScheduleReports);
+            }, { 'all': "schedule/summary.html" }, schdapi.getScheduleReports);
         } else {
             rs.resp(res, 200, data.rows);
         }
