@@ -42,11 +42,11 @@
         }
         
         li a p {
-            font-size: 15px;
+            font-size: 13px;
         }
         
         li span {
-            font-size: 14px;
+            font-size: 13px;
             font-weight: bold;
         }
     </style>
@@ -61,23 +61,23 @@
             {{#each items}}
             <a href="{{reporturl}}/getScheduleReports?flag=feesdetails&type=download&uid={{{uid}}}&utype={{{utype}}}&batchid={{batchid}}&format=html">
                 <p>
-                    <div>Batch :
-                        <span>{{batchname}}</span>
+                    <div>
+                        <span>Batch : {{batchname}}</span>
                     </div>
-                    <div>Pickup Time :
-                        <span>{{picktime}}</span>
+                    <div>
+                        <span>Pickup Time : {{picktime}}</span>
                     </div>
-                    <div>Drop Time :
-                        <span>{{droptime}}</span>
+                    <div>
+                        <span>Drop Time : {{droptime}}</span>
                     </div>
-                    <div>Passangers :
-                        <span>{{countstuds}}</span>
+                    <div>
+                        <span>Passangers : {{countstuds}}</span>
                     </div>
-                    <div>Collected :
-                        <span>{{feescoll}}</span>
+                    <div>
+                        <span>Collected : {{feescoll}}</span>
                     </div>
-                    <div>Pending :
-                        <span>{{feespend}}</span>
+                    <div>
+                        <span>Pending : {{feespend}}</span>
                     </div>
                 </p>
             </a>

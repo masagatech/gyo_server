@@ -27,7 +27,7 @@
             border: none;
         }
         
-        li a {
+        li {
             padding: 5px;
             text-decoration: none;
             color: #000;
@@ -41,12 +41,12 @@
             transition: font-size 0.3s ease, background-color 0.3s ease;
         }
         
-        li a p {
-            font-size: 15px;
+        li p {
+            font-size: 13px;
         }
         
         li span {
-            font-size: 14px;
+            font-size: 13px;
             font-weight: bold;
         }
         
@@ -72,17 +72,14 @@
             <h2>{{studentname}}</h2>
 
             <p>
-                <div>Father Name :
-                    <span>{{fathername}}</span>
+                <div>
+                    <span>Father Name : {{fathername}}</span>
                 </div>
-                <div>Mobile :
-                    <span>{{mobileno1}}</span>
+                <div>
+                    <span>Mobile : {{mobileno1}}</span>
                 </div>
-                <div>Collected :
-                    <span>{{feescoll}}</span>
-                </div>
-                <div>Pending :
-                    <span>{{feespend}}</span>
+                <div>
+                    <span>Collected : {{feescoll}}, Pending : <span>{{feespend}}</span>
                 </div>
             </p>
             <hr />
