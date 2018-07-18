@@ -49,42 +49,46 @@
             font-size: 14px;
             font-weight: bold;
         }
+        
+        .button {
+            background-color: #ccc;
+            text-decoration: none;
+            color: #ffffff;
+            padding: 5px;
+        }
     </style>
 </head>
 
 <body>
-    {{#group data by="schoolname"}}
+    <div align="right">
+        <a class="button" href="{{reporturl}}/getScheduleReports?flag=feessummary&type=download&uid={{{uid}}}&utype={{{utype}}}&batchid={{batchid}}&format=html">
+            Back To Summary
+        </a>
+    </div>
+
+    {{#data}}
     <ul>
         <li>
-            <h2>{{value}}</h2>
+            <h2>{{studentname}}</h2>
 
-            {{#each items}}
-            <a href="{{reporturl}}/getScheduleReports?flag=feesdetails&type=download&uid={{{uid}}}&utype={{{utype}}}&batchid={{batchid}}&format=html">
-                <p>
-                    <div>Batch :
-                        <span>{{batchname}}</span>
-                    </div>
-                    <div>Pickup Time :
-                        <span>{{picktime}}</span>
-                    </div>
-                    <div>Drop Time :
-                        <span>{{droptime}}</span>
-                    </div>
-                    <div>Passangers :
-                        <span>{{countstuds}}</span>
-                    </div>
-                    <div>Collected :
-                        <span>{{feescoll}}</span>
-                    </div>
-                    <div>Pending :
-                        <span>{{feespend}}</span>
-                    </div>
-                </p>
-            </a>
-            <hr /> {{/each}}
+            <p>
+                <div>Father Name :
+                    <span>{{fathername}}</span>
+                </div>
+                <div>Mobile :
+                    <span>{{mobileno1}}</span>
+                </div>
+                <div>Collected :
+                    <span>{{feescoll}}</span>
+                </div>
+                <div>Pending :
+                    <span>{{feespend}}</span>
+                </div>
+            </p>
+            <hr />
         </li>
     </ul>
-    {{/group}}
+    {{/data}}
 </body>
 
 </html>
