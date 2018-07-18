@@ -38,6 +38,7 @@ var mrktnorder = require("../appmodule/marketing/order.js");
 var mrktndb = require("../appmodule/marketing/dashboard.js");
 
 var medicine = require("../appmodule/schoolapi/medicine.js");
+var fuel = require("../appmodule/schoolapi/fuelentry.js");
 
 var multer = require('multer');
 
@@ -289,6 +290,13 @@ var appRouter = function(app) {
     app.post(globals.globvar.rootAPI + "/getMedicineDetails", medicine.getMedicineDetails);
 
     //##################################### Marketing Order ##################################################
+
+    //##################################### Fuel Entry #######################################################
+
+    app.post(globals.globvar.rootAPI + "/saveFuelEntry", fuel.saveFuelEntry);
+    app.post(globals.globvar.rootAPI + "/getFuelEntry", fuel.getFuelEntry);
+
+    //##################################### Fuel Entry #######################################################
 
 
     //##################################### VIVEK ############################################################

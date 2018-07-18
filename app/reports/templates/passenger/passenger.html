@@ -28,7 +28,7 @@
             background: #eeeeee;
             color: #000000;
             padding: 5px;
-            text-align: center;
+            text-align: left;
             vertical-align: top;
         }
         
@@ -47,9 +47,6 @@
     <table cellspacing="0" cellpadding="0">
         {{#psngrhead}}
         <tr>
-            <td width="100px">
-                <img src="{{{uploadurl}}}/{{enttlogo}}" width="100">
-            </td>
             <td align="center">
                 <h3 {{{font-13}}}>{{enttname}}</h3>
                 <h3 {{{font-10}}}>{{enttaddr}}</h3>
@@ -59,8 +56,8 @@
             </td>
         </tr>
         <tr>
-            <td colspan="2">
-                <h3 {{{font-10}}}><b>{{{psngrtype_head}}} Details </b> {{gender}} {{psngrname}}</h3>
+            <td>
+                <h3 {{{font-10}}}><b>{{{psngrtype_head}}} Details </b> {{psngrname}}</h3>
             </td>
             <td align="right">
                 <h3 {{{font-10}}}>Total {{{psngrtype_head}}} : {{{count_data}}}</h3>
@@ -82,7 +79,13 @@
                 </tr>
             </thead>
             <tbody>
-                {{{nodatafound}}} {{#psngrdata}}
+                {{{nodatafound}}} {{#group psngrdata by="enttname"}}
+                <tr>
+                    <th colspan="6">
+                        <b>School : </b> {{value}}
+                    </th>
+                </tr>
+                {{#each items}}
                 <tr>
                     <td align="center">
                         {{{psngrphoto_col this}}}
@@ -103,7 +106,7 @@
                         {{{contactinfo_col this}}}
                     </td>
                 </tr>
-                {{/psngrdata}}
+                {{/each}} {{/group}}
             </tbody>
         </table>
     </div>
