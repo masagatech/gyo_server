@@ -1,7 +1,9 @@
 var Handlebars = require('handlebars');
-var moment = require('moment');
 var reports = module.exports = {};
 var globals = require("gen").globals;
+
+var groupBy = require('handlebars-group-by');
+groupBy.register(Handlebars);
 
 reports.getScheduleReports = function getScheduleReports(data) {
     var _hndlbar = Handlebars;

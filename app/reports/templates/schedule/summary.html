@@ -53,11 +53,14 @@
 </head>
 
 <body>
-    {{#data}}
+    {{#group data by="schoolname"}}
+
     <ul>
         <li>
             <a>
-                <h2> {{schoolname}}</h2>
+                <h2>{{value}}</h2>
+
+                {{#each items}}
                 <p>
                     <div>Batch:
                         <span>{{batchname}}</span>
@@ -78,10 +81,11 @@
                         <span>0</span>
                     </div>
                 </p>
+                <hr /> {{/each}}
             </a>
         </li>
     </ul>
-    {{/data}}
+    {{/group}}
 </body>
 
 </html>
