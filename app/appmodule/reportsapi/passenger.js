@@ -21,7 +21,12 @@ rptpsngr.getPassengerReports = function getPassengerReports(req, res, done) {
             parentheadcolumn = [];
             psngrheadcolumn = [];
         } else if (req.query.flag == "profile") {
-            formname = "passenger/passenger.html";
+            if (req.query.psngrtype == "passenger") {
+                formname = "passenger/passenger.html";
+            } else {
+                formname = "passenger/staff.html";
+            }
+
             parentheadcolumn = [];
             psngrheadcolumn = [];
         } else if (req.query.flag == "gr_summary") {
