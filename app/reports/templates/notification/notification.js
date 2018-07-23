@@ -1,6 +1,7 @@
 var Handlebars = require('handlebars');
 var moment = require('moment');
 var reports = module.exports = {};
+var globals = require("gen").globals;
 
 reports.getNotificationReports = function getNotificationReports(data) {
     var _hndlbar = Handlebars;
@@ -51,6 +52,42 @@ reports.getNotificationReports = function getNotificationReports(data) {
                 return "show";
             }
         }
+    });
+
+    _hndlbar.registerHelper('showvtsdata', function(params) {
+        if (params.status == "nosend") {
+            return "hide";
+        } else {
+            return "show";
+        }
+    });
+
+    // Passenger Mobile No 1
+
+    _hndlbar.registerHelper('psngrphone1_col', function(row) {
+        var phinfo_col = "";
+
+        if (row.isprntmob1 == "Y") {
+            phinfo_col += row.mobileno1 + ' <img height="20" width="20" title="' + row.pregdate + '" src="' + globals.logourl + '/tick.png">';
+        } else {
+            phinfo_col += row.mobileno1;
+        }
+
+        return phinfo_col;
+    });
+
+    // Passenger Mobile No 2
+
+    _hndlbar.registerHelper('psngrphone2_col', function(row) {
+        var phinfo_col = "";
+
+        if (row.isprntmob2 == "Y") {
+            phinfo_col += row.mobileno2 + ' <img height="20" width="20" title="' + row.mregdate + '" src="' + globals.logourl + '/tick.png">';
+        } else {
+            phinfo_col += row.mobileno2;
+        }
+
+        return phinfo_col;
     });
 
     _hndlbar.registerHelper('emptydatamsg', function(params) {

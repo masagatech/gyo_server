@@ -23,6 +23,11 @@ notification.getNotification = function getNotification(req, res, done) {
                     data: data.rows,
                     params: req.query
                 }, { 'all': 'notification/system.html' }, rptntfapi.getNotificationReports);
+            } else if (req.query.type == "vts") {
+                download(req, res, {
+                    data: data.rows,
+                    params: req.query
+                }, { 'all': 'notification/vts.html' }, rptntfapi.getNotificationReports);
             }
         } else {
             rs.resp(res, 200, data.rows);

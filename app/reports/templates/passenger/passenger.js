@@ -165,7 +165,7 @@ reports.getPassengerReports = function getPassengerReports(data) {
         return psngrphoto_col;
     });
 
-    // Passenger Photo
+    // Passenger Phone
 
     _hndlbar.registerHelper('phoneinfo_col', function(row) {
         var phinfo_col = "";

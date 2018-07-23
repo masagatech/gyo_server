@@ -1,0 +1,133 @@
+<html>
+
+<head>
+    <meta charset="utf-8" />
+
+    <style>
+        table {
+            border-collapse: collapse;
+            font-size: 12px;
+            width: 100%;
+            border: 1px solid rgba(204, 204, 204, 0.35);
+        }
+        
+        table thead th {
+            background: #009688;
+            color: #ffffff;
+            padding: 5px;
+            text-align: left;
+            vertical-align: top;
+        }
+        
+        table tbody th {
+            background: #e6dede;
+            color: #000000;
+            padding: 5px;
+            text-align: left;
+            vertical-align: top;
+        }
+        
+        table td {
+            padding: 5px;
+            vertical-align: top;
+        }
+        
+        .show {
+            display: inline-table!important;
+        }
+        
+        .hide {
+            display: none!important;
+        }
+    </style>
+</head>
+
+<body>
+    <h4 align="center">
+        Notification - {{{formatDate params.frmdt "short"}}} To {{{formatDate params.todt "short"}}}
+    </h4>
+
+    <h4 align="center">{{{emptydatamsg}}}</h4>
+
+    {{#group data by="schoolname"}}
+
+    <h4><b>School : </b>{{value}} {{#each items}}</h4>
+
+    <table class="table table-bordered table-responsive" border="1" cellspacing="0" cellpadding="5">
+        <thead>
+            <tr>
+                <th colspan="4">
+                    <b>Batch : </b>{{batchname}} ({{batchtime}}), <b>Driver : </b>{{drivername}}, <b>Vehicle : </b>{{vehicleno}}
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th>
+                    Student
+                </th>
+                <th>
+                    Mobile No 1
+                </th>
+                <th>
+                    Mobile No 2
+                </th>
+                <th>
+                    Remark
+                </th>
+            </tr>
+            {{#ntfstuddata}}
+            <tr>
+                <td width="300px">
+                    {{studname}}
+                </td>
+                <td width="150px">
+                    {{{psngrphone1_col this}}}
+                </td>
+                <td width="150px">
+                    {{{psngrphone2_col this}}}
+                </td>
+                <td>
+                    {{statusdesc}}
+                </td>
+            </tr>
+            <tr class="{{{showvtsdata this}}}">
+                <td colspan="4">
+                    <table class="table table-bordered table-responsive" border="1" cellspacing="0" cellpadding="5">
+                        <thead>
+                            <tr>
+                                <th>
+                                    Date
+                                </th>
+                                <th>
+                                    Title
+                                </th>
+                                <th>
+                                    Message
+                                </th>
+                            </tr>
+                        </thead>
+                        {{#pddata}}
+                        <tbody>
+                            <tr>
+                                <td width="150px">
+                                    {{crdate}}
+                                </td>
+                                <td>
+                                    {{title}}
+                                </td>
+                                <td>
+                                    {{msg}}
+                                </td>
+                            </tr>
+                        </tbody>
+                        {{/pddata}}
+                    </table>
+                </td>
+            </tr> {{/ntfstuddata}}
+        </tbody>
+    </table>
+    {{/each}} {{/group}}
+</body>
+
+</html>
