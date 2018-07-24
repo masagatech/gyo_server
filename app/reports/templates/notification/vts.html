@@ -19,7 +19,7 @@
             vertical-align: top;
         }
         
-        table tbody th {
+        table thead td {
             background: #e6dede;
             color: #000000;
             padding: 5px;
@@ -27,7 +27,14 @@
             vertical-align: top;
         }
         
-        table td {
+        table tbody th {
+            background: #f5f3f3;
+            padding: 5px;
+            vertical-align: top;
+        }
+        
+        table tbody td {
+            background: #ffffff;
             padding: 5px;
             vertical-align: top;
         }
@@ -53,29 +60,33 @@
 
     <h4><b>School : </b>{{value}} {{#each items}}</h4>
 
-    <table class="table table-bordered table-responsive" border="1" cellspacing="0" cellpadding="5">
+    <table class="table table-bordered table-responsive" cellspacing="0" cellpadding="5">
         <thead>
             <tr>
-                <th colspan="4">
+                <th colspan="5">
+                    <b>Schedule : </b>{{typname}} <br />
                     <b>Batch : </b>{{batchname}} ({{batchtime}}), <b>Driver : </b>{{drivername}}, <b>Vehicle : </b>{{vehicleno}}
                 </th>
             </tr>
+            <tr>
+                <td>
+                    Student
+                </td>
+                <td>
+                    Mobile No 1
+                </td>
+                <td>
+                    Mobile No 2
+                </td>
+                <td>
+                    Message 1
+                </td>
+                <td>
+                    Message 2
+                </td>
+            </tr>
         </thead>
         <tbody>
-            <tr>
-                <th>
-                    Student
-                </th>
-                <th>
-                    Mobile No 1
-                </th>
-                <th>
-                    Mobile No 2
-                </th>
-                <th>
-                    Remark
-                </th>
-            </tr>
             {{#ntfstuddata}}
             <tr>
                 <td width="300px">
@@ -88,43 +99,15 @@
                     {{{psngrphone2_col this}}}
                 </td>
                 <td>
-                    {{statusdesc}}
+                    {{{splitMessage1 msg}}}
+                    <br /> {{{splitMessage1 crdate}}}
+                </td>
+                <td>
+                    {{{splitMessage2 msg}}}
+                    <br /> {{{splitMessage2 crdate}}}
                 </td>
             </tr>
-            <tr class="{{{showvtsdata this}}}">
-                <td colspan="4">
-                    <table class="table table-bordered table-responsive" border="1" cellspacing="0" cellpadding="5">
-                        <thead>
-                            <tr>
-                                <th>
-                                    Date
-                                </th>
-                                <th>
-                                    Title
-                                </th>
-                                <th>
-                                    Message
-                                </th>
-                            </tr>
-                        </thead>
-                        {{#pddata}}
-                        <tbody>
-                            <tr>
-                                <td width="150px">
-                                    {{crdate}}
-                                </td>
-                                <td>
-                                    {{title}}
-                                </td>
-                                <td>
-                                    {{msg}}
-                                </td>
-                            </tr>
-                        </tbody>
-                        {{/pddata}}
-                    </table>
-                </td>
-            </tr> {{/ntfstuddata}}
+            {{/ntfstuddata}}
         </tbody>
     </table>
     {{/each}} {{/group}}

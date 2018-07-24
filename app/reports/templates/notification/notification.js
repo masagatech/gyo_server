@@ -9,7 +9,15 @@ reports.getNotificationReports = function getNotificationReports(data) {
     var headerdt = data.data1;
     var dparams = data.params;
 
-    var col_total = [];
+    _hndlbar.registerHelper('splitMessage1', function(head) {
+        var t = head.split(";");
+        return t[0];
+    });
+
+    _hndlbar.registerHelper('splitMessage2', function(head) {
+        var t = head.split(";");
+        return t[1];
+    });
 
     var DateFormats = {
         short: "DD/MMM/YYYY",

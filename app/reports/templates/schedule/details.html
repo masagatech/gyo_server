@@ -4,57 +4,32 @@
     <meta charset="utf-8" />
 
     <style>
-        h2 {
-            font: 200 25px/1.5 Helvetica, Verdana, sans-serif;
+        h4 {
             font-weight: bold;
-            margin: 0;
+            margin: 5px 0;
             padding: 0;
             color: rgb(0, 144, 228)
         }
         
-        ul {
-            list-style-type: none;
-            margin: 0;
-            padding: 0;
+        table {
+            border-collapse: collapse;
+            font-size: 12px;
+            width: 100%;
+            border: 1px solid rgba(204, 204, 204, 0.35);
         }
         
-        li {
-            font: 200 20px/1.5 Helvetica, Verdana, sans-serif;
-            border-bottom: 1px solid #ccc;
-        }
-        
-        li:last-child {
-            border: none;
-        }
-        
-        li {
-            padding: 5px;
-            text-decoration: none;
-            color: #000;
-            display: block;
-            background: #f6f6f6;
-            border-radius: 5px;
-            -webkit-transition: font-size 0.3s ease, background-color 0.3s ease;
-            -moz-transition: font-size 0.3s ease, background-color 0.3s ease;
-            -o-transition: font-size 0.3s ease, background-color 0.3s ease;
-            -ms-transition: font-size 0.3s ease, background-color 0.3s ease;
-            transition: font-size 0.3s ease, background-color 0.3s ease;
-        }
-        
-        li p {
-            font-size: 13px;
-        }
-        
-        li span {
-            font-size: 13px;
-            font-weight: bold;
-        }
-        
-        .button {
-            background-color: #ccc;
-            text-decoration: none;
+        table thead th {
+            background: #009688;
             color: #ffffff;
             padding: 5px;
+            text-align: left;
+            vertical-align: top;
+        }
+        
+        table tbody td {
+            background: #ffffff;
+            padding: 5px;
+            vertical-align: top;
         }
     </style>
 </head>
@@ -66,26 +41,42 @@
         </a>
     </div>
 
-    {{#data}}
-    <ul>
-        <li>
-            <h2>{{studentname}}</h2>
+    {{#group data by="schoolname"}}
+    <h4>{{value}}</h4>
 
-            <p>
-                <div>
-                    <span>Father Name : {{fathername}}</span>
-                </div>
-                <div>
-                    <span>Mobile : {{mobileno1}}</span>
-                </div>
-                <div>
-                    <span>Collected : {{feescoll}}, Pending : <span>{{feespend}}</span>
-                </div>
-            </p>
-            <hr />
-        </li>
-    </ul>
-    {{/data}}
+    {{#each items}}
+    <h4>{{studentname}}</h4>
+
+    <table class="table table-bordered table-responsive" cellspacing="0" cellpadding="5">
+        <thead>
+            <tr>
+                <th width="50%">Father</th>
+                <th>Mother</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    <div><b>Name : </b>{{fathername}}</div>
+                    <div><b>Mobile : </b>
+                        <a href="tel:{{mobileno1}}">{{mobileno1}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div><b>Name : </b>{{mothername}}</div>
+                    <div><b>Mobile : </b>
+                        <a href="tel:{{mobileno2}}">{{mobileno2}}</a>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <th colspan="2">
+                    <b>Collected : </b>{{feescoll}}, <b>Pending : </b>{{feespend}}
+                </th>
+            </tr>
+        </tbody>
+    </table>
+    <hr /> {{/each}} {{/group}}
 </body>
 
 </html>
