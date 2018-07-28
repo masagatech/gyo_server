@@ -149,6 +149,13 @@ var appRouter = function(app) {
 
     //##################################### Passenger #######################################################
 
+    //##################################### Student Location ################################################
+
+    app.post(globals.globvar.rootAPI + "/saveStudentLocation", psngr.saveStudentLocation);
+    app.post(globals.globvar.rootAPI + "/getStudentLocation", psngr.getStudentLocation);
+
+    //##################################### Student Location ################################################
+
     //##################################### Holiday #########################################################
 
     app.post(globals.globvar.rootAPI + "/saveHoliday", holiday.saveHoliday);
