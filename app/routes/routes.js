@@ -75,6 +75,8 @@ var appRouter = function(app) {
     app.post(globals.globvar.rootAPI + "/getLogout", login.getLogout);
     app.post(globals.globvar.rootAPI + "/savePassword", login.savePassword);
 
+    app.post(globals.globvar.rootAPI + "/getAdminLogin", login.getAdminLogin);
+
     //##################################### Login ###########################################################
 
     //##################################### File Upload #####################################################

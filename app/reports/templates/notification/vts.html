@@ -12,7 +12,7 @@
         }
         
         table thead th {
-            background: #009688;
+            /* background: #009688; */
             color: #ffffff;
             padding: 5px;
             text-align: left;
@@ -46,6 +46,16 @@
         .hide {
             display: none!important;
         }
+        
+        .Pickup {
+            background: #009688!important;
+            color: #FFFFFF!important;
+        }
+        
+        .Drop {
+            background: #dab3bb!important;
+            color: #000000!important;
+        }
     </style>
 </head>
 
@@ -63,10 +73,10 @@
     <table class="table table-bordered table-responsive" cellspacing="0" cellpadding="5">
         <thead>
             <tr>
-                <th colspan="5">
+                <td colspan="5" class="{{typname}}">
                     <b>Schedule : </b>{{typname}} <br />
                     <b>Batch : </b>{{batchname}} ({{batchtime}}), <b>Driver : </b>{{drivername}}, <b>Vehicle : </b>{{vehicleno}}
-                </th>
+                </td>
             </tr>
             <tr>
                 <td>
