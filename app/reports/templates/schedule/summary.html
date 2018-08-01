@@ -9,7 +9,7 @@
             font-weight: bold;
             margin: 0;
             padding: 0;
-            color: rgb(0, 144, 228)
+            color: rgb(0, 144, 228);
         }
         
         ul {
@@ -59,7 +59,7 @@
             <h2>{{value}}</h2>
 
             {{#each items}}
-            <a href="{{reporturl}}/getScheduleReports?flag=feesdetails&type=download&uid={{{uid}}}&utype={{{utype}}}&batchid={{batchid}}&format=html">
+            <a href="{{reporturl}}/getScheduleReports?flag=feesdetails&type=download&uid={{{uid}}}&utype={{{utype}}}&batchid={{batchid}}&enttid={{schoolid}}&format=html">
                 <p>
                     <div>
                         <span>Batch : {{batchname}}</span>
