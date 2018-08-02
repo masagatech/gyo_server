@@ -30,6 +30,32 @@ reports.getScheduleReports = function getScheduleReports(data) {
         }
     });
 
+    // Fees Summary
+
+    _hndlbar.registerHelper('feessummary', function(row) {
+        if (row.isfeestrctr == true) {
+            var _strfees = "";
+
+            _strfees += "<div><span>Collected : " + row.feescoll + "</span></div>";
+            _strfees += "<div><span>Pending : " + row.feespend + "</span></div>";
+
+            return _strfees;
+        } else {
+            return "Fees Structure Not Created !!!!";
+        }
+    });
+
+    // Fees Details
+
+    _hndlbar.registerHelper('feesdetails', function(row) {
+        if (row.isfeestrctr == true) {
+            var _strfees = "<b>Collected : </b>" + row.feescoll + ", <b>Pending : </b>" + row.feespend;
+            return _strfees;
+        } else {
+            return "";
+        }
+    });
+
     // Upload URL
 
     _hndlbar.registerHelper('reporturl', function(row) {
