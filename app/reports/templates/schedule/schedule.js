@@ -7,7 +7,7 @@ groupBy.register(Handlebars);
 
 reports.getScheduleReports = function getScheduleReports(data) {
     var _hndlbar = Handlebars;
-    var feesdt = data.data;
+    var scheduledt = data.data;
     var params = data.params;
 
     // User ID Params
@@ -23,10 +23,10 @@ reports.getScheduleReports = function getScheduleReports(data) {
     });
 
     _hndlbar.registerHelper('nodatafound', function(row) {
-        if (feesdt.length == 0) {
-            return "show";
+        if (scheduledt.length == 0) {
+            return "Schedule Not Created !!!! <br />Please Contact GOYO";
         } else {
-            return "hide";
+            return "";
         }
     });
 

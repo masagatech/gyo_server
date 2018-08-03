@@ -107,7 +107,6 @@ var appRouter = function(app) {
     app.get(globals.globvar.rootAPI + "/getAutoData", common.getAutoData);
     app.post(globals.globvar.rootAPI + "/getDropDownData", common.getDropDownData);
 
-    app.post(globals.globvar.rootAPI + "/getDashboard", common.getDashboard);
     app.post(globals.globvar.rootAPI + "/getMOM", common.getMOM);
     app.post(globals.globvar.rootAPI + "/saveMOM", common.saveMOM);
 
@@ -278,21 +277,6 @@ var appRouter = function(app) {
 
     //##################################### Reports ##########################################################
 
-    //##################################### Marketing Order ##################################################
-
-    app.post(globals.globvar.marketapi + "/saveOrderInfo", mrktnorder.saveOrderInfo);
-    app.post(globals.globvar.marketapi + "/updateOrderInfo", mrktnorder.updateOrderInfo);
-    app.post(globals.globvar.marketapi + "/getOrderDetail", mrktnorder.getOrderDetail);
-    app.post(globals.globvar.marketapi + "/getOrder", mrktnorder.getOrder);
-
-    //##################################### Marketing Order ##################################################
-
-    //##################################### Marketing Dashboard ##############################################
-
-    app.post(globals.globvar.rootAPI + "/getMarketingDB", mrktndb.getMarketingDB);
-
-    //##################################### Marketing Dashboard ##############################################
-
     //##################################### Medicine #########################################################
 
     app.post(globals.globvar.rootAPI + "/saveMedicineInfo", upload.any(), medicine.saveMedicineInfo);
@@ -317,6 +301,7 @@ var appRouter = function(app) {
     //##################################### Dashboard ########################################################
 
     app.post(globals.globvar.rootAPI + "/getDashboard", dashboard.getDashboard);
+    app.post(globals.globvar.rootAPI + "/getHelpDesk", dashboard.getHelpDesk);
 
     //##################################### Dashboard ########################################################
 
@@ -327,6 +312,22 @@ var appRouter = function(app) {
     app.post(globals.globvar.rootAPI + "/getDriverInfoDetails", driverinfo.getDriverInfoDetails);
 
     //##################################### Driver Info ######################################################
+
+    //##################################### Marketing Order ##################################################
+
+    app.post(globals.globvar.marketapi + "/saveOrderInfo", mrktnorder.saveOrderInfo);
+    app.post(globals.globvar.marketapi + "/updateOrderInfo", mrktnorder.updateOrderInfo);
+    app.post(globals.globvar.marketapi + "/getOrderDetail", mrktnorder.getOrderDetail);
+    app.post(globals.globvar.marketapi + "/getOrder", mrktnorder.getOrder);
+
+    //##################################### Marketing Order ##################################################
+
+    //##################################### Marketing Dashboard ##############################################
+
+    app.post(globals.globvar.rootAPI + "/getMarketingDB", mrktndb.getMarketingDB);
+    app.post(globals.globvar.rootAPI + "/getMarketingDashboard", mrktndb.getMarketingDashboard);
+
+    //##################################### Marketing Dashboard ##############################################
 
     //##################################### File Uploads #####################################################
 
