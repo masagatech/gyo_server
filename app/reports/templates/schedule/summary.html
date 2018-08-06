@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
 
     <style>
-        h2.schoolname {
+        .trip h2.schoolname {
             text-align: center;
             width: 100%;
             font: 100 20px/1.5 Helvetica, Verdana, sans-serif;
@@ -14,24 +14,23 @@
             color: rgb(228, 156, 0);
             margin-bottom: 15px;
         }
-
-        ul {
+        
+        .trip ul {
             list-style-type: none;
             margin: 0;
             padding: 0;
         }
-
-        li {
+        
+        .trip li {
             font: 200 20px/1.5 Helvetica, Verdana, sans-serif;
             border-bottom: 1px solid #ccc;
-
         }
-
-        li:last-child {
+        
+        .trip li:last-child {
             border: none;
         }
-
-        li a {
+        
+        .trip li a {
             position: relative;
             padding: 5px;
             text-decoration: none;
@@ -47,8 +46,7 @@
             margin-bottom: 10px;
             box-shadow: 0px 2px 8px 1px #ccc;
         }
-
-
+        
         @-webkit-keyframes pulse {
             0% {
                 -webkit-box-shadow: 0 0 0 0 rgba(33, 185, 33, .9)
@@ -60,7 +58,7 @@
                 -webkit-box-shadow: 0 0 0 0 rgba(33, 185, 33, 0)
             }
         }
-
+        
         @keyframes pulse {
             0% {
                 -moz-box-shadow: 0 0 0 0 rgba(33, 185, 33, .9);
@@ -75,101 +73,101 @@
                 box-shadow: 0 0 0 0 rgba(33, 185, 33, 0)
             }
         }
-
-        li a p {
+        
+        .trip li a p {
             font-size: 13px;
         }
-
-        li span {
+        
+        .trip li span {
             font-size: 13px;
             font-weight: bold;
         }
-
-        .text_p {
+        
+        .trip .text_p {
             color: rgb(1, 141, 36);
         }
-
-
-        .text_d {
+        
+        .trip .text_d {
             color: rgb(231, 28, 28);
         }
-
-        .p {
+        
+        .trip .p {
             border: 1px solid rgb(1, 141, 36);
             border-left: 10px solid rgb(1, 141, 36);
         }
-
-        .d {
+        
+        .trip .d {
             border: 1px solid rgb(231, 28, 28);
             border-left: 10px solid rgb(231, 28, 28);
         }
-
-        .batchnm {
+        
+        .trip .batchnm {
             font-size: 16px;
-
         }
-
-        .small {
+        
+        .trip .small {
             font-size: 10px;
             color: red;
             position: absolute;
             right: 5px;
             bottom: 5px;
         }
-
-        .othertext {
+        
+        .trip .othertext {
             font-weight: normal;
         }
-
-        .passengers {
+        
+        .trip .passengers {
             margin-left: 10px;
         }
-
-        .active {
+        
+        .trip .active {
             animation: pulse 2s infinite;
         }
-
-        .disabled {
+        
+        .trip .disabled {
             animation: none;
             border: 1px solid #ccc;
             border-left: 10px solid #ccc;
             color: #6f6f6f !important;
         }
-
-        .disabled span {
+        
+        .trip .disabled span {
             color: #6f6f6f;
         }
     </style>
 </head>
 
 <body>
-    <h2 align="center">{{{nodatafound}}}</h2>
+    <div class="trip">
+        <h2 align="center">{{{nodatafound}}}</h2>
 
-    {{#group data by="schoolname"}}
-    <ul>
-        <li>
-            <h2 class="schoolname">{{value}}</h2>
+        {{#group data by="schoolname"}}
+        <ul>
+            <li>
+                <h2 class="schoolname">{{value}}</h2>
 
-            {{#each items}}
-            <a class="{{typ}} {{act}} {{dis}}" href="{{reporturl}}/getScheduleReports?flag=feesdetails&type=download&uid={{{uid}}}&utype={{{utype}}}&batchid={{batchid}}&pdtype={{typ}}&enttid={{schoolid}}&format=html">
-                <div>
+                {{#each items}}
+                <a class="{{typ}} {{act}} {{dis}}" href="{{reporturl}}/getScheduleReports?flag=feesdetails&type=download&uid={{{uid}}}&utype={{{utype}}}&batchid={{batchid}}&pdtype={{typ}}&enttid={{schoolid}}&format=html">
                     <div>
-                        <span class="batchnm">{{batchname}}</span>
+                        <div>
+                            <span class="batchnm">{{batchname}}</span>
+                        </div>
+                        <div>
+                            <span class="othertext">{{frmtm}} - {{totm}}</span>
+                        </div>
+                        <div>
+                            <span class="text_{{typ}} othertext">{{typname}}</span>
+                            <span class="passengers othertext">Passangers : {{countstuds}}</span>
+                        </div>
+                        <span class="small othertext">{{{feessummary this}}}</span>
                     </div>
-                    <div>
-                        <span class="othertext">{{frmtm}} - {{totm}}</span>
-                    </div>
-                    <div>
-                        <span style="float: left;" class="text_{{typ}} othertext">{{typname}}</span>
-                        <span class="passengers othertext">Passangers : {{countstuds}}</span>
-                    </div>
-                    <span class="small othertext">{{{feessummary this}}}</span>
-                </div>
-            </a>
-            {{/each}}
-        </li>
-    </ul>
-    {{/group}}
+                </a>
+                {{/each}}
+            </li>
+        </ul>
+        {{/group}}
+    </div>
 </body>
 
 </html>
