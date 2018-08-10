@@ -53,8 +53,12 @@ rptpsngr.getPassengerReports = function getPassengerReports(req, res, done) {
             formname = "passenger/birthday.html";
             parentheadcolumn = [];
             psngrheadcolumn = [];
-        } else {
+        } else if (req.query.flag == "left") {
             formname = "passenger/leftpsngr.html";
+            parentheadcolumn = [];
+            psngrheadcolumn = [];
+        } else {
+            formname = "passenger/parents.html";
             parentheadcolumn = [];
             psngrheadcolumn = [];
         }

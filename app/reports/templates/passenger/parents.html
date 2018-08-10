@@ -1,0 +1,117 @@
+<html>
+
+<head>
+    <meta charset="utf-8" />
+
+    <style>
+        .table-overflow {
+            width: 100%;
+            overflow: auto;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            border: 1px solid #114ca5 !important;
+            margin-bottom: 10px;
+        }
+
+        table thead th {
+            background: #009688;
+            color: #ffffff;
+            padding: 3px;
+            text-align: center;
+            vertical-align: top;
+        }
+
+        table tbody th {
+            background: #eeeeee;
+            color: #000000;
+            padding: 5px;
+            text-align: left;
+            vertical-align: top;
+        }
+
+        table tbody td {
+            padding: 3px;
+            vertical-align: top;
+        }
+
+        h3 {
+            margin: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <table cellspacing="0" cellpadding="0">
+        {{#psngrhead}}
+        <tr>
+            <td align="center">
+                <h3 {{{font-13}}}>{{enttname}}</h3>
+                <h3 {{{font-10}}}>{{enttaddr}}</h3>
+            </td>
+            <td width="200px" align="right">
+                <h3 {{{font-10}}}>Report Date : {{rptdate}}</h3>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <h3 {{{font-10}}}>
+                    <b>Parent Details </b> ({{prnttype}})
+                </h3>
+            </td>
+            <td align="right">
+                <h3 {{{font-10}}}>Total Student : {{{count_data}}}</h3>
+            </td>
+        </tr>
+        {{/psngrhead}}
+    </table>
+
+    <div class="table-overflow">
+        <table border="1" class="table table-bordered table-responsive" cellspacing="0" cellpadding="5">
+            <thead>
+                <tr>
+                    <th width="50px" {{{font-07}}}>Sr.</th>
+                    <th width="300px" {{{font-07}}}>Student Name</th>
+                    <th width="200px" {{{font-07}}}>Parents</th>
+                    <th width="150px" {{{font-07}}}>Relation</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{{nodatafound}}} {{#group psngrdata by="schoolname"}}
+                <tr>
+                    <th></th>
+                    <th colspan="3">
+                        <b>School : </b> {{value}}
+                    </th>
+                </tr>
+                {{#group items by="prntmobile"}}
+                <tr>
+                    <td></td>
+                    <td colspan="3">
+                        <b>Mobile No : </b> {{value}}
+                    </td>
+                </tr>
+                {{#each items}}
+                <tr>
+                    <td align="center">
+                        {{rowid}}
+                    </td>
+                    <td {{{font-07}}}>
+                        {{studentname}}
+                    </td>
+                    <td {{{font-07}}}>
+                        {{prntname}}
+                    </td>
+                    <td {{{font-07}}}>
+                        {{prnttype}}
+                    </td>
+                </tr>
+                {{/each}} {{/group}} {{/group}}
+            </tbody>
+        </table>
+    </div>
+</body>
+
+</html>
