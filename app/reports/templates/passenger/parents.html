@@ -73,25 +73,19 @@
             <thead>
                 <tr>
                     <th width="50px" {{{font-07}}}>Sr.</th>
-                    <th width="300px" {{{font-07}}}>Student Name</th>
+                    <th width="200px" {{{font-07}}}>Student Name</th>
+                    <th width="200px" {{{font-07}}}>School Name</th>
                     <th width="200px" {{{font-07}}}>Parents</th>
                     <th width="150px" {{{font-07}}}>Relation</th>
                 </tr>
             </thead>
             <tbody>
-                {{{nodatafound}}} {{#group psngrdata by="schoolname"}}
+                {{{nodatafound}}} {{#group psngrdata by="prntmobile"}}
                 <tr>
                     <th></th>
-                    <th colspan="3">
-                        <b>School : </b> {{value}}
-                    </th>
-                </tr>
-                {{#group items by="prntmobile"}}
-                <tr>
-                    <td></td>
-                    <td colspan="3">
+                    <th colspan="4">
                         <b>Mobile No : </b> {{value}}
-                    </td>
+                    </th>
                 </tr>
                 {{#each items}}
                 <tr>
@@ -102,13 +96,16 @@
                         {{studentname}}
                     </td>
                     <td {{{font-07}}}>
+                        {{schoolname}}
+                    </td>
+                    <td {{{font-07}}}>
                         {{prntname}}
                     </td>
                     <td {{{font-07}}}>
                         {{prnttype}}
                     </td>
                 </tr>
-                {{/each}} {{/group}} {{/group}}
+                {{/each}} {{/group}}
             </tbody>
         </table>
     </div>
