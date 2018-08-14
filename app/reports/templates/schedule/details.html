@@ -14,7 +14,7 @@
             color: rgb(228, 156, 0);
             margin-bottom: 15px;
         }
-
+        
         .backtosmry {
             position: fixed;
             top: 0px;
@@ -26,7 +26,7 @@
             margin: 0px;
             z-index: 1111;
         }
-
+        
         .backtosmry a.button {
             color: #fff;
             font-size: 21px;
@@ -36,18 +36,18 @@
             line-height: 48px;
             text-decoration: none;
         }
-
+        
         a.phone {
             color: #000000;
             text-decoration: none;
         }
-
+        
         .student span {
             display: block;
             font-size: 13px;
             margin-bottom: 2px;
         }
-
+        
         .student {
             position: relative;
             padding: 5px;
@@ -64,25 +64,25 @@
             margin-bottom: 10px;
             border: 1px solid #009dea;
         }
-
+        
         .main {
             margin-top: 55px;
         }
-
+        
         h4 {
             font-weight: bold;
             margin: 5px 0;
             padding: 0;
             color: rgb(0, 144, 228)
         }
-
+        
         table {
             border-collapse: collapse;
             font-size: 12px;
             width: 100%;
             border: 1px solid rgba(204, 204, 204, 0.35);
         }
-
+        
         table thead th {
             background: #009688;
             color: #ffffff;
@@ -90,41 +90,48 @@
             text-align: left;
             vertical-align: top;
         }
-
+        
         table tbody td {
             background: #ffffff;
             padding: 5px;
             vertical-align: top;
         }
+        
+        .iconx {
+            position: absolute;
+        }
     </style>
 </head>
 
 <body>
-    <div class="backtosmry" >
+    <div class="backtosmry">
         <a class="button" href="{{reporturl}}/getScheduleReports?flag=feessummary&type=download&uid={{{uid}}}&utype={{{utype}}}&batchid={{batchid}}&format=html">
-           << Back To Summary
-        </a>
+            << Back To Summary </a>
     </div>
     <div class="main">
         {{#group data by="schoolname"}}
+
         <h2 class="schoolname">{{value}}</h2>
 
         {{#each items}}
 
-
         <div class="student">
             <h4>{{studentname}}</h4>
+
             <span>{{fathername}}
-                <a class="phone" href="tel:{{mobileno1}}">{{mobileno1}}</a>
+                <a class="phone" href="tel:{{mobileno1}}">{{mobileno1}}
+                    {{#if isprntmob1}}<img class="iconx" src="http://school.goyo.in:8080/assets/img/phone.png" />{{/if}}
+                </a>
             </span>
+
             <span>{{mothername}}
-                <a class="phone" href="tel:{{mobileno2}}">{{mobileno2}}</a>
+                <a class="phone" href="tel:{{mobileno2}}">{{mobileno2}}
+                    {{#if isprntmob2}}<img class="iconx" src="http://school.goyo.in:8080/assets/img/phone.png" />{{/if}}
+                </a>
             </span>
+
             <span> {{{feesdetails this}}}</span>
         </div>
-
-
-
 
         {{/each}} {{/group}}
     </div>

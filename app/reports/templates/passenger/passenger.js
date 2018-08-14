@@ -145,6 +145,12 @@ reports.getPassengerReports = function getPassengerReports(data) {
         return globals.uploadurl;
     });
 
+    // Logo URL
+
+    _hndlbar.registerHelper('logourl', function(row) {
+        return globals.logourl;
+    });
+
     // Passenger Photo
 
     _hndlbar.registerHelper('psngrphoto_col', function(row) {
@@ -171,13 +177,13 @@ reports.getPassengerReports = function getPassengerReports(data) {
         var phinfo_col = "";
 
         if (row.isprntmob1 == true) {
-            phinfo_col += row.mobileno1 + ' <img height="20" width="20" title="' + row.pregdate + '" src="' + globals.logourl + '/tick.png">';
+            phinfo_col += row.mobileno1 + ' <img height="20" width="20" title="' + row.pregdate + '" src="' + globals.logourl + '/right.png">';
         } else {
             phinfo_col += row.mobileno1;
         }
 
         if (row.isprntmob2 == true) {
-            phinfo_col += "<br />" + row.mobileno2 + ' <img height="20" width="20" title="' + row.mregdate + '" src="' + globals.logourl + '/tick.png">';
+            phinfo_col += "<br />" + row.mobileno2 + ' <img height="20" width="20" title="' + row.mregdate + '" src="' + globals.logourl + '/right.png">';
         } else {
             phinfo_col += "<br />" + row.mobileno2;
         }

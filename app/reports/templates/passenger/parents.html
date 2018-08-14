@@ -8,14 +8,14 @@
             width: 100%;
             overflow: auto;
         }
-
+        
         table {
             border-collapse: collapse;
             width: 100%;
             border: 1px solid #114ca5 !important;
             margin-bottom: 10px;
         }
-
+        
         table thead th {
             background: #009688;
             color: #ffffff;
@@ -23,7 +23,7 @@
             text-align: center;
             vertical-align: top;
         }
-
+        
         table tbody th {
             background: #eeeeee;
             color: #000000;
@@ -31,12 +31,12 @@
             text-align: left;
             vertical-align: top;
         }
-
+        
         table tbody td {
             padding: 3px;
             vertical-align: top;
         }
-
+        
         h3 {
             margin: 5px;
         }
@@ -74,26 +74,14 @@
                 <tr>
                     <th width="50px" {{{font-07}}}>Sr.</th>
                     <th width="300px" {{{font-07}}}>Student Name</th>
-                    <th width="200px" {{{font-07}}}>Parents</th>
+                    <th width="150px" {{{font-07}}}>Parent Mobile</th>
+                    <th width="200px" {{{font-07}}}>Parent Name</th>
                     <th width="150px" {{{font-07}}}>Relation</th>
+                    <th width="100px" {{{font-07}}}>Is Register</th>
                 </tr>
             </thead>
             <tbody>
-                {{{nodatafound}}} {{#group psngrdata by="schoolname"}}
-                <tr>
-                    <th></th>
-                    <th colspan="3">
-                        <b>School : </b> {{value}}
-                    </th>
-                </tr>
-                {{#group items by="prntmobile"}}
-                <tr>
-                    <td></td>
-                    <td colspan="3">
-                        <b>Mobile No : </b> {{value}}
-                    </td>
-                </tr>
-                {{#each items}}
+                {{{nodatafound}}} {{#psngrdata}}
                 <tr>
                     <td align="center">
                         {{rowid}}
@@ -102,13 +90,19 @@
                         {{studentname}}
                     </td>
                     <td {{{font-07}}}>
+                        {{prntmobile}}
+                    </td>
+                    <td {{{font-07}}}>
                         {{prntname}}
                     </td>
                     <td {{{font-07}}}>
                         {{prnttype}}
                     </td>
+                    <td {{{font-07}}}>
+                        <img height="20" width="20" src="{{logourl}}/{{isreg}}.png" />
+                    </td>
                 </tr>
-                {{/each}} {{/group}} {{/group}}
+                {{/psngrdata}}
             </tbody>
         </table>
     </div>

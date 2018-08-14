@@ -76,7 +76,7 @@ reports.getNotificationReports = function getNotificationReports(data) {
         var phinfo_col = "";
 
         if (row.isprntmob1 == "Y") {
-            phinfo_col += row.mobileno1 + ' <img height="20" width="20" title="' + row.pregdate + '" src="' + globals.logourl + '/tick.png">';
+            phinfo_col += row.mobileno1 + ' <img height="20" width="20" title="' + row.pregdate + '" src="' + globals.logourl + '/right.png">';
         } else {
             phinfo_col += row.mobileno1;
         }
@@ -90,7 +90,7 @@ reports.getNotificationReports = function getNotificationReports(data) {
         var phinfo_col = "";
 
         if (row.isprntmob2 == "Y") {
-            phinfo_col += row.mobileno2 + ' <img height="20" width="20" title="' + row.mregdate + '" src="' + globals.logourl + '/tick.png">';
+            phinfo_col += row.mobileno2 + ' <img height="20" width="20" title="' + row.mregdate + '" src="' + globals.logourl + '/right.png">';
         } else {
             phinfo_col += row.mobileno2;
         }
