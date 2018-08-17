@@ -220,7 +220,7 @@ var appRouter = function(app) {
     //##################################### User #############################################################
 
     app.post(globals.globvar.rootAPI + "/saveUserInfo", user.saveUserInfo);
-    app.post(globals.globvar.rootAPI + "/updateUserInfo", user.updateUserInfo);
+    app.post(globals.globvar.rootAPI + "/changePassword", user.changePassword);
     app.post(globals.globvar.rootAPI + "/getUserDetails", user.getUserDetails);
 
     //##################################### User #############################################################
