@@ -26,9 +26,9 @@ reports.getScheduleReports = function getScheduleReports(data) {
 
     _hndlbar.registerHelper('worktime', function(row) {
         if (row.trptm == "notrip") {
-            return "<strong>No Trip</strong> <br />" + row.wkdays;
+            return "<strong>Today's No Trip</strong> <hr />" + row.wkdays;
         } else {
-            return row.trptm + "<br />" + row.wkdays;
+            return row.trptm + " (" + row.wkname + ")<hr />" + row.wkdays;
         }
     });
 
