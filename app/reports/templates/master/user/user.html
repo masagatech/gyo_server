@@ -40,6 +40,10 @@
             max-height: 135px;
             overflow: auto;
         }
+        
+        .bg-green {
+            background-color: #4CAF50;
+        }
     </style>
 </head>
 
@@ -47,7 +51,7 @@
     <table border="1" class="table table-bordered table-responsive" cellspacing="0" cellpadding="5">
         <thead>
             <tr>
-                <th width="50px"></th>
+                <th width="30px"></th>
                 <th width="200px">User Name</th>
                 <th width="150px">Mapped Vehicles</th>
                 <th width="300px">Mapped Entity</th>
@@ -70,17 +74,21 @@
                     {{rowid}}
                 </td>
                 <td>
-                    {{ucode}} : {{fullname}} <br /> {{drow.utypename}}
+                    {{ucode}} : {{fullname}} <br /> {{utypename}}
                 </td>
                 <td>
-                    {{#vehicledt}}
-                    <div class="overflow-135"><b>{{@index}}.</b> {{vehname}}</div>
-                    {{/vehicledt}}
+                    <div class="overflow-135">
+                        {{#vehicledt}}
+                        <div><b>{{@index}}.</b> {{vehname}}</div>
+                        {{/vehicledt}}
+                    </div>
                 </td>
                 <td>
-                    {{#schooldt}}
-                    <div class="overflow-135"><b>{{@index}}.</b> {{schname}}</div>
-                    {{/schooldt}}
+                    <div class="overflow-135">
+                        {{#schooldt}}
+                        <div class="{{{findownschool this}}}"><b>{{@index}}.</b> {{schname}}</div>
+                        {{/schooldt}}
+                    </div>
                 </td>
                 <td>
                     {{mobileno1}} <br /> {{mobileno2}}

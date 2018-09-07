@@ -43,6 +43,14 @@ reports.getUserMasterReports = function getUserMasterReports(data) {
         }
     });
 
+    _hndlbar.registerHelper('findownschool', function(row) {
+        if (row.isowner == "true") {
+            return "bg-green";
+        } else {
+            return "";
+        }
+    });
+
     // No Data Found
 
     _hndlbar.registerHelper('nodatafound', function(row) {
