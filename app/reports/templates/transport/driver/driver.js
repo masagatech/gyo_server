@@ -53,6 +53,14 @@ reports.getDriverTransportReports = function getDriverTransportReports(data) {
         }
     });
 
+    // No Vehicle Found
+
+    _hndlbar.registerHelper('veh_hr', function(row) {
+        if (row.vehdata.length != 0) {
+            return '<hr />';
+        }
+    });
+
     _hndlbar.registerHelper('addressinfo_col', function(row) {
         var addrinfo_col = "";
 
