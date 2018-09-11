@@ -112,6 +112,8 @@ var appRouter = function(app) {
 
     app.get(globals.globvar.rootAPI + "/getEmailSMS_Setting", common.getEmailSMS_Setting);
 
+    app.post(globals.globvar.rootAPI + "/saveOwnershipTransfer", common.saveOwnershipTransfer);
+
     //##################################### Common ##########################################################
 
     //##################################### Qualification ###################################################

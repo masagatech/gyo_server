@@ -4,6 +4,7 @@ var log = require("../appmodule/reportsapi/log.js");
 var reports = require("../appmodule/reportsapi/reports.js");
 var passenger = require("../appmodule/reportsapi/passenger.js");
 var driver = require("../appmodule/reportsapi/driver.js");
+var vehicle = require("../appmodule/reportsapi/vehicle.js");
 var user = require("../appmodule/reportsapi/user.js");
 
 var notification = require("../appmodule/reportsapi/notification.js");
@@ -29,6 +30,10 @@ module.exports = function(app) {
     // Driver Reports
 
     app.get("/getDriverReports", driver.getDriverReports);
+
+    // Vehicle Reports
+
+    app.get("/getVehicleReports", vehicle.getVehicleReports);
 
     // User Reports
 

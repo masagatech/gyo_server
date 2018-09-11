@@ -43,9 +43,9 @@ reports.getUserMasterReports = function getUserMasterReports(data) {
         }
     });
 
-    _hndlbar.registerHelper('findownschool', function(row) {
+    _hndlbar.registerHelper('ownfontcolor', function(row) {
         if (row.isowner == "true") {
-            return "bg-green";
+            return "col-green";
         } else {
             return "";
         }

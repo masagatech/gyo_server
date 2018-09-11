@@ -44,6 +44,18 @@
         .bg-green {
             background-color: #4CAF50;
         }
+        
+        .col-green {
+            color: #4CAF50;
+        }
+        
+        hr {
+            margin: 10px 0;
+        }
+        
+        .big-word {
+            word-break: break-word;
+        }
     </style>
 </head>
 
@@ -53,22 +65,16 @@
             <tr>
                 <th width="30px"></th>
                 <th width="200px">User Name</th>
-                <th width="150px">Mapped Vehicles</th>
-                <th width="300px">Mapped Entity</th>
-                <th width="80px">Mobile</th>
-                <th width="150px">Email</th>
-                <th width="200px">Address</th>
+                <th width="250px">Mapped Vehicles</th>
+                <th width="250px">Mapped Entity</th>
+                <th width="70px">Mobile</th>
+                <th width="120px">Email</th>
+                <th width="250px">Address</th>
                 <th width="50px">Status</th>
             </tr>
         </thead>
         <tbody>
-            {{{nodatafound}}} {{#group data by="wsname"}}
-            <tr>
-                <th colspan="8">
-                    <b>Workspace : </b> {{value}}
-                </th>
-            </tr>
-            {{#each items}}
+            {{{nodatafound}}} {{#data}}
             <tr>
                 <td>
                     {{rowid}}
@@ -78,23 +84,28 @@
                 </td>
                 <td>
                     <div class="overflow-135">
-                        {{#vehicledt}}
+                        {{#group vehicledt by="enttname"}}
+                        <b>{{value}}</b> {{#each items}}
                         <div><b>{{@index}}.</b> {{vehname}}</div>
-                        {{/vehicledt}}
+                        {{/each}}
+                        <hr /> {{/group}}
                     </div>
                 </td>
                 <td>
                     <div class="overflow-135">
-                        {{#schooldt}}
-                        <div class="{{{findownschool this}}}"><b>{{@index}}.</b> {{schname}}</div>
-                        {{/schooldt}}
+                        {{#group schooldt by="wsname"}}
+                        <b>Workspace : {{value}} {{#each items}}</b>
+                        <div class="{{{ownfontcolor this}}}"><b>{{@index}}.</b> {{schname}}</div>
+                        {{/each}}
+                        <hr /> {{/group}}
                     </div>
                 </td>
                 <td>
                     {{mobileno1}} <br /> {{mobileno2}}
                 </td>
                 <td>
-                    {{email1}} <br /> {{email2}}
+                    <div class="big-word">{{email1}}</div>
+                    <div class="big-word">{{email2}}</div>
                 </td>
                 <td>
                     {{{addressinfo_col this}}}
@@ -103,7 +114,7 @@
                     {{mode}}
                 </td>
             </tr>
-            {{/each}} {{/group}}
+            {{/data}}
         </tbody>
     </table>
 </body>
