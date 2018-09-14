@@ -470,5 +470,11 @@ reports.getPassengerReports = function getPassengerReports(data) {
         return _columns;
     });
 
+    // Student Working Days
+
+    _hndlbar.registerHelper('student_BatchTime', function(row) {
+        return row.wkdays;
+    });
+
     return _hndlbar;
 }

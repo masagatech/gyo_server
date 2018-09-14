@@ -40,6 +40,10 @@
         h3 {
             margin: 5px;
         }
+        
+        hr {
+            margin: 5px 0;
+        }
     </style>
 </head>
 
@@ -72,13 +76,14 @@
         <table border="1" class="table table-bordered table-responsive" cellspacing="0" cellpadding="5">
             <thead>
                 <tr>
-                    <th width="50px" {{{font-07}}}>Sr.</th>
-                    <th width="250px" {{{font-07}}}>Student Name</th>
-                    <th width="200px" {{{font-07}}}>School Name</th>
-                    <th width="150px" {{{font-07}}}>Parent Mobile</th>
-                    <th width="200px" {{{font-07}}}>Parent Name</th>
-                    <th width="150px" {{{font-07}}}>Relation</th>
-                    <th width="100px" {{{font-07}}}>Is Register</th>
+                    <th width="30px" {{{font-07}}}>Sr.</th>
+                    <th width="100px" {{{font-07}}}>School Name</th>
+                    <th width="100px" {{{font-07}}}>Student Name</th>
+                    <th width="500px" {{{font-07}}}>Driver Details</th>
+                    <th width="100px" {{{font-07}}}>Parent Mobile</th>
+                    <th width="100px" {{{font-07}}}>Parent Name</th>
+                    <th width="60px" {{{font-07}}}>Relation</th>
+                    <th width="30px" {{{font-07}}}><img class="iconx" src="http://school.goyo.in:8080/assets/img/phone.png" /></th>
                 </tr>
             </thead>
             <tbody>
@@ -88,10 +93,15 @@
                         {{rowid}}
                     </td>
                     <td {{{font-07}}}>
+                        {{schoolname}}
+                    </td>
+                    <td {{{font-07}}}>
                         {{studentname}}
                     </td>
                     <td {{{font-07}}}>
-                        {{schoolname}}
+                        {{#drvdata}}
+                        <b>{{studname}} ({{batchname}})</b> <br /> {{{student_BatchTime this}}} <br /> <b>Driver</b> : {{drivername}} ({{drvmobno1}}) - {{vehicleno}}
+                        <hr /> {{/drvdata}}
                     </td>
                     <td {{{font-07}}}>
                         {{prntmobile}}

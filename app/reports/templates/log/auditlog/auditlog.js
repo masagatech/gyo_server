@@ -114,6 +114,8 @@ reports.getAuditLogReports = function getAuditLogReports(data) {
         } else if (row.fldtype == "img") {
             fldval = '<img src="' + globals.uploadurl + "/" + row.val + '" height="60" onerror="this.src=\'assets/img/noimage.gif\';">';
             columns = columns + '<b>' + row.key + '</b><br />' + fldval;
+        } else if (row.fldtype == "boolean") {
+            columns = columns + '<b>' + row.key + '</b> : ' + row.val;
         } else {
             if (row.val == "" || row.val == "0" || row.val == null) {
                 columns = columns + '<b>' + row.key + ' : </b> No Entry';
