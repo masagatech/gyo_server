@@ -1,0 +1,135 @@
+<html>
+
+<head>
+    <meta charset="utf-8" />
+
+    <style>
+        .table-overflow {
+            width: 100%;
+            overflow: auto;
+        }
+        
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            border: 1px solid #114ca5!important;
+            margin-bottom: 10px;
+        }
+        
+        table thead th {
+            background: #009688;
+            color: #ffffff;
+            padding: 3px;
+            text-align: center;
+            vertical-align: top;
+        }
+        
+        table tbody th {
+            background: #eeeeee;
+            color: #000000;
+            padding: 5px;
+            vertical-align: top;
+        }
+        
+        table tbody td {
+            padding: 3px;
+            vertical-align: top;
+        }
+        
+        h3 {
+            margin: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <table cellspacing="0" cellpadding="0">
+        {{#psngrhead}}
+        <tr>
+            <td>
+                <img src="{{{uploadurl}}}/{{enttlogo}}" width="80">
+            </td>
+            <td align="center">
+                <h3 {{{font-13}}}>{{enttname}}</h3>
+                <h3 {{{font-10}}}>{{enttaddr}}</h3>
+            </td>
+            <td align="right">
+                <h3 {{{font-10}}}>Report Date : {{rptdate}}</h3>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="3">
+                <h3 {{{font-13}}}>Prospectus Wise Report - {{prspctname}}</h3>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <h3 {{{font-10}}}>Class : {{classname}}</h3>
+            </td>
+            <td align="right">
+                <h3 {{{font-10}}}>Total Student : {{{countstudent}}}</h3>
+            </td>
+        </tr>
+        {{/psngrhead}}
+    </table>
+
+    <div class="table-overflow">
+        <table border="1" class="table table-bordered table-responsive" cellspacing="0" cellpadding="5">
+            <thead>
+                <tr>
+                    <th width="50px" {{{font-07}}}>Sr.</th>
+                    <th {{{font-07}}}>Student Name</th>
+                    <th width="100px" {{{font-07}}}>Form No</th>
+                    <th width="100px" {{{font-07}}}>Class</th>
+                    <th width="150px" {{{font-07}}}>Board</th>
+                    <th width="200px" {{{font-07}}}>Father</th>
+                    <th width="200px" {{{font-07}}}>Mother</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{{nodatafound}}} {{#group psngrdata by="prspctname"}}
+                <tr>
+                    <th colspan="6" {{{font-10}}}>
+                        {{value}}
+                    </th>
+                    <th align="right" {{{font-10}}}>
+                        Student : {{{countprspctwise value}}}
+                    </th>
+                </tr>
+                {{#group items by="prspcthead"}}
+                <tr>
+                    <td colspan="7" align="right" {{{font-10}}}>
+                        {{{prspct_head value}}}
+                    </td>
+                </tr>
+                {{#each items}}
+                <tr>
+                    <td align="center" {{{font-07}}}>
+                        {{rowid}}
+                    </td>
+                    <td {{{font-07}}}>
+                        {{studentname}}
+                    </td>
+                    <td align="center" {{{font-07}}}>
+                        {{prspctno}}
+                    </td>
+                    <td align="center" {{{font-07}}}>
+                        {{classname}}
+                    </td>
+                    <td {{{font-07}}}>
+                        {{boardname}}
+                    </td>
+                    <td {{{font-07}}}>
+                        {{fathername}} ({{mobileno1}})
+                    </td>
+                    <td {{{font-07}}}>
+                        {{mothername}} ({{mobileno2}})
+                    </td>
+                </tr>
+                {{/each}} {{/group}} {{/group}}
+            </tbody>
+        </table>
+    </div>
+</body>
+
+</html>

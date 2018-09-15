@@ -21,7 +21,7 @@ var inventory = require("../appmodule/schoolapi/inventory.js");
 var batch = require("../appmodule/schoolapi/batch.js");
 var driver = require("../appmodule/schoolapi/driver.js");
 var vehicle = require("../appmodule/schoolapi/vehicle.js");
-
+var ntf = require("../appmodule/schoolapi/notification.js");
 
 var user = require("../appmodule/schoolapi/user.js");
 var userdt = require("../appmodule/schoolapi/userdetails.js");
@@ -218,6 +218,12 @@ var appRouter = function(app) {
     app.post(globals.globvar.rootAPI + "/getVehicleDetails", vehicle.getVehicleDetails);
 
     //##################################### Vehicle ##########################################################
+
+    //##################################### Notification #################################################
+
+    app.post(globals.globvar.rootAPI + "/saveNotification", ntf.saveNotification);
+
+    //##################################### Notification #################################################
 
     //##################################### User #############################################################
 

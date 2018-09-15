@@ -132,6 +132,21 @@ reports.getPassengerReports = function getPassengerReports(data) {
         return "<b>" + gender + " (" + array.length + ")</b>";
     });
 
+    // Count Prospectus Wise
+
+    _hndlbar.registerHelper('countprspctwise', function(row) {
+        var array = psngrdata.filter(function(x) { return x.prspctname == row });
+        return array.length;
+    });
+
+    _hndlbar.registerHelper('prspct_head', function(row) {
+        var prspctname = row.split("~")[0];
+        var gender = row.split("~")[1];
+
+        var array = psngrdata.filter(function(x) { return x.prspctname == prspctname }).filter(function(x) { return x.gndrval == gender });
+        return "<b>" + gender + " (" + array.length + ")</b>";
+    });
+
     // Split
 
     _hndlbar.registerHelper('split_gender', function(row) {

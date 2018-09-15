@@ -1,0 +1,53 @@
+var db = require("db");
+var rs = require("gen").res;
+var globals = require("gen").globals;
+
+var notification = module.exports = {};
+var tripapi = require("../schoolapi/tripapi.js");
+var sms_email = require("../schoolapi/sendsms_email.js");
+
+notification.saveNotification = function saveNotification(req, res, done) {
+    db.callFunction("select " + globals.schema("funsave_notification") + "($1::json);", [req.body], function(data) {
+        rs.resp(res, 200, data.rows);
+
+        var _ntfdata = data.rows[0].funsave_notification;
+
+        // Send Parents Notification
+
+        var _prntntf = {
+            "flag": "parents_notification",
+            "title": req.body.title,
+            "body": req.body.msg,
+            "prntids": _ntfdata.prntids
+        }
+
+        tripapi.sendNotification(_prntntf);
+
+        // Send Email And SMS
+
+        var _uphone = _ntfdata.uphone;
+        var _uemail = _ntfdata.uemail;
+
+        var _title = req.body.title;
+        var _msg = req.body.mailmsg;
+        var _attachments = req.body.attachments == null ? [] : req.body.attachments;
+
+        var params = {
+            "sms_to": _uphone,
+            "sms_body": _title + " : " + _msg,
+            "mail_to": _uemail,
+            "mail_subject": _title,
+            "mail_body": _msg
+        };
+
+        if (req.body.issendsms == true) {
+            sms_email.sendEmailAndSMS(params, _uphone, _uemail, _attachments, "sms", req.body.enttid);
+        }
+
+        if (req.body.issendemail == true) {
+            sms_email.sendEmailAndSMS(params, _uphone, _uemail, _attachments, "email", req.body.enttid);
+        }
+    }, function(err) {
+        rs.resp(res, 401, "error : " + err);
+    })
+}
