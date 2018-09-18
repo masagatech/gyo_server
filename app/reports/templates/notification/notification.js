@@ -34,6 +34,14 @@ reports.getNotificationReports = function getNotificationReports(data) {
         }
     });
 
+    _hndlbar.registerHelper('isvis', function(param, options) {
+        if (param == "NA") {
+            return options.inverse(this);
+        } else {
+            return options.fn(this);
+        }
+    });
+
     _hndlbar.registerHelper('groupName', function(params) {
         if (notificationdt.length == 0) {
             return "";
