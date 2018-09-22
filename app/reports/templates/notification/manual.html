@@ -82,6 +82,7 @@
                     {{sendtype}}
                 </th>
             </tr>
+            {{#isvis standard}}
             <tr>
                 <td>
                     <b>Standard</b>
@@ -90,6 +91,7 @@
                     {{standard}}
                 </td>
             </tr>
+            {{/isvis}} {{#isvis teacher}}
             <tr>
                 <td>
                     <b>Teacher</b>
@@ -98,6 +100,16 @@
                     {{teacher}}
                 </td>
             </tr>
+            {{/isvis}} {{#isvis student}}
+            <tr>
+                <td>
+                    <b>Student</b>
+                </td>
+                <td colspan="3">
+                    {{student}}
+                </td>
+            </tr>
+            {{/isvis}}
             <tr>
                 <td>
                     <b>Message</b>

@@ -12,7 +12,7 @@
         table {
             border-collapse: collapse;
             width: 100%;
-            border: 1px solid #114ca5 !important;
+            border: 1px solid #114ca5!important;
             margin-bottom: 10px;
         }
         
@@ -28,7 +28,6 @@
             background: #eeeeee;
             color: #000000;
             padding: 5px;
-            text-align: left;
             vertical-align: top;
         }
         
@@ -40,10 +39,6 @@
         h3 {
             margin: 5px;
         }
-        
-        hr {
-            margin: 5px 0;
-        }
     </style>
 </head>
 
@@ -51,22 +46,28 @@
     <table cellspacing="0" cellpadding="0">
         {{#psngrhead}}
         <tr>
+            <td>
+                <img src="{{{uploadurl}}}/{{enttlogo}}" width="80">
+            </td>
             <td align="center">
                 <h3 {{{font-13}}}>{{enttname}}</h3>
                 <h3 {{{font-10}}}>{{enttaddr}}</h3>
             </td>
-            <td width="200px" align="right">
+            <td align="right">
                 <h3 {{{font-10}}}>Report Date : {{rptdate}}</h3>
             </td>
         </tr>
         <tr>
-            <td>
-                <h3 {{{font-10}}}>
-                    <b>Parent Details </b> ({{prnttype}})
-                </h3>
+            <td colspan="3">
+                <h3 {{{font-13}}}>Prospectus Wise Report - {{prspctname}}</h3>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <h3 {{{font-10}}}>Class : {{classname}}</h3>
             </td>
             <td align="right">
-                <h3 {{{font-10}}}>Total Student : {{{count_data}}}</h3>
+                <h3 {{{font-10}}}>Total Student : {{{countstudent}}}</h3>
             </td>
         </tr>
         {{/psngrhead}}
@@ -76,47 +77,56 @@
         <table border="1" class="table table-bordered table-responsive" cellspacing="0" cellpadding="5">
             <thead>
                 <tr>
-                    <th width="30px" {{{font-07}}}>Sr.</th>
-                    <th width="100px" {{{font-07}}}>School Name</th>
-                    <th width="100px" {{{font-07}}}>Student Name</th>
-                    <th width="500px" {{{font-07}}}>Driver Details</th>
-                    <th width="100px" {{{font-07}}}>Parent Mobile</th>
-                    <th width="100px" {{{font-07}}}>Parent Name</th>
-                    <th width="60px" {{{font-07}}}>Relation</th>
-                    <th width="30px" {{{font-07}}}><img class="iconx" src="http://school.goyo.in:8080/assets/img/phone.png" /></th>
+                    <th width="50px" {{{font-07}}}>Sr.</th>
+                    <th {{{font-07}}}>Student Name</th>
+                    <th width="100px" {{{font-07}}}>Form No</th>
+                    <th width="100px" {{{font-07}}}>Class</th>
+                    <th width="150px" {{{font-07}}}>Board</th>
+                    <th width="200px" {{{font-07}}}>Father</th>
+                    <th width="200px" {{{font-07}}}>Mother</th>
                 </tr>
             </thead>
             <tbody>
-                {{{nodatafound}}} {{#psngrdata}}
+                {{{nodatafound}}} {{#group psngrdata by="prspctname"}}
                 <tr>
-                    <td align="center">
-                        {{rowid}}
+                    <th colspan="6" {{{font-10}}}>
+                        {{value}}
+                    </th>
+                    <th align="right" {{{font-10}}}>
+                        Student : {{{countprspctwise value}}}
+                    </th>
+                </tr>
+                {{#group items by="prspcthead"}}
+                <tr>
+                    <td colspan="7" align="right" {{{font-10}}}>
+                        {{{prspct_head value}}}
                     </td>
-                    <td {{{font-07}}}>
-                        {{schoolname}}
+                </tr>
+                {{#each items}}
+                <tr>
+                    <td align="center" {{{font-07}}}>
+                        {{rowid}}
                     </td>
                     <td {{{font-07}}}>
                         {{studentname}}
                     </td>
-                    <td {{{font-07}}}>
-                        {{#drvdata}}
-                        <b>{{studname}} ({{batchname}})</b> <br /> {{{student_BatchTime this}}} <br /> <b>Driver</b> : {{drivername}} ({{drvmobno1}}) - {{vehicleno}}
-                        <hr /> {{/drvdata}}
+                    <td align="center" {{{font-07}}}>
+                        {{prspctno}}
+                    </td>
+                    <td align="center" {{{font-07}}}>
+                        {{classname}}
                     </td>
                     <td {{{font-07}}}>
-                        {{prntmobile}}
+                        {{boardname}}
                     </td>
                     <td {{{font-07}}}>
-                        {{prntname}}
+                        {{fathername}} ({{mobileno1}})
                     </td>
                     <td {{{font-07}}}>
-                        {{prnttype}}
-                    </td>
-                    <td {{{font-07}}}>
-                        <img height="20" width="20" src="{{logourl}}/{{isreg}}.png" />
+                        {{mothername}} ({{mobileno2}})
                     </td>
                 </tr>
-                {{/psngrdata}}
+                {{/each}} {{/group}} {{/group}}
             </tbody>
         </table>
     </div>

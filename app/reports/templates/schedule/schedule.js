@@ -22,6 +22,16 @@ reports.getScheduleReports = function getScheduleReports(data) {
         return params.utype;
     });
 
+    // Working Days
+
+    _hndlbar.registerHelper('worktime', function(row) {
+        if (row.trptm == "notrip") {
+            return "<strong>Today's No Trip</strong> <hr />" + row.wkdays;
+        } else {
+            return row.trptm + " (" + row.wkname + ")<hr />" + row.wkdays;
+        }
+    });
+
     _hndlbar.registerHelper('nodatafound', function(row) {
         if (scheduledt.length == 0) {
             return "Schedule Not Created !!!! <br />Please Contact GOYO";

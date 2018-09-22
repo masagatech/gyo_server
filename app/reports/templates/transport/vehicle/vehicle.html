@@ -1,0 +1,108 @@
+<html>
+
+<head>
+    <meta charset="utf-8" />
+
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            border: 1px solid #114ca5 !important;
+            margin-bottom: 10px;
+        }
+        
+        table thead th {
+            background: #009688;
+            color: #ffffff;
+            padding: 3px;
+            text-align: center;
+            vertical-align: top;
+        }
+        
+        table tbody th {
+            background: #eeeeee;
+            color: #000000;
+            padding: 5px;
+            text-align: left;
+            vertical-align: top;
+        }
+        
+        table tbody td {
+            padding: 3px;
+            vertical-align: top;
+        }
+        
+        h3 {
+            margin: 5px;
+        }
+        
+        hr {
+            margin: 10px 0;
+        }
+    </style>
+</head>
+
+<body>
+    <table border="1" class="table table-bordered table-responsive" cellspacing="0" cellpadding="5">
+        <thead>
+            <tr>
+                <th width="30px">Sr.</th>
+                <th width="150px">Registration No</th>
+                <th width="350px">Mapped User</th>
+                <th width="60px">Type</th>
+                <th width="100px">IMEI</th>
+                <th width="100px">Sim No</th>
+                <th width="50px">Capacity</th>
+                <th width="150px">Make</th>
+                <th width="150px">Model</th>
+                <th width="150px">Facility</th>
+                <th width="50px">Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{{nodatafound}}} {{#data}}
+            <tr>
+                <td>
+                    {{rowid}}
+                </td>
+                <td>
+                    {{vehregno}}
+                </td>
+                <td>
+                    {{#enttusrdt}}
+                    <h6>{{enttname}} ({{countuser}})</h6>
+                    <b>{{vehname}}</b> {{#userdata}}
+                    <div><b>{{@index}}.</b> {{uname}}</div>
+                    {{/userdata}} {{{user_hr this}}} {{/enttusrdt}}
+                </td>
+                <td>
+                    {{vehicletype}}
+                </td>
+                <td>
+                    {{imei}}
+                </td>
+                <td>
+                    {{simno}}
+                </td>
+                <td>
+                    {{capacity}}
+                </td>
+                <td>
+                    {{vehiclemake}}
+                </td>
+                <td>
+                    {{vehiclemodel}}
+                </td>
+                <td>
+                    {{vehiclefacility}}
+                </td>
+                <td>
+                    {{mode}}
+                </td>
+            </tr>
+            {{/data}}
+        </tbody>
+    </table>
+</body>
+
+</html>

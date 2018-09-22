@@ -125,15 +125,23 @@
             animation: pulse 2s infinite;
         }
         
-        .trip .disabled {
+        .trip .notrip {
             animation: none;
             border: 1px solid #ccc;
             border-left: 10px solid #ccc;
             color: #6f6f6f !important;
         }
         
-        .trip .disabled span {
+        .trip .notrip span {
             color: #6f6f6f;
+        }
+        
+        .trip .notrip strong {
+            color: red;
+        }
+        
+        .trip .hr {
+            border: none;
         }
     </style>
 </head>
@@ -148,14 +156,18 @@
                 <h2 class="schoolname">{{value}}</h2>
 
                 {{#each items}}
-                <a class="{{typ}} {{act}} {{dis}}" href="{{reporturl}}/getScheduleReports?flag=feesdetails&type=download&uid={{{uid}}}&utype={{{utype}}}&batchid={{batchid}}&pdtype={{typ}}&enttid={{schoolid}}&format=html">
+                <a class="{{typ}} {{act}} {{trptm}}" href="{{reporturl}}/getScheduleReports?flag=feesdetails&type=download&uid={{{uid}}}&utype={{{utype}}}&batchid={{batchid}}&pdtype={{typ}}&enttid={{schoolid}}&format=html">
                     <div>
                         <div>
                             <span class="batchnm">{{batchname}}</span>
                         </div>
                         <div>
-                            <span class="othertext">{{frmtm}} - {{totm}}</span>
+                            <span class="othertext">Date : {{frmdt}} - {{todt}}</span>
                         </div>
+                        <div>
+                            <span class="othertext">Time : {{{worktime this}}}</span>
+                        </div>
+                        <hr />
                         <div>
                             <span class="text_{{typ}} othertext">{{typname}}</span>
                             <span class="passengers othertext">Passangers : {{countstuds}}</span>

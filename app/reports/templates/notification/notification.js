@@ -34,6 +34,14 @@ reports.getNotificationReports = function getNotificationReports(data) {
         }
     });
 
+    _hndlbar.registerHelper('isvis', function(param, options) {
+        if (param == "NA") {
+            return options.inverse(this);
+        } else {
+            return options.fn(this);
+        }
+    });
+
     _hndlbar.registerHelper('groupName', function(params) {
         if (notificationdt.length == 0) {
             return "";
@@ -76,7 +84,7 @@ reports.getNotificationReports = function getNotificationReports(data) {
         var phinfo_col = "";
 
         if (row.isprntmob1 == "Y") {
-            phinfo_col += row.mobileno1 + ' <img height="20" width="20" title="' + row.pregdate + '" src="' + globals.logourl + '/tick.png">';
+            phinfo_col += row.mobileno1 + ' <img height="20" width="20" title="' + row.pregdate + '" src="' + globals.logourl + '/right.png">';
         } else {
             phinfo_col += row.mobileno1;
         }
@@ -90,7 +98,7 @@ reports.getNotificationReports = function getNotificationReports(data) {
         var phinfo_col = "";
 
         if (row.isprntmob2 == "Y") {
-            phinfo_col += row.mobileno2 + ' <img height="20" width="20" title="' + row.mregdate + '" src="' + globals.logourl + '/tick.png">';
+            phinfo_col += row.mobileno2 + ' <img height="20" width="20" title="' + row.mregdate + '" src="' + globals.logourl + '/right.png">';
         } else {
             phinfo_col += row.mobileno2;
         }

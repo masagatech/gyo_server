@@ -132,6 +132,21 @@ reports.getPassengerReports = function getPassengerReports(data) {
         return "<b>" + gender + " (" + array.length + ")</b>";
     });
 
+    // Count Prospectus Wise
+
+    _hndlbar.registerHelper('countprspctwise', function(row) {
+        var array = psngrdata.filter(function(x) { return x.prspctname == row });
+        return array.length;
+    });
+
+    _hndlbar.registerHelper('prspct_head', function(row) {
+        var prspctname = row.split("~")[0];
+        var gender = row.split("~")[1];
+
+        var array = psngrdata.filter(function(x) { return x.prspctname == prspctname }).filter(function(x) { return x.gndrval == gender });
+        return "<b>" + gender + " (" + array.length + ")</b>";
+    });
+
     // Split
 
     _hndlbar.registerHelper('split_gender', function(row) {
@@ -143,6 +158,12 @@ reports.getPassengerReports = function getPassengerReports(data) {
 
     _hndlbar.registerHelper('uploadurl', function(row) {
         return globals.uploadurl;
+    });
+
+    // Logo URL
+
+    _hndlbar.registerHelper('logourl', function(row) {
+        return globals.logourl;
     });
 
     // Passenger Photo
@@ -171,13 +192,13 @@ reports.getPassengerReports = function getPassengerReports(data) {
         var phinfo_col = "";
 
         if (row.isprntmob1 == true) {
-            phinfo_col += row.mobileno1 + ' <img height="20" width="20" title="' + row.pregdate + '" src="' + globals.logourl + '/tick.png">';
+            phinfo_col += row.mobileno1 + ' <img height="20" width="20" title="' + row.pregdate + '" src="' + globals.logourl + '/right.png">';
         } else {
             phinfo_col += row.mobileno1;
         }
 
         if (row.isprntmob2 == true) {
-            phinfo_col += "<br />" + row.mobileno2 + ' <img height="20" width="20" title="' + row.mregdate + '" src="' + globals.logourl + '/tick.png">';
+            phinfo_col += "<br />" + row.mobileno2 + ' <img height="20" width="20" title="' + row.mregdate + '" src="' + globals.logourl + '/right.png">';
         } else {
             phinfo_col += "<br />" + row.mobileno2;
         }
@@ -462,6 +483,12 @@ reports.getPassengerReports = function getPassengerReports(data) {
         }
 
         return _columns;
+    });
+
+    // Student Working Days
+
+    _hndlbar.registerHelper('student_BatchTime', function(row) {
+        return row.wkdays;
     });
 
     return _hndlbar;

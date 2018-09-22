@@ -1,0 +1,122 @@
+<html>
+
+<head>
+    <meta charset="utf-8" />
+
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            border: 1px solid #114ca5 !important;
+            margin-bottom: 10px;
+        }
+        
+        table thead th {
+            background: #009688;
+            color: #ffffff;
+            padding: 3px;
+            text-align: center;
+            vertical-align: top;
+        }
+        
+        table tbody th {
+            background: #eeeeee;
+            color: #000000;
+            padding: 5px;
+            text-align: left;
+            vertical-align: top;
+        }
+        
+        table tbody td {
+            padding: 3px;
+            vertical-align: top;
+        }
+        
+        h3 {
+            margin: 5px;
+        }
+        
+        .overflow-135 {
+            max-height: 135px;
+            overflow: auto;
+        }
+        
+        .bg-green {
+            background-color: #4CAF50;
+        }
+        
+        .col-green {
+            color: #4CAF50;
+        }
+        
+        hr {
+            margin: 10px 0;
+        }
+        
+        .big-word {
+            word-break: break-word;
+        }
+    </style>
+</head>
+
+<body>
+    <table border="1" class="table table-bordered table-responsive" cellspacing="0" cellpadding="5">
+        <thead>
+            <tr>
+                <th width="30px"></th>
+                <th width="200px">User Name</th>
+                <th width="250px">Mapped Vehicles</th>
+                <th width="250px">Mapped Entity</th>
+                <th width="70px">Mobile</th>
+                <th width="120px">Email</th>
+                <th width="250px">Address</th>
+                <th width="50px">Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{{nodatafound}}} {{#data}}
+            <tr>
+                <td>
+                    {{rowid}}
+                </td>
+                <td>
+                    {{ucode}} : {{fullname}} <br /> {{utypename}}
+                </td>
+                <td>
+                    <div class="overflow-135">
+                        {{#group vehicledt by="enttname"}}
+                        <b>{{value}}</b> {{#each items}}
+                        <div><b>{{@index}}.</b> {{vehname}}</div>
+                        {{/each}}
+                        <hr /> {{/group}}
+                    </div>
+                </td>
+                <td>
+                    <div class="overflow-135">
+                        {{#group schooldt by="wsname"}}
+                        <b>Workspace : {{value}} {{#each items}}</b>
+                        <div class="{{{ownfontcolor this}}}"><b>{{@index}}.</b> {{schname}}</div>
+                        {{/each}}
+                        <hr /> {{/group}}
+                    </div>
+                </td>
+                <td>
+                    {{mobileno1}} <br /> {{mobileno2}}
+                </td>
+                <td>
+                    <div class="big-word">{{email1}}</div>
+                    <div class="big-word">{{email2}}</div>
+                </td>
+                <td>
+                    {{{addressinfo_col this}}}
+                </td>
+                <td>
+                    {{mode}}
+                </td>
+            </tr>
+            {{/data}}
+        </tbody>
+    </table>
+</body>
+
+</html>

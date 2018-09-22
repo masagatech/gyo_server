@@ -2,10 +2,19 @@ var db = require("db");
 var rs = require("gen").res;
 var globals = require("gen").globals;
 
-var fs = require('fs');
 var common = module.exports = {};
 
-const sendmail = require('sendmail')();
+// Ownership Transfer
+
+common.saveOwnershipTransfer = function saveOwnershipTransfer(req, res, done) {
+    db.callFunction("select " + globals.schema("funsave_ownershiptransfer") + "($1::json);", [req.body], function(data) {
+        rs.resp(res, 200, data.rows);
+    }, function(err) {
+        rs.resp(res, 401, "error : " + err);
+    })
+}
+
+// Check Duplicate Data
 
 common.checkDuplicates = function checkDuplicates(arr, justCheck) {
     var len = arr.length,

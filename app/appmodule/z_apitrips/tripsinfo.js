@@ -128,20 +128,17 @@ tripsinfo.createtripdetails = function(req, res, done) {
                         })
                     }
                 } catch (error) {
-                    console,
-                    log("tripsinfo : 81 :", error)
+                    console.log("tripsinfo : 81 :", error)
                 }
 
                 tripsinfo.updateData(req.body);
                 socketserver.io.sockets.in(req.body.vhid).emit('msgd', { "evt": "data", "data": _speeddata });
             } catch (e) {
-                console,
-                log("tripsinfo : 85 :", e)
+                console.log("tripsinfo : 85 :", e)
             }
         });
     } catch (ex) {
-        console,
-        log("tripsinfo : 81 :", ex);
+        console.log("tripsinfo : 81 :", ex);
 
         if (res) {
             rs.resp(res, 400, ex.message);
