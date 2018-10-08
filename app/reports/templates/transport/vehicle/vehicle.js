@@ -53,10 +53,18 @@ reports.getVehicleTransportReports = function getVehicleTransportReports(data) {
         }
     });
 
-    // No Vehicle Found
+    // No User Found
 
     _hndlbar.registerHelper('user_hr', function(row) {
         if (row.userdata.length != 0) {
+            return '<hr />';
+        }
+    });
+
+    // No Route Found
+
+    _hndlbar.registerHelper('rt_hr', function(row) {
+        if (row.rtdata.length != 0) {
             return '<hr />';
         }
     });

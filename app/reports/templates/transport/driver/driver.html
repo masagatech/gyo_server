@@ -46,11 +46,12 @@
     <table border="1" class="table table-bordered table-responsive" cellspacing="0" cellpadding="5">
         <thead>
             <tr>
-                <th width="50px">Sr.</th>
+                <th width="10px">Sr.</th>
                 <th width="150px">Driver Name</th>
                 <th width="250px">Mapped Vehicles By Entity</th>
-                <th width="70px">Mobile No 1</th>
-                <th width="70px">Mobile No 2</th>
+                <th width="250px">Mapped Route By Entity</th>
+                <th width="70px">Mobile 1</th>
+                <th width="70px">Mobile 2</th>
                 <th width="150px">Email</th>
                 <th width="250px">Address</th>
                 <th width="50px">Status</th>
@@ -71,6 +72,13 @@
                     {{#vehdata}}
                     <div><b>{{@index}}.</b> {{vehname}} ({{vehregno}})</div>
                     {{/vehdata}} {{{veh_hr this}}} {{/enttvehdt}}
+                </td>
+                <td>
+                    {{#enttrtdt}}
+                    <h6>{{enttname}} ({{countrt}})</h6>
+                    {{#rtdata}}
+                    <div><b>{{@index}}.</b> {{rtname}}</div>
+                    {{/rtdata}} {{{rt_hr this}}} {{/enttrtdt}}
                 </td>
                 <td>
                     {{mobileno1}}

@@ -46,16 +46,17 @@
     <table border="1" class="table table-bordered table-responsive" cellspacing="0" cellpadding="5">
         <thead>
             <tr>
-                <th width="30px">Sr.</th>
+                <th width="10px">Sr.</th>
                 <th width="150px">Registration No</th>
                 <th width="350px">Mapped User</th>
-                <th width="60px">Type</th>
+                <th width="350px">Mapped Route</th>
+                <th width="50px">Type</th>
                 <th width="100px">IMEI</th>
-                <th width="100px">Sim No</th>
+                <th width="50px">Sim No</th>
                 <th width="50px">Capacity</th>
-                <th width="150px">Make</th>
-                <th width="150px">Model</th>
-                <th width="150px">Facility</th>
+                <th width="80px">Make</th>
+                <th width="80px">Model</th>
+                <th width="50px">Facility</th>
                 <th width="50px">Status</th>
             </tr>
         </thead>
@@ -74,6 +75,13 @@
                     <b>{{vehname}}</b> {{#userdata}}
                     <div><b>{{@index}}.</b> {{uname}}</div>
                     {{/userdata}} {{{user_hr this}}} {{/enttusrdt}}
+                </td>
+                <td>
+                    {{#enttrtdt}}
+                    <h6>{{enttname}} ({{countrt}})</h6>
+                    {{#rtdata}}
+                    <div><b>{{@index}}.</b> {{rtname}}</div>
+                    {{/rtdata}} {{{rt_hr this}}} {{/enttrtdt}}
                 </td>
                 <td>
                     {{vehicletype}}

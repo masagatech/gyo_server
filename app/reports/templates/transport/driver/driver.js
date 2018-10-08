@@ -58,6 +58,16 @@ reports.getDriverTransportReports = function getDriverTransportReports(data) {
     _hndlbar.registerHelper('veh_hr', function(row) {
         if (row.vehdata.length != 0) {
             return '<hr />';
+        } else {
+            return "No Route Found";
+        }
+    });
+
+    // No Route Found
+
+    _hndlbar.registerHelper('rt_hr', function(row) {
+        if (row.rtdata.length != 0) {
+            return '<hr />';
         }
     });
 
