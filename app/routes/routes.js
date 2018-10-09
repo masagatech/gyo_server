@@ -228,8 +228,8 @@ var appRouter = function(app) {
 
     //############################ Notification Redis / #######################################################
 
-    app.get(root + "/getNotify", ntfredis.getNotify);
-    app.post(root + "/createNotify", ntfredis.createNotify);
+    app.get(globals.globvar.rootAPI + "/getNotify", ntfredis.getNotify);
+    app.post(globals.globvar.rootAPI + "/createNotify", ntfredis.createNotify);
 
     //############################ Notification Redis / #######################################################
 

@@ -36,7 +36,7 @@
     "pg": "^6.1.0",
     "phantom-html2pdf": "^4.0.0",
     "q": "^1.4.1",
-    "redisdb": "^1.2.4",
+    "redis": "^2.8.0",
     "sendmail": "^1.2.0",
     "socket.io": "^1.7.3",
     "uniqid": "^4.1.1",
