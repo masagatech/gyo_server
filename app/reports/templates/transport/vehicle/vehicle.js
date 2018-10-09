@@ -58,6 +58,8 @@ reports.getVehicleTransportReports = function getVehicleTransportReports(data) {
     _hndlbar.registerHelper('user_hr', function(row) {
         if (row.userdata.length != 0) {
             return '<hr />';
+        } else {
+            return "No User Map";
         }
     });
 
@@ -66,6 +68,8 @@ reports.getVehicleTransportReports = function getVehicleTransportReports(data) {
     _hndlbar.registerHelper('rt_hr', function(row) {
         if (row.rtdata.length != 0) {
             return '<hr />';
+        } else {
+            return "No Route Map";
         }
     });
 

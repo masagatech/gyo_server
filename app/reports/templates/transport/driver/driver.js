@@ -59,7 +59,7 @@ reports.getDriverTransportReports = function getDriverTransportReports(data) {
         if (row.vehdata.length != 0) {
             return '<hr />';
         } else {
-            return "No Route Found";
+            return "No Vehicle Map";
         }
     });
 
@@ -68,6 +68,8 @@ reports.getDriverTransportReports = function getDriverTransportReports(data) {
     _hndlbar.registerHelper('rt_hr', function(row) {
         if (row.rtdata.length != 0) {
             return '<hr />';
+        } else {
+            return "No Route Map";
         }
     });
 
