@@ -1,6 +1,7 @@
 var Handlebars = require('handlebars');
 var moment = require('moment');
 var reports = module.exports = {};
+var globals = require("gen").globals;
 
 reports.getNotificationReports = function getNotificationReports(data) {
     var _hndlbar = Handlebars;
@@ -8,7 +9,15 @@ reports.getNotificationReports = function getNotificationReports(data) {
     var headerdt = data.data1;
     var dparams = data.params;
 
-    var col_total = [];
+    _hndlbar.registerHelper('splitMessage1', function(head) {
+        var t = head.split(";");
+        return t[0];
+    });
+
+    _hndlbar.registerHelper('splitMessage2', function(head) {
+        var t = head.split(";");
+        return t[1];
+    });
 
     var DateFormats = {
         short: "DD/MMM/YYYY",
@@ -22,6 +31,14 @@ reports.getNotificationReports = function getNotificationReports(data) {
             return moment(datetime).format(format);
         } else {
             return datetime;
+        }
+    });
+
+    _hndlbar.registerHelper('isvis', function(param, options) {
+        if (param == "NA") {
+            return options.inverse(this);
+        } else {
+            return options.fn(this);
         }
     });
 
@@ -51,6 +68,42 @@ reports.getNotificationReports = function getNotificationReports(data) {
                 return "show";
             }
         }
+    });
+
+    _hndlbar.registerHelper('showvtsdata', function(params) {
+        if (params.status == "nosend") {
+            return "hide";
+        } else {
+            return "show";
+        }
+    });
+
+    // Passenger Mobile No 1
+
+    _hndlbar.registerHelper('psngrphone1_col', function(row) {
+        var phinfo_col = "";
+
+        if (row.isprntmob1 == "Y") {
+            phinfo_col += row.mobileno1 + ' <img height="20" width="20" title="' + row.pregdate + '" src="' + globals.logourl + '/right.png">';
+        } else {
+            phinfo_col += row.mobileno1;
+        }
+
+        return phinfo_col;
+    });
+
+    // Passenger Mobile No 2
+
+    _hndlbar.registerHelper('psngrphone2_col', function(row) {
+        var phinfo_col = "";
+
+        if (row.isprntmob2 == "Y") {
+            phinfo_col += row.mobileno2 + ' <img height="20" width="20" title="' + row.mregdate + '" src="' + globals.logourl + '/right.png">';
+        } else {
+            phinfo_col += row.mobileno2;
+        }
+
+        return phinfo_col;
     });
 
     _hndlbar.registerHelper('emptydatamsg', function(params) {

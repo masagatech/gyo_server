@@ -28,7 +28,6 @@
             background: #eeeeee;
             color: #000000;
             padding: 5px;
-            text-align: left;
             vertical-align: top;
         }
         
@@ -47,20 +46,28 @@
     <table cellspacing="0" cellpadding="0">
         {{#psngrhead}}
         <tr>
+            <td>
+                <img src="{{{uploadurl}}}/{{enttlogo}}" width="80">
+            </td>
             <td align="center">
                 <h3 {{{font-13}}}>{{enttname}}</h3>
                 <h3 {{{font-10}}}>{{enttaddr}}</h3>
             </td>
-            <td width="200px" align="right">
+            <td align="right">
                 <h3 {{{font-10}}}>Report Date : {{rptdate}}</h3>
             </td>
         </tr>
         <tr>
-            <td>
-                <h3 {{{font-10}}}><b>{{{psngrtype_head}}} Details </b> {{psngrname}}</h3>
+            <td colspan="3">
+                <h3 {{{font-13}}}>Prospectus Wise Report - {{prspctname}}</h3>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <h3 {{{font-10}}}>Class : {{classname}}</h3>
             </td>
             <td align="right">
-                <h3 {{{font-10}}}>Total {{{psngrtype_head}}} : {{{count_data}}}</h3>
+                <h3 {{{font-10}}}>Total Student : {{{countstudent}}}</h3>
             </td>
         </tr>
         {{/psngrhead}}
@@ -71,42 +78,55 @@
             <thead>
                 <tr>
                     <th width="50px" {{{font-07}}}>Sr.</th>
-                    <th width="200px" {{{font-07}}}>{{{psngrtype_head}}} Name</th>
-                    <th width="150px" {{{font-07}}}>Mobile</th>
-                    <th width="200px" {{{font-07}}}>Email</th>
-                    <th width="250px" {{{font-07}}}>Pick Drop Details</th>
-                    <th width="250px" {{{font-07}}}>Schedule Details</th>
+                    <th {{{font-07}}}>Student Name</th>
+                    <th width="100px" {{{font-07}}}>Form No</th>
+                    <th width="100px" {{{font-07}}}>Class</th>
+                    <th width="150px" {{{font-07}}}>Board</th>
+                    <th width="200px" {{{font-07}}}>Father</th>
+                    <th width="200px" {{{font-07}}}>Mother</th>
                 </tr>
             </thead>
             <tbody>
-                {{{nodatafound}}} {{#group psngrdata by="enttname"}}
+                {{{nodatafound}}} {{#group psngrdata by="prspctname"}}
                 <tr>
-                    <th colspan="6">
-                        <b>School : </b> {{value}}
+                    <th colspan="6" {{{font-10}}}>
+                        {{value}}
                     </th>
+                    <th align="right" {{{font-10}}}>
+                        Student : {{{countprspctwise value}}}
+                    </th>
+                </tr>
+                {{#group items by="prspcthead"}}
+                <tr>
+                    <td colspan="7" align="right" {{{font-10}}}>
+                        {{{prspct_head value}}}
+                    </td>
                 </tr>
                 {{#each items}}
                 <tr>
-                    <td align="center">
+                    <td align="center" {{{font-07}}}>
                         {{rowid}}
                     </td>
                     <td {{{font-07}}}>
-                        <b>{{psngrname}}</b><br /> ({{psngrtypenm}})
+                        {{studentname}}
+                    </td>
+                    <td align="center" {{{font-07}}}>
+                        {{prspctno}}
+                    </td>
+                    <td align="center" {{{font-07}}}>
+                        {{classname}}
                     </td>
                     <td {{{font-07}}}>
-                        {{{phoneinfo_col this}}}
+                        {{boardname}}
                     </td>
                     <td {{{font-07}}}>
-                        {{email1}}<br /> {{email2}}
+                        {{fathername}} ({{mobileno1}})
                     </td>
                     <td {{{font-07}}}>
-                        {{{pickdropinfo_col this}}}
-                    </td>
-                    <td {{{font-07}}}>
-                        {{{scheduleinfo_col this}}}
+                        {{mothername}} ({{mobileno2}})
                     </td>
                 </tr>
-                {{/each}} {{/group}}
+                {{/each}} {{/group}} {{/group}}
             </tbody>
         </table>
     </div>

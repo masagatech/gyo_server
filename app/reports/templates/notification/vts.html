@@ -1,0 +1,126 @@
+<html>
+
+<head>
+    <meta charset="utf-8" />
+
+    <style>
+        table {
+            border-collapse: collapse;
+            font-size: 12px;
+            width: 100%;
+            border: 1px solid rgba(204, 204, 204, 0.35);
+        }
+        
+        table thead th {
+            /* background: #009688; */
+            color: #ffffff;
+            padding: 5px;
+            text-align: left;
+            vertical-align: top;
+        }
+        
+        table thead td {
+            background: #e6dede;
+            color: #000000;
+            padding: 5px;
+            text-align: left;
+            vertical-align: top;
+        }
+        
+        table tbody th {
+            background: #f5f3f3;
+            padding: 5px;
+            vertical-align: top;
+        }
+        
+        table tbody td {
+            background: #ffffff;
+            padding: 5px;
+            vertical-align: top;
+        }
+        
+        .show {
+            display: inline-table!important;
+        }
+        
+        .hide {
+            display: none!important;
+        }
+        
+        .Pickup {
+            background: #009688!important;
+            color: #FFFFFF!important;
+        }
+        
+        .Drop {
+            background: #dab3bb!important;
+            color: #000000!important;
+        }
+    </style>
+</head>
+
+<body>
+    <h4 align="center">
+        Notification - {{{formatDate params.frmdt "short"}}} To {{{formatDate params.todt "short"}}}
+    </h4>
+
+    <h4 align="center">{{{emptydatamsg}}}</h4>
+
+    {{#group data by="schoolname"}}
+
+    <h4><b>School : </b>{{value}} {{#each items}}</h4>
+
+    <table class="table table-bordered table-responsive" cellspacing="0" cellpadding="5">
+        <thead>
+            <tr>
+                <td colspan="5" class="{{typname}}">
+                    <b>Schedule : </b>{{typname}} <br />
+                    <b>Batch : </b>{{batchname}} ({{batchtime}}), <b>Driver : </b>{{drivername}}, <b>Vehicle : </b>{{vehicleno}}
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Student
+                </td>
+                <td>
+                    Mobile No 1
+                </td>
+                <td>
+                    Mobile No 2
+                </td>
+                <td>
+                    Message 1
+                </td>
+                <td>
+                    Message 2
+                </td>
+            </tr>
+        </thead>
+        <tbody>
+            {{#ntfstuddata}}
+            <tr>
+                <td width="300px">
+                    {{studname}}
+                </td>
+                <td width="150px">
+                    {{{psngrphone1_col this}}}
+                </td>
+                <td width="150px">
+                    {{{psngrphone2_col this}}}
+                </td>
+                <td>
+                    {{{splitMessage1 msg}}}
+                    <br /> {{{splitMessage1 crdate}}}
+                </td>
+                <td>
+                    {{{splitMessage2 msg}}}
+                    <br /> {{{splitMessage2 crdate}}}
+                </td>
+            </tr>
+            {{/ntfstuddata}}
+        </tbody>
+    </table>
+    {{/each}} {{/group}}
+</body>
+
+</html>

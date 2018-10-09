@@ -70,12 +70,12 @@
         <table border="1" class="table table-bordered table-responsive" cellspacing="0" cellpadding="5">
             <thead>
                 <tr>
-                    <th width="50px" {{{font-07}}}>Sr.</th>
+                    <th width="50px" {{{font-07}}}>Photo</th>
                     <th width="200px" {{{font-07}}}>{{{psngrtype_head}}} Name</th>
-                    <th width="150px" {{{font-07}}}>Mobile</th>
-                    <th width="200px" {{{font-07}}}>Email</th>
-                    <th width="250px" {{{font-07}}}>Pick Drop Details</th>
-                    <th width="250px" {{{font-07}}}>Schedule Details</th>
+                    <th width="100px" {{{font-07}}}>Aadhar No</th>
+                    <th width="100px" {{{font-07}}}>Mobile</th>
+                    <th width="100px" {{{font-07}}}>Email</th>
+                    <th width="250px" {{{font-07}}}>Contact</th>
                 </tr>
             </thead>
             <tbody>
@@ -88,22 +88,22 @@
                 {{#each items}}
                 <tr>
                     <td align="center">
-                        {{rowid}}
+                        {{{psngrphoto_col this}}}
                     </td>
                     <td {{{font-07}}}>
                         <b>{{psngrname}}</b><br /> ({{psngrtypenm}})
                     </td>
                     <td {{{font-07}}}>
-                        {{{phoneinfo_col this}}}
+                        {{aadharno}}
+                    </td>
+                    <td {{{font-07}}}>
+                        {{mobileno1}}<br /> {{mobileno2}}
                     </td>
                     <td {{{font-07}}}>
                         {{email1}}<br /> {{email2}}
                     </td>
                     <td {{{font-07}}}>
-                        {{{pickdropinfo_col this}}}
-                    </td>
-                    <td {{{font-07}}}>
-                        {{{scheduleinfo_col this}}}
+                        {{{contactinfo_col this}}}
                     </td>
                 </tr>
                 {{/each}} {{/group}}

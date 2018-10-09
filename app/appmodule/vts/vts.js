@@ -50,9 +50,10 @@ vts.getFence = function(req, res, done) {
         if (_data !== undefined) {
             if (_data.status == 0) {
                 rs.resp(res, 200, _data);
+            } else if (_data.status == -1) {
+                rs.resp(res, 200, _data);
             } else {
                 saveNotification(req, res, ntfparams, _data);
-
                 tripapi.sendNotification(ntfparams);
             }
         } else {

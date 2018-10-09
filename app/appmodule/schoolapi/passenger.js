@@ -5,6 +5,24 @@ var globals = require("gen").globals;
 var psngr = module.exports = {};
 var common = require("../schoolapi/common.js");
 
+// Save Student Location
+
+psngr.saveStudentLocation = function saveStudentLocation(req, res, done) {
+    db.callFunction("select " + globals.schema("funsave_studentlocation") + "($1::json);", [req.body], function(data) {
+        rs.resp(res, 200, data.rows);
+    }, function(err) {
+        rs.resp(res, 401, "error : " + err);
+    })
+}
+
+psngr.getStudentLocation = function getStudentLocation(req, res, done) {
+    db.callProcedure("select " + globals.schema("funget_studentlocation") + "($1,$2::json);", ['stdloc', req.body], function(data) {
+        rs.resp(res, 200, data.rows);
+    }, function(err) {
+        rs.resp(res, 401, "error : " + err);
+    }, 1)
+}
+
 // Save Passenger By Bulk Upload
 
 psngr.bulkUploadPassenger = function bulkUploadPassenger(req, res, result, callback) {

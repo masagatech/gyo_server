@@ -132,6 +132,21 @@ reports.getPassengerReports = function getPassengerReports(data) {
         return "<b>" + gender + " (" + array.length + ")</b>";
     });
 
+    // Count Prospectus Wise
+
+    _hndlbar.registerHelper('countprspctwise', function(row) {
+        var array = psngrdata.filter(function(x) { return x.prspctname == row });
+        return array.length;
+    });
+
+    _hndlbar.registerHelper('prspct_head', function(row) {
+        var prspctname = row.split("~")[0];
+        var gender = row.split("~")[1];
+
+        var array = psngrdata.filter(function(x) { return x.prspctname == prspctname }).filter(function(x) { return x.gndrval == gender });
+        return "<b>" + gender + " (" + array.length + ")</b>";
+    });
+
     // Split
 
     _hndlbar.registerHelper('split_gender', function(row) {
@@ -143,6 +158,12 @@ reports.getPassengerReports = function getPassengerReports(data) {
 
     _hndlbar.registerHelper('uploadurl', function(row) {
         return globals.uploadurl;
+    });
+
+    // Logo URL
+
+    _hndlbar.registerHelper('logourl', function(row) {
+        return globals.logourl;
     });
 
     // Passenger Photo
@@ -163,6 +184,26 @@ reports.getPassengerReports = function getPassengerReports(data) {
         }
 
         return psngrphoto_col;
+    });
+
+    // Passenger Phone
+
+    _hndlbar.registerHelper('phoneinfo_col', function(row) {
+        var phinfo_col = "";
+
+        if (row.isprntmob1 == true) {
+            phinfo_col += row.mobileno1 + ' <img height="20" width="20" title="' + row.pregdate + '" src="' + globals.logourl + '/right.png">';
+        } else {
+            phinfo_col += row.mobileno1;
+        }
+
+        if (row.isprntmob2 == true) {
+            phinfo_col += "<br />" + row.mobileno2 + ' <img height="20" width="20" title="' + row.mregdate + '" src="' + globals.logourl + '/right.png">';
+        } else {
+            phinfo_col += "<br />" + row.mobileno2;
+        }
+
+        return phinfo_col;
     });
 
     // Student Photo
@@ -313,6 +354,76 @@ reports.getPassengerReports = function getPassengerReports(data) {
         return prntinfo_col;
     });
 
+    // Pickup / Drop  Info
+
+    _hndlbar.registerHelper('pickdropinfo_col', function(row) {
+        var pickinfo_col = "";
+
+        if (row.pickrtname != "" && row.pickrtname != null) {
+            pickinfo_col += "<div><b>Pickup Route : </b>" + row.pickrtname + "</div>";
+        }
+
+        if (row.pickstpname != "" && row.pickstpname != null) {
+            pickinfo_col += "<div><b>Pickup Stop : </b>" + row.pickstpname + "</div>";
+        }
+
+        if (row.pickaddr != "" && row.pickaddr != null) {
+            pickinfo_col += "<div><b>Pickup Address : </b>" + row.pickaddr + "</div>";
+        }
+
+        return pickinfo_col;
+    });
+
+    // Pickup / Drop  Info
+
+    _hndlbar.registerHelper('dropaddr_col', function(row) {
+        var dropinfo_col = "";
+
+        if (row.droprtname != "" && row.droprtname != null) {
+            dropinfo_col += "<div><b>Drop Route : </b>" + row.droprtname + "</div>";
+        }
+
+        if (row.dropstpname != "" && row.dropstpname != null) {
+            dropinfo_col += "<div><b>Drop Stop : </b>" + row.dropstpname + "</div>";
+        }
+
+        if (row.dropaddr != "" && row.dropaddr != null) {
+            dropinfo_col += "<div><b>Drop Address : </b>" + row.dropaddr + "</div>";
+        }
+
+        return dropinfo_col;
+    });
+
+    // Schedule Info
+
+    _hndlbar.registerHelper('scheduleinfo_col', function(row) {
+        var schdinfo_col = "";
+
+        schdinfo_col += "<div><b>Is Schedule : </b>" + row.isschd + "</div>";
+
+        if (row.batchname != "" && row.batchname != null) {
+            schdinfo_col += "<div><b>Batch Name : </b>" + row.batchname + "</div>";
+        }
+
+        if (row.picktime != "" && row.picktime != null) {
+            schdinfo_col += "<div><b>Pick Up Time : </b>" + row.picktime + "</div>";
+        }
+
+        if (row.droptime != "" && row.droptime != null) {
+            schdinfo_col += "<div><b>Drop Time : </b>" + row.droptime + "</div>";
+        }
+
+        if (row.drivername != "" && row.drivername != null) {
+            schdinfo_col += "<div><b>Driver Name : </b>" + row.drivername + "</div>";
+        }
+
+        if (row.vehicleno != "" && row.vehicleno != null) {
+            schdinfo_col += "<div><b>Vehicle No : </b>" + row.vehicleno + "</div>";
+        }
+
+        return schdinfo_col;
+    });
+
     // Contact Info
 
     _hndlbar.registerHelper('contactinfo_col', function(row) {
@@ -372,6 +483,12 @@ reports.getPassengerReports = function getPassengerReports(data) {
         }
 
         return _columns;
+    });
+
+    // Student Working Days
+
+    _hndlbar.registerHelper('student_BatchTime', function(row) {
+        return row.wkdays;
     });
 
     return _hndlbar;

@@ -12,7 +12,7 @@
         table {
             border-collapse: collapse;
             width: 100%;
-            border: 1px solid #114ca5!important;
+            border: 1px solid #114ca5 !important;
             margin-bottom: 10px;
         }
         
@@ -40,6 +40,10 @@
         h3 {
             margin: 5px;
         }
+        
+        hr {
+            margin: 5px 0;
+        }
     </style>
 </head>
 
@@ -57,10 +61,12 @@
         </tr>
         <tr>
             <td>
-                <h3 {{{font-10}}}><b>{{{psngrtype_head}}} Details </b> {{psngrname}}</h3>
+                <h3 {{{font-10}}}>
+                    <b>Parent Details </b> ({{prnttype}})
+                </h3>
             </td>
             <td align="right">
-                <h3 {{{font-10}}}>Total {{{psngrtype_head}}} : {{{count_data}}}</h3>
+                <h3 {{{font-10}}}>Total Student : {{{count_data}}}</h3>
             </td>
         </tr>
         {{/psngrhead}}
@@ -70,43 +76,47 @@
         <table border="1" class="table table-bordered table-responsive" cellspacing="0" cellpadding="5">
             <thead>
                 <tr>
-                    <th width="50px" {{{font-07}}}>Sr.</th>
-                    <th width="200px" {{{font-07}}}>{{{psngrtype_head}}} Name</th>
-                    <th width="150px" {{{font-07}}}>Mobile</th>
-                    <th width="200px" {{{font-07}}}>Email</th>
-                    <th width="250px" {{{font-07}}}>Pick Drop Details</th>
-                    <th width="250px" {{{font-07}}}>Schedule Details</th>
+                    <th width="30px" {{{font-07}}}>Sr.</th>
+                    <th width="100px" {{{font-07}}}>School Name</th>
+                    <th width="100px" {{{font-07}}}>Student Name</th>
+                    <th width="500px" {{{font-07}}}>Driver Details</th>
+                    <th width="100px" {{{font-07}}}>Parent Mobile</th>
+                    <th width="100px" {{{font-07}}}>Parent Name</th>
+                    <th width="60px" {{{font-07}}}>Relation</th>
+                    <th width="30px" {{{font-07}}}><img class="iconx" src="http://school.goyo.in:8080/assets/img/phone.png" /></th>
                 </tr>
             </thead>
             <tbody>
-                {{{nodatafound}}} {{#group psngrdata by="enttname"}}
-                <tr>
-                    <th colspan="6">
-                        <b>School : </b> {{value}}
-                    </th>
-                </tr>
-                {{#each items}}
+                {{{nodatafound}}} {{#psngrdata}}
                 <tr>
                     <td align="center">
                         {{rowid}}
                     </td>
                     <td {{{font-07}}}>
-                        <b>{{psngrname}}</b><br /> ({{psngrtypenm}})
+                        {{schoolname}}
                     </td>
                     <td {{{font-07}}}>
-                        {{{phoneinfo_col this}}}
+                        {{studentname}}
                     </td>
                     <td {{{font-07}}}>
-                        {{email1}}<br /> {{email2}}
+                        {{#drvdata}}
+                        <b>{{studname}} ({{batchname}})</b> <br /> {{{student_BatchTime this}}} <br /> <b>Driver</b> : {{drivername}} ({{drvmobno1}}) - {{vehicleno}}
+                        <hr /> {{/drvdata}}
                     </td>
                     <td {{{font-07}}}>
-                        {{{pickdropinfo_col this}}}
+                        {{prntmobile}}
                     </td>
                     <td {{{font-07}}}>
-                        {{{scheduleinfo_col this}}}
+                        {{prntname}}
+                    </td>
+                    <td {{{font-07}}}>
+                        {{prnttype}}
+                    </td>
+                    <td {{{font-07}}}>
+                        <img height="20" width="20" src="{{logourl}}/{{isreg}}.png" />
                     </td>
                 </tr>
-                {{/each}} {{/group}}
+                {{/psngrdata}}
             </tbody>
         </table>
     </div>

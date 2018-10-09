@@ -21,7 +21,12 @@ rptpsngr.getPassengerReports = function getPassengerReports(req, res, done) {
             parentheadcolumn = [];
             psngrheadcolumn = [];
         } else if (req.query.flag == "profile") {
-            formname = "passenger/passenger.html";
+            if (req.query.psngrtype == "passenger") {
+                formname = "passenger/passenger.html";
+            } else {
+                formname = "passenger/staff.html";
+            }
+
             parentheadcolumn = [];
             psngrheadcolumn = [];
         } else if (req.query.flag == "gr_summary") {
@@ -40,6 +45,10 @@ rptpsngr.getPassengerReports = function getPassengerReports(req, res, done) {
             formname = "passenger/catwise_details.html";
             parentheadcolumn = [];
             psngrheadcolumn = [];
+        } else if (req.query.flag == "prospectus_wise") {
+            formname = "passenger/prospectuswise.html";
+            parentheadcolumn = [];
+            psngrheadcolumn = [];
         } else if (req.query.flag == "agewise") {
             formname = "passenger/agewise.html";
             parentheadcolumn = data.rows[0][0].stdgndrcolumn.filter(function(x) { return x.id == 1 });
@@ -48,8 +57,12 @@ rptpsngr.getPassengerReports = function getPassengerReports(req, res, done) {
             formname = "passenger/birthday.html";
             parentheadcolumn = [];
             psngrheadcolumn = [];
-        } else {
+        } else if (req.query.flag == "left") {
             formname = "passenger/leftpsngr.html";
+            parentheadcolumn = [];
+            psngrheadcolumn = [];
+        } else {
+            formname = "passenger/parents.html";
             parentheadcolumn = [];
             psngrheadcolumn = [];
         }

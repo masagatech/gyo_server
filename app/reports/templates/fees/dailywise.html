@@ -40,13 +40,16 @@
     <table border="1" class="table table-bordered table-responsive" cellspacing="0" cellpadding="5">
         <thead>
             <tr>
+                <th width="30px">
+                    Sr.
+                </th>
                 <th width="250px">
                     School
                 </th>
                 <th>
                     Academic Year
                 </th>
-                <th width="100px">
+                <th width="80px">
                     GR No
                 </th>
                 <th width="100px">
@@ -55,7 +58,7 @@
                 <th width="250px">
                     Name
                 </th>
-                <th width="150px">
+                <th width="120px">
                     Receipt No
                 </th>
                 <th width="150px">
@@ -64,10 +67,10 @@
                 <th width="150px">
                     Receipt Amount
                 </th>
-                <th width="150px">
+                <th width="100px">
                     Pay Type
                 </th>
-                <th width="150px">
+                <th width="120px">
                     Cheque No
                 </th>
                 <th width="150px">
@@ -81,6 +84,9 @@
         <tbody>
             {{#data1}}
             <tr>
+                <td>
+                    {{rowid}}
+                </td>
                 <td>
                     {{schname}}
                 </td>
@@ -102,7 +108,7 @@
                 <td>
                     {{receivedate}}
                 </td>
-                <td>
+                <td align="right">
                     {{receiveamt}}
                 </td>
                 <td>
@@ -120,7 +126,7 @@
             </tr>
             {{/data1}} {{#data}}
             <tr class="tr-table">
-                <td colspan="7" align="right">
+                <td colspan="8" align="right">
                     <b>Total Amount</b>
                 </td>
                 <td align="right">

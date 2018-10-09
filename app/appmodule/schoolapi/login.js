@@ -4,10 +4,22 @@ var globals = require("gen").globals;
 
 var login = module.exports = {};
 
+// Get User Login
+
 login.getLogin = function getLogin(req, res, done) {
     var _data = getUserData(req);
 
     db.callProcedure("select " + globals.schema("funget_login") + "($1,$2::json);", ['login', _data], function(data) {
+        rs.resp(res, 200, data.rows);
+    }, function(err) {
+        rs.resp(res, 401, "error : " + err);
+    }, 1)
+}
+
+// Get Admin Login
+
+login.getAdminLogin = function getAdminLogin(req, res, done) {
+    db.callProcedure("select " + globals.schema("funget_adminlogin") + "($1,$2::json);", ['admlogin', req.body], function(data) {
         rs.resp(res, 200, data.rows);
     }, function(err) {
         rs.resp(res, 401, "error : " + err);

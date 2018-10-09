@@ -4,91 +4,182 @@
     <meta charset="utf-8" />
 
     <style>
-        table {
-            border-collapse: collapse;
-            border: 1px solid rgba(204, 204, 204, 0.35);
+        .trip h2.schoolname {
+            text-align: center;
             width: 100%;
+            font: 100 20px/1.5 Helvetica, Verdana, sans-serif;
+            font-weight: bold;
+            margin: 0;
+            padding: 0;
+            color: rgb(228, 156, 0);
+            margin-bottom: 15px;
         }
         
-        table thead th {
-            background: #009688;
-            border: 1px solid rgba(204, 204, 204, 0.35);
-            color: #ffffff;
-            padding: 5px;
-            text-align: left;
-            vertical-align: top;
+        .trip ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
         }
         
-        table tbody th {
-            background: #eeeeee;
-            border: 1px solid rgba(204, 204, 204, 0.35);
-            color: #000000;
-            padding: 5px;
-            text-align: left;
-            vertical-align: top;
+        .trip li {
+            font: 200 20px/1.5 Helvetica, Verdana, sans-serif;
+            border-bottom: 1px solid #ccc;
         }
         
-        table tbody td {
-            border: 1px solid rgba(204, 204, 204, 0.35);
+        .trip li:last-child {
+            border: none;
+        }
+        
+        .trip li a {
+            position: relative;
             padding: 5px;
-            vertical-align: top;
+            text-decoration: none;
+            color: #000;
+            display: block;
+            background: #f6f6f6;
+            border-radius: 5px;
+            -webkit-transition: font-size 0.3s ease, background-color 0.3s ease;
+            -moz-transition: font-size 0.3s ease, background-color 0.3s ease;
+            -o-transition: font-size 0.3s ease, background-color 0.3s ease;
+            -ms-transition: font-size 0.3s ease, background-color 0.3s ease;
+            transition: font-size 0.3s ease, background-color 0.3s ease;
+            margin-bottom: 10px;
+            box-shadow: 0px 2px 8px 1px #ccc;
+        }
+        
+        @-webkit-keyframes pulse {
+            0% {
+                -webkit-box-shadow: 0 0 0 0 rgba(33, 185, 33, .9)
+            }
+            70% {
+                -webkit-box-shadow: 0 0 0 10px rgba(33, 185, 33, 0)
+            }
+            to {
+                -webkit-box-shadow: 0 0 0 0 rgba(33, 185, 33, 0)
+            }
+        }
+        
+        @keyframes pulse {
+            0% {
+                -moz-box-shadow: 0 0 0 0 rgba(33, 185, 33, .9);
+                box-shadow: 0 0 0 0 rgba(33, 185, 33, .9)
+            }
+            70% {
+                -moz-box-shadow: 0 0 0 10px rgba(33, 185, 33, 0);
+                box-shadow: 0 0 0 10px rgba(33, 185, 33, 0)
+            }
+            to {
+                -moz-box-shadow: 0 0 0 0 rgba(33, 185, 33, 0);
+                box-shadow: 0 0 0 0 rgba(33, 185, 33, 0)
+            }
+        }
+        
+        .trip li a p {
+            font-size: 13px;
+        }
+        
+        .trip li span {
+            font-size: 13px;
+            font-weight: bold;
+        }
+        
+        .trip .text_p {
+            color: rgb(1, 141, 36);
+        }
+        
+        .trip .text_d {
+            color: rgb(231, 28, 28);
+        }
+        
+        .trip .p {
+            border: 1px solid rgb(1, 141, 36);
+            border-left: 10px solid rgb(1, 141, 36);
+        }
+        
+        .trip .d {
+            border: 1px solid rgb(231, 28, 28);
+            border-left: 10px solid rgb(231, 28, 28);
+        }
+        
+        .trip .batchnm {
+            font-size: 16px;
+        }
+        
+        .trip .small {
+            font-size: 10px;
+            color: red;
+            position: absolute;
+            right: 5px;
+            bottom: 5px;
+        }
+        
+        .trip .othertext {
+            font-weight: normal;
+        }
+        
+        .trip .passengers {
+            margin-left: 10px;
+        }
+        
+        .trip .active {
+            animation: pulse 2s infinite;
+        }
+        
+        .trip .notrip {
+            animation: none;
+            border: 1px solid #ccc;
+            border-left: 10px solid #ccc;
+            color: #6f6f6f !important;
+        }
+        
+        .trip .notrip span {
+            color: #6f6f6f;
+        }
+        
+        .trip .notrip strong {
+            color: red;
+        }
+        
+        .trip .hr {
+            border: none;
         }
     </style>
 </head>
 
 <body>
-    <table class="table table-bordered table-responsive">
-        <thead>
-            <tr>
-                <th>
-                    School
-                </th>
-                <th>
-                    Batch
-                </th>
-                <th>
-                    Pick Time
-                </th>
-                <th>
-                    Drop Time
-                </th>
-                <th>
-                    Student
-                </th>
-                <th>
-                    Collected
-                </th>
-                <th>
-                    Pending
-                </th>
-            </tr>
-        </thead>
-        <tbody>
-            {{#data}}
-            <tr>
-                <td>
-                    {{schoolname}}
-                </td>
-                <td>
-                    {{batchname}}
-                </td>
-                <td>
-                    {{picktime}}
-                </td>
-                <td>
-                    {{droptime}}
-                </td>
-                <td>
-                    {{countstuds}}
-                </td>
-                <td>
-                </td>
-                <td>
-                </td>
-            </tr>
-            {{/data}}
-        </tbody>
-    </table>
+    <div class="trip">
+        <h2 align="center">{{{nodatafound}}}</h2>
+
+        {{#group data by="schoolname"}}
+        <ul>
+            <li>
+                <h2 class="schoolname">{{value}}</h2>
+
+                {{#each items}}
+                <a class="{{typ}} {{act}} {{trptm}}" href="{{reporturl}}/getScheduleReports?flag=feesdetails&type=download&uid={{{uid}}}&utype={{{utype}}}&batchid={{batchid}}&pdtype={{typ}}&enttid={{schoolid}}&format=html">
+                    <div>
+                        <div>
+                            <span class="batchnm">{{batchname}}</span>
+                        </div>
+                        <div>
+                            <span class="othertext">Date : {{frmdt}} - {{todt}}</span>
+                        </div>
+                        <div>
+                            <span class="othertext">Time : {{{worktime this}}}</span>
+                        </div>
+                        <hr />
+                        <div>
+                            <span class="text_{{typ}} othertext">{{typname}}</span>
+                            <span class="passengers othertext">Passangers : {{countstuds}}</span>
+                        </div>
+                        <span class="small othertext">{{{feessummary this}}}</span>
+                    </div>
+                </a>
+                {{/each}}
+            </li>
+        </ul>
+        {{/group}}
+    </div>
 </body>
 
 </html>
