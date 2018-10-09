@@ -3,34 +3,35 @@ var rs = require("gen").res;
 var globals = require("gen").globals;
 
 var tripentry = require("../z_apitrips/tripsinfo.js");
+var ntfredis = require("../schoolapi/notificationredis.js");
 var trip = module.exports = {};
 
 //get my todays trips details 
 
-trip.mytrips = function (req, res, done) {
-    db.callProcedure("select " + globals.schema("funget_api_mytrips") + "($1,$2::json);", ['mytrips', req.body], function (data) {
+trip.mytrips = function(req, res, done) {
+    db.callProcedure("select " + globals.schema("funget_api_mytrips") + "($1,$2::json);", ['mytrips', req.body], function(data) {
         rs.resp(res, 200, data.rows);
-    }, function (err) {
+    }, function(err) {
         rs.resp(res, 401, "error : " + err);
     }, 1);
 }
 
 //get trips passengers details
 
-trip.getcrews = function (req, res, done) {
-    db.callProcedure("select " + globals.schema("funget_api_tripcrews") + "($1,$2::json);", ['tripcrews', req.body], function (data) {
+trip.getcrews = function(req, res, done) {
+    db.callProcedure("select " + globals.schema("funget_api_tripcrews") + "($1,$2::json);", ['tripcrews', req.body], function(data) {
         rs.resp(res, 200, data.rows);
-    }, function (err) {
+    }, function(err) {
         rs.resp(res, 401, "error : " + err);
     }, 1);
 }
 
 //start trip api 
 
-trip.starttrip = function (req, res, done) {
+trip.starttrip = function(req, res, done) {
     req.body.mode = "start";
 
-    db.callFunction("select " + globals.schema("funsave_api_startstoptrip") + "($1::json);", [req.body], function (data) {
+    db.callFunction("select " + globals.schema("funsave_api_startstoptrip") + "($1::json);", [req.body], function(data) {
         var _d = data.rows[0].funsave_api_startstoptrip;
         rs.resp(res, 200, _d);
 
@@ -56,17 +57,17 @@ trip.starttrip = function (req, res, done) {
 
             }
         }
-    }, function (err) {
+    }, function(err) {
         rs.resp(res, 401, "error : " + err);
     });
 }
 
 // api for stop trip from driver device
 
-trip.stoptrip = function (req, res, done) {
+trip.stoptrip = function(req, res, done) {
     req.body.mode = "stop";
 
-    db.callFunction("select " + globals.schema("funsave_api_startstoptrip") + "($1::json);", [req.body], function (data) {
+    db.callFunction("select " + globals.schema("funsave_api_startstoptrip") + "($1::json);", [req.body], function(data) {
         var _d = data.rows[0].funsave_api_startstoptrip;
         rs.resp(res, 200, _d);
 
@@ -84,15 +85,15 @@ trip.stoptrip = function (req, res, done) {
 
             }
         }
-    }, function (err) {
+    }, function(err) {
         rs.resp(res, 401, "error : " + err);
     });
 }
 
 // api for pickup / drop passenger
 
-trip.picdrpcrew = function (req, res, done) {
-    db.callFunction("select " + globals.schema("funsave_api_pickupdropcrew") + "($1::json);", [req.body], function (data) {
+trip.picdrpcrew = function(req, res, done) {
+    db.callFunction("select " + globals.schema("funsave_api_pickupdropcrew") + "($1::json);", [req.body], function(data) {
         var _d = data.rows[0].funsave_api_pickupdropcrew;
         rs.resp(res, 200, _d);
 
@@ -111,12 +112,12 @@ trip.picdrpcrew = function (req, res, done) {
                 trip.sendabsentalert(sendData);
             }
         }
-    }, function (err) {
+    }, function(err) {
         rs.resp(res, 401, "error : " + err);
     });
 }
 
-trip.sendpickupalert = function (data) {
+trip.sendpickupalert = function(data) {
     trip.sendNotification({
         "tripid": data.tripid,
         "studid": data.studid,
@@ -128,7 +129,7 @@ trip.sendpickupalert = function (data) {
     });
 }
 
-trip.senddropalert = function (data) {
+trip.senddropalert = function(data) {
     trip.sendNotification({
         "tripid": data.tripid,
         "studid": data.studid,
@@ -140,8 +141,7 @@ trip.senddropalert = function (data) {
     });
 }
 
-trip.sendabsentalert = function (data) {
-
+trip.sendabsentalert = function(data) {
     trip.sendNotification({
         "tripid": data.tripid,
         "studid": data.studid,
@@ -153,7 +153,7 @@ trip.sendabsentalert = function (data) {
     });
 }
 
-trip.sendreachingalert = function (req, res, done) {
+trip.sendreachingalert = function(req, res, done) {
     var data = req.body;
 
     trip.sendNotification({
@@ -168,11 +168,10 @@ trip.sendreachingalert = function (req, res, done) {
 // sending FCM notification
 var fcm = require("gen").fcm();
 
-trip.sendNotification = function (_data, res) {
+trip.sendNotification = function(_data, res) {
     db.callProcedure("select " + globals.schema("funget_api_getnotifyids") + "($1,$2,$3::json);", ['tripnotify', 'tripnotify1', _data],
-        function (data) {
+        function(data) {
             try {
-
                 var _sound = "default";
                 var devicetokens = data.rows[0];
                 var tokens = [];
@@ -180,6 +179,16 @@ trip.sendNotification = function (_data, res) {
 
                 for (var i = 0; i <= devicetokens.length - 1; i++) {
                     tokens.push(devicetokens[i].devtok);
+
+                    try {
+                        if (_data.flag === "enter" || _data.flag === "exit") {
+                            ntfredis.createNotify({
+                                "body": { "uid": devicetokens[i].id, "title": msg.title, "body": msg.body }
+                            });
+                        }
+                    } catch (ex) {
+
+                    }
                 }
 
                 if (res) {
@@ -200,6 +209,7 @@ trip.sendNotification = function (_data, res) {
                         }
                     }
                 }
+
                 if (_data.type) {
                     if (_data.type == "driver_tracking") {
                         _sound = "notification_tone_2";
@@ -227,8 +237,8 @@ trip.sendNotification = function (_data, res) {
                     "priority": "HIGH",
                     "time_to_live": (60 * 15)
                 };
-                console.log(message)
-                fcm.send(message, function (err, response) {
+
+                fcm.send(message, function(err, response) {
                     if (err) {
                         console.log("Somethings has gone wrong!", err);
                     } else {
@@ -240,7 +250,7 @@ trip.sendNotification = function (_data, res) {
             }
         },
 
-        function (err) {
+        function(err) {
 
         }, 2);
 }
