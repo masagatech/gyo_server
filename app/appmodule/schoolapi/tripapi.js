@@ -4,6 +4,7 @@ var globals = require("gen").globals;
 
 var tripentry = require("../z_apitrips/tripsinfo.js");
 var ntfredis = require("../schoolapi/notificationredis.js");
+var sms_email = require("../schoolapi/sendsms_email.js");
 var trip = module.exports = {};
 
 //get my todays trips details 
@@ -182,9 +183,27 @@ trip.sendNotification = function(_data, res) {
 
                     try {
                         if (_data.flag === "enter" || _data.flag === "exit") {
+                            var uid = devicetokens[i].id;
+                            var uphone = devicetokens[i].phone;
+                            var uemail = devicetokens[i].email;
+
+                            // Send Notification
+
                             ntfredis.createNotify({
-                                "body": { "uid": devicetokens[i].id, "title": msg.title, "body": msg.body }
+                                "body": { "uid": uid, "title": msg.title, "body": msg.body }
                             });
+
+                            // Send Email
+
+                            var params = {
+                                "sms_to": uphone,
+                                "sms_body": msg.title + " : " + msg.body,
+                                "mail_to": uemail,
+                                "mail_subject": msg.title,
+                                "mail_body": msg.body
+                            };
+
+                            sms_email.sendEmailAndSMS(params, uphone, uemail, [], "email", _data.enttid);
                         }
                     } catch (ex) {
 
