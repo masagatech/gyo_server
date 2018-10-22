@@ -6,8 +6,8 @@ var globals = gen.globals;
 var download = gen.download;
 
 var driver = module.exports = {};
-var drvmstapi = require("../../reports/templates/master/driver/driver.js");
 var drvtrnspapi = require("../../reports/templates/transport/driver/driver.js");
+var drvmstapi = require("../../reports/templates/master/driver/driver.js");
 
 driver.getDriverReports = function getDriverReports(req, res, done) {
     db.callProcedure("select " + globals.schema("funget_driverdetails") + "($1,$2::json);", ['drv', req.query], function(data) {

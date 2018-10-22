@@ -1,0 +1,98 @@
+<html>
+
+<head>
+    <meta charset="utf-8" />
+
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            border: 1px solid #114ca5 !important;
+            margin-bottom: 10px;
+        }
+        
+        table thead th {
+            background: #009688;
+            color: #ffffff;
+            padding: 3px;
+            text-align: center;
+            vertical-align: top;
+        }
+        
+        table tbody th {
+            background: #eeeeee;
+            color: #000000;
+            padding: 5px;
+            text-align: left;
+            vertical-align: top;
+        }
+        
+        table tbody td {
+            padding: 3px;
+            vertical-align: top;
+        }
+        
+        h3 {
+            margin: 5px;
+        }
+        
+        hr {
+            margin: 10px 0;
+        }
+    </style>
+</head>
+
+<body>
+    <table border="1" class="table table-bordered table-responsive" cellspacing="0" cellpadding="5">
+        <thead>
+            <tr>
+                <th width="10px">Sr.</th>
+                <th width="100px">Registration No</th>
+                <th width="80px">IMEI</th>
+                <th width="50px">Sim No</th>
+                <th width="350px">School</th>
+                <th width="80px">Created Date</th>
+                <th width="80px">From Date</th>
+                <th width="80px">To Date</th>
+                <th width="80px">Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{{nodatafound}}} {{#data}}
+            <tr>
+                <td>
+                    {{rowid}}
+                </td>
+                <td>
+                    {{vehregno}}
+                </td>
+                <td>
+                    {{imei}}
+                </td>
+                <td>
+                    {{simno}}
+                </td>
+                <td>
+                    {{#schooldt}}
+                    <div><b>{{@index}}.</b> {{schname}}</div>
+                    {{/schooldt}}
+                </td>
+                <td>
+                    {{createdon}}
+                </td>
+                <td>
+                    {{frmdt}}
+                </td>
+                <td>
+                    {{todt}}
+                </td>
+                <td>
+                    {{status}}
+                </td>
+            </tr>
+            {{/data}}
+        </tbody>
+    </table>
+</body>
+
+</html>
