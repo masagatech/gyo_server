@@ -5,7 +5,10 @@ const root = "/vts";
 
 var appVTSRouter = function(app) {
     // Get Fence
-    app.get(root + "/fnc", vts.getFence);
+    // app.get(root + "/fnc", vts.getFence);
+
+    // Get Fence
+    app.get(root + "/fnc", vts.addToMongodb);
 
     // Get Speed
     app.get(root + "/speed", vts.getSpeed);
