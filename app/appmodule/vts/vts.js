@@ -113,32 +113,32 @@ vts.addToMongodb = function (req, res, done) {
         "servertime": Date.now(),
         "date": date
     };
-    mondb.mongoose.model('notification').findOne({
-        "date": date,
-        "batchid": ntfparams.batchid,
-        "stpid": ntfparams.stpid,
-        "almtyp": ntfparams.almtyp,
-        "pdtype": ntfparams.pdtype,
-    }).exec(function (err, datas) {
-        if (datas == null) {
-            mondb.mongoose.model('notification').create(ntfparams, function (err, data) {
-                if (err) {
-                    if (res) {
-                        rs.resp(res, 200, "err");
-                    }
-                    return;
-                }
-                if (res) {
-                    rs.resp(res, 200, "ok");
-                }
-            });
-
-        } else {
+    // mondb.mongoose.model('notification').findOne({
+    //     "date": date,
+    //     "batchid": ntfparams.batchid,
+    //     "stpid": ntfparams.stpid,
+    //     "almtyp": ntfparams.almtyp,
+    //     "pdtype": ntfparams.pdtype,
+    // }).exec(function (err, datas) {
+    //     if (datas == null) {
+    mondb.mongoose.model('notification').create(ntfparams, function (err, data) {
+        if (err) {
             if (res) {
-                rs.resp(res, 200, "exists");
+                rs.resp(res, 200, "err");
             }
+            return;
+        }
+        if (res) {
+            rs.resp(res, 200, "ok");
         }
     });
+
+    //     } else {
+    //         if (res) {
+    //             rs.resp(res, 200, "exists");
+    //         }
+    //     }
+    // });
 }
 
 // From MongoDB
@@ -150,7 +150,7 @@ var j = schedule.scheduleJob('*/2 * * * * *', function () {
         'isread': false
     }).sort({
         'servertime': 1
-    }).limit(50);
+    }).limit(80);
 
     d.exec(function (err, mdata) {
         if (err) {
