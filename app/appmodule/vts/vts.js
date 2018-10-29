@@ -25,14 +25,14 @@ function saveNotification(req, res, _remark3, _data) {
         "cuid": "admin.goyo"
     };
 
-    db.callFunction("select " + globals.erpschema("funsave_notification") + "($1::json);", [params], function(data) {
+    db.callFunction("select " + globals.erpschema("funsave_notification") + "($1::json);", [params], function (data) {
         rs.resp(res, 200, data.rows);
-    }, function(err) {
+    }, function (err) {
         rs.resp(res, 401, "error : " + err);
     })
 }
 
-vts.getFence = function(req, res, done) {
+vts.getFence = function (req, res, done) {
     var ntfparams = {
         "flag": req.query.almtyp,
         "almtyp": req.query.almtyp,
@@ -47,7 +47,7 @@ vts.getFence = function(req, res, done) {
         "enttid": req.query.enttid
     };
 
-    db.callProcedure("select " + globals.schema("funapisend_notification_or_not") + "($1,$2::json);", ['ntf', ntfparams], function(data) {
+    db.callProcedure("select " + globals.schema("funapisend_notification_or_not") + "($1,$2::json);", ['ntf', ntfparams], function (data) {
         var _data = data.rows[0];
 
         if (_data !== undefined) {
@@ -62,12 +62,12 @@ vts.getFence = function(req, res, done) {
         } else {
             rs.resp(res, 200, "No Data Found");
         }
-    }, function(err) {
+    }, function (err) {
         rs.resp(res, 401, "error : " + err);
     }, 1)
 }
 
-vts.getSpeed = function(req, res, done) {
+vts.getSpeed = function (req, res, done) {
     console.log(req);
 }
 
@@ -89,12 +89,12 @@ var NotificationSchema = new Schema({
     tm: String,
     enttid: Number,
     isread: Boolean,
-    servertime: String
+    servertime: Date
 });
 
 mondb.mongoose.model('notification', NotificationSchema);
 
-vts.addToMongodb = function(req, res, done) {
+vts.addToMongodb = function (req, res, done) {
     var ntfparams = {
         "flag": req.query.almtyp,
         "almtyp": req.query.almtyp,
@@ -106,10 +106,12 @@ vts.addToMongodb = function(req, res, done) {
         "stptype": req.query.stptype,
         "pdtype": req.query.pdtype,
         "tm": req.query.tm,
-        "enttid": req.query.enttid
+        "enttid": req.query.enttid,
+        "isread": false,
+        "servertime": Date.now()
     };
 
-    mondb.mongoose.model('notification').create(ntfparams, function(err, data) {
+    mondb.mongoose.model('notification').create(ntfparams, function (err, data) {
         if (err) {
             if (res) {
                 rs.resp(res, 400, err);
@@ -126,19 +128,30 @@ vts.addToMongodb = function(req, res, done) {
 
 // From MongoDB
 
-var j = schedule.scheduleJob('*/2 * * * * *', function() {
+var j = schedule.scheduleJob('*/2 * * * * *', function () {
     console.log('The answer to life, the universe, and everything!');
 
-    var d = mondb.mongoose.model('notification').find({}).sort({ 'servertime': -1 }).limit(50);
+    var d = mondb.mongoose.model('notification').find({}).sort({
+        'servertime': -1
+    }).limit(50);
 
-    d.exec(function(err, mdata) {
+    d.exec(function (err, mdata) {
         if (err) {
             return;
         }
 
-        console.log(mdata);
+        var lastrec = mdata[mdata.length - 1]
 
-        db.callProcedure("select " + globals.schema("funapisend_notification_or_not") + "($1,$2::json);", ['ntf', mdata], function(data) {
+        mondb.mongoose.model('notification').updateMany({
+            'servertime': {
+                $lte: lastrec.servertime
+            }
+        }, {
+            'isread': true
+        });
+        // console.log(mdata);
+
+        db.callProcedure("select " + globals.schema("funapisend_notification_or_not") + "($1,$2::json);", ['ntf', mdata], function (data) {
             var _data = data.rows[0];
 
             if (_data !== undefined) {
@@ -158,9 +171,9 @@ var j = schedule.scheduleJob('*/2 * * * * *', function() {
                     "cuid": "admin.goyo"
                 };
 
-                db.callFunction("select " + globals.erpschema("funsave_notification") + "($1::json);", [params], function(data) {
-                    console.log(data.rows);
-                }, function(err) {
+                db.callFunction("select " + globals.erpschema("funsave_notification") + "($1::json);", [params], function (data) {
+                    // console.log(data.rows);
+                }, function (err) {
                     console.log(err);
                 });
 
@@ -168,7 +181,7 @@ var j = schedule.scheduleJob('*/2 * * * * *', function() {
             } else {
                 console.log("No Data Found");
             }
-        }, function(err) {
+        }, function (err) {
             console.log(err);
         }, 1)
     });
