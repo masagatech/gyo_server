@@ -273,3 +273,103 @@ trip.sendNotification = function(_data, res) {
 
         }, 2);
 }
+
+// VTS
+
+trip.sendVTSNotification = function(_data, res) {
+    try {
+        var _sound = "default";
+        var devicetokens = _data;
+        var tokens = [];
+        var msg = _data.rows[1][0];
+
+        for (var i = 0; i <= devicetokens.length - 1; i++) {
+            tokens.push(devicetokens[i].token);
+
+            try {
+                if (_data.flag === "enter" || _data.flag === "exit") {
+                    var uid = devicetokens[i].id;
+                    var uphone = devicetokens[i].phone;
+                    var uemail = devicetokens[i].email;
+
+                    // Send Notification
+
+                    ntfredis.createNotify({
+                        "body": { "uid": uid, "title": msg.title, "body": msg.body }
+                    });
+
+                    // Send Email
+
+                    var params = {
+                        "sms_to": uphone,
+                        "sms_body": msg.title + " : " + msg.body,
+                        "mail_to": uemail,
+                        "mail_subject": msg.title,
+                        "mail_body": msg.body
+                    };
+
+                    sms_email.sendEmailAndSMS(params, uphone, uemail, [], "email", _data.enttid);
+                }
+            } catch (ex) {
+
+            }
+        }
+
+        if (res) {
+            if (_data.flag == "reaching") {
+                if (msg.title == "al") {
+                    var _d = {
+                        "status": false
+                    };
+
+                    rs.resp(res, 200, _d);
+                    return;
+                } else {
+                    var _d = {
+                        "status": true
+                    };
+
+                    rs.resp(res, 200, _d);
+                }
+            }
+        }
+
+        if (_data.type) {
+            if (_data.type == "driver_tracking") {
+                _sound = "notification_tone_2";
+            }
+        }
+
+        if (_data.flag == "stoptrip") {
+            if (msg.title == "no") {
+                return;
+            }
+        }
+
+        _data["body"] = msg.body;
+        _data["title"] = msg.title;
+
+        var message = {
+            "registration_ids": tokens,
+            "notification": {
+                body: msg.body,
+                title: msg.title,
+                sound: _sound,
+            },
+
+            "data": _data,
+            "priority": "HIGH",
+            "time_to_live": (60 * 15)
+        };
+
+        fcm.send(message, function(err, response) {
+            if (err) {
+                console.log("Somethings has gone wrong!", err);
+            } else {
+                console.log("Successfullys sent with response: ", response);
+            }
+        });
+    } catch (error) {
+        console.log(error);
+    }
+}
