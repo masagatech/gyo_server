@@ -95,6 +95,8 @@ var NotificationSchema = new Schema({
 mondb.mongoose.model('notification', NotificationSchema);
 
 vts.addToMongodb = function (req, res, done) {
+    var nowDate = new Date();
+    var date = nowDate.getFullYear() + '/' + (nowDate.getMonth() + 1) + '/' + nowDate.getDate();
     var ntfparams = {
         "flag": req.query.almtyp,
         "almtyp": req.query.almtyp,
@@ -108,33 +110,35 @@ vts.addToMongodb = function (req, res, done) {
         "tm": req.query.tm,
         "enttid": req.query.enttid,
         "isread": false,
-        "servertime": Date.now()
+        "servertime": Date.now(),
+        "date": date
     };
     mondb.mongoose.model('notification').findOne({
+        "date": date,
         "batchid": ntfparams.batchid,
         "stpid": ntfparams.stpid,
         "almtyp": ntfparams.almtyp,
         "pdtype": ntfparams.pdtype,
     }).exec(function (err, datas) {
         if (datas == null) {
-
             mondb.mongoose.model('notification').create(ntfparams, function (err, data) {
                 if (err) {
                     if (res) {
-                        rs.resp(res, 400, err);
+                        rs.resp(res, 200, "err");
                     }
-
                     return;
                 }
-
                 if (res) {
-                    rs.resp(res, 200, data);
+                    rs.resp(res, 200, "ok");
                 }
             });
 
+        } else {
+            if (res) {
+                rs.resp(res, 200, "exists");
+            }
         }
     });
-
 }
 
 // From MongoDB
@@ -145,7 +149,7 @@ var j = schedule.scheduleJob('*/2 * * * * *', function () {
     var d = mondb.mongoose.model('notification').find({
         'isread': false
     }).sort({
-        'servertime': -1
+        'servertime': 1
     }).limit(50);
 
     d.exec(function (err, mdata) {
