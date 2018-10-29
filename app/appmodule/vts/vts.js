@@ -110,20 +110,31 @@ vts.addToMongodb = function (req, res, done) {
         "isread": false,
         "servertime": Date.now()
     };
+    mondb.mongoose.model('notification').findOne({
+        "batchid": ntfparams.batchid,
+        "stpid": ntfparams.stpid,
+        "almtyp": ntfparams.almtyp,
+        "pdtype": ntfparams.pdtype,
+    }).exec(function (err, datas) {
+        if (datas == null) {
 
-    mondb.mongoose.model('notification').create(ntfparams, function (err, data) {
-        if (err) {
-            if (res) {
-                rs.resp(res, 400, err);
-            }
+            mondb.mongoose.model('notification').create(ntfparams, function (err, data) {
+                if (err) {
+                    if (res) {
+                        rs.resp(res, 400, err);
+                    }
 
-            return;
-        }
+                    return;
+                }
 
-        if (res) {
-            rs.resp(res, 200, data);
+                if (res) {
+                    rs.resp(res, 200, data);
+                }
+            });
+
         }
     });
+
 }
 
 // From MongoDB
@@ -131,7 +142,9 @@ vts.addToMongodb = function (req, res, done) {
 var j = schedule.scheduleJob('*/2 * * * * *', function () {
     console.log('The answer to life, the universe, and everything!');
 
-    var d = mondb.mongoose.model('notification').find({}).sort({
+    var d = mondb.mongoose.model('notification').find({
+        'isread': false
+    }).sort({
         'servertime': -1
     }).limit(50);
 
