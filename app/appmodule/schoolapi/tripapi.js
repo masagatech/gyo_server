@@ -9,30 +9,30 @@ var trip = module.exports = {};
 
 //get my todays trips details 
 
-trip.mytrips = function(req, res, done) {
-    db.callProcedure("select " + globals.schema("funget_api_mytrips") + "($1,$2::json);", ['mytrips', req.body], function(data) {
+trip.mytrips = function (req, res, done) {
+    db.callProcedure("select " + globals.schema("funget_api_mytrips") + "($1,$2::json);", ['mytrips', req.body], function (data) {
         rs.resp(res, 200, data.rows);
-    }, function(err) {
+    }, function (err) {
         rs.resp(res, 401, "error : " + err);
     }, 1);
 }
 
 //get trips passengers details
 
-trip.getcrews = function(req, res, done) {
-    db.callProcedure("select " + globals.schema("funget_api_tripcrews") + "($1,$2::json);", ['tripcrews', req.body], function(data) {
+trip.getcrews = function (req, res, done) {
+    db.callProcedure("select " + globals.schema("funget_api_tripcrews") + "($1,$2::json);", ['tripcrews', req.body], function (data) {
         rs.resp(res, 200, data.rows);
-    }, function(err) {
+    }, function (err) {
         rs.resp(res, 401, "error : " + err);
     }, 1);
 }
 
 //start trip api 
 
-trip.starttrip = function(req, res, done) {
+trip.starttrip = function (req, res, done) {
     req.body.mode = "start";
 
-    db.callFunction("select " + globals.schema("funsave_api_startstoptrip") + "($1::json);", [req.body], function(data) {
+    db.callFunction("select " + globals.schema("funsave_api_startstoptrip") + "($1::json);", [req.body], function (data) {
         var _d = data.rows[0].funsave_api_startstoptrip;
         rs.resp(res, 200, _d);
 
@@ -58,17 +58,17 @@ trip.starttrip = function(req, res, done) {
 
             }
         }
-    }, function(err) {
+    }, function (err) {
         rs.resp(res, 401, "error : " + err);
     });
 }
 
 // api for stop trip from driver device
 
-trip.stoptrip = function(req, res, done) {
+trip.stoptrip = function (req, res, done) {
     req.body.mode = "stop";
 
-    db.callFunction("select " + globals.schema("funsave_api_startstoptrip") + "($1::json);", [req.body], function(data) {
+    db.callFunction("select " + globals.schema("funsave_api_startstoptrip") + "($1::json);", [req.body], function (data) {
         var _d = data.rows[0].funsave_api_startstoptrip;
         rs.resp(res, 200, _d);
 
@@ -86,15 +86,15 @@ trip.stoptrip = function(req, res, done) {
 
             }
         }
-    }, function(err) {
+    }, function (err) {
         rs.resp(res, 401, "error : " + err);
     });
 }
 
 // api for pickup / drop passenger
 
-trip.picdrpcrew = function(req, res, done) {
-    db.callFunction("select " + globals.schema("funsave_api_pickupdropcrew") + "($1::json);", [req.body], function(data) {
+trip.picdrpcrew = function (req, res, done) {
+    db.callFunction("select " + globals.schema("funsave_api_pickupdropcrew") + "($1::json);", [req.body], function (data) {
         var _d = data.rows[0].funsave_api_pickupdropcrew;
         rs.resp(res, 200, _d);
 
@@ -113,12 +113,12 @@ trip.picdrpcrew = function(req, res, done) {
                 trip.sendabsentalert(sendData);
             }
         }
-    }, function(err) {
+    }, function (err) {
         rs.resp(res, 401, "error : " + err);
     });
 }
 
-trip.sendpickupalert = function(data) {
+trip.sendpickupalert = function (data) {
     trip.sendNotification({
         "tripid": data.tripid,
         "studid": data.studid,
@@ -130,7 +130,7 @@ trip.sendpickupalert = function(data) {
     });
 }
 
-trip.senddropalert = function(data) {
+trip.senddropalert = function (data) {
     trip.sendNotification({
         "tripid": data.tripid,
         "studid": data.studid,
@@ -142,7 +142,7 @@ trip.senddropalert = function(data) {
     });
 }
 
-trip.sendabsentalert = function(data) {
+trip.sendabsentalert = function (data) {
     trip.sendNotification({
         "tripid": data.tripid,
         "studid": data.studid,
@@ -154,7 +154,7 @@ trip.sendabsentalert = function(data) {
     });
 }
 
-trip.sendreachingalert = function(req, res, done) {
+trip.sendreachingalert = function (req, res, done) {
     var data = req.body;
 
     trip.sendNotification({
@@ -169,9 +169,9 @@ trip.sendreachingalert = function(req, res, done) {
 // sending FCM notification
 var fcm = require("gen").fcm();
 
-trip.sendNotification = function(_data, res) {
+trip.sendNotification = function (_data, res) {
     db.callProcedure("select " + globals.schema("funget_api_getnotifyids") + "($1,$2,$3::json);", ['tripnotify', 'tripnotify1', _data],
-        function(data) {
+        function (data) {
             try {
                 var _sound = "default";
                 var devicetokens = data.rows[0];
@@ -190,7 +190,11 @@ trip.sendNotification = function(_data, res) {
                             // Send Notification
 
                             ntfredis.createNotify({
-                                "body": { "uid": uid, "title": msg.title, "body": msg.body }
+                                "body": {
+                                    "uid": uid,
+                                    "title": msg.title,
+                                    "body": msg.body
+                                }
                             });
 
                             // Send Email
@@ -257,7 +261,7 @@ trip.sendNotification = function(_data, res) {
                     "time_to_live": (60 * 15)
                 };
 
-                fcm.send(message, function(err, response) {
+                fcm.send(message, function (err, response) {
                     if (err) {
                         console.log("Somethings has gone wrong!", err);
                     } else {
@@ -269,106 +273,108 @@ trip.sendNotification = function(_data, res) {
             }
         },
 
-        function(err) {
+        function (err) {
 
         }, 2);
 }
 
 // VTS
 
-trip.sendVTSNotification = function(_data, res) {
+trip.sendVTSNotification = function (_data, res) {
     try {
-        var _sound = "default";
+        var _sound = "notification_tone_2";
         var devicetokens = _data;
-        var tokens = [];
-        var msg = _data.rows[1][0];
+        var tokens = {};
+
+
 
         for (var i = 0; i <= devicetokens.length - 1; i++) {
-            tokens.push(devicetokens[i].token);
+            var d = devicetokens[i];
+            if (tokens[d.almtype + "_" + d.vehid] === undefined) {
+                tokens[d.almtype + "_" + d.vehid] = {
+                    msg: d.msg,
+                    title: d.title,
+                    data: []
+                };
+            }
 
-            try {
-                if (_data.flag === "enter" || _data.flag === "exit") {
-                    var uid = devicetokens[i].id;
-                    var uphone = devicetokens[i].phone;
-                    var uemail = devicetokens[i].email;
+            tokens[d.almtype + "_" + d.vehid].data.push({
+                devtok: d.token,
+                email: d.email,
+                phone: d.phone
+            });
+        }
 
-                    // Send Notification
+        try {
+            // Send Notification
 
-                    ntfredis.createNotify({
-                        "body": { "uid": uid, "title": msg.title, "body": msg.body }
+            Object.keys(tokens).forEach(function (key) {
+                var val = tokens[key];
+
+                var toks = [];
+                for (let index = 0; index < val.data.length; index++) {
+                    const element = val.data[index];
+                    toks.push(element.devtok);
+
+                }
+
+
+                // ntfredis.createNotify({
+                //     "body": {
+                //         "uid": uid,
+                //         "title": msg.title,
+                //         "body": msg.body
+                //     }
+                // });
+                if (toks.length > 0) {
+                    var dta = {};
+                    dta["body"] = val.body;
+                    dta["title"] = val.title;
+
+                    var message = {
+                        "registration_ids": toks,
+                        "notification": {
+                            body: val.body,
+                            title: val.title,
+                            sound: _sound,
+                        },
+                        "data": dta,
+                        "priority": "HIGH",
+                        "time_to_live": (60 * 15)
+                    };
+
+                    fcm.send(message, function (err, response) {
+                        if (err) {
+                            console.log("Somethings has gone wrong!", err);
+                        } else {
+                            console.log("Successfullys sent with response: ", response);
+                        }
                     });
 
                     // Send Email
 
-                    var params = {
-                        "sms_to": uphone,
-                        "sms_body": msg.title + " : " + msg.body,
-                        "mail_to": uemail,
-                        "mail_subject": msg.title,
-                        "mail_body": msg.body
-                    };
+                    // var params = {
+                    //     "sms_to": uphone,
+                    //     "sms_body": msg.title + " : " + msg.body,
+                    //     "mail_to": uemail,
+                    //     "mail_subject": msg.title,
+                    //     "mail_body": msg.body
+                    // };
 
-                    sms_email.sendEmailAndSMS(params, uphone, uemail, [], "email", _data.enttid);
+                    // sms_email.sendEmailAndSMS(params, uphone, uemail, [], "email", _data.enttid);
                 }
-            } catch (ex) {
 
-            }
+            });
+
+
+
+        } catch (ex) {
+
+
         }
 
-        if (res) {
-            if (_data.flag == "reaching") {
-                if (msg.title == "al") {
-                    var _d = {
-                        "status": false
-                    };
 
-                    rs.resp(res, 200, _d);
-                    return;
-                } else {
-                    var _d = {
-                        "status": true
-                    };
 
-                    rs.resp(res, 200, _d);
-                }
-            }
-        }
-
-        if (_data.type) {
-            if (_data.type == "driver_tracking") {
-                _sound = "notification_tone_2";
-            }
-        }
-
-        if (_data.flag == "stoptrip") {
-            if (msg.title == "no") {
-                return;
-            }
-        }
-
-        _data["body"] = msg.body;
-        _data["title"] = msg.title;
-
-        var message = {
-            "registration_ids": tokens,
-            "notification": {
-                body: msg.body,
-                title: msg.title,
-                sound: _sound,
-            },
-
-            "data": _data,
-            "priority": "HIGH",
-            "time_to_live": (60 * 15)
-        };
-
-        fcm.send(message, function(err, response) {
-            if (err) {
-                console.log("Somethings has gone wrong!", err);
-            } else {
-                console.log("Successfullys sent with response: ", response);
-            }
-        });
     } catch (error) {
         console.log(error);
     }
