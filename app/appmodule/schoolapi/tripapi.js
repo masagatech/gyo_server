@@ -322,15 +322,9 @@ trip.sendVTSNotification = function(_data, res) {
         try {
             // Save  Notification
 
-            console.log("token", JSON.stringify(tokens.enter_12));
+            // console.log("token", JSON.stringify(tokens.enter_12));
 
             var params = { "vtsnotification": [tokens.enter_12], "enttid": tokens.enter_12.enttid }
-
-            db.callFunction("select " + globals.erpschema("funsave_vtsnotification") + "($1::json);", [params], function(data) {
-                console.log("Notification", data.rows);
-            }, function(err) {
-                console.log(err);
-            });
 
             // Send Notification
 
@@ -370,13 +364,13 @@ trip.sendVTSNotification = function(_data, res) {
 
                     // console.log(message);
 
-                    // fcm.send(message, function(err, response) {
-                    //     if (err) {
-                    //         console.log("Somethings has gone wrong!", err);
-                    //     } else {
-                    //         console.log("Successfullys sent with response: ", response);
-                    //     }
-                    // });
+                    fcm.send(message, function(err, response) {
+                        if (err) {
+                            console.log("Somethings has gone wrong!", err);
+                        } else {
+                            console.log("Successfullys sent with response: ", response);
+                        }
+                    });
 
                     // Send Email
 
@@ -389,7 +383,17 @@ trip.sendVTSNotification = function(_data, res) {
                     // };
 
                     // sms_email.sendEmailAndSMS(params, uphone, uemail, [], "email", _data.enttid);
+
+
+                    db.callFunction("select " + globals.erpschema("funsave_vtsnotification") + "($1::json);", [params], function(data) {
+                        console.log("Notification", data.rows);
+                    }, function(err) {
+                        console.log(err);
+                    });
                 }
+
+
+
             });
         } catch (ex) {
 
