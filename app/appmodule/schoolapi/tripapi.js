@@ -307,7 +307,6 @@ trip.sendVTSNotification = function(_data, res) {
                     pdtype: d.pdtype,
                     tm: d.tm,
                     enttid: d.enttid,
-                    wsautoid: d.wsautoid,
                     data: []
                 };
             }
@@ -320,21 +319,19 @@ trip.sendVTSNotification = function(_data, res) {
         }
 
         try {
-            // Save  Notification
-
-            // console.log("token", JSON.stringify(tokens.enter_12));
-
-            var params = { "vtsnotification": [tokens.enter_12], "enttid": tokens.enter_12.enttid }
-
             // Send Notification
+
+            var ntfdata = [];
 
             Object.keys(tokens).forEach(function(key) {
                 var val = tokens[key];
 
                 var toks = [];
+
                 for (let index = 0; index < val.data.length; index++) {
                     const element = val.data[index];
                     toks.push(element.devtok);
+                    ntfdata.push(element);
                 }
 
                 // ntfredis.createNotify({
@@ -384,16 +381,16 @@ trip.sendVTSNotification = function(_data, res) {
 
                     // sms_email.sendEmailAndSMS(params, uphone, uemail, [], "email", _data.enttid);
 
-
-                    db.callFunction("select " + globals.erpschema("funsave_vtsnotification") + "($1::json);", [params], function(data) {
-                        console.log("Notification", data.rows);
-                    }, function(err) {
-                        console.log(err);
-                    });
+                    // Save  Notification
                 }
+            });
 
+            var params = { "vtsnotification": ntfdata }
 
-
+            db.callFunction("select " + globals.erpschema("funsave_vtsnotification") + "($1::json);", [params], function(data) {
+                console.log("Notification", data.rows);
+            }, function(err) {
+                console.log(err);
             });
         } catch (ex) {
 
