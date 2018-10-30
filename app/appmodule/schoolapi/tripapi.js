@@ -383,14 +383,14 @@ trip.sendVTSNotification = function(_data, res) {
 
                     // Save  Notification
                 }
-            });
 
-            var params = { "vtsnotification": ntfdata }
+                var params = { "vtsnotification": val }
 
-            db.callFunction("select " + globals.erpschema("funsave_vtsnotification") + "($1::json);", [params], function(data) {
-                console.log("Notification", data.rows);
-            }, function(err) {
-                console.log(err);
+                db.callFunction("select " + globals.erpschema("funsave_vtsnotification") + "($1::json);", [params], function(data) {
+                    console.log("Notification", data.rows);
+                }, function(err) {
+                    console.log(err);
+                });
             });
         } catch (ex) {
 
