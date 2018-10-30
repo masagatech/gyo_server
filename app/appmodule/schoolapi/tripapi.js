@@ -9,30 +9,30 @@ var trip = module.exports = {};
 
 //get my todays trips details 
 
-trip.mytrips = function (req, res, done) {
-    db.callProcedure("select " + globals.schema("funget_api_mytrips") + "($1,$2::json);", ['mytrips', req.body], function (data) {
+trip.mytrips = function(req, res, done) {
+    db.callProcedure("select " + globals.schema("funget_api_mytrips") + "($1,$2::json);", ['mytrips', req.body], function(data) {
         rs.resp(res, 200, data.rows);
-    }, function (err) {
+    }, function(err) {
         rs.resp(res, 401, "error : " + err);
     }, 1);
 }
 
 //get trips passengers details
 
-trip.getcrews = function (req, res, done) {
-    db.callProcedure("select " + globals.schema("funget_api_tripcrews") + "($1,$2::json);", ['tripcrews', req.body], function (data) {
+trip.getcrews = function(req, res, done) {
+    db.callProcedure("select " + globals.schema("funget_api_tripcrews") + "($1,$2::json);", ['tripcrews', req.body], function(data) {
         rs.resp(res, 200, data.rows);
-    }, function (err) {
+    }, function(err) {
         rs.resp(res, 401, "error : " + err);
     }, 1);
 }
 
 //start trip api 
 
-trip.starttrip = function (req, res, done) {
+trip.starttrip = function(req, res, done) {
     req.body.mode = "start";
 
-    db.callFunction("select " + globals.schema("funsave_api_startstoptrip") + "($1::json);", [req.body], function (data) {
+    db.callFunction("select " + globals.schema("funsave_api_startstoptrip") + "($1::json);", [req.body], function(data) {
         var _d = data.rows[0].funsave_api_startstoptrip;
         rs.resp(res, 200, _d);
 
@@ -58,17 +58,17 @@ trip.starttrip = function (req, res, done) {
 
             }
         }
-    }, function (err) {
+    }, function(err) {
         rs.resp(res, 401, "error : " + err);
     });
 }
 
 // api for stop trip from driver device
 
-trip.stoptrip = function (req, res, done) {
+trip.stoptrip = function(req, res, done) {
     req.body.mode = "stop";
 
-    db.callFunction("select " + globals.schema("funsave_api_startstoptrip") + "($1::json);", [req.body], function (data) {
+    db.callFunction("select " + globals.schema("funsave_api_startstoptrip") + "($1::json);", [req.body], function(data) {
         var _d = data.rows[0].funsave_api_startstoptrip;
         rs.resp(res, 200, _d);
 
@@ -86,15 +86,15 @@ trip.stoptrip = function (req, res, done) {
 
             }
         }
-    }, function (err) {
+    }, function(err) {
         rs.resp(res, 401, "error : " + err);
     });
 }
 
 // api for pickup / drop passenger
 
-trip.picdrpcrew = function (req, res, done) {
-    db.callFunction("select " + globals.schema("funsave_api_pickupdropcrew") + "($1::json);", [req.body], function (data) {
+trip.picdrpcrew = function(req, res, done) {
+    db.callFunction("select " + globals.schema("funsave_api_pickupdropcrew") + "($1::json);", [req.body], function(data) {
         var _d = data.rows[0].funsave_api_pickupdropcrew;
         rs.resp(res, 200, _d);
 
@@ -108,17 +108,17 @@ trip.picdrpcrew = function (req, res, done) {
                     trip.senddropalert(sendData); //for dropped
                 }
 
-            } else if (sendData.status === '2') // for absent 
+            } else if (sendData.status === '2') // for absent
             {
                 trip.sendabsentalert(sendData);
             }
         }
-    }, function (err) {
+    }, function(err) {
         rs.resp(res, 401, "error : " + err);
     });
 }
 
-trip.sendpickupalert = function (data) {
+trip.sendpickupalert = function(data) {
     trip.sendNotification({
         "tripid": data.tripid,
         "studid": data.studid,
@@ -130,7 +130,7 @@ trip.sendpickupalert = function (data) {
     });
 }
 
-trip.senddropalert = function (data) {
+trip.senddropalert = function(data) {
     trip.sendNotification({
         "tripid": data.tripid,
         "studid": data.studid,
@@ -142,7 +142,7 @@ trip.senddropalert = function (data) {
     });
 }
 
-trip.sendabsentalert = function (data) {
+trip.sendabsentalert = function(data) {
     trip.sendNotification({
         "tripid": data.tripid,
         "studid": data.studid,
@@ -154,7 +154,7 @@ trip.sendabsentalert = function (data) {
     });
 }
 
-trip.sendreachingalert = function (req, res, done) {
+trip.sendreachingalert = function(req, res, done) {
     var data = req.body;
 
     trip.sendNotification({
@@ -169,9 +169,9 @@ trip.sendreachingalert = function (req, res, done) {
 // sending FCM notification
 var fcm = require("gen").fcm();
 
-trip.sendNotification = function (_data, res) {
+trip.sendNotification = function(_data, res) {
     db.callProcedure("select " + globals.schema("funget_api_getnotifyids") + "($1,$2,$3::json);", ['tripnotify', 'tripnotify1', _data],
-        function (data) {
+        function(data) {
             try {
                 var _sound = "default";
                 var devicetokens = data.rows[0];
@@ -261,7 +261,7 @@ trip.sendNotification = function (_data, res) {
                     "time_to_live": (60 * 15)
                 };
 
-                fcm.send(message, function (err, response) {
+                fcm.send(message, function(err, response) {
                     if (err) {
                         console.log("Somethings has gone wrong!", err);
                     } else {
@@ -273,27 +273,41 @@ trip.sendNotification = function (_data, res) {
             }
         },
 
-        function (err) {
+        function(err) {
 
         }, 2);
 }
 
 // VTS
 
-trip.sendVTSNotification = function (_data, res) {
+trip.sendVTSNotification = function(_data, res) {
     try {
         var _sound = "notification_tone_2";
         var devicetokens = _data;
         var tokens = {};
 
-
-
         for (var i = 0; i <= devicetokens.length - 1; i++) {
             var d = devicetokens[i];
+
             if (tokens[d.almtype + "_" + d.vehid] === undefined) {
                 tokens[d.almtype + "_" + d.vehid] = {
+                    ntfid: 0,
                     msg: d.msg,
                     title: d.title,
+                    stdid: d.stdid,
+                    flag: d.flag,
+                    almtype: d.almtype,
+                    batchid: d.batchid,
+                    drvid: d.drvid,
+                    vehid: d.vehid,
+                    rtid: d.rtid,
+                    stpid: d.stpid,
+                    stptype: "normal",
+                    pdid: d.pdid,
+                    pdtype: d.pdtype,
+                    tm: d.tm,
+                    enttid: d.enttid,
+                    wsautoid: d.wsautoid,
                     data: []
                 };
             }
@@ -306,18 +320,28 @@ trip.sendVTSNotification = function (_data, res) {
         }
 
         try {
+            // Save  Notification
+
+            console.log("token", JSON.stringify(tokens.enter_12));
+
+            var params = { "vtsnotification": [tokens.enter_12], "enttid": tokens.enter_12.enttid }
+
+            db.callFunction("select " + globals.erpschema("funsave_vtsnotification") + "($1::json);", [params], function(data) {
+                console.log("Notification", data.rows);
+            }, function(err) {
+                console.log(err);
+            });
+
             // Send Notification
 
-            Object.keys(tokens).forEach(function (key) {
+            Object.keys(tokens).forEach(function(key) {
                 var val = tokens[key];
 
                 var toks = [];
                 for (let index = 0; index < val.data.length; index++) {
                     const element = val.data[index];
                     toks.push(element.devtok);
-
                 }
-
 
                 // ntfredis.createNotify({
                 //     "body": {
@@ -326,15 +350,16 @@ trip.sendVTSNotification = function (_data, res) {
                 //         "body": msg.body
                 //     }
                 // });
+
                 if (toks.length > 0) {
                     var dta = {};
-                    dta["body"] = val.body;
+                    dta["body"] = val.msg;
                     dta["title"] = val.title;
 
                     var message = {
                         "registration_ids": toks,
                         "notification": {
-                            body: val.body,
+                            body: val.msg,
                             title: val.title,
                             sound: _sound,
                         },
@@ -343,13 +368,15 @@ trip.sendVTSNotification = function (_data, res) {
                         "time_to_live": (60 * 15)
                     };
 
-                    fcm.send(message, function (err, response) {
-                        if (err) {
-                            console.log("Somethings has gone wrong!", err);
-                        } else {
-                            console.log("Successfullys sent with response: ", response);
-                        }
-                    });
+                    // console.log(message);
+
+                    // fcm.send(message, function(err, response) {
+                    //     if (err) {
+                    //         console.log("Somethings has gone wrong!", err);
+                    //     } else {
+                    //         console.log("Successfullys sent with response: ", response);
+                    //     }
+                    // });
 
                     // Send Email
 
@@ -363,18 +390,10 @@ trip.sendVTSNotification = function (_data, res) {
 
                     // sms_email.sendEmailAndSMS(params, uphone, uemail, [], "email", _data.enttid);
                 }
-
             });
-
-
-
         } catch (ex) {
 
-
         }
-
-
-
     } catch (error) {
         console.log(error);
     }

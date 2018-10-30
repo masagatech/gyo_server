@@ -75,3 +75,13 @@ notification.getNotification = function getNotification(req, res, done) {
         rs.resp(res, 401, "error : " + err);
     }, 1)
 }
+
+//
+
+notification.saveVTS_Notification = function saveVTS_Notification(req, res, done) {
+    db.callFunction("select " + globals.erpschema("funsave_vtsnotification") + "($1::json);", ['vtsntf', req.body], function(data) {
+        rs.resp(res, 200, data.rows);
+    }, function(err) {
+        rs.resp(res, 401, "error : " + err);
+    })
+}

@@ -232,6 +232,8 @@ var appRouter = function(app) {
     app.post(root + "/saveNotification", ntf.saveNotification);
     app.post(root + "/getNotification", ntf.getNotification);
 
+    app.post(root + "/saveVTS_Notification", ntf.saveVTS_Notification);
+
     //##################################### Notification #################################################
 
     //##################################### Announcement #################################################
