@@ -290,32 +290,31 @@ trip.sendVTSNotification = function (_data, res) {
 
         for (var i = 0; i <= devicetokens.length - 1; i++) {
             var d = devicetokens[i];
-
+            var dt = {
+                ntfid: 0,
+                msg: d.msg,
+                title: d.title,
+                stdid: d.stdid,
+                flag: d.flag,
+                almtype: d.almtype,
+                batchid: d.batchid,
+                drvid: d.drvid,
+                vehid: d.vehid,
+                rtid: d.rtid,
+                stpid: d.stpid,
+                stptype: "normal",
+                pdid: d.pdid,
+                pdtype: d.pdtype,
+                tm: d.tm,
+                enttid: d.enttid,
+                data: []
+            };
             if (tokens[d.almtype + "_" + d.vehid] === undefined) {
-
-                var dt = {
-                    ntfid: 0,
-                    msg: d.msg,
-                    title: d.title,
-                    stdid: d.stdid,
-                    flag: d.flag,
-                    almtype: d.almtype,
-                    batchid: d.batchid,
-                    drvid: d.drvid,
-                    vehid: d.vehid,
-                    rtid: d.rtid,
-                    stpid: d.stpid,
-                    stptype: "normal",
-                    pdid: d.pdid,
-                    pdtype: d.pdtype,
-                    tm: d.tm,
-                    enttid: d.enttid,
+                tokens[d.almtype + "_" + d.vehid] = {
                     data: []
                 };
-                ntfdata.push(dt)
-
-                tokens[d.almtype + "_" + d.vehid] = dt;
             }
+            ntfdata.push(dt)
 
             tokens[d.almtype + "_" + d.vehid].data.push({
                 devtok: d.token,

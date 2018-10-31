@@ -169,7 +169,7 @@ var j = schedule.scheduleJob('*/5 * * * * *', function () {
             data: mdata
         }], function (data) {
             var _data = data.rows;
-            console.log(_data);
+            //console.log(_data);
             if (_data !== undefined && _data.length > 0) {
                 // var params = {
                 //     "grpid": 0,
