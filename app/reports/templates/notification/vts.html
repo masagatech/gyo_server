@@ -47,6 +47,14 @@
             display: none!important;
         }
         
+        .col-red {
+            color: red!important;
+        }
+        
+        .col-orange {
+            color: orange!important;
+        }
+        
         .Pickup {
             background: #009688!important;
             color: #FFFFFF!important;
@@ -109,12 +117,16 @@
                     {{{psngrphone2_col this}}}
                 </td>
                 <td>
-                    {{{splitMessage1 msg}}}
-                    <br /> {{{splitMessage1 crdate}}}
+                    <span class="{{color}}">
+                        {{{splitMessage1 this msg}}}
+                        <br /> {{{splitDate1 this crdate}}}
+                    </span>
                 </td>
                 <td>
-                    {{{splitMessage2 msg}}}
-                    <br /> {{{splitMessage2 crdate}}}
+                    <span class="{{color}}">
+                        {{{splitMessage2 this msg}}}
+                        <br /> {{{splitDate2 this crdate}}}
+                    </span>
                 </td>
             </tr>
             {{/ntfstuddata}}
