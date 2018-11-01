@@ -9,14 +9,60 @@ reports.getNotificationReports = function getNotificationReports(data) {
     var headerdt = data.data1;
     var dparams = data.params;
 
-    _hndlbar.registerHelper('splitMessage1', function(head) {
-        var t = head.split(";");
-        return t[0];
+    // Split Message
+
+    _hndlbar.registerHelper('splitMessage1', function(row, head) {
+        var t = "";
+
+        if (row.status == 1) {
+            t = head.split(";")[0];
+        } else if (row.status == 0) {
+            t = "Not Applicable";
+        } else {
+            t = "Trip Not Started";
+        }
+
+        return t;
     });
 
-    _hndlbar.registerHelper('splitMessage2', function(head) {
-        var t = head.split(";");
-        return t[1];
+    _hndlbar.registerHelper('splitMessage2', function(row, head) {
+        var t = "";
+
+        if (row.status == 1) {
+            t = head.split(";")[1];
+        } else if (row.status == 0) {
+            t = "Not Applicable";
+        } else {
+            t = "Trip Not Started";
+        }
+
+        return t;
+    });
+
+    // Split Date
+
+    _hndlbar.registerHelper('splitDate1', function(row, head) {
+        var t = "";
+
+        if (row.status == 1) {
+            t = head.split(";")[0];
+        } else {
+            t = "";
+        }
+
+        return t;
+    });
+
+    _hndlbar.registerHelper('splitDate2', function(row, head) {
+        var t = "";
+
+        if (row.status == 1) {
+            t = head.split(";")[1];
+        } else {
+            t = "";
+        }
+
+        return t;
     });
 
     var DateFormats = {
