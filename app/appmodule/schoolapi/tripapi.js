@@ -346,7 +346,11 @@ trip.sendVTSNotification = function (_data, res) {
                 // });
 
                 if (toks.length > 0) {
-                    var dta = {};
+                    toks.push('fgJXmBnz2gk:APA91bHuYnfgZzuGTnPjybbhpgR148aw4xSoWeq5czMHuN_te1o9SkhehAV2G85paK67EFBPP41dvUptWi8SHhK1aty7B9tI7WanQdrwst-N92hXBlrlgI0rMk88ddtngQN7PmTKzNrp')
+                    var dta = {
+                        "type": "driver_tracking",
+                        "subtype": "start_trip"
+                    };
                     dta["body"] = val.msg;
                     dta["title"] = val.title;
 
